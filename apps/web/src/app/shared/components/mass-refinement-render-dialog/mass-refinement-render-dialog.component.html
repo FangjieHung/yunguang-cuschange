@@ -1,0 +1,49 @@
+<div class="dialog-card max-w-md">
+    <header class="dialog-header">
+        <h3>材質渲染</h3>
+        <button mat-dialog-close><span class="material-symbols-outlined">close</span></button>
+    </header>
+
+    <form>
+
+        <div class="space-y-7">
+            <fieldset class="radio-single-img-container">
+                <legend>請選擇喜愛的風格</legend>
+
+                <swiper [spaceBetween]="32" [navigation]="true" [slidesPerView]="3" class="max-w-[260px] 2xl:max-w-md">
+                    <ng-template swiperSlide *ngFor="let item of styles">
+                        <input type="radio" [id]="item.value" name="style" [value]="item.value"
+                            [(ngModel)]="selectedStyleValue" (change)="doStyleSelect(item)" />
+                        <label class="radio-label-wrap" [for]="item.value">
+                            <img [src]="item.img" [alt]="item.name">
+                            <p>{{ item.name }}</p>
+                        </label>
+                    </ng-template>
+                </swiper>
+            </fieldset>
+
+            <fieldset class="radio-single-img-container" *ngIf="selectStyle">
+                <legend>請選擇外牆主材質</legend>
+                <swiper [spaceBetween]="32" [navigation]="true" [slidesPerView]="3" class="max-w-[260px] 2xl:max-w-md">
+                    <ng-template swiperSlide *ngFor="let item of (selectStyle?.wallMats || [])">
+                        <input type="radio" [id]="item.value" name="wallMat" [value]="item.value"
+                            [(ngModel)]="selectedWallMatValue" />
+                        <label class="radio-label-wrap" [for]="item.value">
+                            <img [src]="item.img" [alt]="item.name">
+                            <p>{{ item.name }}</p>
+                        </label>
+                    </ng-template>
+                </swiper>
+            </fieldset>
+        </div>
+
+        <footer class="dialog-footer">
+            <p class="warn-hint" *ngIf="!data?.isQuicklyGenerate"><span class="material-symbols-outlined pr-1">info</span>請先調整建築角度再進行渲染
+            </p>
+            <a class="btn-gradient btn-lg h-14" (click)="onSubmit()">
+                <span class="material-symbols-outlined pr-2">wand_stars</span>
+                渲染
+            </a>
+        </footer>
+    </form>
+</div>

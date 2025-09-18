@@ -1,0 +1,198 @@
+<div class="lg:flex items-stretch overflow-auto">
+  <div class="flex-1 overflow-y-auto h-full">
+    <!-- Search bar -->
+    <nz-card class="col-span-full p-4" *ngIf="false">
+      <nz-radio-group ngModel="radioValue" nzButtonStyle="solid" class="flex flex-wrap items-center w-full">
+        <label nz-radio-button nzValue="today" class="flex-1 text-center">今日</label>
+        <label nz-radio-button nzValue="yesterday" class="flex-1 text-center">昨日</label>
+        <label nz-radio-button nzValue="week" class="flex-1 text-center">本週</label>
+        <label nz-radio-button nzValue="month" class="flex-1 text-center">本月</label>
+        <label nz-radio-button nzValue="manual" class="flex-1 text-center">其他日</label>
+        <div class="radio-content w-full md:w-2/5">
+          <nz-range-picker ngModel="date" nzBorderless class="w-full mt-3 md:mt-0"></nz-range-picker>
+        </div>
+      </nz-radio-group>
+    </nz-card>
+
+    <!-- <nz-card nzTitle="統計資訊" [nzExtra]="extraPartnersEdit">
+      <section class="grid gap-4 p-4 lg:grid-cols-3">
+        <nz-card class="px-6 py-4 lg:col-span-1 bg-slate-50">
+          <nz-statistic [nzValue]="((partnerDto.customerTotal || 0) | number: '')!" [nzTitle]="'服務客戶數'">
+          </nz-statistic>
+          <ng-template #prefix><i nz-icon nzType="arrow-up"></i></ng-template>
+        </nz-card>
+        <nz-card class="px-6 py-4 lg:col-span-1 bg-slate-50">
+          <nz-statistic [nzValue]="(partnerDto.projectTotal| number: '')!" [nzTitle]="'專案數量'">
+          </nz-statistic>
+          <ng-template #prefix><i nz-icon nzType="arrow-down"></i></ng-template>
+        </nz-card>
+        <nz-card class="px-6 py-4 lg:col-span-1 bg-slate-50">
+          <nz-statistic [nzValue]="(partnerDto.commercialValue| number: '')!" [nzTitle]="'商業價值'">
+          </nz-statistic>
+          <ng-template #prefix><i nz-icon nzType="arrow-down"></i></ng-template>
+        </nz-card>
+      </section>
+    </nz-card> -->
+    <ng-template #extraPartnersEdit>
+      <a routerLink="/page-mgt/partners/edit" class="text-blue-500">管理</a>
+    </ng-template>
+
+    <section class="grid gap-4 p-4 lg:grid-cols-8 lg:grid-rows-2">
+      <nz-card *ngIf="false" class="lg:col-span-4 lg:row-span-2">
+        <nz-empty [nzNotFoundContent]="contentTpl" class="py-10">
+          <ng-template #contentTpl>
+            <span>目前尚無資料</span>
+          </ng-template>
+        </nz-empty>
+      </nz-card>
+      <nz-card *ngIf="false" class="px-6 py-4 lg:col-span-2">
+        <nz-statistic [nzValue]="(93 | number: '')!" [nzTitle]="'退款總金額'" [nzPrefix]="'$'">
+        </nz-statistic>
+        <ng-template #prefix><i nz-icon nzType="arrow-down"></i></ng-template>
+      </nz-card>
+      <nz-card *ngIf="false" class="px-6 py-4 lg:col-span-2">
+        <nz-statistic [nzValue]="(2 | number: '')!" [nzTitle]="'退款訂單數'">
+        </nz-statistic>
+        <ng-template #prefix><i nz-icon nzType="arrow-down"></i></ng-template>
+      </nz-card>
+      <nz-card *ngIf="false" class="px-6 py-4 col-span-full flex items-center">
+        圓餅圖
+        <div class="flex items-center">
+          <nz-statistic [nzValue]="(56 | number: '')!" [nzTitle]="'新會員'"></nz-statistic>
+          <ng-template #prefix><i nz-icon nzType="arrow-up"></i></ng-template>
+
+          <nz-statistic [nzValue]="(30 | number: '')!" [nzTitle]="'回購率'" [nzSuffix]="'%'"></nz-statistic>
+          <ng-template #prefix><i nz-icon nzType="arrow-up"></i></ng-template>
+          時間內 購買超過 2 次的會員 / 完成訂單的買家總數
+        </div>
+      </nz-card>
+
+      <ng-container *ngIf="dashboardCardPaths | hasAnyPermission; else welcomeScreen">
+        <nz-card *ngIf="'/customer/list' | hasPermission" nzTitle="新進客戶" [nzExtra]="extraCustomerView"
+          class="col-span-full 2xl:col-span-4">
+          <nz-table #customerViewsTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="customerViews">
+            <thead>
+              <tr>
+                <th nzWidth="140px">公司</th>
+                <th nzWidth="140px">電子信箱</th>
+                <th>客戶名稱</th>
+                <th nzWidth="140px">狀態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of customerViewsTable.data">
+                <td>{{ data.corpId | aryFindValue: corpOpts :'id':'name' | emptyFormatter:'-' }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.name }}</td>
+                <td>
+                  <nz-tag class="mr-0 font-semibold"
+                    [nzColor]="(data.appUserStatus| aryFindValue: (appUserApiServ.getAppUserStatusInfos() | async): 'value': 'style') ?? 'default'">
+                    {{ data.appUserStatus | aryFindValue: appUserApiServ.appUserStatusOpts :'value':'name'
+                    }}
+                  </nz-tag>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-card>
+        <ng-template #extraCustomerView>
+          <a routerLink="/customer/list" class="text-blue-500">更多</a>
+        </ng-template>
+
+        <nz-card *ngIf="'/customer/corp/list' | hasPermission" nzTitle="公司資料" [nzExtra]="extraCorpViews"
+          class="col-span-full 2xl:col-span-4">
+          <nz-table #corpViewsTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="corpViews">
+            <thead>
+              <tr>
+                <th>統一編號</th>
+                <th>公司名稱</th>
+                <th>聯絡人</th>
+                <th>聯絡人手機</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of corpViewsTable.data">
+                <td>{{ data.taxId }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.cpName }}</td>
+                <td>{{ data.cpMobile }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <ng-template #productRank>
+            <nz-select ngModel="" class="w-28">
+              <nz-option nzValue="全部商品" nzLabel="全部商品"></nz-option>
+              <nz-option nzValue="紙袋" nzLabel="紙袋"></nz-option>
+              <nz-option nzValue="塑膠袋" nzLabel="塑膠袋"></nz-option>
+            </nz-select>
+          </ng-template>
+        </nz-card>
+        <ng-template #extraCorpViews>
+          <a routerLink="/customer/corp/list" class="text-blue-500">更多</a>
+        </ng-template>
+      </ng-container>
+
+      <nz-card *ngIf="false" nzTitle="組合銷售排名" [nzExtra]="bundleRank" class="col-span-full 2xl:col-span-4">
+        <nz-table #basicTable [nzData]="listOfData">
+          <thead>
+            <tr>
+              <th [nzWidth]="'50px'" [nzAlign]="'center'">排名</th>
+              <th>組合名稱</th>
+              <th [nzShowSort]="true">方式</th>
+              <th [nzShowSort]="true" [nzAlign]="'right'">銷售量</th>
+              <th [nzShowSort]="true" [nzAlign]="'right'">總銷售額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td [nzAlign]="'center'">{{ data.rank }}</td>
+              <td>
+                <nz-tag nzColor="success">進行中</nz-tag>
+                <nz-tag nzColor="default">已結束</nz-tag>
+                {{ data.name }}
+              </td>
+              <td>滿 5 件折 $100</td>
+              <td [nzAlign]="'right'">{{ data.quantity }}</td>
+              <td [nzAlign]="'right'">$ {{ data.total }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #bundleRank>
+          <nz-select ngModel="" class="w-28">
+            <nz-option nzValue="全部組合" nzLabel="全部組合"></nz-option>
+            <nz-option nzValue="進行中" nzLabel="進行中"></nz-option>
+            <nz-option nzValue="已結束" nzLabel="已結束"></nz-option>
+          </nz-select>
+        </ng-template>
+      </nz-card>
+    </section>
+  </div>
+
+  <!-- Right Menu -->
+  <div *ngIf="false">
+    <nz-card class="min-w-max h-full overflow-y-auto">
+      <nz-date-picker nzInline ngModel="date" [nzShowToday]="false" class="flex justify-center"></nz-date-picker>
+      <div class="p-5">
+        <nz-timeline>
+          <nz-timeline-item>
+            <span class="opacity-50">9:00</span>
+            <p>王小明、林聰明 今日休假 </p>
+          </nz-timeline-item>
+          <nz-timeline-item>
+            <span class="opacity-50">10:00</span>
+            <p>小組月會</p>
+          </nz-timeline-item>
+        </nz-timeline>
+      </div>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #welcomeScreen>
+  <nz-card class="col-span-full">
+    <div class="text-center py-10 text-gray-500">
+      <h2 class="text-2xl font-semibold">歡迎使用儀表板</h2>
+      <p>您目前尚未被授權查看任何資料內容。</p>
+    </div>
+  </nz-card>
+</ng-template>

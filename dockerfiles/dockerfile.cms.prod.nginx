@@ -1,0 +1,9 @@
+FROM nginx:latest
+LABEL maintainer="SxF <service@starxfuture.com>"
+
+# Copy cms files
+COPY ./dist/apps/cms/ /usr/share/nginx/html
+COPY ./confs/nginx/default.prod.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80

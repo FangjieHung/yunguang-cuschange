@@ -1,0 +1,23 @@
+.segments-inputs-warp {
+  @apply mt-10 pl-6 -space-y-2;
+
+  li {
+    @apply flex items-start;
+  }
+
+  .form-label > p {
+    @apply my-3 ml-6 mr-3;
+  }
+}
+
+.side-nav-content li.switch-btn {
+  @apply justify-between;
+}
+
+.render-btn {
+  @apply absolute top-3 inset-x-0 w-fit h-11 m-auto rounded-xl hover:shadow-none;
+}
+
+.checkbox-list {
+  @apply pl-6 pr-3 pt-3 pb-1 space-y-1;
+}

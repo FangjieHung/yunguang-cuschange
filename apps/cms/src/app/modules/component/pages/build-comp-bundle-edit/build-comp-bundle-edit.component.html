@@ -1,0 +1,126 @@
+<div class="">
+  <form [formGroup]="valForm">
+    <div class="grid grid-cols-12 gap-x-4">
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-full">
+        <mat-label>所屬公司</mat-label>
+        <mat-select formControlName="corpId" (selectionChange)="onCorpIdChange($event)"
+          [required]="f['corpId'] | ctrlHasRequired">
+          <mat-option [value]="0">通用元件</mat-option>
+          <ng-container *ngFor="let opt of corpOpts">
+            <mat-option [value]="+opt.id">{{ opt.name }}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error class="text-xs" *ngIf="f['corpId'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['corpId'].errors, '所屬公司')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-full">
+        <mat-label>元件名稱</mat-label>
+        <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['name'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '元件名稱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="w-full col-span-full">
+        <div class="overflow-hidden border border-gray-200  md:rounded-lg">
+          <div class="p-4">
+            <button (click)="addDetail()"
+              class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 ">
+              <span class="material-symbols-outlined">
+                add_circle
+              </span>
+              <span>新增元件</span>
+            </button>
+          </div>
+
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                  元件組合設定
+                </th>
+                <th scope="col" class="relative py-3.5 px-4 w-5">
+                  <span class="sr-only">Edit</span>
+                </th>
+                <th scope="col" class="relative py-3.5 px-4 w-5">
+                  <span class="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <ng-container *ngFor="let item of editDto.details; let idx = index">
+                <tr>
+                  <td class="px-2 pt-2">
+                    <mat-form-field class="w-full" appearance="outline">
+                      <mat-label>請選擇元件</mat-label>
+                      <mat-select id="buildCompId{index}" required [(ngModel)]="item.buildCompId"
+                        #buildCompIdInput="ngModel" [ngModelOptions]="{standalone: true}">
+                        <ng-container *ngFor="let opt of buildComponentOpts">
+                          <mat-option [value]="+opt.id">{{ opt.name }}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error *ngIf="buildCompIdInput.invalid">元件為必填</mat-error>
+                    </mat-form-field>
+                  </td>
+                  <td class="px-2 pt-2">
+                    <mat-form-field class="w-full" appearance="outline">
+                      <mat-label>排序</mat-label>
+                      <input id="sort{index}" required matInput type="number" [(ngModel)]="item.sort"
+                        [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                  </td>
+                  <td class="px-2 pt-2">
+                    <button (click)="removeDetail(idx)"
+                      class="px-1 py-1 mb-4 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-100">
+                      <span class="material-icons-outlined align-middle">delete</span>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="doCancel()">取消</button>
+  <nz-divider nzType="vertical"></nz-divider>
+  <!-- <button nz-button nzType="primary" nz-button nz-dropdown [nzDropdownMenu]="menuEdit">操作</button> -->
+  <button nz-button nzType="primary" (click)="onSubmit()">確認</button>
+</div>
+
+<ng-template #timePickerCancel>
+  <div class="mr-4">
+    <a class="font-bold text-base h-10">取消</a>
+  </div>
+</ng-template>
+<ng-template #timePickerConfirm>
+  <div>
+    <a class="font-bold text-base h-10">確定</a>
+  </div>
+</ng-template>
+
+<nz-dropdown-menu #menuEdit="nzDropdownMenu">
+  <ul nz-menu>
+    <ng-container>
+      <li nz-menu-item>
+        <div
+          class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded-sm border border-blue-400 inline-flex items-center justify-center">
+          操作
+        </div>
+      </li>
+      <!-- <li nz-menu-item>
+        <button nz-button nzType="text" (click)="onEnableCustCat(editDto.id)" class="w-full text-left"
+          [disabled]="!(editDto.status !== customerApiServ.custCatStatuses['啟用'])">啟用狀態</button>
+      </li> -->
+      <!-- <li nz-menu-item>
+        <button nz-button nzType="text" (click)="onDisableCustCat(editDto.id)" class="w-full text-left"
+          [disabled]="!(editDto.status !== customerApiServ.custCatStatuses['停用'])">停用狀態</button>
+      </li> -->
+    </ng-container>
+  </ul>
+</nz-dropdown-menu>

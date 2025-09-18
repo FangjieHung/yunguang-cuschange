@@ -1,0 +1,55 @@
+<div>
+  <cms-page-header>
+    <div class="flex gap-x-2">
+      <!-- <button mat-raised-button color="primary" (click)="doEdit()">
+              <span class="material-icons-outlined pr-2 text-lg">library_add</span>
+              <span>新增{{actionName}}</span>
+            </button> -->
+    </div>
+  </cms-page-header>
+
+  <nz-card class="mx-4 mb-4 border p-5 border-slate-200 rounded-md">
+    <form [formGroup]="validateForm">
+      <nz-collapse nzAccordion>
+        <nz-collapse-panel [nzHeader]="'ShapeDiver Ticket Key V2'" [nzActive]="true">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>I 型</mat-label>
+            <textarea name="typology0" rows="3" matInput type="text"
+              [(ngModel)]="appSettingShapediverTicketJto.v2.typology0" [ngModelOptions]="{standalone: true}"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>O 型</mat-label>
+            <textarea name="typology0" rows="3" matInput type="text"
+              [(ngModel)]="appSettingShapediverTicketJto.v2.typology1" [ngModelOptions]="{standalone: true}"></textarea>
+          </mat-form-field>
+        </nz-collapse-panel>
+        <nz-collapse-panel [nzHeader]="'ShapeDiver Ticket Key V1 (即將棄用)'" [nzActive]="false">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>changeModel</mat-label>
+            <textarea rows="3" matInput type="text" formControlName="changeModel"
+              [required]="f['changeModel'] | ctrlHasRequired"></textarea>
+            <mat-error class="text-xs" *ngIf="f['changeModel'].errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['changeModel'].errors, 'changeModel')">{{ msg }}</div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>generateOption</mat-label>
+            <textarea rows="3" matInput type="text" formControlName="generateOption"
+              [required]="f['generateOption'] | ctrlHasRequired"></textarea>
+            <mat-error class="text-xs" *ngIf="f['generateOption'].errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['generateOption'].errors, 'generateOption')">{{ msg }}
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </form>
+    <div class="mt-2">
+      <mat-divider class="pt-2"></mat-divider>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        <span class="material-icons-outlined pr-2 text-lg">save</span>
+        <span>修改儲存</span>
+      </button>
+    </div>
+  </nz-card>
+</div>

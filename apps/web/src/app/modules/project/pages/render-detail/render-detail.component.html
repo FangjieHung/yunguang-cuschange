@@ -1,0 +1,159 @@
+<mat-sidenav-container hasBackdrop="false" class="bg-white flex items-stretch justify-between w-full h-full">
+    <mat-sidenav-content>
+        <div class="map-container map-full">
+            <img [src]="curRenderView.appFileAttId | fileUrl" *ngIf="curRenderView.appFileAttId > 0">
+            <img [src]="'assets/image/illustration/empty-img.png'" *ngIf="!curRenderView.appFileAttId">
+
+            <div class="btn-tl flex space-x-2">
+                <a mat-flat-button class="h-11" [routerLink]="['/project/render-list']" [queryParams]="{buildProjectId:buildProjectId,
+            buildProjVolumeId:buildProjVolumeId}"><span class="material-symbols-outlined relative -left-1">
+                        chevron_left
+                    </span><span>返回</span>
+                </a>
+                <a mat-flat-button class="h-11" [matMenuTriggerFor]="renderOptionMenu">更換渲染結果</a>
+
+                <mat-menu #renderOptionMenu="matMenu">
+                    <div class="dialog-card max-w-lg px-5 py-3 space-y-5">
+                        <header class="justify-header">
+                            <h3>選擇渲染結果</h3>
+                            <button mat-dialog-close><span class="material-symbols-outlined">close</span></button>
+                        </header>
+
+                        <form action="">
+                            <fieldset class="radio-single-img-container">
+                                <legend class="-ml-5">主畫面將切換至選取的渲染選項</legend>
+                                <ul class="grid grid-cols-3 gap-8 pt-4 pb-5">
+                                    <li *ngFor="let item of buildProjRenderViews">
+                                        <input type="radio" [id]="item.id" name="style" [value]="item.id"
+                                            (click)="$event.stopPropagation()" [(ngModel)]="buildProjRenderId" />
+                                        <label class="radio-label-wrap" [for]="item.id"
+                                            (click)="$event.stopPropagation()">
+                                            <img [src]="item.appFileAttId | fileUrl" [alt]="item.buildStyle">
+                                            <p>{{(item?.result || '{}' | jsonParse)?.versionName || '-' }}</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                            <button mat-flat-button color="primary" (click)="onSearch()"
+                                class="btn-lg h-14 w-full mt-6">確定</button>
+                        </form>
+                    </div>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-sidenav-content>
+
+    <mat-sidenav #sidenav mode="side" opened position="end" [class.collapsed]="isCollapsed" class="sub-sidenav-right">
+        <!-- Main content -->
+        <div class="main-content space-y-5" *ngIf="!isCollapsed">
+            <section class="pb-6 border-b border-primary-200">
+                <h2 class="mb-6">{{buildProjectView.name}}-{{renderResultJto?.versionName || '-' }}</h2>
+                <div class="flex justify-between">
+                    <h5>DesignGen</h5>
+                    <button *ngIf="false" class="btn-outline-purple btn-sm">
+                        <span class="material-symbols-outlined pr-2">download</span>?.json 檔?
+                    </button>
+                </div>
+                <ul class="describe-list-col">
+
+
+                    <li
+                        *ngFor="let item of renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.apartmentUnitMix">
+                        <span class="label w-20">{{ item.name }}</span>
+                        <span class="content">{{ (item.ratio * 100) | roundDefault:2 }} %</span>
+                    </li>
+                    <li>
+                        <span class="label w-20">戶數</span>
+                        <span class="content">
+                            {{renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.numApartmentUnits}}戶
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label w-20">樓高</span>
+                        <span class="content">
+                            {{renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.floorToFloor |
+                            roundDefault:2 }}m
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label w-20">地上樓數</span>
+                        <span
+                            class="content">
+                            {{renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.numFloors | roundDefault:0 }}層
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label w-20">地下樓數</span>
+                        <span
+                            class="content">
+                            {{renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.numBasements | roundDefault:0 }}層
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label w-20">停車數</span>
+                        <span
+                            class="content">
+                            {{renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.numCarParks | roundDefault:0 }}個
+                        </span>
+                    </li>
+                    <li>
+                        <span class="label w-20">公共空間</span>
+                        <span
+                            class="content">
+                            {{(renderResultJto?.volOutput?.option?.optionCriteria.basicCriteria.publicSpaceRatio) | roundDefault:2 }}%
+                        </span>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h5>CostGen</h5>
+                <ul class="radio-btn-text text-sm mt-3">
+                    <li *ngFor="let option of costGen">
+                        <input type="radio" [id]="option.value" [value]="option.value" name="cost-gen">
+                        <label [for]="option.value">
+                            <p class="name">{{ option.name }}</p>
+                            <ul class="details">
+                                <li *ngFor="let item of option.details"><span class="pr-2"> {{ item?.title }}</span><b>
+                                        {{ item?.data }}</b></li>
+                            </ul>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <div class="flex justify-between">
+                    <h5>細項</h5>
+                    <button *ngIf="false" (click)="openDialog()" class="btn-outline-purple btn-sm">詳細資訊</button>
+                </div>
+                <ul class="describe-list-col mt-3 border-list list-sm">
+                    <!-- <li *ngFor="let item of detailList">
+                        <span class="label w-40">{{ item.title }}</span>
+                        <span class="content">{{ item.data }}</span>
+                    </li> -->
+
+                    <li>
+                        <span class="label w-40">外牆主材質(至多三種)</span>
+                        <span class="content">{{ curRenderView.wallMat | aryFindValue :
+                            thirdPartyApiServ.getWallMatsByStyles(curRenderView.buildStyle) :'value':'name' }}</span>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+
+        <div class="bg-white border-t sticky bottom-0" *ngIf="!isCollapsed">
+            <button mat-button (click)="isCollapsed = !isCollapsed" class="h-12">
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+        </div>
+
+        <!-- 折疊狀態 內容縮小-->
+        <div *ngIf="isCollapsed" class="p-2 flex flex-col h-full">
+            <button mat-button (click)="isCollapsed = !isCollapsed" class="flex-1">
+                <span class="material-symbols-outlined">arrow_back_ios</span>
+            </button>
+        </div>
+    </mat-sidenav>
+</mat-sidenav-container>

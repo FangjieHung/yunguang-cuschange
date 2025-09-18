@@ -1,0 +1,68 @@
+<div class="bg-[#FAF7FA] flex flex-col items-center justify-center p-6 h-full relative">
+  <a routerLink="/">
+    <img src="assets/image/logo/landscape.svg" alt="logo" class="logo-tl">
+  </a>
+  <picture class="bg-image">
+    <source srcset="assets/video/buildings-grow.webp">
+    <img src="assets/image/photo/buildings-grow.png">
+  </picture>
+
+  <div class="signin-container">
+    <img src="assets/image/photo/pexels-photo-87223.png" alt="building" class="signin-img">
+    <section class="flex flex-col p-6">
+      <h1 class="text-2xl font-bold text-center mb-5 mt-2">歡迎回來!</h1>
+
+      <form [formGroup]="validateForm">
+        <ul class="inputs-wrap space-y-1">
+          <li>
+            <div class="form-label">
+              <p>Email<span class="required-mark">*</span></p>
+            </div>
+            <mat-form-field appearance="outline" class="w-full fill-gray input-large">
+              <input matInput type="email" formControlName="account" [required]="f['account'] | ctrlHasRequired">
+              <mat-error class="text-xs" *ngIf="f['account'].errors">
+                <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, 'Email')">{{ msg }}</div>
+              </mat-error>
+            </mat-form-field>
+          </li>
+
+          <li>
+            <div class="form-label">
+              <p>密碼<span class="required-mark">*</span></p>
+            </div>
+            <mat-form-field appearance="outline" class="w-full fill-gray input-large">
+              <input matInput type="password" formControlName="password" [required]="f['password'] | ctrlHasRequired"
+                [type]="hidePassword ? 'password' : 'text'" (keydown.enter)="onSubmit()">
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
+                <span class="material-symbols-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</span>
+              </button>
+              <mat-error class="text-xs" *ngIf="f['password'].errors">
+                <div *ngFor="let msg of formHelper.errorMsgs(f['password'].errors, '密碼')">{{ msg }}</div>
+              </mat-error>
+            </mat-form-field>
+          </li>
+        </ul>
+
+        <div class="mb-5 space-y-5">
+          <div class="flex justify-between items-center">
+            <mat-checkbox color="primary"><span class="text-base -ml-2">記住我</span></mat-checkbox>
+            <a *ngIf="false" class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
+            <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? 請聯絡系統管理員</a>
+          </div>
+          <a mat-flat-button color="primary" class="w-full btn-lg h-12" (click)="onSubmit()">登入</a>
+          <a class="btn-outline-purple w-full btn-lg h-12">註冊</a>
+        </div>
+      </form>
+
+      <p *ngIf="false" class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">登入或註冊即表示您同意我們的
+        <a target="_blank" routerLink="/auth/policy">隱私權與服務政策</a>
+      </p>
+
+      <p class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">系統管理員信箱：
+        <a target="_blank" href="mailto:hello@sparkgen.cc">hello@sparkgen.cc</a>
+      </p>
+    </section>
+  </div>
+</div>
+

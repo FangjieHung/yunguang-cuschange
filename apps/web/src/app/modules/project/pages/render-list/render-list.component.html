@@ -1,0 +1,64 @@
+<div class="max-w-container">
+    <header class="basic-header">
+        <a [routerLink]="['/project/mass-comparison']" [queryParams]="{buildProjectId:buildProjectId}"
+            class="btn-text text-sm"><span class="material-symbols-outlined">chevron_left</span>返回
+        </a>
+        <h1>渲染結果 - {{buildStyle}}</h1>
+        <button class="btn-gradient mt-1 shadow-lg w-36" (click)="doRender()">
+            <span class="material-symbols-outlined pr-2">wand_stars</span>
+            新增渲染
+        </button>
+    </header>
+    <section class="card-list-container py-4">
+        <div *ngFor="let item of buildProjRenderViews" [routerLink]="['/project/render-detail']" [queryParams]="{buildProjectId:buildProjectId,
+            buildProjVolumeId:buildProjVolumeId, buildProjRenderId: item.id}" (click)="onCardClick($event)"
+            class="card link">
+            <!--
+                <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.name" class="cover"
+                    onerror="this.onerror=null;this.src='assets/image/illustration/empty-img.png';" /> -->
+            <!-- <img [src]="item.src" class="cover"> -->
+            <img class="cover" [src]="item.appFileAttId | fileUrl" *ngIf="item.appFileAttId > 0">
+            <img class="cover" [src]="'assets/image/illustration/empty-img.png'" *ngIf="!item.appFileAttId">
+            <div class="name-wrap">
+                <div>
+                    <h2>{{(item?.result || '{}' | jsonParse)?.versionName || '-' }}</h2>
+                    <!-- <h2> {{ buildProjectView.buildCompBundleId | aryFindValue: buildCompBundleOpts :'id':'name' }}</h2> -->
+                    <p class="date"> {{ item.crtAt | dateFormatter: 'yyyy/MM/dd hh:mm:ss': '-'}}</p>
+                </div>
+
+
+                <button class="card-action" [matMenuTriggerFor]="actionMenu" (click)="$event.stopPropagation()"><span
+                        class="material-symbols-outlined">
+                        more_vert
+                    </span></button>
+                <mat-menu #actionMenu="matMenu">
+                    <button mat-menu-item (click)="onDownloadClick($event)"><span
+                            class="material-symbols-outlined">download</span>下載</button>
+                    <button mat-menu-item class="danger" (click)="deleteBuildProjRender(item.id)"><span
+                            class="material-symbols-outlined">delete</span>刪除</button>
+                </mat-menu>
+            </div>
+
+            <ul class="describe-list-col mt-3 between">
+                <li><span class="label w-20">成本 Cost</span> <span class="content">
+                        {{(((item.result || '{}' | jsonParse)?.costGen?.totalCost || 0).toFixed(0)) |
+                        emptyFormatter:'-'}} 億</span></li>
+                <li><span class="label w-20">銷售 Cost</span> <span class="content">
+                        {{(((item.result || '{}' | jsonParse)?.costGen?.sellPrice || 0).toFixed(0)) |
+                        emptyFormatter:'-'}} 億</span></li>
+                <div *ngIf="false">
+                    <li><span class="label w-20">總面積</span> <span class="content">{{ (item.result || '{}' |
+                            jsonParse)?.option.optionCriteria.basicCriteria.totalFloorArea?.toFixed(2) }} 坪</span></li>
+                    <li><span class="label w-20">樓地板效率</span> <span class="content">{{ (item.result || '{}' |
+                            jsonParse)?.option.optionCriteria.basicCriteria.siteConstraints.floorAreaRatio?.toFixed(2)
+                            }}
+                            &#37;</span></li>
+                    <li><span class="label w-20">樓高</span> <span class="content">{{ (item.result || '{}' |
+                            jsonParse)?.option.optionCriteria.basicCriteria.floorToFloor }} m</span></li>
+                    <li><span class="label w-20">地上樓層數</span> <span class="content">{{ (item.result || '{}' |
+                            jsonParse)?.option.optionCriteria.basicCriteria.numFloors }} 樓</span></li>
+                </div>
+            </ul>
+        </div>
+    </section>
+</div>

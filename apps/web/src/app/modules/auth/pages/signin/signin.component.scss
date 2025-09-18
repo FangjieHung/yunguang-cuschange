@@ -1,0 +1,16 @@
+.bg-image {
+    @apply absolute right-0 bottom-0 w-full md:w-1/2 h-auto;
+}
+
+.signin-img {
+    @apply w-full h-full object-cover;
+}
+
+.signin-container {
+    @apply bg-white grid md:grid-cols-2 w-full max-w-4xl shadow-lg border border-primary-200 relative overflow-hidden;
+    border-radius: 2.25rem
+}
+
+.logo-tl {
+    @apply absolute top-8 left-9 w-36;
+}

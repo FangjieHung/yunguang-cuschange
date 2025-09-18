@@ -1,0 +1,9 @@
+export class PagingResponse<T> {
+  rows: T[] = [];
+  totalCount = 0;
+  pageIndex = 0;
+  pageSize = 0;
+  totalPages = 0;
+  hasPreviousPage = false;
+  hasNextPage = false;
+}

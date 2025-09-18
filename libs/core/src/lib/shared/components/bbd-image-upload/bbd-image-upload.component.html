@@ -1,0 +1,17 @@
+<div class="upload-img-label">
+  <label *ngIf="!(selectedImage || imageUrl || attId)" for="bbd-image-upload" class="upload-img-label flex-auto">
+    <div class="dash-hint aspect-[4/3]">
+      <i class="material-symbols-outlined">
+        add_photo_alternate
+      </i>
+      <p>Upload</p>
+    </div>
+    <input id="bbd-image-upload" type="file" accept="image/*" class="hidden" (change)="onFileChange($event)" />
+  </label>
+  <div *ngIf="selectedImage || imageUrl || attId" class="uploaded-img aspect-[4/3]">
+    <img *ngIf="selectedImage && (!attId)" [src]="selectedImage" alt="圖片縮圖" class="rounded shadow" />
+    <img *ngIf="imageUrl" [src]="imageUrl | safeUrl" alt="圖片縮圖" class="rounded shadow" />
+    <img *ngIf="attId > 0" [src]="attId | fileUrl" alt="圖片縮圖" class="rounded shadow" />
+    <button class="btn-ghost" (click)="remove()"><span class="material-symbols-outlined pl-1">delete</span></button>
+  </div>
+</div>

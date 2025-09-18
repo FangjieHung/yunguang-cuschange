@@ -1,0 +1,49 @@
+<div class="dialog-card max-h-[90vh] overflow-auto">
+    <header class="dialog-header">
+        <h3>總成本估算明細 - ?專屬模型?</h3>
+        <button class="btn-outline-purple btn-sm ml-4 mr-auto">
+            <span class="material-symbols-outlined pr-2">download</span>?Excel 檔?
+        </button>
+        <button mat-dialog-close class="h-11"><span class="material-symbols-outlined">close</span></button>
+    </header>
+    <div class="grid gap-x-11 gap-y-5 items-start xl:grid-cols-3 px-6 pb-6">
+        <ul class="describe-list-col col-span-full">
+            <li>
+                <span class="label">材料 Cost：</span>
+                <span class="content"> ?6 億?</span>
+            </li>
+            <li>
+                <span class="label">人工 Cost：</span>
+                <span class="content"> ?8 億?</span>
+            </li>
+            <li>
+                <span class="label">Sales：</span>
+                <span class="content">?20 億?</span>
+            </li>
+        </ul>
+        <table>
+            <tbody>
+                <tr *ngFor="let item of tableContentA" class="describe-list-col mt-3 border-list">
+                    <td class="label">{{ item.title }}</td>
+                    <td class="data">?{{ item.data }}?</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr *ngFor="let item of tableContentB" class="describe-list-col mt-3 border-list">
+                    <td class="label">{{ item.title }}</td>
+                    <td class="data">?{{ item.data }}?</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr *ngFor="let item of tableContentC" class="describe-list-col mt-3 border-list">
+                    <td class="label">{{ item.title }}</td>
+                    <td class="data">?{{ item.data }}?</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

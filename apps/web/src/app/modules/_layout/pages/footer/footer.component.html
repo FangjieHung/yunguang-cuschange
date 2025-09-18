@@ -1,0 +1,18 @@
+<div class="relative">
+    <button class="chat-toggle" (click)="toggleChat()">
+        <span *ngIf="!isChatOpen" class="material-symbols-outlined">sms</span>
+        <span *ngIf="isChatOpen" class="material-symbols-outlined">close</span>
+    </button>
+    
+    <div *ngIf="isChatOpen" @fadeInOut class="chat-container">
+        <input type="text" placeholder="您可詢問任何問題">
+        <div class="flex items-center">
+            <button class="btn-outline-black p-1 mr-2">
+                <span class="material-symbols-outlined">attach_file</span>
+            </button>
+    
+            <span>例：</span>
+            <button class="btn-outline-black py-1 px-4">製作一個檔案</button>
+        </div>
+    </div>
+</div>

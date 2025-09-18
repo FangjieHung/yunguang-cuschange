@@ -1,0 +1,135 @@
+.max-w-container {
+  @apply px-8 py-7 w-full max-w-[92rem] mx-auto;
+}
+
+.flex-outer,
+.mat-horizontal-stepper-content {
+  @apply flex flex-col h-full overflow-auto;
+}
+
+// Header
+.basic-header {
+  @apply flex items-center flex-wrap;
+
+  h1 {
+    @apply leading-normal mr-4;
+  }
+}
+
+.justify-header {
+  @apply flex items-center justify-between;
+}
+
+.section-title-wrap {
+  @apply flex items-center flex-wrap;
+
+  h2 {
+    @apply py-2;
+  }
+
+  b {
+    @apply flex items-center font-bold text-lg;
+
+    .material-symbols-outlined {
+      @apply text-primary-600 text-3xl w-10;
+    }
+  }
+
+  .hint {
+    @apply text-sm text-primary-gray ml-10 -mt-1;
+  }
+
+  .btn-outline-purple {
+    @apply rounded flex items-center px-2 py-1 min-w-fit font-medium text-sm;
+
+    .material-symbols-outlined {
+      @apply text-lg pr-1;
+    }
+  }
+}
+
+// Toolbar
+.sticky-toolbar {
+  @apply col-span-full mt-5 sticky bottom-0 bg-white border-t py-4;
+
+  button.submit {
+    @apply w-full float-right lg:w-fit;
+  }
+}
+
+.sticky-header {
+  @apply p-4 border-b flex items-center justify-between sticky top-0 bg-white;
+  z-index: 1;
+}
+
+// Side Nav
+[class*='sub-sidenav-'] {
+
+  .mat-accordion  {
+    @apply block h-auto;
+  }
+
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    @apply bg-inherit shadow-none;
+  }
+
+  .mat-expansion-panel-header,
+  .mat-expansion-panel-body {
+    @apply px-3 pb-0;
+  }
+
+  .mat-expansion-panel-header.mat-expanded {
+    height: auto
+  }
+
+  .mat-expansion-indicator {
+    @apply flex justify-center w-8;
+
+    &::after {
+      @apply border-primary-900;
+    }
+  }
+}
+
+.sub-sidenav-left {
+  @apply bg-primary-50 rounded-r-3xl flex flex-col pb-6 pt-4 h-full overflow-auto shadow-lg z-10;
+  width: 22.5rem;
+
+  .side-nav-content {
+    @apply flex-1 overflow-auto pt-2;
+
+    mat-form-field {
+      max-width: 8rem;
+      height: 4.5rem
+    }
+  }
+
+  .side-nav-submit {
+    @apply mx-6 rounded-xl shadow-lg overflow-hidden;
+  }
+}
+
+.sub-sidenav-right {
+  @apply bg-white h-full overflow-auto relative shadow transition-all duration-300 ease-in-out;
+  width: 22.5rem;
+
+  .main-content {
+    @apply flex-1 px-6 pb-6 pt-4;
+  }
+}
+
+.mat-drawer.mat-drawer-end.sub-sidenav-right {
+  .mat-drawer-inner-container {
+    @apply flex flex-col pt-0;
+  }
+
+  &:not(.mat-drawer-side) {
+    @apply shadow-lg;
+  }
+  
+  &.collapsed {
+    width: 5rem !important;
+    min-width: 5rem !important;
+    max-width: 5rem !important;
+  }
+}

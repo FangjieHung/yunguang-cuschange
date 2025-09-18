@@ -1,0 +1,91 @@
+<div>
+  <cms-page-header [breadcrumbs]="['系統管理', '使用者資料']">
+    <button mat-raised-button color="primary" (click)="onCreate()">
+      <span class="material-icons-outlined pr-2 text-lg">library_add</span>
+      <span>新增使用者</span>
+    </button>
+  </cms-page-header>
+
+  <nz-card class="mx-4 mb-4 border border-slate-200 rounded-md">
+    <section class="relative">
+      <nz-collapse nzGhost>
+        <nz-collapse-panel [nzHeader]="panelHeader" [nzShowArrow]="false" #panel class="collapse-fit mx-4 mb-3 md:mb-0">
+          <ng-template #panelHeader>
+            <p class="flex items-center text-base min-w-max">
+              <span class="material-icons-outlined text-2xl -ml-3 mb-0.5">manage_search</span>
+              <span class="font-medium pl-1">篩選查詢</span>
+              <span nz-icon nzType="right" class="ant-collapse-arrow px-2" [nzRotate]="panel.nzActive ? 90 : 0"></span>
+            </p>
+          </ng-template>
+
+          <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
+            <mat-form-field appearance="outline" class="w-full flex-1 -mb-2" slot="start">
+              <mat-label>狀態</mat-label>
+              <mat-select [(ngModel)]="request.queryRequest.status">
+                <mat-option [value]="0">全部</mat-option>
+                <mat-option *ngFor="let status of statuses$ | async" [value]="+status.value">{{ status.name
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </cms-search-bar>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </section>
+
+    <nz-table class="overflow-x-auto" #listTable [nzFrontPagination]="false" [nzShowPagination]="false"
+      [nzData]="dataSource" [nzLoading]="dataLoading">
+      <thead>
+        <tr>
+          <th>帳號</th>
+          <!-- <th>名稱</th> -->
+          <th>啟用日</th>
+          <th>停用日</th>
+          <th nzWidth="60px">狀態</th>
+          <th nzWidth="50px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listTable.data">
+          <td>{{ data.account }}</td>
+          <!-- <td>{{ data.name }}</td> -->
+          <td class="text-blue-600">
+            {{ data.startAt | dateFormatter: 'yyyy-MM-dd': '-' }}
+          </td>
+          <td class="text-red-600">
+            {{ data?.endAt | dateFormatter: 'yyyy-MM-dd': '-' }}
+          </td>
+          <td>
+            <nz-tag class="mr-0"
+              [nzColor]="(data.status | aryFindValue: (statusInfos$ | async): 'value': 'style') ?? 'default'">
+              {{ data.status | aryFindValue: (statusInfos$ | async):'value':'name' }}
+            </nz-tag>
+          </td>
+          <td nzAlign="center">
+            <button class="rounded-full px-0" nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu">
+              <span class="material-icons-outlined align-middle">more_vert</span>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a nz-button nzType="text" (click)="onUpdate(data)">編輯</a>
+                </li>
+                <li nz-menu-item *ngIf="(data.status | aryFindValue: (statuses$ | async): 'value': 'name') === '停用'">
+                  <a nz-button nzType="text" (click)="onEnable(data)">啟用</a>
+                </li>
+                <li nz-menu-item *ngIf="(data.status | aryFindValue: (statuses$ | async): 'value': 'name') === '啟用'">
+                  <a nz-button nzType="text" (click)="onDisable(data)">停用</a>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <section>
+      <nz-pagination class="flex justify-end mt-3 mb-4 px-4 lg:px-6" [nzPageIndex]="response?.pageIndex"
+        [nzPageSize]="response?.pageSize" [nzTotal]="response?.totalCount"
+        (nzPageIndexChange)="onPageIndexChange($event)"></nz-pagination>
+    </section>
+  </nz-card>
+</div>

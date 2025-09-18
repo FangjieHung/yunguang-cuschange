@@ -1,0 +1,182 @@
+// Spinner
+.ngx-spinner-overlay {
+    @apply backdrop-blur-sm;
+
+    img {
+        @apply h-48 w-48;
+    }
+
+    .loading-text {
+        @apply inset-0 w-fit h-fit m-auto pt-48;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+}
+
+.loading-wrapper {
+    --size: 2.5rem;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .isometric {
+        position: relative;
+        transform: rotateX(55deg) rotateZ(-45deg) translate(calc(var(--size) * -2), 0);
+        margin-bottom: calc(3 * var(--size));
+    }
+
+    .box {
+        position: absolute;
+        width: var(--size);
+        height: var(--size);
+        background: #b6ace3;
+        animation: slide 0.9s cubic-bezier(0.65, 0.53, 0.59, 0.93) infinite;
+    }
+    .box:before,
+    .box:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    .box:before {
+        background: #2f2a7d;
+        transform: skew(0deg, -45deg);
+        right: 100%;
+        top: 50%;
+    }
+    .box:after {
+        background: #6658ca;
+        transform: skew(-45deg, 0deg);
+        top: 100%;
+        right: 50%;
+    }
+    .box:nth-child(1) {
+        --sx: 50%;
+        --sy: -50%;
+        --ex: 150%;
+        --ey: 50%;
+    }
+    .box:nth-child(2) {
+        --sx: -50%;
+        --sy: -50%;
+        --ex: 50%;
+        --ey: -50%;
+    }
+    .box:nth-child(3) {
+        --sx: 150%;
+        --sy: 50%;
+        --ex: 50%;
+        --ey: 50%;
+    }
+    .box:nth-child(4) {
+        --sx: 50%;
+        --sy: 50%;
+        --ex: -50%;
+        --ey: -50%;
+    }
+    h1 {
+        font-size: 1rem;
+        color: #b6ace3;
+    }
+    .eclipse {
+        color: transparent;
+        position: relative;
+    }
+    .eclipse:before {
+        content: ".";
+        position: absolute;
+        bottom: -2px;
+        color: #b6ace3;
+        margin-left: 1px;
+        animation: load 1.5s linear infinite;
+        display: inline-block;
+    }
+    @keyframes slide {
+        0% {
+            transform: translate(var(--sx), var(--sy));
+        }
+        65% {
+            transform: translate(var(--ex), var(--sy));
+        }
+        95%,
+        100% {
+            transform: translate(var(--ex), var(--ey));
+        }
+    }
+    @keyframes load {
+        20% {
+            content: ".";
+        }
+        40% {
+            content: "..";
+        }
+        80%,
+        100% {
+            content: "...";
+        }
+    }
+}
+
+.progress-container {
+    @apply w-full max-w-sm mx-auto mb-4;
+
+    .counter {
+        @apply text-white text-center mt-1;
+    }
+}
+
+.progress-bar {
+    @apply bg-primary-50 w-full h-1 rounded overflow-hidden relative;
+
+    &::after {
+        @apply content-[''] rounded absolute inset-0;
+        background: linear-gradient(100deg, #eead92 18%, #6018dc 100%) fixed;
+        animation: progressing 60s ease-in-out;
+    }
+}
+
+@keyframes progressing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 99%;
+    }
+}
+
+@property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+}
+
+@keyframes countUp {
+    to {
+        --num: 99;
+    }
+}
+
+.counter-animation {
+    @apply block text-white text-center mt-4 text-base;
+
+    .counter-number::before {
+        @apply px-1;
+        counter-reset: percent var(--num);
+        content: counter(percent);
+        animation: countUp steps(99, end) forwards 60s;
+    }
+
+    .counter-number::after {
+        @apply text-sm;
+        content: "%";
+    }
+}
+

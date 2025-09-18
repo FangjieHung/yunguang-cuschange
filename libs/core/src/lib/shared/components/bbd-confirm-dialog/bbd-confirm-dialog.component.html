@@ -1,0 +1,15 @@
+<div class="p-6 text-center max-w-md mx-auto">
+    <svg class="mx-auto mb-4 text-red-500 w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ data.title }}</h3>
+    <p class="text-sm text-gray-600 mb-6 whitespace-pre-line">
+        {{ data.content }}
+    </p>
+    <div class="flex justify-center space-x-4">
+        <button mat-stroked-button (click)="onCancel()">{{ data.cancelText || '取消' }}</button>
+        <button mat-flat-button color="primary" (click)="onConfirm()">{{ data.confirmText || '確定' }}</button>
+        <button mat-flat-button color="primary" (click)="onConfirm('confirmB')" *ngIf="data.confirmTextB">{{ data.confirmTextB }}</button>
+    </div>
+</div>

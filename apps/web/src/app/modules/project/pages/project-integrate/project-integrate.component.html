@@ -1,0 +1,394 @@
+<div class="max-w-container flex flex-col space-y-5 h-full">
+    <header class="basic-header">
+        <a [routerLink]="['/project/edit']" [queryParams]="{ buildProjectId:buildProjectDto.id, mode:'edit' }"
+            class="btn-text text-sm"><span class="material-symbols-outlined">chevron_left</span>返回
+        </a>
+        <h1>資料總覽</h1>
+    </header>
+
+    <div class="card min-h-fit">
+        <ul class="describe-list-row p-5">
+            <li>
+                <span class="text-stone-500">專案名稱：</span>
+                <span class="font-medium">{{buildProjectDto.name}}</span>
+            </li>
+            <li>
+                <span class="text-stone-500">需求書：</span>
+                <span class="font-medium">{{((buildProjectDto.docs || [])[0] || {}).fileName}}</span>
+            </li>
+            <li>
+                <span class="text-stone-500">房型組：</span>
+                <span class="font-medium">
+                    {{ buildProjectDto.buildCompBundleId | aryFindValue: buildCompBundleOpts :'id':'name'}}</span>
+            </li>
+            <li>
+                <span class="text-stone-500">基地位址：</span>
+                <span class="font-medium">{{buildProjectDto.addr}}</span>
+            </li>
+        </ul>
+    </div>
+    <form [formGroup]="valForm" class="card flex-auto">
+        <div class="sticky-header">
+            <h2>參數調整</h2>
+            <button mat-flat-button color="primary" (click)="onSubmit()" class="submit">下一步，計算建築削線範圍</button>
+        </div>
+        <div class="integrate-container">
+            <section class="inputs-wrap">
+                <ul>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.buildingCoverRatio.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>建蔽率<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="buildingCoverRatio">
+                            <span matSuffix class="unit">%</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['buildingCoverRatio'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['buildingCoverRatio'].errors, '建蔽率')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.floorAreaRatio.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>容積率<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="floorAreaRatio">
+                            <span matSuffix class="unit">%</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['floorAreaRatio'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['floorAreaRatio'].errors, '容積率')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numFloors.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>地上樓層數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numFloors">
+                            <span matSuffix class="unit">層</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['numFloors'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numFloors'].errors, '地上樓層數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numBasements.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>地下室層數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numBasements">
+                            <span matSuffix class="unit">層</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['numBasements'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numBasements'].errors, '地下室層數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.egressDistance.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>防火梯逃生距離<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="防火梯逃生距離" formControlName="egressDistance">
+                            <span matSuffix class="unit">m</span>
+                            <mat-error class="text-xs" *ngIf="f['egressDistance'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['egressDistance'].errors, '防火梯逃生距離')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.corridorWidth.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>最低走廊寬度<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="corridorWidth">
+                            <span matSuffix class="unit">m</span>
+                            <mat-hint class="success">符合建議</mat-hint>
+                            <mat-error class="text-xs" *ngIf="f['corridorWidth'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['corridorWidth'].errors, '最低走廊寬度')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numApartmentUnits.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>最低戶數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numApartmentUnits">
+                            <span matSuffix class="unit">戶</span>
+                            <mat-error class="text-xs" *ngIf="f['numApartmentUnits'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numApartmentUnits'].errors, '最低戶數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+                </ul>
+                <!-- 右 -->
+                <ul>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.publicSpaceRatio.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>公設比例<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="publicSpaceRatio">
+                            <span matSuffix class="unit">%</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['publicSpaceRatio'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['publicSpaceRatio'].errors, '公設比例')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li class="w-72">
+                        <div class="form-label" [matTooltip]="formThreshold.apartmentUnitMix.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>房型比例<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <div class="multi-inputs grid-cols-3">
+                            <mat-form-field appearance="outline" required>
+                                <input matInput type="number" placeholder="1BR" formControlName="apartmentUnitMixA">
+                                <span matSuffix class="unit">%</span>
+                                <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                                <mat-error class="text-xs" *ngIf="f['apartmentUnitMixA'].errors">
+                                    <div
+                                        *ngFor="let msg of formHelper.errorMsgs(f['apartmentUnitMixA'].errors, '房型比例')">
+                                        {{ msg }}
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" required>
+                                <input matInput type="number" placeholder="2BR" formControlName="apartmentUnitMixB">
+                                <span matSuffix class="unit">%</span>
+                                <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                                <mat-error class="text-xs" *ngIf="f['apartmentUnitMixB'].errors">
+                                    <div
+                                        *ngFor="let msg of formHelper.errorMsgs(f['apartmentUnitMixB'].errors, '房型比例')">
+                                        {{ msg }}
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" required>
+                                <input matInput type="number" placeholder="3BR" formControlName="apartmentUnitMixC">
+                                <span matSuffix class="unit">%</span>
+                                <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                                <mat-error class="text-xs" *ngIf="f['apartmentUnitMixC'].errors">
+                                    <div
+                                        *ngFor="let msg of formHelper.errorMsgs(f['apartmentUnitMixC'].errors, '房型比例')">
+                                        {{ msg }}
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </li>
+                    <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>棟數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numBuildings">
+                            <span matSuffix class="unit">棟</span>
+                            <!-- <mat-hint class="success">符合建議</mat-hint> -->
+                            <mat-error class="text-xs" *ngIf="f['numBuildings'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numBuildings'].errors, '棟數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.floorToFloor.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>樓層高度(標準層/地面層/地下室)<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="floorToFloor">
+                            <span matSuffix class="unit">m</span>
+                            <mat-error class="text-xs" *ngIf="f['floorToFloor'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['floorToFloor'].errors, '樓層高度')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+
+                    <!-- <li class="max-w-md">
+                        <div class="form-label" [matTooltip]="formThreshold.commercialArea.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>商用空間<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <div class="multi-inputs grid-cols-5">
+
+                            <mat-form-field appearance="outline" required class="col-span-3">
+                                <span matPrefix class="input-prefix">店鋪總面積</span>
+                                <input matInput type="number" placeholder="請輸入" formControlName="commercialArea">
+                                <span matSuffix class="unit">&#13217;</span>
+                                <mat-error class="text-xs" *ngIf="f['commercialArea'].errors">
+                                    <div *ngFor="let msg of formHelper.errorMsgs(f['commercialArea'].errors, '鋪總面積')">
+                                        {{ msg }}
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" required class="col-span-2">
+                                <span matPrefix class="input-prefix">店鋪數量</span>
+                                <input matInput type="number" placeholder="請輸入" formControlName="commercialUnits">
+                                <span matSuffix class="unit">間</span>
+                                <mat-error class="text-xs" *ngIf="f['commercialUnits'].errors">
+                                    <div *ngFor="let msg of formHelper.errorMsgs(f['commercialUnits'].errors, '店鋪數量')">
+                                        {{ msg }}
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </li> -->
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numCarParks.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>最少停車格數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numCarParks">
+                            <span matSuffix class="unit">個</span>
+                            <mat-error class="text-xs" *ngIf="f['numCarParks'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numCarParks'].errors, '最少停車格數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numMotorParks.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>最少機車格數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numMotorParks">
+                            <span matSuffix class="unit">個</span>
+                            <mat-error class="text-xs" *ngIf="f['numMotorParks'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numMotorParks'].errors, '最少機車格數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+                    <!-- <li class="pb-[1.59375em] w-3/5">
+                        <div class="form-label" [matTooltip]="formThreshold.typology.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>量體型態<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-button-toggle-group name="量體型態" aria-label="量體型態" class="mt-1" formControlName="typology">
+                            <mat-button-toggle [value]="0">I 型</mat-button-toggle>
+                            <mat-button-toggle disabled [value]="1">L 型</mat-button-toggle>
+                            <mat-button-toggle disabled [value]="2">T 型</mat-button-toggle>
+                        </mat-button-toggle-group>
+                        <mat-error class="text-xs" *ngIf="f['typology'].errors">
+                            <div *ngFor="let msg of formHelper.errorMsgs(f['typology'].errors, '量體型態')" class="mt-2">
+                                {{ msg }}
+                            </div>
+                        </mat-error>
+                    </li> -->
+                    <!-- <li class="">
+                        <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>棟數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numBuildings">
+                            <span matSuffix class="unit">棟</span>
+                            <mat-error class="text-xs" *ngIf="f['numBuildings'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numBuildings'].errors, '棟數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li> -->
+                </ul>
+            </section>
+            <section class="w-full max-w-xs">
+                <div class="form-label pt-0.5" matTooltip="建議值 80%" matTooltipPosition="above"
+                    matTooltipClass="form-tooltip">
+                    <p>基地範圍</p>
+                </div>
+                <figure>
+                    <!-- Mapbox -->
+                    <div class="mt-3">
+                        <!-- <img src="assets/image/demo/base-range-001.png" alt="" class="w-full h-full object-cover"> -->
+
+                        <img class="w-full h-full object-cover" [src]="buildProjectDto.baseMapAttId | fileUrl"
+                            *ngIf="buildProjectDto.baseMapAttId > 0">
+                        <img class="w-full h-full object-cover" [src]="'assets/image/illustration/empty-img.png'"
+                            *ngIf="!buildProjectDto.baseMapAttId">
+
+                    </div>
+                    <figcaption>
+                        <p>
+                            <span class="material-symbols-outlined text-yellow-500">
+                                horizontal_rule
+                            </span>
+                            道路邊界線
+                        </p>
+                        <p>
+                            <span class="material-symbols-outlined text-sky-400">
+                                horizontal_rule
+                            </span>
+                            基地範圍
+                        </p>
+                    </figcaption>
+                </figure>
+            </section>
+        </div>
+    </form>
+</div>
+
+<!-- <div class="shapediver-preload">
+    <div class="shapediver-viewer">
+        <canvas #canvasElement id="{{tPSShapediverServ.generateOption.canvas}}"></canvas>
+    </div>
+</div> -->
+
+<div class="shapediver-viewer" style="position: absolute; left: -9999px; opacity: 0;">
+    <canvas #canvasElement id="{{tPSShapediverServ.generateOption.canvas}}"></canvas>
+</div>

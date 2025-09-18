@@ -1,0 +1,86 @@
+// Layout
+.mat-drawer-container.mat-sidenav-container {
+  background-color: #ffffff00; // transparent
+}
+
+.mat-drawer-side {
+  border-right: 0;
+}
+
+.mat-drawer-content.mat-sidenav-content {
+  @apply flex;
+}
+
+.bg-none-dialog .mat-dialog-container {
+  @apply bg-white/0 shadow-none;
+}
+
+.backdrop-blur-dialg {
+  @apply backdrop-blur-md bg-black/50;
+}
+
+// Stepper
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  background-color: #ffffff00; //transparent
+}
+
+.form-card,
+mat-stepper .mat-horizontal-stepper-wrapper {
+  @apply bg-white border border-primary-200 rounded-lg overflow-y-auto h-full;
+
+  .mat-horizontal-content-container {
+    @apply pt-6 flex-1;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    @apply border-b;
+  }
+
+  .mat-horizontal-stepper-header-container,
+  .mat-horizontal-content-container {
+    //@apply bg-white border border-primary-200 rounded-lg overflow-y-auto;
+  }
+}
+
+mat-stepper .mat-horizontal-stepper-wrapper .mat-horizontal-content-container,
+mat-form-field.mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {
+  padding: 0;
+}
+
+.mat-step-header.mat-horizontal-stepper-header {
+  @apply h-14;
+
+  .mat-step-icon {
+    @apply w-5 h-5;
+  }
+
+  .mat-step-icon .mat-icon,
+  .mat-step-icon-content {
+    @apply flex items-center justify-center;
+    font-size: 0.75rem;
+  }
+
+  .mat-step-label,
+  .mat-step-label-selected {
+    @apply text-sm;
+  }
+}
+
+thead tr.mat-mdc-header-row {
+  @apply bg-primary-50 h-9;
+}
+
+[role="menu"].mat-menu-panel {
+  max-width: fit-content;
+
+  &:has(.dialog-card) {
+    @apply rounded-3xl;
+  }
+}
+
+.mat-progress-bar.mat-accent {
+  .mat-progress-bar-buffer {
+    background-color: #aaa;
+  }
+}

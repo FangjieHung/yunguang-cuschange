@@ -1,0 +1,28 @@
+h1 {
+    @apply text-2xl font-bold;
+}
+
+h2 {
+    @apply text-xl font-semibold text-primary-800;
+}
+
+h3 {
+    @apply font-normal text-xl;
+}
+
+h4 {
+    @apply font-normal text-lg;
+}
+
+h5 {
+    @apply text-base font-bold;
+}
+
+.mat-cell,
+.mat-footer-cell {
+    @apply text-sm;
+}
+
+.material-symbols-outlined {
+    font-size: 1.5rem;
+}

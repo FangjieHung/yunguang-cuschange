@@ -1,0 +1,31 @@
+@import "@angular/material/theming";
+@include mat-core();
+
+$app-primary: mat-palette($mat-blue);
+$app-accent: mat-palette($mat-orange);
+$app-warn: mat-palette($mat-pink);
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+
+/* Form */
+
+// input
+.mat-mdc-text-field-wrapper.mdc-text-field .mdc-notched-outline__notch {
+    border-right: none;
+}
+
+// form hint
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+    padding: 0;
+
+    .mat-mdc-form-field-bottom-align::before {
+        @apply flex h-auto pt-0.5;
+    }
+}
+
+/* Button */
+.mdc-button__label {
+    @apply flex items-center;
+}

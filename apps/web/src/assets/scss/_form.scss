@@ -1,0 +1,221 @@
+// Inputs // Smaller Size
+.mat-mdc-form-field {
+    .mat-mdc-form-field-flex {
+        @apply h-11;
+    }
+
+    input.mat-input-element,
+    .mat-mdc-form-field-label {
+        @apply leading-6 4xl:leading-5;
+        font-size: 0.875rem;
+    }
+
+    .mdc-floating-label {
+    }
+
+    .mat-mdc-text-field-wrapper.mdc-text-field .mdc-notched-outline__notch {
+        border-right: none;
+    }
+
+    // form hint
+    .mat-mdc-form-field-hint-wrapper,
+    .mat-mdc-form-field-error-wrapper {
+        padding: 0;
+
+        .mat-mdc-form-field-bottom-align::before {
+            @apply flex h-auto pt-0.5;
+        }
+    }
+}
+
+mat-hint.success {
+    @apply text-green-600;
+}
+
+.warn-hint {
+    @apply text-red-500 flex items-center pr-1 text-sm;
+
+    .material-symbols-outlined {
+        @apply text-sm;
+    }
+}
+
+.mat-mdc-form-field-flex {
+    .mat-mdc-form-field-icon-prefix,
+    .mat-mdc-form-field-icon-suffix {
+        font-size: 0.875rem;
+
+        + .mat-mdc-form-field-infix {
+            padding: 0.65rem 0.3rem;
+        }
+    }
+
+    .mat-mdc-form-field-icon-prefix {
+        @apply pl-2;
+    }
+
+    .mat-mdc-form-field-icon-suffix {
+        @apply pr-2;
+    }
+
+    .input-prefix {
+        @apply relative top-px 4xl:top-0;
+    }
+
+    .mat-mdc-form-field-icon-prefix .material-symbols-outlined,
+    .mat-mdc-form-field-suffix .material-symbols-outlined {
+        @apply text-xl align-middle;
+    }
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+    .mat-mdc-form-field-infix {
+        @apply min-h-full py-2;
+    }
+}
+
+.mat-mdc-form-field-flex:has(.mdc-floating-label) {
+    .mat-mdc-form-field-infix {
+        //@apply pt-3;
+    }
+    .mat-mdc-form-field-icon-prefix,
+    .mat-mdc-form-field-icon-suffix {
+        @apply pt-1;
+    }
+}
+
+// Inputs // Large Size
+.mat-mdc-form-field.input-large {
+    .mat-mdc-form-field-flex {
+        @apply h-[3.25rem];
+
+        input.mat-input-element,
+        .mat-mdc-form-field-label {
+            @apply text-base;
+        }
+    }
+
+    .mat-mdc-form-field-infix {
+        padding: 0.8rem 0 0.65rem;
+    }
+}
+
+.mat-mdc-form-field.center-input {
+    .mat-mdc-form-field-icon-prefix + .mat-mdc-form-field-infix,
+    .mat-mdc-form-field-suffix + .mat-mdc-form-field-infix {
+        text-align: center;
+    }
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-can-float.mat-mdc-form-field-should-float .mat-mdc-form-field-label,
+.mat-mdc-form-field.mat-mdc-form-field-can-float
+    .mat-input-server:focus
+    + .mat-mdc-form-field-label-wrapper
+    .mat-mdc-form-field-label {
+    transform: translateY(-1.3em) scale(0.75);
+}
+
+// Form
+.fill-white.mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+        @apply bg-white h-10 flex-none;
+        border-radius: 5px;
+    }
+
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+        [class*="mdc-notched-outline__"] {
+            @apply border-primary-200;
+        }
+
+        &.mdc-text-field--focused [class*="mdc-notched-outline__"] {
+            @apply border-primary-500;
+        }
+    }
+}
+
+.fill-gray.mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+        @apply bg-primary-50 rounded-md;
+    }
+
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+        [class*="mdc-notched-outline__"] {
+            @apply border-primary-50;
+        }
+
+        &.mdc-text-field--focused [class*="mdc-notched-outline__"] {
+            @apply border-primary-500;
+        }
+    }
+}
+
+.form-label {
+    @apply flex items-center cursor-pointer w-fit mb-1 hover:text-black;
+
+    > p {
+        @apply text-sm font-normal relative min-w-fit;
+    }
+
+    .material-symbols-outlined {
+        @apply text-primary-500 text-lg w-8 text-center ml-2;
+    }
+
+    .required-mark {
+        @apply text-red-600 text-sm absolute -right-2 top-0;
+    }
+}
+
+.form-tooltip {
+    @apply text-base;
+}
+
+.multi-inputs {
+    @apply w-full grid gap-x-1 min-w-fit max-w-fit;
+
+    .secondary-label {
+        @apply text-primary-gray text-sm mb-6 mr-2 min-w-fit;
+    }
+}
+
+.form-section {
+    @apply pl-10;
+}
+
+.inputs-container {
+    @apply px-5 py-4 flex-auto overflow-auto;
+}
+
+.mat-button-toggle-group {
+    @apply w-full;
+
+    .mat-button-toggle {
+        @apply text-sm flex-auto;
+    }
+
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        @apply leading-8;
+    }
+}
+
+.mat-option {
+    @apply text-sm;
+}
+
+.checkbox-list {
+
+    .mat-mdc-checkbox {
+        display: block;
+    }
+
+    .mat-mdc-checkbox label {
+        @apply text-base;
+    }
+
+    .mdc-form-field {
+        @apply flex flex-row-reverse w-full;
+    }
+}
+
+.mdc-checkbox {
+    padding: 0;
+}

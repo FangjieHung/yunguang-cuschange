@@ -1,0 +1,242 @@
+<div class="bg-white flex w-full h-full">
+    <form [formGroup]="valForm" class="sub-sidenav-left">
+        <a [routerLink]="['/home']" matTooltipClass="form-tooltip" class="btn-text text-sm ml-5"><span
+                class="material-symbols-outlined">
+                chevron_left
+            </span>返回
+        </a>
+        <div class="side-nav-content">
+            <section>
+                <h2>資料來源</h2>
+                <ul class="describe-list-col">
+                    <li>
+                        <span class="label w-20">專案名稱</span>
+                        <span class="content">{{buildProjectDto.name}}</span>
+                    </li>
+                    <li>
+                        <span class="label w-20">需求書</span>
+                        <span class="content">{{((buildProjectDto.docs || [])[0] || {}).fileName}}</span>
+                    </li>
+                    <li>
+                        <span class="label w-20">房型組</span>
+                        <span class="content">{{ buildProjectDto.buildCompBundleId | aryFindValue: buildCompBundleOpts
+                            :'id':'name'}}</span>
+                    </li>
+                    <li>
+                        <span class="label w-20">基地位址</span>
+                        <span class="content">{{buildProjectDto.addr}}</span>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>變化參數以生成新量體</h2>
+                <ul class=" mt-4">
+                    <li>
+                        <div class="form-label" [matTooltip]="formThreshold.buildingCoverRatio.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>建蔽率<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" class="fill-white" required>
+                            <input matInput type="number" placeholder="請輸入建蔽率" formControlName="buildingCoverRatio">
+                            <span matSuffix class="unit">%</span>
+                            <mat-error class="text-xs" *ngIf="f['buildingCoverRatio'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['buildingCoverRatio'].errors, '建蔽率')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li>
+                        <div class="form-label" [matTooltip]="formThreshold.floorAreaRatio.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>容積率<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" class="fill-white" required>
+                            <input matInput type="number" placeholder="請輸入容積率" formControlName="floorAreaRatio">
+                            <span matSuffix class="unit">%</span>
+                            <mat-error class="text-xs" *ngIf="f['floorAreaRatio'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['floorAreaRatio'].errors, '容積率')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </li>
+                    <li class="mb-6">
+                        <div class="form-label" [matTooltip]="formThreshold.typology.tooltip" matTooltipPosition="above"
+                            matTooltipClass="form-tooltip">
+                            <p>量體型態<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-button-toggle-group name="量體型態" aria-label="量體型態" class="mt-1" formControlName="typology">
+                            <mat-button-toggle [value]="0">Ｉ型</mat-button-toggle>
+                            <mat-button-toggle [value]="1">O 型</mat-button-toggle>
+                            <!-- <mat-button-toggle disabled [value]="2">T 型</mat-button-toggle> -->
+                        </mat-button-toggle-group>
+                        <mat-error class="text-xs" *ngIf="f['typology'].errors">
+                            <div *ngFor="let msg of formHelper.errorMsgs(f['typology'].errors, '量體型態')" class="mt-2">
+                                {{ msg }}
+                            </div>
+                        </mat-error>
+                        <!-- <span class="mat-hint">目前只能選擇 I 型</span> -->
+                    </li>
+                    <li>
+                        <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>棟數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" class="fill-white" required>
+                            <input matInput type="number" placeholder="請輸入棟數" formControlName="numBuildings">
+                            <mat-error class="text-xs" *ngIf="f['numBuildings'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numBuildings'].errors, '棟數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                            <!-- <mat-hint>上限 2 棟</mat-hint> -->
+                        </mat-form-field>
+                    </li>
+                    <li class="mb-6">
+                        <div class="form-label" [matTooltip]="formThreshold.numFloors.tooltip"
+                            matTooltipPosition="above" matTooltipClass="form-tooltip">
+                            <p>地上樓層數<span class="required-mark">*</span></p>
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <mat-form-field appearance="outline" class="fill-white" required>
+                            <input matInput type="number" placeholder="請輸入" formControlName="numFloors">
+                            <mat-error class="text-xs" *ngIf="f['numFloors'].errors">
+                                <div *ngFor="let msg of formHelper.errorMsgs(f['numFloors'].errors, '地上樓層數')">
+                                    {{ msg }}
+                                </div>
+                            </mat-error>
+                            <!-- <mat-hint>上限 2 棟</mat-hint> -->
+                        </mat-form-field>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div class="side-nav-submit">
+            <button mat-flat-button color="primary" (click)="onSubmit()" class="btn-lg h-14 w-full">
+                <span class="material-symbols-outlined">crossword</span>
+                <span>確認，生成 1 個量體</span>
+            </button>
+        </div>
+    </form>
+
+    <div class="h-full overflow-auto flex-auto">
+        <div class="max-w-container">
+            <header class="basic-header w-full mb-5">
+                <h1>量體綜合比較</h1>
+                <mat-form-field appearance="outline" class="-mb-6">
+                    <mat-label>條件</mat-label>
+                    <mat-select (selectionChange)="selectionChangeSort()" name="sortOptSelect"
+                        [(ngModel)]="sortOptSelect">
+                        <mat-option *ngFor="let opt of sorts" [value]="opt.value">
+                            {{ opt.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </header>
+
+            <section class="card-list-container">
+                <div *ngFor="let item of buildProjectDto.volumes" class="card link" (click)="onCardClick($event, item)">
+                    <!--
+                        <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.comparisonName" class="cover"
+                            onerror="this.onerror=null;this.src='assets/image/illustration/empty-img.png';" /> -->
+                    <img class="cover" [src]="item.coverAttId | fileUrl" *ngIf="item.coverAttId > 0">
+                    <img class="cover" [src]="'assets/image/illustration/empty-img.png'" *ngIf="!item.coverAttId">
+
+                    <div class="name-wrap">
+                        <div>
+                            <h2> {{ (item.param || '{}' | jsonParse)?.project }}</h2>
+                            <p class="date"> {{ item.updAt | dateFormatter: 'yyyy/MM/dd hh:mm': '-'}}</p>
+                        </div>
+                        <button class="card-action" [matMenuTriggerFor]="actionMenu"
+                            (click)="$event.stopPropagation()"><span class="material-symbols-outlined">
+                                more_vert
+                            </span></button>
+                        <mat-menu #actionMenu="matMenu">
+                            <button mat-menu-item class="" [routerLink]="['/project/mass-refinement']"
+                                [queryParams]="{ buildProjectId:buildProjectDto.id ,buildProjVolumeId: item.id }"><span
+                                    class="material-symbols-outlined">edit</span>編輯</button>
+                            <button mat-menu-item class="danger" (click)="deleteBuildProjVolume(item.id)"><span
+                                    class="material-symbols-outlined">delete</span>刪除</button>
+                        </mat-menu>
+                    </div>
+
+                    <ul class="describe-list-col mt-3 between">
+                        <li><span class="label w-20">總樓地板面積</span> <span class="content">{{ (item.result || '{}' |
+                                jsonParse)?.option?.optionCriteria?.basicCriteria?.totalFloorArea | areaConvert:'toPing'
+                                | number }} 坪</span>
+                        </li>
+                        <li><span class="label w-20">建蔽率</span> <span class="content">{{ (item.result || '{}' |
+                                jsonParse)?.option?.optionCriteria?.basicCriteria?.siteConstraints?.buildingCoverRatio *
+                                100 | roundDefault:2
+                                }} &#37;</span>
+                        </li>
+                        <!-- <li class=" flex gap-x-2">
+                            <div>{{item.scoreParking}}</div>
+                            <div>{{item.scoreStructure}}</div>
+                            <div>{{item.scoreUnitMix}}</div>
+                        </li> -->
+                    </ul>
+
+                    <!-- <img [src]="item.src" class="cover">
+                    <div class="name-wrap">
+                        <div>
+                            <h2> {{ item.comparisonName }}</h2>
+                            <p class="date"> {{ item.comparisonTime}}</p>
+                        </div>
+                        <button class="card-action" [matMenuTriggerFor]="actionMenu"
+                            (click)="$event.stopPropagation()"><span class="material-symbols-outlined">
+                                more_vert
+                            </span></button>
+                        <mat-menu #actionMenu="matMenu">
+                            <button mat-menu-item class="danger"><span
+                                    class="material-symbols-outlined">delete</span>刪除</button>
+                        </mat-menu>
+                    </div>
+    
+                    <ul class="describe-list-col mt-3 between">
+                        <li><span class="label w-20">總樓地板面積</span> <span class="content">{{ item.comparisonGFA }} 坪</span>
+                        </li>
+                        <li><span class="label w-20">建蔽率</span> <span class="content">{{ item.comparisonBCR }} &#37;</span>
+                        </li>
+                    </ul> -->
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let card of cards; let i = index" class="card">
+    <img [src]="card.img">
+    <div class="title">option-{{i + 1}}</div>
+    <div class="time">{{card.time}}</div>
+    <div class="info">
+        <div class="label">總樓地板面積</div>
+        <div class="value">
+            <!-- {{(card.data.option.optionCriteria.basicCriteria.totalFloorArea * 0.3025)?.toFixed(2)}} -->
+            坪
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="label">建蔽率</div>
+        <div class="value">
+            <!-- {{(card.data.option.optionCriteria.basicCriteria.siteConstraints.buildingCoverRatio * 100)?.toFixed(0)}} -->
+            %
+        </div>
+    </div>
+</div>
+
+<!-- <div class="shapediver-preload">
+    <div class="shapediver-viewer">
+        <canvas #canvasElement id="{{tPSShapediverServ.generateOption.canvas}}"></canvas>
+    </div>
+</div> -->
+
+<div class="shapediver-viewer" style="position: absolute; left: -9999px; opacity: 0;">
+    <canvas #canvasElement id="{{tPSShapediverServ.generateOption.canvas}}"></canvas>
+</div>

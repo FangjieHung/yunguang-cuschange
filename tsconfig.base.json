@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@core/+states": ["libs/core/src/lib/+states/index.ts"],
+      "@core/consts": ["libs/core/src/lib/consts/index.ts"],
+      "@core/models": ["libs/core/src/lib/models/index.ts"],
+      "@core/services": ["libs/core/src/lib/services/index.ts"],
+      "@core/shared": ["libs/core/src/lib/shared/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

@@ -1,0 +1,10 @@
+<section class="flex items-center" role="alert">
+  
+  <span [ngClass]="data.iconStyle || ''" class="material-symbols-outlined">{{data.icon || 'info'}}</span>
+  <p class="flex-auto pl-2 truncate">
+    {{data.text || '' }}
+  </p>
+  <button class="btn-ghost w-10" (click)="snackBarRef.dismiss()">
+    <span class="material-symbols-outlined align-middle">close</span>
+  </button>
+</section>

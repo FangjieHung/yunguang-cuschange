@@ -1,0 +1,59 @@
+<div class="default-container">
+
+    <nav class="nav-bar">
+        <div class="flex items-center">
+            <button mat-button (click)="toggleMenu()" class="h-14">
+                <span class="material-symbols-outlined" *ngIf="!snav?.opened">menu</span>
+                <span class="material-symbols-outlined" *ngIf="snav?.opened">menu_open</span>
+            </button>
+            <!-- {{ pageTitle }} -->
+            <a routerLink="/">
+                <img src="assets/image/logo/landscape.svg" alt="logo" class="w-36">
+            </a>
+        </div>
+
+        <div class="tools-wrap">
+            <button>
+                <span class="material-symbols-outlined">help</span>
+            </button>
+            <button>
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="avatar-btn" [matMenuTriggerFor]="accountMenu">
+                <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
+                <span class="material-symbols-outlined">
+                    keyboard_arrow_down
+                </span>
+            </button>
+
+            <mat-menu #accountMenu="matMenu">
+                <button mat-menu-item *ngIf="isSignin" routerLink="/account/profile">帳號設定</button>
+                <button mat-menu-item *ngIf="!isSignin" routerLink="/auth/signin">登入</button>
+                <button mat-menu-item *ngIf="isSignin" (click)="appAuthApiServ.signout()">登出</button>
+            </mat-menu>
+        </div>
+    </nav>
+
+    <mat-sidenav-container>
+        <mat-sidenav #snav mode="side">
+            <mat-nav-list class="sidenav-list">
+                <a mat-list-item routerLink="/" class="focused">
+                    <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">專案管理
+                </a>
+                <a mat-list-item>
+                    <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">元件管理
+                </a>
+                <a mat-list-item>
+                    <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">成本模型管理
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div class="main-container">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <web-footer></web-footer>
+</div>

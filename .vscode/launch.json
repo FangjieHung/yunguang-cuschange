@@ -1,0 +1,98 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "啟動程式",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-start:cms",
+            "request": "launch",
+            "command": "npm run clean-start:cms",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-stage:cms",
+            "request": "launch",
+            "command": "npm run clean-stage:cms",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-start:web",
+            "request": "launch",
+            "command": "npm run clean-start:web",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-start:web-p3000",
+            "request": "launch",
+            "command": "npm run clean-start:web-p3000",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-stage:web",
+            "request": "launch",
+            "command": "npm run clean-stage:web",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: build-stage:cms",
+            "request": "launch",
+            "command": "npm run build-stage:cms && git add dist-stage/apps/cms/. && git commit -m 'Build local cms stage files' &&  git push origin HEAD:main && exit",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: build:cms",
+            "request": "launch",
+            "command": "npm run build:cms && git add dist/apps/cms/. && git commit -m 'Build local cms prod files' &&  git push origin HEAD:main && exit",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: build-stage:web",
+            "request": "launch",
+            "command": "npm run build-stage:web && git add dist-stage/apps/web/. && git commit -m 'Build local web stage files' &&  git push origin HEAD:main && exit",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: build:web",
+            "request": "launch",
+            "command": "npm run build:web && git add dist/apps/web/. && git commit -m 'Build local web prod files' &&  git push origin HEAD:main && exit",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: start:web",
+            "request": "launch",
+            "command": "npm run start:web",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-prod:cms",
+            "request": "launch",
+            "command": "npm run clean-prod:cms",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "執行指令碼: clean-prod:web",
+            "request": "launch",
+            "command": "npm run clean-prod:web",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+export * from './result-empty/result-empty.component';

@@ -1,0 +1,20 @@
+.chat-toggle {
+    @apply bg-white fixed bottom-2 right-2 z-10 flex items-center justify-center rounded-full border w-14 h-14 shadow-md hover:shadow-none ease-in-out;
+}
+
+.chat-container {
+    @apply bg-white rounded-xl shadow-lg p-5 border absolute inset-x-3 bottom-20 h-auto mr-0 ml-auto z-10 sm:max-w-xl md:max-w-lg;
+
+    > input {
+        @apply w-full mb-4 outline-none;
+    }
+
+    .btn-outline-black {
+        @apply rounded-full flex;
+
+        .material-symbols-outlined {
+            @apply px-1 h-auto;
+            font-size: 1.5rem;
+        }
+    }
+}

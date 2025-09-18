@@ -1,0 +1,73 @@
+.default-container {
+    @apply flex flex-col absolute inset-0 bg-primary-50;
+}
+
+.main-container {
+    @apply flex-1 h-full overflow-y-auto relative;
+}
+
+.mat-sidenav {
+    @apply bg-stone-50;
+    min-width: 15rem;
+}
+
+.mat-drawer:not(.mat-drawer-side) {
+    @apply shadow-none;
+}
+
+mat-sidenav-container {
+    @apply flex-auto;
+}
+
+.mobile-container mat-sidenav-container {
+    //flex: 1 0 auto;
+}
+
+.menu-button .material-symbols-outlined {
+    @apply opacity-100 w-6;
+    transition: all 0.3s ease;
+
+    &.hide {
+        @apply opacity-0 w-0;
+    }
+}
+
+.nav-bar {
+    @apply bg-white flex items-center justify-between h-14 max-h-16 border-b relative z-10 shadow-sm;
+}
+
+.sidenav-list {
+    @apply px-5 py-2;
+
+    > a {
+        @apply rounded-md my-2 text-base;
+    }
+
+    a.focused {
+        @apply font-bold bg-primary-200;
+    }
+
+    .list-icon {
+        @apply w-6 mr-2;
+    }
+}
+
+.tools-wrap {
+    @apply flex items-center font-bold px-3;
+
+    > button {
+        @apply w-11 h-14;
+    }
+    .material-symbols-outlined {
+        @apply text-xl;
+    }
+}
+
+.avatar-btn {
+    @apply flex items-center min-w-fit pl-3;
+
+    .user {
+        @apply rounded-xl min-w-8 w-8 h-8 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
+        font-size: .875rem;
+    }
+}
