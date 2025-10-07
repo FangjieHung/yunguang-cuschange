@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: '',
         component: DefaultContainerComponent,
-        canActivate: [AppAuthGuard],
+        // canActivate: [AppAuthGuard],
         children: [
           {
             path: 'home',
