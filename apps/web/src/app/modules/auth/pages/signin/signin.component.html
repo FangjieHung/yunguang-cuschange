@@ -1,6 +1,6 @@
 <div class="bg-[#FAF7FA] flex flex-col items-center justify-center p-6 h-full relative">
   <a routerLink="/">
-    <img src="assets/image/logo/landscape.svg" alt="logo" class="logo-tl">
+    <img src="assets/image/logo/mark.webp" alt="logo" class="logo-tl">
   </a>
   <picture class="bg-image">
     <source srcset="assets/video/buildings-grow.webp">
@@ -48,19 +48,15 @@
           <div class="flex justify-between items-center">
             <mat-checkbox color="primary"><span class="text-base -ml-2">記住我</span></mat-checkbox>
             <a *ngIf="false" class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
-            <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? 請聯絡系統管理員</a>
+            <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? </a>
           </div>
           <a mat-flat-button color="primary" class="w-full btn-lg h-12" (click)="onSubmit()">登入</a>
           <a class="btn-outline-purple w-full btn-lg h-12">註冊</a>
         </div>
       </form>
 
-      <p *ngIf="false" class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">登入或註冊即表示您同意我們的
+      <p class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">登入或註冊即表示您同意我們的
         <a target="_blank" routerLink="/auth/policy">隱私權與服務政策</a>
-      </p>
-
-      <p class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">系統管理員信箱：
-        <a target="_blank" href="mailto:hello@sparkgen.cc">hello@sparkgen.cc</a>
       </p>
     </section>
   </div>

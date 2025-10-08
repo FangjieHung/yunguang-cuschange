@@ -5,7 +5,7 @@ export const environment = {
   storageAuthUserName: 'tslmaiWebStageAuthUser',
   siteName: '台灣人工智慧檢驗醫學學會',
   siteServer: 'https://tslmai.bonbondi.com',
-  apiServer: 'https://api.tslmai.bonbondi.com/Portal',
-  cdnServer: 'https://api.tslmai.bonbondi.com',
+  apiServer: 'http://localhost:5038/Portal',
+  cdnServer: 'http://localhost:5038',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'
 };
