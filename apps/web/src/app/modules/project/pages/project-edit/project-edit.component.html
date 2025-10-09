@@ -1,7 +1,7 @@
 <div class="max-w-container h-full">
     <div class="flex flex-col h-full">
         <header class="basic-header">
-            <a routerLink="/" class="btn-text text-sm"><span class="material-symbols-outlined">chevron_left</span>返回
+            <a routerLink="/" class="btn-text text-sm"><span class="material-symbols-rounded">chevron_left</span>返回
             </a>
             <h1>{{editMode === 'edit' ? fBP['name'].value:'新增專案' }}</h1>
         </header>
@@ -73,7 +73,7 @@
                                 </bbd-image-upload>
                                 <p class="text-sm text-primary-gray mt-2">格式需為 jpeg、png, 檔案限制 2M 以下, 400*300px </p>
                                 <button class="btn-outline-purple my-2" *ngIf="false"><span
-                                        class="material-symbols-outlined pr-2">wand_stars</span>生成封面圖</button>
+                                        class="material-symbols-rounded pr-2">wand_stars</span>生成封面圖</button>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +86,7 @@
                         <section class="w-full">
                             <div class="section-title-wrap w-full">
                                 <div class="pr-2">
-                                    <b><span class="material-symbols-outlined">
+                                    <b><span class="material-symbols-rounded">
                                             upload_file
                                         </span>請上傳需求書</b>
                                     <p class="hint">格式需為.pdf, 檔案大小不能超過 10M</p>
@@ -119,14 +119,14 @@
                                 </table>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="btn-outline-purple" (click)="fileInput.click()"><span
-                                            class="material-symbols-outlined">attachment</span><span>上傳需求書</span>
+                                            class="material-symbols-rounded">attachment</span><span>上傳需求書</span>
                                     </button>
                                     <button *ngIf="demoDocId" class="btn-outline-purple"
                                         (click)="getArcgenDocs(demoDocId)"><span
-                                            class="material-symbols-outlined"></span>查詢狀況</button>
+                                            class="material-symbols-rounded"></span>查詢狀況</button>
                                     <button *ngIf="demoDocId" class="btn-outline-purple"
                                         (click)="getArcgenDocsAnalysis(demoDocId)"><span
-                                            class="material-symbols-outlined"></span>需求書分析</button>
+                                            class="material-symbols-rounded"></span>需求書分析</button>
                                     <input type="file" #fileInput style="display: none" accept="application/pdf"
                                         (change)="onDocSelected($event)" />
                                 </div>
@@ -135,7 +135,7 @@
                         <section class="w-full">
                             <div class="section-title-wrap">
                                 <div class="pr-2">
-                                    <b><span class="material-symbols-outlined">
+                                    <b><span class="material-symbols-rounded">
                                             ink_selection
                                         </span>請選擇房型組</b>
                                 </div>

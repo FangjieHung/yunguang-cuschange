@@ -1,7 +1,8 @@
 .max-w-container {
-  @apply px-8 py-7 w-full max-w-[92rem] mx-auto;
+  @apply px-5 w-full max-w-screen-3xl mx-auto;
 }
 
+/*
 .flex-outer,
 .mat-horizontal-stepper-content {
   @apply flex flex-col h-full overflow-auto;
@@ -30,7 +31,7 @@
   b {
     @apply flex items-center font-bold text-lg;
 
-    .material-symbols-outlined {
+    .material-symbols-rounded {
       @apply text-primary-600 text-3xl w-10;
     }
   }
@@ -42,7 +43,7 @@
   .btn-outline-purple {
     @apply rounded flex items-center px-2 py-1 min-w-fit font-medium text-sm;
 
-    .material-symbols-outlined {
+    .material-symbols-rounded {
       @apply text-lg pr-1;
     }
   }
@@ -133,3 +134,4 @@
     max-width: 5rem !important;
   }
 }
+*/

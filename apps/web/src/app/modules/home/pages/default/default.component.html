@@ -1,62 +1,80 @@
-<div class="max-w-container">
-    <div class="space-y-5 mx-auto w-full">
-        <header class="basic-header">
-            <h1>專案列表</h1>
-            <a mat-flat-button color="primary" [attr.href]="'/project/edit'" class="h-10"><span
-                    class="material-symbols-outlined">add</span><span>新增專案</span></a>
-        </header>
-        <form>
-            <mat-form-field appearance="outline" class="fill-white w-full max-w-2xl">
-                <span matPrefix class="material-symbols-outlined">
-                    search
-                </span>
-                <input type="text" placeholder="搜尋專案名稱或地址" matInput [formControl]="searchControl"
-                    [matAutocomplete]="auto" [(ngModel)]="request.queryRequest.queryString"
-                    (keydown.enter)="onSearch()">
-                <mat-hint>輸入後請按下 Enter 鍵搜尋</mat-hint>
-                <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-                <mat-autocomplete #auto="matAutocomplete">
-                    <!-- <mat-option *ngFor="let option of searchOptions" [value]="option">
-                        {{ option }}
-                    </mat-option> -->
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
+<section class="floating-bg">
+    <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
+    <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
+</section>
 
-        <!-- 有資料 -->
-        <section class="card-list-container" *ngIf="dataSource.length">
-            <div *ngFor="let item of dataSource" class="card link" (click)="doRouterPage(item)" >
-                <img class="cover" [src]="item.coverAttId | fileUrl" *ngIf="item.coverAttId > 0">
-                <img class="cover" [src]="'assets/image/illustration/empty-img.png'" *ngIf="!item.coverAttId">
+<div class="relative">
 
-                <div class="name-wrap">
-                    <div>
-                        <h2> {{ item.name }} </h2>
-                        <p class="date"> {{ item.addr }}</p>
-                    </div>
-                    <button class="card-action" [matMenuTriggerFor]="actionMenu"
-                        (click)="$event.stopPropagation()"><span class="material-symbols-outlined">
-                            more_vert
-                        </span></button>
-                    <mat-menu #actionMenu="matMenu">
-                        <button mat-menu-item (click)="doRouterPage(item)" ><span
-                                class="material-symbols-outlined">preview</span>專案總覽</button>
-                        <a mat-menu-item [attr.href]="'/project/edit?buildProjectId=' + item.id + '&mode=edit'">
-                            <span class="material-symbols-outlined">edit</span>編輯專案
-                        </a>
-                        <button mat-menu-item class="danger" (click)="deleteBuildProject(item)"><span
-                                class="material-symbols-outlined">delete</span>刪除專案</button>
-                    </mat-menu>
-                </div>
+    <header class="hero">
+        <video autoplay loop muted class="hero-video">
+            <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
 
-            </div>
-        </section>
-    </div>
-    <!-- 無資料 -->
-    <web-result-empty *ngIf="(!dataSource.length) && (!request.queryRequest.queryString)"
-        [message]="'請點選左上角「新增專案」開始您的第一個專案'"></web-result-empty>
-    <web-result-empty *ngIf="(!dataSource.length) && request.queryRequest.queryString"
-        [message]="'查無資料，請重新輸入查詢條件'"></web-result-empty>
+        </video>
+
+        <div class="content max-w-container">
+            <h1 class="display">
+                Innovating for Smarter Diagnostics
+            </h1>
+            <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
+            <p class="text-xl tracking-wide">歡迎加入智慧檢驗醫學學會，共同推動檢驗醫學的創新與發展。</p>
+        </div>
+    </header>
+
+
+    <section class="max-w-container min-h-[80svh]">
+        <h2 class="">
+            <span class="display">Academic Activities</span>
+            <p class="headline">學術活動</p>
+        </h2>
+        <div class="">
+            <swiper [spaceBetween]="32" [navigation]="true" [slidesPerView]="3" class="w-full">
+                <ng-template swiperSlide *ngFor="let news of newsList">
+                    <a href="">
+                        <span class="date"> {{ news.date }}</span>
+                        <span class="sort">{{ news.sort }}</span>
+                        <h3> {{ news.title }}</h3>
+                    </a>
+                </ng-template>
+            </swiper>
+        </div>
+        
+
+        <web-glass-bg class="block my-10">
+            <a class="link" target="_blank">
+                看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+            </a>
+        </web-glass-bg>
+    </section>
+
+    <section class="max-w-container min-h-[80svh] flex items-start lg:flex-row-reverse">
+        <div class="flex flex-col self-stretch justify-between items-end">
+            <h2 class="text-right">
+                <span class="display">Latest News</span>
+                <p class="headline">最新消息</p>
+            </h2>
+
+            <mat-button-toggle-group name="newsSort" aria-label="News Sort" *ngIf="false">
+                <mat-button-toggle value="所有消息">所有消息</mat-button-toggle>
+                <mat-button-toggle value="學會公告">學會公告</mat-button-toggle>
+                <mat-button-toggle value="活動訊息">活動訊息</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <web-glass-bg class="block my-10">
+                <a class="link" target="_blank">
+                    看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+                </a>
+            </web-glass-bg>
+        </div>
+        <div class="news-list">
+            <a *ngFor="let news of newsList">
+
+                <span class="date"> {{ news.date }}</span>
+                <span class="sort">{{ news.sort }}</span>
+
+                <h3> {{ news.title }}</h3>
+            </a>
+        </div>
+    </section>
+
+
 </div>

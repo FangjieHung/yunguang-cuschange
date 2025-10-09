@@ -1,6 +1,6 @@
 <div class="bg-[#FAF7FA] flex flex-col items-center justify-center p-6 h-full relative">
   <a routerLink="/">
-    <img src="assets/image/logo/mark.webp" alt="logo" class="logo-tl">
+    <img src="assets/image/logo/mark.png" alt="logo" class="logo-tl">
   </a>
   <picture class="bg-image">
     <source srcset="assets/video/buildings-grow.webp">
@@ -35,7 +35,7 @@
                 [type]="hidePassword ? 'password' : 'text'" (keydown.enter)="onSubmit()">
               <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
                 [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
-                <span class="material-symbols-outlined">{{hidePassword ? 'visibility_off' : 'visibility'}}</span>
+                <span class="material-symbols-rounded">{{hidePassword ? 'visibility_off' : 'visibility'}}</span>
               </button>
               <mat-error class="text-xs" *ngIf="f['password'].errors">
                 <div *ngFor="let msg of formHelper.errorMsgs(f['password'].errors, '密碼')">{{ msg }}</div>

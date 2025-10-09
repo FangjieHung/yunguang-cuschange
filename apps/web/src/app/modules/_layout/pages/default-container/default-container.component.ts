@@ -13,11 +13,10 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./default-container.component.scss']
 })
 
-export class DefaultContainerComponent extends BBDBaseComponent implements OnInit, AfterViewInit {
+export class DefaultContainerComponent extends BBDBaseComponent implements OnInit {
   currentUrl = '';
   @ViewChild('snav') snav!: MatSidenav;
 
-  navOpens = ['/', '/home', '/project/render-list'];
   constructor(protected override injector: Injector,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     private _router: Router,
@@ -26,33 +25,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
   }
 
   ngOnInit(): void {
-    if (this.appAuthApiServ.hasAccessToken) {
-      this.storeServ.getCurrAuthUserCache();
-    }
-    this.doCurrentUrlMap();
-  }
-
-  ngAfterViewInit() {
-    this.dosNavControl();
-  }
-
-  doCurrentUrlMap(): void {
-    this.currentUrl = this.getUrlWithoutParams(this._router.url);
-    this._router.events
-      .subscribe((event: any) => {
-        if (event.url) {
-          this.currentUrl = this.getUrlWithoutParams(event.url);
-          this.dosNavControl();
-        }
-      });
-  }
-
-  dosNavControl(): void {
-    if (this.navOpens.includes(this.currentUrl)) {
-      this.snav.toggle(true);
-    } else {
-      this.snav.toggle(false);
-    }
+    console.log();
   }
 
   toggleMenu() {

@@ -107,7 +107,7 @@
         <mat-button-toggle value="border" (click)="doChangeMode('border')">畫邊界線</mat-button-toggle>
       </mat-button-toggle-group>
       <button (click)="closeDrawing()" class="w-12">
-        <span class="material-symbols-outlined align-middle">
+        <span class="material-symbols-rounded align-middle">
           close
         </span>
       </button>
@@ -121,9 +121,9 @@
         <div class="flex space-x-2 ">
           <ng-container *ngIf="drawingMode !== 'readOnly' && isDrawingOpen">
             <button mat-flat-button (click)="doRefreshMarker()">
-              <span class="material-symbols-outlined">refresh</span><span>重繪</span></button>
+              <span class="material-symbols-rounded">refresh</span><span>重繪</span></button>
             <button mat-flat-button (click)="onSubmit()">
-              <span class="material-symbols-outlined">check</span><span>確認</span></button>
+              <span class="material-symbols-rounded">check</span><span>確認</span></button>
           </ng-container>
         </div>
       </div>
@@ -132,7 +132,7 @@
   </div>
   <ng-container *ngIf="drawingMode !== 'readOnly'">
     <button mat-flat-button class="btn-tl" *ngIf="!isDrawingOpen" (click)="toggleDrawing()"><span
-        class="material-symbols-outlined">
+        class="material-symbols-rounded">
         rebase_edit
       </span><span>開始畫圖</span></button>
   </ng-container>

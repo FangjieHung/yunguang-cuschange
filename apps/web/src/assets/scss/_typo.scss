@@ -1,28 +1,26 @@
-h1 {
-    @apply text-2xl font-bold;
+.display {
+    @apply text-white text-balance text-5xl leading-tight tracking-tight md:text-7xl 2xl:text-8xl 4xl:text-9xl;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5), 0 10px 30px rgba(255, 255, 255, 0.3);
+}       
+
+.headline {
+    @apply text-gray-600 text-2xl leading-relaxed tracking-widest 4xl:text-4xl;
 }
 
-h2 {
-    @apply text-xl font-semibold text-primary-800;
+.title {
+    @apply text-xl 4xl:text-2xl font-medium;
 }
 
-h3 {
-    @apply font-normal text-xl;
-}
-
-h4 {
-    @apply font-normal text-lg;
-}
-
-h5 {
-    @apply text-base font-bold;
-}
-
-.mat-cell,
-.mat-footer-cell {
+.label {
     @apply text-sm;
 }
 
-.material-symbols-outlined {
-    font-size: 1.5rem;
+p,
+li,
+figcaption {
+    @apply text-gray-600;
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	    -ms-hyphens: auto;
+	        hyphens: auto;
 }

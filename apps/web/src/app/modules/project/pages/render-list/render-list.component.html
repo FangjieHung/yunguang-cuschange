@@ -1,11 +1,11 @@
 <div class="max-w-container">
     <header class="basic-header">
         <a [routerLink]="['/project/mass-comparison']" [queryParams]="{buildProjectId:buildProjectId}"
-            class="btn-text text-sm"><span class="material-symbols-outlined">chevron_left</span>返回
+            class="btn-text text-sm"><span class="material-symbols-rounded">chevron_left</span>返回
         </a>
         <h1>渲染結果 - {{buildStyle}}</h1>
         <button class="btn-gradient mt-1 shadow-lg w-36" (click)="doRender()">
-            <span class="material-symbols-outlined pr-2">wand_stars</span>
+            <span class="material-symbols-rounded pr-2">wand_stars</span>
             新增渲染
         </button>
     </header>
@@ -28,14 +28,14 @@
 
 
                 <button class="card-action" [matMenuTriggerFor]="actionMenu" (click)="$event.stopPropagation()"><span
-                        class="material-symbols-outlined">
+                        class="material-symbols-rounded">
                         more_vert
                     </span></button>
                 <mat-menu #actionMenu="matMenu">
                     <button mat-menu-item (click)="onDownloadClick($event)"><span
-                            class="material-symbols-outlined">download</span>下載</button>
+                            class="material-symbols-rounded">download</span>下載</button>
                     <button mat-menu-item class="danger" (click)="deleteBuildProjRender(item.id)"><span
-                            class="material-symbols-outlined">delete</span>刪除</button>
+                            class="material-symbols-rounded">delete</span>刪除</button>
                 </mat-menu>
             </div>
 

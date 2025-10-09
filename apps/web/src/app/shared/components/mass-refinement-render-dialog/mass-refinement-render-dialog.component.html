@@ -1,7 +1,7 @@
 <div class="dialog-card max-w-md">
     <header class="dialog-header">
         <h3>材質渲染</h3>
-        <button mat-dialog-close><span class="material-symbols-outlined">close</span></button>
+        <button mat-dialog-close><span class="material-symbols-rounded">close</span></button>
     </header>
 
     <form>
@@ -38,10 +38,10 @@
         </div>
 
         <footer class="dialog-footer">
-            <p class="warn-hint" *ngIf="!data?.isQuicklyGenerate"><span class="material-symbols-outlined pr-1">info</span>請先調整建築角度再進行渲染
+            <p class="warn-hint" *ngIf="!data?.isQuicklyGenerate"><span class="material-symbols-rounded pr-1">info</span>請先調整建築角度再進行渲染
             </p>
             <a class="btn-gradient btn-lg h-14" (click)="onSubmit()">
-                <span class="material-symbols-outlined pr-2">wand_stars</span>
+                <span class="material-symbols-rounded pr-2">wand_stars</span>
                 渲染
             </a>
         </footer>

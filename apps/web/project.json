@@ -30,8 +30,6 @@
           }
         ],
         "styles": [
-         
-          "apps/web/src/theme/custom-theme.scss",
           "./node_modules/ngx-spinner/animations/ball-grid-beat.css",
           "apps/web/src/styles.scss"
         ],

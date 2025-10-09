@@ -1,7 +1,7 @@
 <div class="max-w-container flex flex-col space-y-5 h-full">
     <header class="basic-header">
         <a [routerLink]="['/project/edit']" [queryParams]="{ buildProjectId:buildProjectDto.id, mode:'edit' }"
-            class="btn-text text-sm"><span class="material-symbols-outlined">chevron_left</span>返回
+            class="btn-text text-sm"><span class="material-symbols-rounded">chevron_left</span>返回
         </a>
         <h1>資料總覽</h1>
     </header>
@@ -39,7 +39,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.buildingCoverRatio.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>建蔽率<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="buildingCoverRatio">
@@ -56,7 +56,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.floorAreaRatio.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>容積率<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="floorAreaRatio">
@@ -73,7 +73,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numFloors.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>地上樓層數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numFloors">
@@ -90,7 +90,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numBasements.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>地下室層數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numBasements">
@@ -107,7 +107,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.egressDistance.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>防火梯逃生距離<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="防火梯逃生距離" formControlName="egressDistance">
@@ -123,7 +123,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.corridorWidth.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>最低走廊寬度<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="corridorWidth">
@@ -141,7 +141,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numApartmentUnits.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>最低戶數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numApartmentUnits">
@@ -160,7 +160,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.publicSpaceRatio.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>公設比例<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="publicSpaceRatio">
@@ -177,7 +177,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.apartmentUnitMix.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>房型比例<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <div class="multi-inputs grid-cols-3">
                             <mat-form-field appearance="outline" required>
@@ -219,7 +219,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>棟數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numBuildings">
@@ -236,7 +236,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.floorToFloor.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>樓層高度(標準層/地面層/地下室)<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="floorToFloor">
@@ -253,7 +253,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.commercialArea.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>商用空間<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <div class="multi-inputs grid-cols-5">
 
@@ -284,7 +284,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numCarParks.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>最少停車格數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numCarParks">
@@ -300,7 +300,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numMotorParks.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>最少機車格數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numMotorParks">
@@ -316,7 +316,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.typology.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>量體型態<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-button-toggle-group name="量體型態" aria-label="量體型態" class="mt-1" formControlName="typology">
                             <mat-button-toggle [value]="0">I 型</mat-button-toggle>
@@ -333,7 +333,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>棟數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numBuildings">
@@ -365,13 +365,13 @@
                     </div>
                     <figcaption>
                         <p>
-                            <span class="material-symbols-outlined text-yellow-500">
+                            <span class="material-symbols-rounded text-yellow-500">
                                 horizontal_rule
                             </span>
                             道路邊界線
                         </p>
                         <p>
-                            <span class="material-symbols-outlined text-sky-400">
+                            <span class="material-symbols-rounded text-sky-400">
                                 horizontal_rule
                             </span>
                             基地範圍

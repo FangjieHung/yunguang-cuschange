@@ -1,5 +1,34 @@
-.default-container {
-    @apply flex flex-col absolute inset-0 bg-primary-50;
+.nav-bar {
+    @apply flex items-center justify-between p-5 w-full fixed z-10;
+}
+
+.hamburger-btn {
+    @apply h-14 lg:hidden;
+}
+
+.nav-links,
+.tools-wrap {
+    @apply flex items-center px-3;
+
+    > button {
+        @apply w-11 h-14;
+    }
+    .material-symbols-rounded {
+        @apply text-xl;
+    }
+}
+
+.link-item {
+
+}
+
+.avatar-btn {
+    @apply flex items-center min-w-fit pl-3;
+
+    .user {
+        @apply rounded-xl min-w-8 w-8 h-8 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
+        font-size: 0.875rem;
+    }
 }
 
 .main-container {
@@ -19,11 +48,7 @@ mat-sidenav-container {
     @apply flex-auto;
 }
 
-.mobile-container mat-sidenav-container {
-    //flex: 1 0 auto;
-}
-
-.menu-button .material-symbols-outlined {
+.menu-button .material-symbols-rounded {
     @apply opacity-100 w-6;
     transition: all 0.3s ease;
 
@@ -31,10 +56,9 @@ mat-sidenav-container {
         @apply opacity-0 w-0;
     }
 }
+/*
 
-.nav-bar {
-    @apply bg-white flex items-center justify-between h-14 max-h-16 border-b relative z-10 shadow-sm;
-}
+
 
 .sidenav-list {
     @apply px-5 py-2;
@@ -52,22 +76,5 @@ mat-sidenav-container {
     }
 }
 
-.tools-wrap {
-    @apply flex items-center font-bold px-3;
 
-    > button {
-        @apply w-11 h-14;
-    }
-    .material-symbols-outlined {
-        @apply text-xl;
-    }
-}
-
-.avatar-btn {
-    @apply flex items-center min-w-fit pl-3;
-
-    .user {
-        @apply rounded-xl min-w-8 w-8 h-8 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
-        font-size: .875rem;
-    }
-}
+    */

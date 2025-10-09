@@ -1,4 +1,12 @@
-/* reset Globel */
+.mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
+  --mat-standard-button-toggle-shape: 99rem;
+}
+
+a.link {
+  @apply flex items-center px-4 py-3;
+}
+
+/* reset Globel *
 a.mdc-button,
 a.mdc-icon-button,
 a.mdc-stroked-button,
@@ -15,12 +23,12 @@ a[class^="btn-"] {
   display: flex !important;
   font-size: 0.875rem;
 
-  .material-symbols-outlined {
+  .material-symbols-rounded {
     @apply h-fit align-middle;
     font-size: 1.3rem;
   }
 
-  .material-symbols-outlined + span {
+  .material-symbols-rounded + span {
     @apply pl-1;
   }
 
@@ -52,21 +60,21 @@ a[class^="btn-"] {
   box-shadow: 0 2px 0 0 rgb(0 0 0 / 5%);
 }
 
-/* text button */
+/* text button *
 .btn-text {
   @apply text-primary-500 flex items-center w-fit font-medium py-1 px-2 rounded hover:bg-primary-700/10;
 
-  &:has(.material-symbols-outlined) {
+  &:has(.material-symbols-rounded) {
     @apply pl-0.5;
   }
 
-  .material-symbols-outlined {
+  .material-symbols-rounded {
     @apply font-light text-left;
     font-size: 1.875rem;
   }
 }
 
-/* outline button */
+/* outline button *
 .btn-outline-black {
   @apply border-gray-500 border text-center font-semibold text-stone-700 hover:bg-stone-200;
 }
@@ -75,7 +83,7 @@ a[class^="btn-"] {
   @apply border-primary-500 border font-medium text-center text-primary-600 bg-primary-50 hover:bg-primary-200 rounded px-5 py-2;
 }
 
-/* flat button */
+/* flat button *
 .mat-flat-button.mat-primary,
 .mat-raised-button.mat-primary,
 .mat-fab.mat-primary,
@@ -88,7 +96,7 @@ a[class^="btn-"] {
   @apply bg-black/60 text-white p-1 font-semibold;
 }
 
-/* size */
+/* size *
 .btn-lg,
 a.btn-lg,
 button.btn-lg {
@@ -112,6 +120,8 @@ button.btn-gradient {
   background: #dea5c2;
   background: linear-gradient(120deg, rgba(222, 165, 194, 1) -10%, rgba(102, 88, 202, 1) 90%);
 }
+*/
+
 
 /* Component */
 .upload-img-label {
@@ -355,7 +365,7 @@ button.btn-gradient {
     @apply text-red-700;
   }
 
-  .material-symbols-outlined {
+  .material-symbols-rounded {
     @apply h-6 pr-2;
     font-size: 1.5rem;
   }

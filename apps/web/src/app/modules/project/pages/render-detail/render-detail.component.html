@@ -6,7 +6,7 @@
 
             <div class="btn-tl flex space-x-2">
                 <a mat-flat-button class="h-11" [routerLink]="['/project/render-list']" [queryParams]="{buildProjectId:buildProjectId,
-            buildProjVolumeId:buildProjVolumeId}"><span class="material-symbols-outlined relative -left-1">
+            buildProjVolumeId:buildProjVolumeId}"><span class="material-symbols-rounded relative -left-1">
                         chevron_left
                     </span><span>返回</span>
                 </a>
@@ -16,7 +16,7 @@
                     <div class="dialog-card max-w-lg px-5 py-3 space-y-5">
                         <header class="justify-header">
                             <h3>選擇渲染結果</h3>
-                            <button mat-dialog-close><span class="material-symbols-outlined">close</span></button>
+                            <button mat-dialog-close><span class="material-symbols-rounded">close</span></button>
                         </header>
 
                         <form action="">
@@ -51,7 +51,7 @@
                 <div class="flex justify-between">
                     <h5>DesignGen</h5>
                     <button *ngIf="false" class="btn-outline-purple btn-sm">
-                        <span class="material-symbols-outlined pr-2">download</span>?.json 檔?
+                        <span class="material-symbols-rounded pr-2">download</span>?.json 檔?
                     </button>
                 </div>
                 <ul class="describe-list-col">
@@ -145,14 +145,14 @@
 
         <div class="bg-white border-t sticky bottom-0" *ngIf="!isCollapsed">
             <button mat-button (click)="isCollapsed = !isCollapsed" class="h-12">
-                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="material-symbols-rounded">arrow_forward_ios</span>
             </button>
         </div>
 
         <!-- 折疊狀態 內容縮小-->
         <div *ngIf="isCollapsed" class="p-2 flex flex-col h-full">
             <button mat-button (click)="isCollapsed = !isCollapsed" class="flex-1">
-                <span class="material-symbols-outlined">arrow_back_ios</span>
+                <span class="material-symbols-rounded">arrow_back_ios</span>
             </button>
         </div>
     </mat-sidenav>

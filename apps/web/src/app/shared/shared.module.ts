@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Third party packages
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -9,7 +10,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { ResultEmptyComponent, MassRefinementRenderDialogComponent } from './components';
+import { ResultEmptyComponent, GlassBgComponent, MassRefinementRenderDialogComponent } from './components';
 
 import {
   ShapediverViewerWidgetComponent,
@@ -19,7 +20,7 @@ import {
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
   // components
-  ResultEmptyComponent, MassRefinementRenderDialogComponent,
+  ResultEmptyComponent, GlassBgComponent, MassRefinementRenderDialogComponent,
   // widgets
   ShapediverViewerWidgetComponent,
   ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent, MapboxEditWidgetComponent,
@@ -33,6 +34,7 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoiaHBicm90aGVyIiwiYSI6ImNtODVmZGtsbTJicTEybXExcXQ1dzJmNzQifQ.641_BzJs9sz9pcdtxo_lqA'
@@ -45,6 +47,6 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
     ...CUST_COMPONENTS,
     ...THIRD_MODULES
   ],
-  providers: [] 
+  providers: []
 })
 export class SharedModule { }

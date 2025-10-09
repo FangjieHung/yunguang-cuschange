@@ -35,7 +35,7 @@ mat-hint.success {
 .warn-hint {
     @apply text-red-500 flex items-center pr-1 text-sm;
 
-    .material-symbols-outlined {
+    .material-symbols-rounded {
         @apply text-sm;
     }
 }
@@ -62,8 +62,8 @@ mat-hint.success {
         @apply relative top-px 4xl:top-0;
     }
 
-    .mat-mdc-form-field-icon-prefix .material-symbols-outlined,
-    .mat-mdc-form-field-suffix .material-symbols-outlined {
+    .mat-mdc-form-field-icon-prefix .material-symbols-rounded,
+    .mat-mdc-form-field-suffix .material-symbols-rounded {
         @apply text-xl align-middle;
     }
 }
@@ -156,7 +156,7 @@ mat-hint.success {
         @apply text-sm font-normal relative min-w-fit;
     }
 
-    .material-symbols-outlined {
+    .material-symbols-rounded {
         @apply text-primary-500 text-lg w-8 text-center ml-2;
     }
 

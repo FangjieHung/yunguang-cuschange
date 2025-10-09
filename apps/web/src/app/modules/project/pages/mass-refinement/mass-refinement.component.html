@@ -2,7 +2,7 @@
     <mat-sidenav-content>
         <form class="relative sub-sidenav-left" [formGroup]="valForm">
             <a (click)="doBack()" matTooltipClass="form-tooltip" class="btn-text text-sm ml-5"><span
-                    class="material-symbols-outlined">
+                    class="material-symbols-rounded">
                     chevron_left
                 </span>返回
             </a>
@@ -10,7 +10,7 @@
                 <div class="flex items-start justify-between w-full px-6 mb-5">
                     <h2>Option-02 量體進階調整</h2>
                     <button class="card-action pb-0.5 w-3" [matMenuTriggerFor]="actionMenu"
-                        (click)="$event.stopPropagation()"><span class="material-symbols-outlined">more_vert
+                        (click)="$event.stopPropagation()"><span class="material-symbols-rounded">more_vert
                         </span></button>
                     <mat-menu #actionMenu="matMenu">
                         <button mat-menu-item (click)="doBindVolume()">回到預設值</button>
@@ -183,14 +183,14 @@
             </div>
             <div class="side-nav-submit">
                 <button mat-flat-button color="primary" class="btn-lg h-14 w-full" (click)="onGenerateVolume()">
-                    <span class="material-symbols-outlined">check</span>
+                    <span class="material-symbols-rounded">check</span>
                     <span>立即套用</span>
                 </button>
             </div>
         </form>
         <div class="map-full">
             <button mat-raised-button class="render-btn z-10" (click)="doRenderPre()">
-                <span class="material-symbols-outlined pr-2">wand_stars</span>
+                <span class="material-symbols-rounded pr-2">wand_stars</span>
                 <span class="pr-0.5">渲染</span>
             </button>
             <div class="shapediver-viewer">
@@ -205,7 +205,7 @@
             <div class="justify-header">
                 <h2>詳細資訊</h2>
                 <button class="btn-outline-purple btn-sm ml-auto" (click)="doExportExcel()">
-                    <span class="material-symbols-outlined pr-2">download</span>Excel 檔
+                    <span class="material-symbols-rounded pr-2">download</span>Excel 檔
                 </button>
             </div>
             <div class="flex-1 space-y-6 pt-2">
@@ -344,7 +344,7 @@
                     </li>
                 </ul>
                 <div *ngIf="volOutput?.option" class="card-green px-5 py-4">
-                    <h5 class="mb-3"><span class="material-symbols-outlined pr-2">temp_preferences_eco</span>綠建築數值</h5>
+                    <h5 class="mb-3"><span class="material-symbols-rounded pr-2">temp_preferences_eco</span>綠建築數值</h5>
                     <ul class="describe-list-col text-primary-800 text-sm">
                         <li>
                             <span class="label w-1/2">日照量</span>
@@ -386,17 +386,17 @@
         <!-- Side Nav -->
         <div class="bg-white border-t sticky bottom-0" *ngIf="!isCollapsed">
             <button mat-button (click)="isCollapsed = !isCollapsed" class="h-12">
-                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="material-symbols-rounded">arrow_forward_ios</span>
             </button>
         </div>
 
         <!-- 折疊狀態 內容縮小-->
         <div *ngIf="isCollapsed" class="p-2 flex flex-col h-full">
             <button class="btn-gradient mt-1 mb-4" (click)="doRenderPre()">
-                <span class="material-symbols-outlined">wand_stars</span>
+                <span class="material-symbols-rounded">wand_stars</span>
             </button>
             <button mat-button (click)="isCollapsed = !isCollapsed" class="flex-1">
-                <span class="material-symbols-outlined">arrow_back_ios</span>
+                <span class="material-symbols-rounded">arrow_back_ios</span>
             </button>
         </div>
     </mat-sidenav>

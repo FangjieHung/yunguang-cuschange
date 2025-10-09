@@ -5,20 +5,29 @@
 @import "swiper/scss";
 @import "swiper/scss/navigation";
 
-@import "assets/scss/material";
+@import "assets/scss/mat-theme";
+@import "assets/scss/typo";
+
+@import "assets/scss/layout";
+@import "assets/scss/section";
+
 @import "assets/scss/button";
 
+/* 
+@import "assets/scss/scroll-snapping";
+
 @import "assets/scss/form";
-@import "assets/scss/layout";
+
 @import "assets/scss/dialog";
 @import "assets/scss/swiper";
-@import "assets/scss/section";
-@import "assets/scss/typo";
+
+
 @import "assets/scss/loading";
 @import "assets/scss/shapediver.scss";
 
 @import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+*/
 
 @layer base {
     html,
@@ -27,7 +36,7 @@
     }
 
     html {
-        @apply text-primary-900 font-sans text-[14px] 4xl:text-[16px];
+        @apply text-base text-pretty;
         margin: 0;
         font-family: "Noto Sans TC", sans-serif;
         font-optical-sizing: auto;
@@ -42,7 +51,7 @@ web-default-container {
 // Scrollbar
 /* width */
 ::-webkit-scrollbar {
-  width: .25rem;
+  @apply h-1 w-1;
 }
 
 /* Track */

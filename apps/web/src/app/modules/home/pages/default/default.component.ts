@@ -31,22 +31,32 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
   searchOptions: string[] = ['國安國宅', '干城好宅', '尊榮貴賓'];
   searchValue = '';
 
-  projectList = [
+  newsList = [
     {
-      projectName: '國安國宅建案',
-      projectAddress: '社住-西屯區國安段585-1地號',
-      src: 'assets/image/illustration/empty-img.png'
+      date: '2025.11.23',
+      title: '呼吸道細胞融合病毒疫苗使用建議',
+      sort: '學會公告'
     },
     {
-      projectName: '干城好宅建案',
-      projectAddress: '春社-南屯區春安段10.11.12-3.12-4地號',
-      src: 'assets/image/illustration/empty-img.png'
+      date: '2025.10.15',
+      title: '2025年度醫療科技創新論壇開放報名',
+      sort: '活動訊息'
     },
     {
-      projectName: '尊榮貴賓建案',
-      projectAddress: '社住-西屯區國安段585-1地號',
-      src: 'assets/image/illustration/empty-img.png'
+      date: '2025.09.30',
+      title: '新版臨床指引正式發布，即日起生效',
+      sort: '學會公告'
     },
+    {
+      date: '2025.08.20',
+      title: '會員系統維護通知：8/25 晚間暫停服務',
+      sort: '系統公告'
+    },
+    {
+      date: '2025.07.10',
+      title: '醫學期刊投稿流程更新說明',
+      sort: '學會公告'
+    }
   ];
 
   request = new PagingRequest<BuildProjectReq>();
@@ -155,7 +165,7 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
         window.location.href = `${baseUrl}?${queryString}`;
       },
       error: () => {
-       window.location.href = `${baseUrl}?${queryString}`;
+        window.location.href = `${baseUrl}?${queryString}`;
       }
     });
   }

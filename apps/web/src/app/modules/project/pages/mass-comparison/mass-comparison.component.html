@@ -1,7 +1,7 @@
 <div class="bg-white flex w-full h-full">
     <form [formGroup]="valForm" class="sub-sidenav-left">
         <a [routerLink]="['/home']" matTooltipClass="form-tooltip" class="btn-text text-sm ml-5"><span
-                class="material-symbols-outlined">
+                class="material-symbols-rounded">
                 chevron_left
             </span>返回
         </a>
@@ -35,7 +35,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.buildingCoverRatio.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>建蔽率<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" class="fill-white" required>
                             <input matInput type="number" placeholder="請輸入建蔽率" formControlName="buildingCoverRatio">
@@ -51,7 +51,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.floorAreaRatio.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>容積率<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" class="fill-white" required>
                             <input matInput type="number" placeholder="請輸入容積率" formControlName="floorAreaRatio">
@@ -67,7 +67,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.typology.tooltip" matTooltipPosition="above"
                             matTooltipClass="form-tooltip">
                             <p>量體型態<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-button-toggle-group name="量體型態" aria-label="量體型態" class="mt-1" formControlName="typology">
                             <mat-button-toggle [value]="0">Ｉ型</mat-button-toggle>
@@ -85,7 +85,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numBuildings.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>棟數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" class="fill-white" required>
                             <input matInput type="number" placeholder="請輸入棟數" formControlName="numBuildings">
@@ -101,7 +101,7 @@
                         <div class="form-label" [matTooltip]="formThreshold.numFloors.tooltip"
                             matTooltipPosition="above" matTooltipClass="form-tooltip">
                             <p>地上樓層數<span class="required-mark">*</span></p>
-                            <span class="material-symbols-outlined">info</span>
+                            <span class="material-symbols-rounded">info</span>
                         </div>
                         <mat-form-field appearance="outline" class="fill-white" required>
                             <input matInput type="number" placeholder="請輸入" formControlName="numFloors">
@@ -118,7 +118,7 @@
         </div>
         <div class="side-nav-submit">
             <button mat-flat-button color="primary" (click)="onSubmit()" class="btn-lg h-14 w-full">
-                <span class="material-symbols-outlined">crossword</span>
+                <span class="material-symbols-rounded">crossword</span>
                 <span>確認，生成 1 個量體</span>
             </button>
         </div>
@@ -153,15 +153,15 @@
                             <p class="date"> {{ item.updAt | dateFormatter: 'yyyy/MM/dd hh:mm': '-'}}</p>
                         </div>
                         <button class="card-action" [matMenuTriggerFor]="actionMenu"
-                            (click)="$event.stopPropagation()"><span class="material-symbols-outlined">
+                            (click)="$event.stopPropagation()"><span class="material-symbols-rounded">
                                 more_vert
                             </span></button>
                         <mat-menu #actionMenu="matMenu">
                             <button mat-menu-item class="" [routerLink]="['/project/mass-refinement']"
                                 [queryParams]="{ buildProjectId:buildProjectDto.id ,buildProjVolumeId: item.id }"><span
-                                    class="material-symbols-outlined">edit</span>編輯</button>
+                                    class="material-symbols-rounded">edit</span>編輯</button>
                             <button mat-menu-item class="danger" (click)="deleteBuildProjVolume(item.id)"><span
-                                    class="material-symbols-outlined">delete</span>刪除</button>
+                                    class="material-symbols-rounded">delete</span>刪除</button>
                         </mat-menu>
                     </div>
 
@@ -189,12 +189,12 @@
                             <p class="date"> {{ item.comparisonTime}}</p>
                         </div>
                         <button class="card-action" [matMenuTriggerFor]="actionMenu"
-                            (click)="$event.stopPropagation()"><span class="material-symbols-outlined">
+                            (click)="$event.stopPropagation()"><span class="material-symbols-rounded">
                                 more_vert
                             </span></button>
                         <mat-menu #actionMenu="matMenu">
                             <button mat-menu-item class="danger"><span
-                                    class="material-symbols-outlined">delete</span>刪除</button>
+                                    class="material-symbols-rounded">delete</span>刪除</button>
                         </mat-menu>
                     </div>
     

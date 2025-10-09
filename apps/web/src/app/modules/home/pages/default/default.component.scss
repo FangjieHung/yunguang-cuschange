@@ -1,3 +1,19 @@
-web-result-empty {
-    @apply flex justify-center items-center min-h-1/2screen;
+header.hero {
+    @apply relative;
+
+    video {
+        @apply w-full h-[100svh] object-cover;
+    }
+
+    .content {
+        @apply text-base absolute inset-0 h-fit my-auto pt-20;
+    }
+
+    .headline {
+        @apply my-10;
+    }
+}
+
+.news-list {
+    @apply min-w-0 flex-auto my-6 xl:mr-6;
 }

@@ -1,3 +1,42 @@
+/* gradient bg */
+.floating-bg {
+  @apply fixed inset-0 w-full h-[100svh] bg-gradient-to-tr from-[#e1eefc] to-white flex items-center justify-end;
+
+  img.sphere-01 {
+    @apply w-full lg:w-1/3;
+    animation: float-lt 10s infinite ease-in-out;
+  }
+
+  img.sphere-02 {
+    @apply w-1/2 lg:w-1/4;
+    animation: float-br 5s infinite ease-in-out;
+  }
+
+  @keyframes float-lt {
+    from {
+      transform: translate(50%, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(-5%, -2%);
+    }
+    to {
+      transform: translate(50%, 0) rotate(360deg);
+    }
+  }
+
+  @keyframes float-br {
+    from {
+      transform: translate(-10%, 0);
+    }
+    50% {
+      transform: translate(25%, 10%);
+    }
+    to {
+      transform: translate(-10%, 0);
+    }
+  }
+}
+
 /* Card */
 .card {
   @apply bg-white border border-primary-200 rounded-lg shadow max-h-full overflow-auto relative;
@@ -32,7 +71,7 @@
     @apply w-8 h-8 rounded hover:bg-stone-100 mt-0.5;
   }
 
-  .card-action .material-symbols-outlined {
+  .card-action .material-symbols-rounded {
     @apply h-auto align-middle;
     font-size: 1.5rem;
   }
@@ -52,193 +91,22 @@ a.card,
 }
 
 /* list */
-.describe-list-row {
-  @apply grid grid-cols-4 gap-2 p-5;
+.news-list {
+  @apply divide-y divide-sky-500/20;
 
-  li {
-    @apply flex flex-wrap;
+  a {
+    @apply block px-5 py-10 cursor-pointer ease-in-out duration-300 transition-all hover:bg-sky-300/10;
   }
 
-  li > span {
-    @apply max-w-[12.5rem] line-clamp-2;
-  }
-}
-
-.describe-list-col {
-  li {
-    @apply flex items-start w-full py-1;
+  h3 {
+    @apply text-xl line-clamp-2;
   }
 
-  .label {
-    @apply text-primary-800 min-w-fit;
+  .date {
+
   }
 
-  .content {
-    @apply text-primary-800 font-bold pl-2 flex-1 truncate;
-  }
-
-  &.between .content {
-    @apply text-right;
-  }
-}
-
-.describe-list-col.border-list {
-  @apply border-b rounded;
-
-  > li {
-    @apply py-0 border-b;
-  }
-
-  > li:last-of-type {
-    border-bottom: 0;
-  }
-
-  .label {
-    @apply bg-primary-50 px-4 py-2;
-  }
-
-  .content,
-  .data {
-    @apply px-4 py-2;
-  }
-
-  &.list-sm {
-    @apply text-sm;
-  }
-
-  &.list-sm .label,
-  &.list-sm .content {
-    @apply px-3;
-  }
-}
-
-.card-list-container {
-  @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4;
-
-  > .card {
-    @apply w-full;
-  }
-}
-
-/* Mapbox */
-[class^="map-container"] {
-  @apply w-full h-full relative overflow-hidden;
-
-  .mapboxgl-canvas-container {
-    @apply w-full h-full block;
-  }
-
-  .mapboxgl-canvas {
-    @apply min-h-full object-cover;
-  }
-
-  .mapboxgl-ctrl-logo {
-    display: none;
-  }
-
-  .mat-mdc-unelevated-button:not(:disabled) {
-    @apply shadow-md h-11;
-  }
-
-  .btn-tl {
-    @apply absolute top-2 left-2;
-  }
-
-  .btn-bl {
-    @apply absolute bottom-2 left-2;
-  }
-
-  .info-tr {
-    @apply absolute top-2 right-2 flex items-center space-x-2;
-  }
-
-  .info-content {
-    @apply bg-black/70 text-white rounded px-4 py-2 h-11 flex items-center;
-  }
-
-  .button-toggle-container {
-    @apply bg-white p-2 rounded flex items-center space-x-2 shadow-md;
-  }
-
-  .mat-button-toggle-group-appearance-standard:not([class*="mat-elevation-z"]) {
-    //@apply shadow-md;
-  }
-
-  .mat-button-toggle {
-    @apply flex items-center justify-center rounded h-8;
-  }
-
-  .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
-    border-left: 0;
-  }
-
-  .mat-button-toggle-group-appearance-standard {
-    border: none;
-  }
-
-  .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
-    @apply bg-primary-500 text-white;
-  }
-
-  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-    @apply text-sm font-medium py-1;
-  }
-}
-
-.map-full {
-  @apply absolute h-full inset-0;
-
-  > img {
-    @apply w-full h-full object-contain;
-  }
-}
-
-.hide-mapbox-ctrl {
-  .mapboxgl-ctrl {
-    display: none;
-  }
-}
-
-// Search bar
-.mapboxgl-ctrl-geocoder {
-  @apply relative rounded-[5px] shadow-none border border-stone-200;
-
-  .mapboxgl-ctrl-geocoder--input {
-    @apply text-black text-sm h-8 relative rounded-[5px] hover:outline-black hover:outline-2 hover:outline focus:outline-primary-500 focus:outline-2 focus:outline;
-  }
-
-  .mapboxgl-ctrl-geocoder--input::placeholder {
-    @apply text-neutral-400;
-  }
-
-  .mapboxgl-ctrl-geocoder--icon-search {
-    @apply fill-black inset-y-0 m-auto w-6 h-6 left-2;
-  }
-
-  .mapboxgl-ctrl-geocoder--pin-right > * {
-    @apply bg-white right-[14px] top-[14px];
-  }
-}
-
-.mapbox-search-hint {
-  .mapboxgl-ctrl-geocoder {
-    @apply mb-4;
-  }
-
-  .mapboxgl-ctrl-geocoder::after {
-    //@apply absolute -bottom-7 left-0 text-sm text-gray-400;
-    //content: "輸入後請按下 Enter 鍵直接搜尋";
-  }
-}
-
-[aria-label="Clear"].mapboxgl-ctrl-geocoder--button {
-  @apply inset-y-1 right-1 w-10 rounded-full;
-
-  .mapboxgl-ctrl-geocoder--icon-close {
-    @apply fill-black;
-  }
-
-  &:not(:disabled):hover .mapboxgl-ctrl-geocoder--icon-close {
-    @apply fill-black;
+  .sort {
+    @apply text-sky-600;
   }
 }
