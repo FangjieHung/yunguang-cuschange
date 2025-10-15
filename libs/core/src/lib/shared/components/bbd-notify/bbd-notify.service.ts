@@ -28,7 +28,6 @@ export class BBDNotifyService {
     this.openFromComponent();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error(text: string, resMsg: any = null): void {
     if (resMsg) {
       if (typeof resMsg === 'string') {

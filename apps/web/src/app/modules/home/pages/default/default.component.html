@@ -12,7 +12,7 @@
         </video>
 
         <div class="content max-w-container">
-            <h1 class="display">
+            <h1 class="display d-white">
                 Innovating for Smarter Diagnostics
             </h1>
             <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
@@ -21,32 +21,65 @@
     </header>
 
 
-    <section class="max-w-container min-h-[80svh]">
+    <section class="max-w-container min-h-[90svh] py-[5vw] flex flex-col">
         <h2 class="">
-            <span class="display">Academic Activities</span>
-            <p class="headline">學術活動</p>
+            <span class="display d-black">Academic Activities</span>
+            <p class="headline font-bold">學術活動</p>
         </h2>
-        <div class="">
-            <swiper [spaceBetween]="32" [navigation]="true" [slidesPerView]="3" class="w-full">
-                <ng-template swiperSlide *ngFor="let news of newsList">
-                    <a href="">
-                        <span class="date"> {{ news.date }}</span>
-                        <span class="sort">{{ news.sort }}</span>
-                        <h3> {{ news.title }}</h3>
-                    </a>
+
+        <div class="relative">
+            <swiper [config]="campaignSwipe" class="w-full my-10">
+                <ng-template swiperSlide *ngFor="let campaign of campaignList" class="mb-5">
+                    <web-glass-bg>
+                        <a href="" class="block w-full p-2">
+                            <div class="px-8">
+                                <ol class="flex items-center justify-between">
+                                    <!-- 開始日 -->
+                                    <li class="flex items-center w-fit">
+                                        <p>
+                                            <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
+                                            <span>{{ campainDate | date:'E' }}</span>
+                                        </p>
+                                        <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                    </li>
+                                    <li class="flex-auto bg-slate-400 h-px mx-5"></li>
+                                    <!-- 結束日 -->
+                                    <li class="flex items-center w-fit">
+                                        <p>
+                                            <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
+                                            <span>{{ campainDate | date:'E' }}</span>
+                                        </p>
+                                        <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                    </li>
+                                </ol>
+                                <h3 class="text-xl tracking-wide line-clamp-2 min-h-[3.75rem] mt-2"> {{ campaign.title }}</h3>
+                                <ul class="describe-list">
+                                    <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                                    <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                                </ul>
+                                <mat-progress-bar mode="determinate" color="primary" value="40" class="mb-10"></mat-progress-bar>
+                            </div>
+
+                            <button class="btn-white w-full rounded-b-[700rem] rounded-t-[90rem] h-12">詳細資訊</button>
+                        </a>
+                    </web-glass-bg>
                 </ng-template>
             </swiper>
+            <button class="btn-primary swiper-btn prev"><span class="material-symbols-rounded">
+                    arrow_back_ios
+                </span></button>
+            <button class="btn-primary swiper-btn next"><span class="material-symbols-rounded">
+                    arrow_forward_ios
+                </span></button>
         </div>
-        
 
-        <web-glass-bg class="block my-10">
-            <a class="link" target="_blank">
-                看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
-            </a>
-        </web-glass-bg>
+        <a class="link link-underline mt-auto ml-auto" target="_blank">
+            看更多活動<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+        </a>
+
     </section>
 
-    <section class="max-w-container min-h-[80svh] flex items-start lg:flex-row-reverse">
+    <section class="max-w-container min-h-[90svh] flex items-start lg:flex-row-reverse">
         <div class="flex flex-col self-stretch justify-between items-end">
             <h2 class="text-right">
                 <span class="display">Latest News</span>
@@ -59,11 +92,9 @@
                 <mat-button-toggle value="活動訊息">活動訊息</mat-button-toggle>
             </mat-button-toggle-group>
 
-            <web-glass-bg class="block my-10">
-                <a class="link" target="_blank">
-                    看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
-                </a>
-            </web-glass-bg>
+            <a class="link link-underline" target="_blank">
+            看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+        </a>
         </div>
         <div class="news-list">
             <a *ngFor="let news of newsList">

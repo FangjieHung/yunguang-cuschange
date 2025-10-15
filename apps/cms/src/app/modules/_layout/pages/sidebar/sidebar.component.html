@@ -6,10 +6,10 @@
 <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" class="pt-2"
   *ngIf="appAuthApiServ?.currUser?.authUserRoutes as roleRoutes">
   <li nz-menu-item nzMatchRouter>
-    <i class="material-symbols-outlined mr-2">monitoring</i><a routerLink="/dashboard">總覽概況</a>
+    <i class="material-symbols-rounded mr-2">monitoring</i><a routerLink="/dashboard">總覽概況</a>
   </li>
   <li nz-submenu [nzTitle]="menuTitle"  *ngFor="let parent of roleRoutes | aryFilter: { fieldName: 'parentId', fieldValue: 0 } | arySort:'asc'">
-    <ng-template #menuTitle class="flex items-center"><i class="material-symbols-outlined mr-2">{{ parent.icon }}</i><span>{{
+    <ng-template #menuTitle class="flex items-center"><i class="material-symbols-rounded mr-2">{{ parent.icon }}</i><span>{{
         parent.name }}</span></ng-template>
     <ul>
       <li nz-menu-item nzMatchRouter *ngFor="
@@ -25,12 +25,12 @@
 <!-- 靜態使用 -->
 <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" class="pt-2" *ngIf="false">
   <li nz-menu-item nzMatchRouter>
-    <i class="material-symbols-outlined mr-2">monitoring</i>
+    <i class="material-symbols-rounded mr-2">monitoring</i>
     <a routerLink="/dashboard">總覽概況</a>
   </li>
   <li nz-submenu>
     <span title class="flex items-center"><i
-        class="material-symbols-outlined mr-2">handshake</i><span>內容行銷</span></span>
+        class="material-symbols-rounded mr-2">handshake</i><span>內容行銷</span></span>
     <ul>
       <li nz-menu-item nzMatchRouter>
         <a routerLink="/consult/consult-rec/list">聯絡我們</a>
@@ -44,7 +44,7 @@
     </ul>
   </li>
   <li nz-submenu>
-    <span title class="flex items-center"><i class="material-symbols-outlined mr-2">web</i><span>頁面管理</span></span>
+    <span title class="flex items-center"><i class="material-symbols-rounded mr-2">web</i><span>頁面管理</span></span>
     <ul>
       <li nz-menu-item nzMatchRouter>
         <a routerLink="/page-mgt/website-setting/edit">網站設定</a>
@@ -72,7 +72,7 @@
     </ul>
   </li>
   <li nz-submenu>
-    <span title class="flex items-center"><i class="material-symbols-outlined mr-2">settings</i><span>系統管理</span></span>
+    <span title class="flex items-center"><i class="material-symbols-rounded mr-2">settings</i><span>系統管理</span></span>
     <ul>
       <li nz-menu-item nzMatchRouter>
         <a routerLink="/user/list">使用者資料</a>

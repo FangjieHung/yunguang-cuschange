@@ -31,6 +31,36 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
   searchOptions: string[] = ['國安國宅', '干城好宅', '尊榮貴賓'];
   searchValue = '';
 
+  campainDate: Date = new Date();
+
+  campaignList = [
+    {
+      signupDate: '2025.11.23',
+      title: '宜蘭響應114年10月1日起公費新冠流感疫苗研討會暨宣導活動',
+      sort: '學會公告'
+    },
+    {
+      signupDate: '2025.10.15',
+      title: '感染管制員甄試核心課程研習班（台中場）',
+      sort: '活動訊息'
+    },
+    {
+      signupDate: '2025.09.30',
+      title: '114年長照機構感染管制查核工作坊-新北場',
+      sort: '學會公告'
+    },
+    {
+      signupDate: '2025.08.20',
+      title: '113年長照機構嬰幼兒呼吸道疾病感染管制實務研討會',
+      sort: '系統公告'
+    },
+    {
+      signupDate: '2025.07.10',
+      title: '114年長照機構感染管制查核工作坊-台中中山場',
+      sort: '學會公告'
+    }
+  ];
+
   newsList = [
     {
       date: '2025.11.23',
@@ -58,6 +88,15 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
       sort: '學會公告'
     }
   ];
+
+  campaignSwipe = {
+    slidesPerView: 3,
+    spaceBetween: 32,
+    navigation: {
+      nextEl: '.swiper-btn.next',
+      prevEl: '.swiper-btn.prev',
+    },
+  };
 
   request = new PagingRequest<BuildProjectReq>();
   response: PagingResponse<BuildProjectView> | null = null;

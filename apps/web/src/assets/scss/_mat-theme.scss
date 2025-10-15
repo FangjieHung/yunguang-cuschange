@@ -4,8 +4,8 @@
 @include mat.core();
 
 // Define a custom color palette
-$primary: mat.define-palette(mat.$indigo-palette, 500);
-$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$primary: mat.define-palette(mat.$light-blue-palette, 500);
+$accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
 // Create a light theme
 $light-theme: mat.define-light-theme(
@@ -21,8 +21,8 @@ $light-theme: mat.define-light-theme(
 @include mat.all-component-themes($light-theme);
 
 :root {
-  --md-sys-color-primary: rgb(52 97 141);
-  --md-sys-color-surface-tint: rgb(52 97 141);
+  --md-sys-color-primary: #34618d;
+  --md-sys-color-surface-tint: rgb(79, 131, 183);
   --md-sys-color-on-primary: rgb(255 255 255);
   --md-sys-color-primary-container: rgb(208 228 255);
   --md-sys-color-on-primary-container: rgb(22 73 116);
@@ -77,6 +77,4 @@ $light-theme: mat.define-light-theme(
 
   --mat-standard-button-toggle-shape: 99rem;
 }
-.r {
-  @apply text-sky-500;
-}
+

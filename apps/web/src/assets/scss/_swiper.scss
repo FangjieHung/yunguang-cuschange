@@ -1,9 +1,10 @@
+/*
 .swiper-button-prev,
 .swiper-button-next {
-    @apply border-2 border-primary-100 bg-white rounded-full w-10 h-10 transition-all ease-in-out lg:flex;
+    @apply border border-white bg-[--md-sys-color-primary] rounded-full w-10 h-10 transition-all ease-in-out duration-300 scale-100 lg:flex hover:scale-150;
 
     &::after {
-        @apply text-lg font-black text-primary-700;
+        @apply text-lg font-black text-white;
     }
 }
 
@@ -13,6 +14,27 @@
 
 .swiper-button-next::after {
     @apply pl-0.5;
+}
+
+.swiper-button-prev {
+    left: -2rem;
+}
+
+.swiper-button-next {
+    right: -2rem;
+}
+    */
+
+.swiper-btn {
+    @apply absolute z-10 inset-y-0 m-auto rounded-full w-14 h-14 scale-100 hover:scale-150;
+
+    &.prev {
+        @apply -left-10 pl-1;
+    }
+
+    &.next {
+        @apply -right-10 pr-1;
+    }
 }
 
 .swiper-button-disabled {

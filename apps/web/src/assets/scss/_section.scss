@@ -103,10 +103,18 @@ a.card,
   }
 
   .date {
-
   }
 
   .sort {
     @apply text-sky-600;
   }
+}
+
+.describe-list {
+  @apply my-4 space-y-2;
+
+  span.divider {
+    @apply px-1;
+  }
+
 }

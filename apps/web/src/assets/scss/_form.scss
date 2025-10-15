@@ -1,3 +1,13 @@
+.mat-mdc-progress-bar.mdc-linear-progress {
+    @apply overflow-x-visible;
+    --mdc-linear-progress-track-shape: 10rem;
+
+    .mdc-linear-progress__bar {
+        @apply rounded;
+        box-shadow: 0 .25rem .8rem var(--md-sys-color-surface-tint, rgb(79, 131, 183));
+    }
+}
+
 // Inputs // Smaller Size
 .mat-mdc-form-field {
     .mat-mdc-form-field-flex {
