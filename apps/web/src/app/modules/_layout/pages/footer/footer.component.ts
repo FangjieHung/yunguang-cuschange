@@ -10,7 +10,7 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent extends BBDBaseComponent implements OnInit {
-  
+  public currYear = (new Date()).getFullYear();
 
   constructor(
     private _appStoreApiServ: AppStoreApiServ,

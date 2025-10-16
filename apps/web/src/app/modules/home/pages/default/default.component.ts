@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   Injector,
+  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -10,8 +11,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Third party packages
-import SwiperCore, { Pagination, Autoplay, Navigation } from 'swiper';
-SwiperCore.use([Pagination, Autoplay, Navigation]);
+import SwiperCore, { Autoplay, Navigation } from 'swiper';
+SwiperCore.use([ Autoplay, Navigation]);
 
 // Custom packages
 
@@ -89,12 +90,37 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
     }
   ];
 
+  bannerList = [
+    {
+      src: 'assets/image/demo/001.jpg',
+      title: '檢驗品質管理工作坊｜提升實驗室標準化流程',
+    },
+    {
+      src: 'assets/image/demo/002.jpg',
+      title: '智慧檢驗技術應用論壇 — AI 與臨床實務的交會',
+    },
+    {
+      src: 'assets/image/demo/003.jpg',
+      title: '會員招募中｜加入我們，共創智慧醫療新未來',
+    },
+  ];
+
   campaignSwipe = {
     slidesPerView: 3,
     spaceBetween: 32,
     navigation: {
-      nextEl: '.swiper-btn.next',
-      prevEl: '.swiper-btn.prev',
+      nextEl: '.swiper-btn-between.next',
+      prevEl: '.swiper-btn-between.prev',
+    },
+  };
+
+  bannerSwipe = {
+    slidesPerView: 1,
+    spaceBetween: 32,
+
+    navigation: {
+      nextEl: '.swiper-btn-bl.next',
+      prevEl: '.swiper-btn-bl.prev',
     },
   };
 

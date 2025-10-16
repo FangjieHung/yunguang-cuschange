@@ -25,15 +25,39 @@
 }
     */
 
-.swiper-btn {
-    @apply absolute z-10 inset-y-0 m-auto rounded-full w-14 h-14 scale-100 hover:scale-150;
+[class*="swiper-btn"] {
+    @apply cursor-pointer rounded-full w-14 h-14 scale-100 hover:scale-150;
 
     &.prev {
-        @apply -left-10 pl-1;
+        @apply pl-1;
     }
 
     &.next {
-        @apply -right-10 pr-1;
+        @apply pr-1;
+    }
+}
+
+.swiper-btn-between {
+    @apply absolute z-10 inset-y-0 m-auto;
+
+    &.prev {
+        @apply -left-10;
+    }
+
+    &.next {
+        @apply -right-10;
+    }
+}
+
+.swiper-btn-bl {
+    @apply absolute bottom-0 z-10;
+
+    &.prev {
+        @apply left-0;
+    }
+
+    &.next {
+        @apply left-20;
     }
 }
 
@@ -42,5 +66,13 @@
 }
 
 .swiper-slide {
-    @apply h-auto items-stretch;
+    @apply h-auto items-stretch transition-all ease-in-out duration-1000;
+}
+
+.slide-1-fade .swiper-slide {
+    @apply opacity-0;
+
+    &.swiper-slide-active {
+        @apply opacity-100;
+    }
 }

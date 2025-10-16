@@ -14,6 +14,14 @@ header.hero {
     }
 }
 
+.default-container {
+    @apply relative;
+
+    section.max-w-container {
+        @apply min-h-[90svh] py-[5vw];
+    }
+}
+
 .news-list {
     @apply min-w-0 flex-auto my-6 xl:mr-6;
 }
