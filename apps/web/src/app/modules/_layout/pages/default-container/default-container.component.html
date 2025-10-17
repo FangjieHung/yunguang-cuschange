@@ -1,39 +1,64 @@
 <nav class="nav-bar">
-    <web-glass-bg>
-        <a routerLink="/">
-            <img src="assets/image/logo/mark.png" alt="logo" class="w-28">
-        </a>
+    <a routerLink="/">
+        <img src="assets/image/logo/mark.png" alt="logo" class="w-28">
+    </a>
+
+    <web-glass-bg class="ml-auto mr-2">
+        <div class="flex items-center">
+            <ng-container *ngFor="let menu of navList">
+                <div class="menu-wrap" *ngIf="menu.children; else singleLink">
+                    <button mat-button (click)="toggleNavbarMenu(menu.label)" [class.active]="activeMenu === menu.label"
+                        class="nav-link">{{ menu.label }}</button>
+                    <div [class.show]="activeMenu === menu.label" class="menu-list">
+                        <web-glass-bg>
+                            <a *ngFor="let item of menu.children" [routerLink]="item.link">
+                                {{ item.label }}
+                            </a>
+                        </web-glass-bg>
+                    </div>
+                </div>
+
+                <ng-template #singleLink>
+                    <a mat-button class="nav-link" [routerLink]="menu.link" target="_blank">
+                        {{ menu.label }}
+                    </a>
+                </ng-template>
+            </ng-container>
+        </div>
     </web-glass-bg>
 
-    <web-glass-bg class="ml-auto">
-        <a mat-button target="_blank" class="link-item" routerLink="/">關於本會</a>
-        <a mat-button target="_blank" class="link-item" routerLink="/">最新消息</a>
-        <a mat-button target="_blank" class="link-item" routerLink="/">學術活動</a>
-        <a mat-button target="_blank" class="link-item" routerLink="/">認證專區</a>
-        <a mat-button target="_blank" class="link-item" routerLink="/">投稿專區</a>
+    <web-glass-bg class="hidde lg:block">
+        <div *ngIf="isSignin" class="flex items-center">
+            <a mat-button class="nav-link" routerLink="/auth/signin">註冊</a>
+            <span>/</span>
+            <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
+        </div>
+
+        <div *ngIf="!isSignin" class="flex items-center">
+            <div class="menu-wrap">
+
+                <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
+                    <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
+                    <span class="material-symbols-rounded">keyboard_arrow_down</span>
+                </button>
+
+                <div class="menu-list" [class.show]="isMenuOpen">
+                    <web-glass-bg>
+                        <a routerLink="/account/profile">帳號設定</a>
+                        <button (click)="appAuthApiServ.signout()">登出</button>
+                    </web-glass-bg>
+                </div>
+
+            </div>
+        </div>
     </web-glass-bg>
 
-    <div class="nav-links" *ngIf="!isSignin">
-        <a routerLink="/auth/signin"><web-glass-bg>註冊</web-glass-bg></a>
-        <a routerLink="/auth/signin"><web-glass-bg>登入</web-glass-bg></a>
-    </div>
-
-    <button *ngIf="isSignin" class="avatar-btn" [matMenuTriggerFor]="accountMenu">
-        <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
-        <span class="material-symbols-rounded">
-            keyboard_arrow_down
-        </span>
-    </button>
-
-    <mat-menu #accountMenu="matMenu">
-        <a mat-menu-item routerLink="/account/profile">帳號設定</a>
-        <button mat-menu-item (click)="appAuthApiServ.signout()">登出</button>
-    </mat-menu>
-
-    <button mat-button (click)="toggleMenu()" class="hamburger-btn">
-        <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
-        <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
-    </button>
+    <web-glass-bg class="lg:hidden">
+        <button mat-button (click)="toggleSideMenu()" class="h-14">
+            <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
+            <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
+        </button>
+    </web-glass-bg>
 </nav>
 
 <mat-sidenav-container>

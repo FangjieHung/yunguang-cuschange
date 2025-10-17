@@ -1,49 +1,57 @@
-<footer class="relative flex flex-wrap">
-    <section class="logo-col">
-        <img src="assets/image/logo/mark.png" alt="logo" class="w-full max-w-36 mb-4">
-        <a href=""></a>
-
-        <div class="copy-right">
-            <p class="pr-1">台灣長期照顧感染預防暨控制學會</p>
-            <p class="pr-1"> &copy; {{ currYear }} All rights reserved.</p>
-            <p class="w-full"><a routerLink="/about/terms">服務條款</a>．<a routerLink="/about/privacy">隱私權</a></p>
+<footer>
+    <img src="assets/image/logo/mark-white.png" alt="logo" class="w-36 h-36 object-contain mr-10 mb-4">
+    <section class="web-map">
+        <div class="flex flex-wrap">
+            <ul>
+                <li>
+                    <span class="label">phone</span>
+                    <p>(02) 2322-3731 轉 66 / 0910-522-912</p>
+                </li>
+                <li>
+                    <span class="label">fax</span>
+                    <p>(02) 2322-3731 轉 11</p>
+                </li>
+                <li>
+                    <span class="label">opening hours</span>
+                    <p>週一至週五 08:00 ~ 12:00、13:00 ~ 17:00</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <span class="label">mail</span>
+                    <p>stltc.ipc2018@gmail.com</p>
+                </li>
+                <li>
+                    <span class="label">location</span>
+                    <p>
+                        <span class="inline-block">100010 台北市中正區忠孝東路二段 100 號 2 樓之 5</span>
+                        <span class="inline-block text-sm">2F-5, No.100, Sec. 2, Zhongxiao E. Rd., Zhongzheng Dist.,
+                            Taipei City
+                            100, Taiwan (R.O.C.)</span>
+                    </p>
+                </li>
+            </ul>
+            <div class="social-links">
+                <a target="_blank" href="">
+                    <img src="assets/image/icon/fb.webp" alt="facebook">
+                </a>
+                <a target="_blank" href="">
+                    <img src="assets/image/icon/ig.webp" alt="instagram">
+                </a>
+                <a target="_blank" href="">
+                    <img src="assets/image/icon/yt.webp" alt="youtube">
+                </a>
+            </div>
         </div>
     </section>
 
-    <div class="web-map">
-        <section>
-                <h3 class="text-lg mb-4">聯絡方式</h3>
-                <ul>
-                    <li>
-                        <span class="material-symbols-rounded">phone</span>
-                        <span>(02) 2322-3731 轉 66 / 0910-522-912</span>
-                    </li>
-                    <li>
-                        <span class="material-symbols-rounded">fax</span>
-                        <span>(02) 2322-3731 轉 11</span>
-                    </li>
-                    <li>
-                        <span class="material-symbols-rounded">schedule</span>
-                        <span>週一至週五 08:00 ~ 12:00、13:00 ~ 17:00</span>
-                    </li>
-                    <li>
-                        <span class="material-symbols-rounded">email</span>
-                        <span>stltc.ipc2018@gmail.com</span>
-                    </li>
-                    <li>
-                        <span class="material-symbols-rounded">location_on</span>
-                        <span>
-                            <p>100010 台北市中正區忠孝東路二段 100 號 2 樓之 5</p>
-                            <p class="text-sm">2F-5, No.100, Sec. 2, Zhongxiao E. Rd., Zhongzheng Dist., Taipei City
-                                100, Taiwan (R.O.C.)</p>
-                        </span>
-                    </li>
-                </ul>
-            </section>
-    </div>
+    <section class="copy-right">
+        <p class="pr-1">台灣長期照顧感染預防暨控制學會 <span>&copy; {{ currYear }} All rights reserved.</span></p>
+        <p><a routerLink="/about/terms">服務條款</a>．<a routerLink="/about/privacy">隱私權</a></p>
+    </section>
 
     <div *ngIf="false">
-                    <img src="assets/image/logo/newebpay.png" alt="logo" class="w-60 h-auto mb-2">
-                    <p class="opacity-60 tracking-wider -ml-1">本網站採用藍新金流，提供您安全、便利的交易環境。</p>
-                </div>
+        <img src="assets/image/logo/newebpay.png" alt="logo" class="w-60 h-auto mb-2">
+        <p class="opacity-60 tracking-wider -ml-1">本網站採用藍新金流，提供您安全、便利的交易環境。</p>
+    </div>
 </footer>

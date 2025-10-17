@@ -47,6 +47,24 @@ a[class^="btn-"] {
   @apply transition-all ease-in-out duration-300 flex items-center justify-center;
 }
 
+.menu-wrap {
+  @apply relative;
+
+  .menu-list {
+    @apply hidden absolute top-0 right-0 pt-16 min-w-max;
+  }
+
+  //&:hover .menu-list,
+  .menu-list.show {
+    @apply block;
+  }
+
+  .menu-list a,
+  .menu-list button {
+    @apply flex items-center;
+  }
+}
+
 /* reset Globel *
 a.mdc-button,
 a.mdc-icon-button,

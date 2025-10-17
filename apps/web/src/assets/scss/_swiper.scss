@@ -1,30 +1,3 @@
-/*
-.swiper-button-prev,
-.swiper-button-next {
-    @apply border border-white bg-[--md-sys-color-primary] rounded-full w-10 h-10 transition-all ease-in-out duration-300 scale-100 lg:flex hover:scale-150;
-
-    &::after {
-        @apply text-lg font-black text-white;
-    }
-}
-
-.swiper-button-prev::after {
-    @apply pr-0.5;
-}
-
-.swiper-button-next::after {
-    @apply pl-0.5;
-}
-
-.swiper-button-prev {
-    left: -2rem;
-}
-
-.swiper-button-next {
-    right: -2rem;
-}
-    */
-
 [class*="swiper-btn"] {
     @apply cursor-pointer rounded-full w-14 h-14 scale-100 hover:scale-150;
 

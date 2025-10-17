@@ -1,32 +1,20 @@
 .nav-bar {
-    @apply flex items-center justify-between p-5 w-full fixed z-10;
+    @apply flex items-start justify-between p-5 w-full fixed z-10;
 }
 
-.hamburger-btn {
-    @apply h-14 lg:hidden;
-}
+.nav-link {
+    @apply flex items-center px-4 py-2 rounded-full;
 
-.nav-links,
-.tools-wrap {
-    @apply flex items-center px-3;
-
-    > button {
-        @apply w-11 h-14;
-    }
     .material-symbols-rounded {
         @apply text-xl;
     }
-}
-
-.link-item {
-
 }
 
 .avatar-btn {
     @apply flex items-center min-w-fit pl-3;
 
     .user {
-        @apply rounded-xl min-w-8 w-8 h-8 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
+        @apply rounded-xl min-w-8 w-9 h-9 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
         font-size: 0.875rem;
     }
 }
