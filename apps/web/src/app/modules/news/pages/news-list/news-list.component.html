@@ -1,0 +1,33 @@
+<div class="max-w-container py-20">
+  <header class="mt-20 xl:mt-10">
+    <h2>
+      <span class="display d-black">Latest News</span>
+      <p class="headline">最新消息</p>
+    </h2>
+  </header>
+
+  <web-result-empty *ngIf="!newsList.length" class="block mt-5"></web-result-empty>
+
+  <section class="sort-list-container">
+
+    <div class="sort-link">
+      <a class="link-item" *ngFor="let sort of sorts; let i = index" [routerLink]="sort"
+        [ngClass]="{ 'focusd': focusedIndex === i }" (click)="setFocused(i)">
+        {{ sort }}
+      </a>
+    </div>
+
+    <div class="news-list flex-auto">
+      <a *ngFor="let news of newsList" routerLink="/news/detail">
+        <p class="space-x-2">
+          <span> {{ news.date }}</span>
+          <span class="sort">{{ news.sort }}</span>
+        </p>
+        <h3> {{ news.title }}</h3>
+      </a>
+      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+        class="pt-10">
+      </mat-paginator>
+    </div>
+  </section>
+</div>

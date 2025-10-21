@@ -8,8 +8,18 @@
     &.next {
         @apply pr-1;
     }
+
+    &.swiper-button-disabled {
+        @apply shadow-none grayscale opacity-50;
+    }
 }
 
+// 放底部
+.swipe-btn-wrap-b {
+    @apply absolute bottom-0 right-0 z-10 flex items-center space-x-5 w-fit lg:left-0;
+}
+
+// 放兩側
 .swiper-btn-between {
     @apply absolute z-10 inset-y-0 m-auto;
 
@@ -20,22 +30,6 @@
     &.next {
         @apply -right-10;
     }
-}
-
-.swiper-btn-bl {
-    @apply absolute bottom-0 z-10;
-
-    &.prev {
-        @apply left-0;
-    }
-
-    &.next {
-        @apply left-20;
-    }
-}
-
-.swiper-button-disabled {
-    display: none;
 }
 
 .swiper-slide {

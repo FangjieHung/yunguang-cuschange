@@ -3,7 +3,11 @@
 }
 
 a.link {
-  @apply flex items-center cursor-pointer relative w-fit;
+  @apply flex items-center cursor-pointer relative w-fit mb-2;
+}
+
+.sort {
+  @apply text-sky-600;
 }
 
 .link-underline {
@@ -35,13 +39,24 @@ a.link {
 }
 
 .btn-primary {
-    @apply border-2 border-sky-200 text-white bg-sky-500/50 shadow-lg;
+  @apply border-2 border-sky-200 text-white bg-sky-500/50 shadow-lg;
 }
 
 .btn-white {
-    @apply border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
+  @apply border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
 }
 
+/* reset Globel */
+a.mdc-button,
+a.mdc-icon-button,
+a.mdc-stroked-button,
+a.mdc-flat-button,
+a.mdc-menu-trigger,
+button.mdc-button,
+button.mdc-icon-button,
+button.mdc-stroked-button,
+button.mdc-flat-button,
+button.mdc-menu-trigger,
 button[class^="btn-"],
 a[class^="btn-"] {
   @apply transition-all ease-in-out duration-300 flex items-center justify-center;
@@ -54,7 +69,7 @@ a[class^="btn-"] {
     @apply hidden absolute top-0 right-0 pt-16 min-w-max;
   }
 
-  //&:hover .menu-list,
+  &:hover .menu-list,
   .menu-list.show {
     @apply block;
   }
@@ -78,7 +93,7 @@ button.mdc-flat-button,
 button.mdc-menu-trigger,
 button[class^="btn-"],
 a[class^="btn-"] {
-  @apply items-center justify-center outline-none cursor-pointer rounded-md leading-none px-4 min-h-8;
+  @apply items-center justify-center outline-none cursor-pointer rounded-md;
   display: flex !important;
   font-size: 0.875rem;
 

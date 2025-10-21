@@ -37,6 +37,18 @@ const routes: Routes = [
               ),
           },
           {
+            path: 'news',
+            loadChildren: () =>
+              import('./modules/news/news.module').then((m) => m.NewsModule
+              ),
+          },
+          {
+            path: 'campaign',
+            loadChildren: () =>
+              import('./modules/campaign/campaign.module').then((m) => m.CampaignModule
+              ),
+          },
+          {
             path: 'project',
             title: '新增專案',
             loadChildren: () => import('./modules/project/project.module').then(m => m.ProjectModule)

@@ -1,0 +1,61 @@
+<div class="max-w-container py-20">
+    <header class="mt-20 xl:mt-10">
+        <h2>
+            <span class="display d-black">Academic Activities</span>
+            <p class="headline">學術活動</p>
+        </h2>
+    </header>
+
+    <web-result-empty *ngIf="false" class="block mt-5"></web-result-empty>
+
+    <section class="sort-list-container">
+
+        <div class="sort-link">
+            <a class="link-item" *ngFor="let sort of sorts; let i = index" routerLink="/campaign/detail"
+                [ngClass]="{ 'focusd': focusedIndex === i }" (click)="setFocused(i)">
+                {{ sort }}
+            </a>
+        </div>
+
+        <div class="campain-list">
+            <web-glass-bg *ngFor="let campaign of campaignList">
+                <a href="" class="block w-full p-2">
+                    <div class="px-8">
+                        <ol class="date-duration">
+                            <!-- 開始日 -->
+                            <li>
+                                <p>
+                                    <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
+                                    <span>{{ campainDate | date:'E' }}</span>
+                                </p>
+                                <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                            </li>
+                            <li class="line"></li>
+                            <!-- 結束日 -->
+                            <li>
+                                <p>
+                                    <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
+                                    <span>{{ campainDate | date:'E' }}</span>
+                                </p>
+                                <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                            </li>
+                        </ol>
+                        <h3 class="title-sm"> {{
+                            campaign.title
+                            }}</h3>
+                        <ul class="describe-list">
+                            <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                            <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                        </ul>
+                        <mat-progress-bar mode="determinate" color="primary" value="40"
+                            class="mb-10"></mat-progress-bar>
+                    </div>
+                    <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
+                </a>
+            </web-glass-bg>
+        </div>
+    </section>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+        class="pt-10">
+    </mat-paginator>
+</div>

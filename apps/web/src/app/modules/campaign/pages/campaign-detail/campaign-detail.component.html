@@ -1,0 +1,43 @@
+<div class="min-h-container w-full max-w-2xl mx-auto py-20">
+    <header *ngFor="let campaign of campaignDetail">
+        <ol class="date-duration text-base max-w-xs">
+            <!-- 開始日 -->
+            <li>
+                <p>
+                    <span>{{ campainDate | date:'MM' }} &#8725;</span><br>
+                    <span>{{ campainDate | date:'E' }}</span>
+                </p>
+                <span class="text-5xl">{{ campainDate | date:'dd' }}</span>
+            </li>
+            <li class="line"></li>
+            <!-- 結束日 -->
+            <li>
+                <p>
+                    <span>{{ campainDate | date:'MM' }} &#8725;</span><br>
+                    <span>{{ campainDate | date:'E' }}</span>
+                </p>
+                <span class="text-5xl">{{ campainDate | date:'dd' }}</span>
+            </li>
+        </ol>
+        <h3 class="headline"> {{
+            campaign.title
+            }}</h3>
+        <ul class="describe-list">
+            <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
+            <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+        </ul>
+        <mat-progress-bar mode="determinate" color="primary" value="40" class="mb-10"></mat-progress-bar>
+
+    </header>
+    <!-- 編輯器內容 
+    <section class="h-auto text-base my-10 text-pretty">
+        <app-bbd-quill-editor-viewer [content]="(info.content || '{}' | jsonParse)?.desc">
+        </app-bbd-quill-editor-viewer>
+    </section>
+    -->
+
+    <a class="link link-underline" routerLink="/campaign/list">
+        <span class="material-symbols-rounded pr-2">arrow_left_alt</span>
+        活動列表
+    </a>
+</div>

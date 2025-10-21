@@ -1,5 +1,5 @@
 .liquidGlass-wrapper {
-    @apply relative flex items-center justify-center cursor-pointer shadow-lg p-2;
+    @apply bg-white/30 relative flex items-center justify-center cursor-pointer shadow-lg p-2;
     border-radius: 3rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 
@@ -8,16 +8,13 @@
     }
 
     &:hover {
-        @apply p-4;
+        @apply bg-white/80 p-4;
     }
 }
 
 /* Menu */
 
 .menu-list {
-    .liquidGlass-wrapper {
-        @apply bg-white/10;
-    }
 
     .liquidGlass-wrapper,
     .liquidGlass-wrapper > div {
@@ -50,7 +47,6 @@
     z-index: 1;
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.25);
 }
 
 .liquidGlass-shine {

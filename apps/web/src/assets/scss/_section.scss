@@ -101,13 +101,6 @@ a.card,
   h3 {
     @apply text-xl line-clamp-2;
   }
-
-  .date {
-  }
-
-  .sort {
-    @apply text-sky-600;
-  }
 }
 
 .describe-list {
@@ -116,5 +109,44 @@ a.card,
   span.divider {
     @apply px-1;
   }
+}
 
+.mat-mdc-paginator {
+  --mat-paginator-container-background-color: transparent;
+}
+
+.sort-link {
+  @apply relative flex items-center w-full h-14 overflow-x-auto lg:h-auto lg:flex-col lg:items-start lg:space-y-3 lg:max-w-32;
+
+  .link-item {
+    @apply p-3 rounded-full min-w-fit transition-all ease-in-out duration-300 hover:bg-sky-600/20 lg:w-full;
+  }
+
+  .link-item.focused {
+    @apply bg-sky-600/40 text-white;
+  }
+}
+
+.sort-list-container {
+  @apply flex flex-col lg:flex-row lg:space-x-32 mt-10;
+}
+
+.date-duration {
+  @apply flex items-center justify-between flex-col lg:flex-row;
+
+  > li {
+    @apply flex items-center w-fit;
+  }
+
+  li.line {
+    @apply flex-auto bg-slate-400 w-px h-10 lg:h-px mx-5;
+  }
+
+  ~ h3.title-sm {
+    @apply text-xl tracking-wide line-clamp-3 lg:line-clamp-2 min-h-[3.75rem] mt-2;
+  }
+
+  span.text-5xl {
+    @apply pl-2;
+  }
 }

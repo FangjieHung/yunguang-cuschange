@@ -12,7 +12,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Third party packages
 import SwiperCore, { Autoplay, Navigation } from 'swiper';
-SwiperCore.use([ Autoplay, Navigation]);
+SwiperCore.use([Autoplay, Navigation]);
 
 // Custom packages
 
@@ -21,6 +21,7 @@ import { AppStoreApiServ, BuildProjectApiServ } from '@core/services';
 import { BuildProjectReq, BuildProjectView, PagingRequest, PagingResponse } from '@core/models';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-default',
@@ -28,10 +29,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./default.component.scss'],
 })
 export class DefaultComponent extends BBDBaseComponent implements OnInit {
-  searchControl = new FormControl('');
-  searchOptions: string[] = ['國安國宅', '干城好宅', '尊榮貴賓'];
-  searchValue = '';
-
   campainDate: Date = new Date();
 
   campaignList = [
@@ -106,21 +103,30 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
   ];
 
   campaignSwipe = {
-    slidesPerView: 3,
     spaceBetween: 32,
     navigation: {
       nextEl: '.swiper-btn-between.next',
       prevEl: '.swiper-btn-between.prev',
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1280: {
+        slidesPerView: 3,
+      },
     },
   };
 
   bannerSwipe = {
     slidesPerView: 1,
     spaceBetween: 32,
-
     navigation: {
-      nextEl: '.swiper-btn-bl.next',
-      prevEl: '.swiper-btn-bl.prev',
+      nextEl: '.swiper-btn-banner-next',
+      prevEl: '.swiper-btn-banner-prev',
     },
   };
 

@@ -3,80 +3,87 @@
         <img src="assets/image/logo/mark.png" alt="logo" class="w-28">
     </a>
 
-    <web-glass-bg class="ml-auto mr-2">
-        <div class="flex items-center">
-            <ng-container *ngFor="let menu of navList">
-                <div class="menu-wrap" *ngIf="menu.children; else singleLink">
-                    <button mat-button (click)="toggleNavbarMenu(menu.label)" [class.active]="activeMenu === menu.label"
-                        class="nav-link">{{ menu.label }}</button>
-                    <div [class.show]="activeMenu === menu.label" class="menu-list">
+    <div class="flex items-center space-x-4">
+        <web-glass-bg class="hidden lg:block">
+            <div class="flex items-center">
+                <ng-container *ngFor="let menu of navList">
+                    <div class="menu-wrap" *ngIf="menu.children; else singleLink">
+                        <button mat-button (click)="toggleNavbarMenu(menu.label)"
+                            [class.active]="activeMenu === menu.label" class="nav-link">{{ menu.label }}</button>
+                        <div [class.show]="activeMenu === menu.label" class="menu-list">
+                            <web-glass-bg>
+                                <a *ngFor="let item of menu.children" (click)="closeNavbarMenu()"
+                                    [routerLink]="item.link">
+                                    {{ item.label }}
+                                </a>
+                            </web-glass-bg>
+                        </div>
+                    </div>
+
+                    <ng-template #singleLink>
+                        <a mat-button class="nav-link" [routerLink]="menu.link" target="_blank">
+                            {{ menu.label }}
+                        </a>
+                    </ng-template>
+                </ng-container>
+            </div>
+        </web-glass-bg>
+
+        <web-glass-bg>
+            <div *ngIf="isSignin" class="flex items-center">
+                <a mat-button class="nav-link" routerLink="/auth/signin">註冊</a>
+                <span>/</span>
+                <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
+            </div>
+
+            <div *ngIf="!isSignin" class="flex items-center">
+                <div class="menu-wrap">
+
+                    <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
+                        <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
+                        <span class="material-symbols-rounded">keyboard_arrow_down</span>
+                    </button>
+
+                    <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
                         <web-glass-bg>
-                            <a *ngFor="let item of menu.children" [routerLink]="item.link">
-                                {{ item.label }}
-                            </a>
+                            <a routerLink="/account/profile">帳號設定</a>
+                            <button (click)="appAuthApiServ.signout()">登出</button>
                         </web-glass-bg>
                     </div>
+
                 </div>
-
-                <ng-template #singleLink>
-                    <a mat-button class="nav-link" [routerLink]="menu.link" target="_blank">
-                        {{ menu.label }}
-                    </a>
-                </ng-template>
-            </ng-container>
-        </div>
-    </web-glass-bg>
-
-    <web-glass-bg class="hidde lg:block">
-        <div *ngIf="isSignin" class="flex items-center">
-            <a mat-button class="nav-link" routerLink="/auth/signin">註冊</a>
-            <span>/</span>
-            <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
-        </div>
-
-        <div *ngIf="!isSignin" class="flex items-center">
-            <div class="menu-wrap">
-
-                <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
-                    <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
-                    <span class="material-symbols-rounded">keyboard_arrow_down</span>
-                </button>
-
-                <div class="menu-list" [class.show]="isMenuOpen">
-                    <web-glass-bg>
-                        <a routerLink="/account/profile">帳號設定</a>
-                        <button (click)="appAuthApiServ.signout()">登出</button>
-                    </web-glass-bg>
-                </div>
-
             </div>
-        </div>
-    </web-glass-bg>
+        </web-glass-bg>
 
-    <web-glass-bg class="lg:hidden">
-        <button mat-button (click)="toggleSideMenu()" class="h-14">
-            <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
-            <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
-        </button>
-    </web-glass-bg>
+        <web-glass-bg class="lg:hidden">
+            <button mat-button (click)="toggleSideMenu()" class="h-14">
+                <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
+                <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
+            </button>
+        </web-glass-bg>
+    </div>
 </nav>
 
 <mat-sidenav-container>
     <mat-sidenav #snav mode="over" position="end">
         <mat-nav-list class="sidenav-list">
             <a mat-list-item routerLink="/" class="focused">
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">專案管理
+                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
             </a>
             <a mat-list-item>
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">元件管理
+                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
             </a>
             <a mat-list-item>
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">成本模型管理
+                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
             </a>
         </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
+        <section class="floating-bg">
+            <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
+            <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
+        </section>
         <div class="main-container">
             <router-outlet></router-outlet>
         </div>

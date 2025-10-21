@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -32,7 +32,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     },
     {
       label: '最新消息',
-      link: '/'
+      link: '/news/list'
     },
     {
       label: '學術活動',
@@ -69,16 +69,30 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     super(injector);
   }
 
+
+@HostListener('document:click', ['$event'])
+onDocumentClick(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  const clickedInsideMenu = target.closest('.menu-wrap');
+  if (!clickedInsideMenu) {
+    this.activeMenu = null;
+  }
+}
+
   ngOnInit(): void {
     console.log();
   }
 
   toggleSideMenu() {
-    this.snav.toggle(); // 切換側邊菜單
+    this.snav.toggle();
   }
 
   toggleNavbarMenu(label: string) {
     this.activeMenu = this.activeMenu === label ? null : label;
+  }
+
+  closeNavbarMenu() {
+    this.activeMenu = null;
   }
 
   toggleSingleMenu() {

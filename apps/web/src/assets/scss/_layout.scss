@@ -1,6 +1,18 @@
+:root {
+  --footer-desktop-h: 20.5rem;
+}
+
+footer {
+  min-height: var(footer-desktop-h);
+}
+
 .max-w-container {
   @apply px-5 w-full max-w-screen-3xl mx-auto;
 }
+
+.min-h-container {
+  min-height: calc(100svh - var(--footer-desktop-h));
+} 
 
 /*
 .flex-outer,
