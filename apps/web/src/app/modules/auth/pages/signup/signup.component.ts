@@ -1,8 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
 
-// Third party packages
-import SwiperCore, { FreeMode, Thumbs, Pagination, Autoplay } from 'swiper';
-SwiperCore.use([FreeMode, Thumbs, Pagination, Autoplay]);
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { StepperOrientation } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -131,12 +133,17 @@ export class SignupComponent extends BBDBaseComponent implements OnInit {
 }
 */
 export class SignupComponent extends BBDBaseComponent implements OnInit {
+  sorts: string[] = ['個人會員', '團體會員'];
+  focusedIndex: number | null = null;
 
-  constructor(
-    protected override injector: Injector) {
-      super(injector);
+  constructor(protected override injector: Injector, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
+    super(injector);
   }
-  
+
+    setFocused(index: number) {
+    this.focusedIndex = index;
+  }
+
   ngOnInit(): void {
     console.log('');
   }

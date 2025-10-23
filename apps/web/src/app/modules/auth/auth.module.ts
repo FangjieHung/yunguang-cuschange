@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 
 // Custom packages
-import { SharedModule } from '@core/shared';
+//import { SharedModule } from '@core/shared';
+import { SharedModule } from '../../shared/shared.module';
 import {
   ForgetPasswordComponent,
   PolicyComponent,

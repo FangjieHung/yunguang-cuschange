@@ -134,7 +134,7 @@
 }
 
 .progress-bar {
-    @apply bg-primary-50 w-full h-1 rounded overflow-hidden relative;
+    @apply bg-sky-50 w-full h-1 rounded overflow-hidden relative;
 
     &::after {
         @apply content-[''] rounded absolute inset-0;

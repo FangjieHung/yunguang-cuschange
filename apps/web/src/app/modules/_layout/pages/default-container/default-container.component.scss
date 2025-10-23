@@ -1,5 +1,5 @@
 .nav-bar {
-    @apply flex items-start justify-between p-5 w-full fixed z-10;
+    @apply flex items-start justify-between p-4 w-full fixed z-10;
 }
 
 .nav-link {
@@ -10,11 +10,19 @@
     }
 }
 
+[id="logoImg"] {
+    @apply transition-all ease-in-out duration-500 absolute p-3 w-32 xs:w-40 4xl:w-48;
+
+    &.img-shrink {
+        @apply w-20 p-0;
+    }
+}
+
 .avatar-btn {
-    @apply flex items-center min-w-fit pl-3;
+    @apply flex items-center min-w-fit;
 
     .user {
-        @apply rounded-xl min-w-8 w-9 h-9 bg-primary-200 text-primary-600 flex items-center justify-center font-bold;
+        @apply rounded-xl min-w-8 w-9 h-9 bg-sky-200 text-sky-600 flex items-center justify-center font-bold;
         font-size: 0.875rem;
     }
 }
@@ -56,7 +64,7 @@ mat-sidenav-container {
     }
 
     a.focused {
-        @apply font-bold bg-primary-200;
+        @apply font-bold bg-sky-200;
     }
 
     .list-icon {

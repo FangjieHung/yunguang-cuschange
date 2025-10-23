@@ -73,13 +73,13 @@ export class ProjectEditComponent extends BBDBaseComponent implements OnInit {
   currArea = 0;
   screenshotFile: File | null = null;
 
-  firstFormGroup = this._fb.group({
+  accountInfo = this._fb.group({
     firstCtrl: ['', Validators.required],
   });
-  secondFormGroup = this._fb.group({
+  basicInfo = this._fb.group({
     isCompleted: ['', Validators.required],
   });
-  thirdFormGroup = this._fb.group({
+  currentEmployment = this._fb.group({
     isCompleted: ['', Validators.required],
   });
   forthFormGroup = this._fb.group({
@@ -252,8 +252,8 @@ export class ProjectEditComponent extends BBDBaseComponent implements OnInit {
 
   doStepperInit(): void {
     if (this.editMode === 'edit') {
-      this.secondFormGroup.get('isCompleted')?.setValue('OK');
-      this.thirdFormGroup.get('isCompleted')?.setValue('OK');
+      this.basicInfo.get('isCompleted')?.setValue('OK');
+      this.currentEmployment.get('isCompleted')?.setValue('OK');
       this.stepperLinear = false;
       this.doBindMapbox();
     }
@@ -418,7 +418,7 @@ export class ProjectEditComponent extends BBDBaseComponent implements OnInit {
       this.bbdNotifyServ.warning('提示：請選擇房型');
       return;
     }
-    this.secondFormGroup.get('isCompleted')?.setValue('OK');
+    this.basicInfo.get('isCompleted')?.setValue('OK');
     this.stepper.next();
   }
 
@@ -435,7 +435,7 @@ export class ProjectEditComponent extends BBDBaseComponent implements OnInit {
       this.bbdNotifyServ.warning('提示：基地範圍尚未完成，無法計算面積');
       return;
     }
-    this.thirdFormGroup.get('isCompleted')?.setValue('OK');
+    this.currentEmployment.get('isCompleted')?.setValue('OK');
     this.stepper.next();
   }
 

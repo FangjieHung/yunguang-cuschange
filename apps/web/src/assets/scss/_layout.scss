@@ -1,7 +1,3 @@
-:root {
-  --footer-desktop-h: 20.5rem;
-}
-
 footer {
   min-height: var(footer-desktop-h);
 }
@@ -44,15 +40,15 @@ footer {
     @apply flex items-center font-bold text-lg;
 
     .material-symbols-rounded {
-      @apply text-primary-600 text-3xl w-10;
+      @apply text-sky-600 text-3xl w-10;
     }
   }
 
   .hint {
-    @apply text-sm text-primary-gray ml-10 -mt-1;
+    @apply text-sm text-sky-900/50 ml-10 -mt-1;
   }
 
-  .btn-outline-purple {
+  . {
     @apply rounded flex items-center px-2 py-1 min-w-fit font-medium text-sm;
 
     .material-symbols-rounded {
@@ -99,13 +95,13 @@ footer {
     @apply flex justify-center w-8;
 
     &::after {
-      @apply border-primary-900;
+      @apply border-sky-900;
     }
   }
 }
 
 .sub-sidenav-left {
-  @apply bg-primary-50 rounded-r-3xl flex flex-col pb-6 pt-4 h-full overflow-auto shadow-lg z-10;
+  @apply bg-sky-50 rounded-r-3xl flex flex-col pb-6 pt-4 h-full overflow-auto shadow-lg z-10;
   width: 22.5rem;
 
   .side-nav-content {

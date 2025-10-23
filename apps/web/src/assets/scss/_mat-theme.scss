@@ -24,8 +24,8 @@ $light-theme: mat.define-light-theme(
   --md-sys-color-primary: #34618d;
   --md-sys-color-surface-tint: rgb(79, 131, 183);
   --md-sys-color-on-primary: rgb(255 255 255);
-  --md-sys-color-primary-container: rgb(208 228 255);
-  --md-sys-color-on-primary-container: rgb(22 73 116);
+  --md-sys-color-sky-container: rgb(208 228 255);
+  --md-sys-color-on-sky-container: rgb(22 73 116);
   --md-sys-color-secondary: rgb(82 95 112);
   --md-sys-color-on-secondary: rgb(255 255 255);
   --md-sys-color-secondary-container: rgb(214 228 247);
@@ -51,10 +51,10 @@ $light-theme: mat.define-light-theme(
   --md-sys-color-inverse-surface: rgb(45 49 53);
   --md-sys-color-inverse-on-surface: rgb(239 240 247);
   --md-sys-color-inverse-primary: rgb(159 202 252);
-  --md-sys-color-primary-fixed: rgb(208 228 255);
-  --md-sys-color-on-primary-fixed: rgb(0 29 53);
-  --md-sys-color-primary-fixed-dim: rgb(159 202 252);
-  --md-sys-color-on-primary-fixed-variant: rgb(6, 39, 65);
+  --md-sys-color-sky-fixed: rgb(208 228 255);
+  --md-sys-color-on-sky-fixed: rgb(0 29 53);
+  --md-sys-color-sky-fixed-dim: rgb(159 202 252);
+  --md-sys-color-on-sky-fixed-variant: rgb(6, 39, 65);
   --md-sys-color-secondary-fixed: rgb(214 228 247);
   --md-sys-color-on-secondary-fixed: rgb(15 28 42);
   --md-sys-color-secondary-fixed-dim: rgb(186 200 219);
@@ -76,5 +76,9 @@ $light-theme: mat.define-light-theme(
   --mat-standard-button-toggle-divider-color: rgba(52, 97, 141, 0.604);
 
   --mat-standard-button-toggle-shape: 99rem;
+
+  // --nav-logo-height-xs: 8rem;
+  // --nav-logo-height-lg: 15rem;
+  --footer-desktop-h: 20.5rem;
 }
 

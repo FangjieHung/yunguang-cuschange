@@ -71,17 +71,17 @@
                                 <bbd-image-upload [attId]="buildProjectDto.coverAttId" class="block mt-1 w-28"
                                     (imageSelected)="onBuildProjectCoverAttFileSelected($event)">
                                 </bbd-image-upload>
-                                <p class="text-sm text-primary-gray mt-2">格式需為 jpeg、png, 檔案限制 2M 以下, 400*300px </p>
-                                <button class="btn-outline-purple my-2" *ngIf="false"><span
+                                <p class="text-sm text-sky-900/50 mt-2">格式需為 jpeg、png, 檔案限制 2M 以下, 400*300px </p>
+                                <button class=" my-2" *ngIf="false"><span
                                         class="material-symbols-rounded pr-2">wand_stars</span>生成封面圖</button>
                             </li>
                         </ul>
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup">
+            <mat-step [stepControl]="basicInfo">
                 <ng-template matStepLabel>步驟 2 : 需求及房型資料</ng-template>
-                <form [formGroup]="secondFormGroup">
+                <form [formGroup]="basicInfo">
                     <div class="inputs-container space-y-10">
                         <section class="w-full">
                             <div class="section-title-wrap w-full">
@@ -118,13 +118,13 @@
                                     <tr mat-row *matRowDef="let row; columns: docDispCols;"></tr>
                                 </table>
                                 <div class="flex items-center space-x-2 mt-4">
-                                    <button class="btn-outline-purple" (click)="fileInput.click()"><span
+                                    <button class="" (click)="fileInput.click()"><span
                                             class="material-symbols-rounded">attachment</span><span>上傳需求書</span>
                                     </button>
-                                    <button *ngIf="demoDocId" class="btn-outline-purple"
+                                    <button *ngIf="demoDocId" class=""
                                         (click)="getArcgenDocs(demoDocId)"><span
                                             class="material-symbols-rounded"></span>查詢狀況</button>
-                                    <button *ngIf="demoDocId" class="btn-outline-purple"
+                                    <button *ngIf="demoDocId" class=""
                                         (click)="getArcgenDocsAnalysis(demoDocId)"><span
                                             class="material-symbols-rounded"></span>需求書分析</button>
                                     <input type="file" #fileInput style="display: none" accept="application/pdf"
@@ -166,9 +166,9 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="thirdFormGroup">
+            <mat-step [stepControl]="currentEmployment">
                 <ng-template matStepLabel>步驟 3 : 設定基地邊界</ng-template>
-                <form [formGroup]="thirdFormGroup" class="flex-outer">
+                <form [formGroup]="currentEmployment" class="flex-outer">
                     <div class="inputs-container flex-outer">
                         <div class="form-label mb-1">
                             <p>請輸入基地位址，並圈選基地邊界<span class="required-mark">*</span></p>

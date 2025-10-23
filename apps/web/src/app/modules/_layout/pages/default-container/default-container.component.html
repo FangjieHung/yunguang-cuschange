@@ -1,17 +1,17 @@
 <nav class="nav-bar">
     <a routerLink="/">
-        <img src="assets/image/logo/mark.png" alt="logo" class="w-28">
+        <img id="logoImg" #logoImg src="assets/image/logo/mark.png" alt="logo">
     </a>
 
-    <div class="flex items-center space-x-4">
-        <web-glass-bg class="hidden lg:block">
+    <div class="ml-auto mt-3 flex items-center space-x-4">
+        <web-glass-bg class="container-hover hidden lg:block">
             <div class="flex items-center">
                 <ng-container *ngFor="let menu of navList">
                     <div class="menu-wrap" *ngIf="menu.children; else singleLink">
                         <button mat-button (click)="toggleNavbarMenu(menu.label)"
                             [class.active]="activeMenu === menu.label" class="nav-link">{{ menu.label }}</button>
                         <div [class.show]="activeMenu === menu.label" class="menu-list">
-                            <web-glass-bg>
+                            <web-glass-bg class="container-hover">
                                 <a *ngFor="let item of menu.children" (click)="closeNavbarMenu()"
                                     [routerLink]="item.link">
                                     {{ item.label }}
@@ -29,37 +29,36 @@
             </div>
         </web-glass-bg>
 
-        <web-glass-bg>
-            <div *ngIf="isSignin" class="flex items-center">
-                <a mat-button class="nav-link" routerLink="/auth/signin">註冊</a>
-                <span>/</span>
-                <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
-            </div>
-
-            <div *ngIf="!isSignin" class="flex items-center">
-                <div class="menu-wrap">
-
-                    <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
-                        <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
-                        <span class="material-symbols-rounded">keyboard_arrow_down</span>
-                    </button>
-
-                    <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
-                        <web-glass-bg>
-                            <a routerLink="/account/profile">帳號設定</a>
-                            <button (click)="appAuthApiServ.signout()">登出</button>
-                        </web-glass-bg>
+        <web-glass-bg class="container-hover">
+            <div class="flex items-center px-1 space-x-2">
+                <div *ngIf="!isSignin" class="items-center hidden lg:flex">
+                    <a mat-button class="nav-link" routerLink="/auth/signup">註冊</a>
+                    <span>/</span>
+                    <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
+                </div>
+    
+                <div *ngIf="isSignin" class="flex items-center">
+                    <div class="menu-wrap">
+                        <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
+                            <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
+                        </button>
+    
+                        <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
+                            <web-glass-bg class="container-hover">
+                                <a routerLink="/account/profile">帳號設定</a>
+                                <button (click)="appAuthApiServ.signout()">登出</button>
+                            </web-glass-bg>
+                        </div>
                     </div>
-
+                </div>
+                
+                <div class="lg:hidden">
+                    <button mat-button (click)="toggleSideMenu()" class="h-14">
+                        <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
+                        <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
+                    </button>
                 </div>
             </div>
-        </web-glass-bg>
-
-        <web-glass-bg class="lg:hidden">
-            <button mat-button (click)="toggleSideMenu()" class="h-14">
-                <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
-                <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
-            </button>
         </web-glass-bg>
     </div>
 </nav>
@@ -67,23 +66,15 @@
 <mat-sidenav-container>
     <mat-sidenav #snav mode="over" position="end">
         <mat-nav-list class="sidenav-list">
-            <a mat-list-item routerLink="/" class="focused">
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
-            </a>
-            <a mat-list-item>
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
-            </a>
-            <a mat-list-item>
-                <img src="assets/image/icon/grid-view.svg" class="list-icon" alt="list icon">
-            </a>
+            <a mat-list-item routerLink="/" class="focused"></a>
         </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <section class="floating-bg">
+        <div class="floating-bg">
             <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
             <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
-        </section>
+        </div>
         <div class="main-container">
             <router-outlet></router-outlet>
         </div>

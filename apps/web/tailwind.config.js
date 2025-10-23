@@ -54,6 +54,7 @@ module.exports = {
         'primary-gray': '#787486',
       },
       screens: {
+        xs: '321px',
         m: '640px',
         md: '768px',
         lg: '1024px',

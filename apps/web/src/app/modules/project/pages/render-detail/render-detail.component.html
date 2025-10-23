@@ -46,11 +46,11 @@
     <mat-sidenav #sidenav mode="side" opened position="end" [class.collapsed]="isCollapsed" class="sub-sidenav-right">
         <!-- Main content -->
         <div class="main-content space-y-5" *ngIf="!isCollapsed">
-            <section class="pb-6 border-b border-primary-200">
+            <section class="pb-6 border-b border-sky-200">
                 <h2 class="mb-6">{{buildProjectView.name}}-{{renderResultJto?.versionName || '-' }}</h2>
                 <div class="flex justify-between">
                     <h5>DesignGen</h5>
-                    <button *ngIf="false" class="btn-outline-purple btn-sm">
+                    <button *ngIf="false" class=" btn-sm">
                         <span class="material-symbols-rounded pr-2">download</span>?.json 檔?
                     </button>
                 </div>
@@ -125,7 +125,7 @@
             <section>
                 <div class="flex justify-between">
                     <h5>細項</h5>
-                    <button *ngIf="false" (click)="openDialog()" class="btn-outline-purple btn-sm">詳細資訊</button>
+                    <button *ngIf="false" (click)="openDialog()" class=" btn-sm">詳細資訊</button>
                 </div>
                 <ul class="describe-list-col mt-3 border-list list-sm">
                     <!-- <li *ngFor="let item of detailList">

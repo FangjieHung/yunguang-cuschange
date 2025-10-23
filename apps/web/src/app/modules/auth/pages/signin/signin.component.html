@@ -1,64 +1,63 @@
-<div class="bg-[#FAF7FA] flex flex-col items-center justify-center p-6 h-full relative">
-  <a routerLink="/">
-    <img src="assets/image/logo/mark.png" alt="logo" class="logo-tl">
-  </a>
-  <picture class="bg-image">
-    <source srcset="assets/video/buildings-grow.webp">
-    <img src="assets/image/photo/buildings-grow.png">
-  </picture>
+<div class="sky-gradient-animated flex items-center justify-center h-full relative">
+  <div class="floating-bg rotate-[160deg] opacity-70">
+    <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
+    <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
+  </div>
 
-  <div class="signin-container">
-    <img src="assets/image/photo/pexels-photo-87223.png" alt="building" class="signin-img">
-    <section class="flex flex-col p-6">
-      <h1 class="text-2xl font-bold text-center mb-5 mt-2">歡迎回來!</h1>
+  <div class="relative grid items-center gap-y-5 gap-x-10 max-w-6xl w-full mx-auto lg:grid-cols-2">
+    <img src="assets/image/logo/mark.png" alt="logo" class="w-32 mx-auto md:w-40 lg:w-full max-w-md">
 
-      <form [formGroup]="validateForm">
-        <ul class="inputs-wrap space-y-1">
-          <li>
-            <div class="form-label">
-              <p>Email<span class="required-mark">*</span></p>
+    <web-glass-bg class="block w-full max-w-64 mx-auto xs:max-w-none sm:max-w-md">
+      <div class="p-6">
+        <h1 class="text-2xl font-bold text-center mb-5 mt-2">歡迎回來!</h1>
+
+        <form [formGroup]="validateForm">
+          <ul class="space-y-5">
+            <li>
+              <div class="form-label">
+                <p>Email<span class="required-mark">*</span></p>
+              </div>
+              <mat-form-field appearance="outline" class="w-full fill-black">
+                <input matInput type="email" formControlName="account" [required]="f['account'] | ctrlHasRequired">
+                <mat-error class="text-sm" *ngIf="f['account'].errors">
+                  <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, 'Email')">{{ msg }}</div>
+                </mat-error>
+              </mat-form-field>
+            </li>
+
+            <li>
+              <div class="form-label">
+                <p>密碼<span class="required-mark">*</span></p>
+              </div>
+              <mat-form-field appearance="outline" class="w-full fill-black">
+                <input matInput type="password" formControlName="password" [required]="f['password'] | ctrlHasRequired"
+                  [type]="hidePassword ? 'password' : 'text'" (keydown.enter)="onSubmit()">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                  [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
+                  <span class="material-symbols-rounded">{{hidePassword ? 'visibility_off' : 'visibility'}}</span>
+                </button>
+                <mat-error class="text-sm" *ngIf="f['password'].errors">
+                  <div *ngFor="let msg of formHelper.errorMsgs(f['password'].errors, '密碼')">{{ msg }}</div>
+                </mat-error>
+              </mat-form-field>
+            </li>
+          </ul>
+
+          <div class="mb-5 space-y-5">
+            <div class="flex justify-between items-center">
+              <mat-checkbox color="primary"><span class="text-base -ml-2">記住我</span></mat-checkbox>
+              <a *ngIf="false" class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
+              <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? </a>
             </div>
-            <mat-form-field appearance="outline" class="w-full fill-gray input-large">
-              <input matInput type="email" formControlName="account" [required]="f['account'] | ctrlHasRequired">
-              <mat-error class="text-xs" *ngIf="f['account'].errors">
-                <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, 'Email')">{{ msg }}</div>
-              </mat-error>
-            </mat-form-field>
-          </li>
-
-          <li>
-            <div class="form-label">
-              <p>密碼<span class="required-mark">*</span></p>
-            </div>
-            <mat-form-field appearance="outline" class="w-full fill-gray input-large">
-              <input matInput type="password" formControlName="password" [required]="f['password'] | ctrlHasRequired"
-                [type]="hidePassword ? 'password' : 'text'" (keydown.enter)="onSubmit()">
-              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
-                [attr.aria-label]="'hide password'" [attr.aria-pressed]="hidePassword">
-                <span class="material-symbols-rounded">{{hidePassword ? 'visibility_off' : 'visibility'}}</span>
-              </button>
-              <mat-error class="text-xs" *ngIf="f['password'].errors">
-                <div *ngFor="let msg of formHelper.errorMsgs(f['password'].errors, '密碼')">{{ msg }}</div>
-              </mat-error>
-            </mat-form-field>
-          </li>
-        </ul>
-
-        <div class="mb-5 space-y-5">
-          <div class="flex justify-between items-center">
-            <mat-checkbox color="primary"><span class="text-base -ml-2">記住我</span></mat-checkbox>
-            <a *ngIf="false" class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
-            <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? </a>
+            <button class="btn-primary btn-lg" (click)="onSubmit()">登入</button>
+            <a mat-button routerLink="/auth/signup" class="btn-lg">註冊</a>
           </div>
-          <a mat-flat-button color="primary" class="w-full btn-lg h-12" (click)="onSubmit()">登入</a>
-          <a class="btn-outline-purple w-full btn-lg h-12">註冊</a>
-        </div>
-      </form>
+        </form>
 
-      <p class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">登入或註冊即表示您同意我們的
-        <a target="_blank" routerLink="/auth/policy">隱私權與服務政策</a>
-      </p>
-    </section>
+        <p class="text-center text-sm m-auto text-slate-500 mt-auto mb-0">登入或註冊即表示您同意我們的
+          <a target="_blank" routerLink="/auth/policy">隱私權與服務政策</a>
+        </p>
+      </div>
+    </web-glass-bg>
   </div>
 </div>
-

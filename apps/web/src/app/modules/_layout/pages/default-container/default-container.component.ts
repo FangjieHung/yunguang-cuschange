@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit, HostListener, ElementRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -16,9 +16,11 @@ import { BBDBaseComponent } from '@core/shared';
 
 export class DefaultContainerComponent extends BBDBaseComponent implements OnInit {
   currentUrl = '';
-  @ViewChild('snav') snav!: MatSidenav;
   activeMenu: string | null = null;
   isMenuOpen = false;
+
+  @ViewChild('snav') snav!: MatSidenav;
+  @ViewChild('logoImg', { static: false }) logoRef!: ElementRef<HTMLImageElement>
 
   navList = [
     {
@@ -37,27 +39,27 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     {
       label: '學術活動',
       children: [
-        { label: '國內外研討會', link: '/about/introduction' },
-        { label: '教育積分申請', link: '/about/organization' },
-        { label: '積分申請進度', link: '/about/history' },
-        { label: '活動報名查詢', link: '/about/honorary' },
-        { label: '活動花絮', link: '/about/honorary' },
+        { label: '國內外研討會', link: '/campaign/list' },
+        { label: '教育積分申請', link: '/campaign/list' },
+        { label: '積分申請進度', link: '/campaign/list' },
+        { label: '活動報名查詢', link: '/campaign/list' },
+        { label: '活動花絮', link: '/campaign/list' },
       ]
     },
     {
       label: '認證專區',
       children: [
-        { label: '訓練醫院 / 機構申請', link: '/about/introduction' },
-        { label: '合格訓練醫院', link: '/about/organization' },
-        { label: '合格訓練機構', link: '/about/history' },
+        { label: '訓練醫院 / 機構申請', link: '/' },
+        { label: '合格訓練醫院', link: '/' },
+        { label: '合格訓練機構', link: '/' },
       ]
     },
     {
       label: '投稿專區',
       children: [
-        { label: '年會投稿', link: '/about/introduction' },
-        { label: '雜誌投稿', link: '/about/organization' },
-        { label: '投稿進度查詢', link: '/about/history' },
+        { label: '年會投稿', link: '/' },
+        { label: '雜誌投稿', link: '/' },
+        { label: '投稿進度查詢', link: '/' },
       ]
     }
   ];
@@ -69,15 +71,26 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     super(injector);
   }
 
-
-@HostListener('document:click', ['$event'])
-onDocumentClick(event: MouseEvent) {
-  const target = event.target as HTMLElement;
-  const clickedInsideMenu = target.closest('.menu-wrap');
-  if (!clickedInsideMenu) {
-    this.activeMenu = null;
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const clickedInsideMenu = target.closest('.menu-wrap');
+    if (!clickedInsideMenu) {
+      this.activeMenu = null;
+    }
   }
-}
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const logo = this.logoRef.nativeElement;
+
+    if (scrollY > 50) {
+      logo.classList.add('img-shrink');
+    } else {
+      logo.classList.remove('img-shrink');
+    }
+  }
 
   ngOnInit(): void {
     console.log();

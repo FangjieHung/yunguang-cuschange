@@ -3,7 +3,7 @@
         <video autoplay loop muted class="hero-video">
             <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
         </video>
-        <div class="content max-w-container">
+        <div class="content max-w-container pt-32">
             <h1 class="display d-white">
                 Innovating for Smarter Diagnostics
             </h1>
@@ -12,7 +12,7 @@
         </div>
     </header>
 
-    <section class="max-w-container">
+    <section class="max-w-container pt-32">
         <h2 class="relative z-[3]">
             <span class="display d-black text-pretty">Knowledge Exchange</span>
             <p class="headline font-bold mt-4">知識交流與跨界合作</p>
@@ -47,7 +47,7 @@
         <div class="relative">
             <swiper [config]="campaignSwipe" class="w-full my-10">
                 <ng-template swiperSlide *ngFor="let campaign of campaignList" class="mb-5">
-                    <web-glass-bg>
+                    <web-glass-bg class="container-hover">
                         <a routerLink="/campaign/detail" class="block w-full p-2">
                             <div class="px-8">
                                 <ol class="date-duration">
@@ -96,7 +96,7 @@
         </a>
     </section>
 
-    <section class="max-w-container">
+    <section class="max-w-container pt-32">
         <div class="flex items-start flex-col lg:flex-row-reverse">
             <h2 class="lg:text-right">
                 <span class="display d-black">Latest News</span>

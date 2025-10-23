@@ -39,7 +39,7 @@
 
 /* Card */
 .card {
-  @apply bg-white border border-primary-200 rounded-lg shadow max-h-full overflow-auto relative;
+  @apply bg-white border border-sky-200 rounded-lg shadow max-h-full overflow-auto relative;
 
   .cover {
     @apply aspect-[4/3] object-cover rounded;
@@ -64,7 +64,7 @@
   }
 
   .date {
-    @apply text-base text-primary-gray mt-1;
+    @apply text-base text-sky-900/50 mt-1;
   }
 
   .card-action {
@@ -79,14 +79,14 @@
 
 a.card,
 .card.link {
-  @apply text-primary-900 ease-in-out duration-300 cursor-pointer p-4 hover:shadow-lg;
+  @apply text-sky-900 ease-in-out duration-300 cursor-pointer p-4 hover:shadow-lg;
 }
 
 .card-green {
   @apply bg-[#DDEBEB] rounded-lg;
 
   h5 {
-    @apply text-primary-800 flex items-center;
+    @apply text-sky-800 flex items-center;
   }
 }
 
@@ -119,7 +119,7 @@ a.card,
   @apply relative flex items-center w-full h-14 overflow-x-auto lg:h-auto lg:flex-col lg:items-start lg:space-y-3 lg:max-w-32;
 
   .link-item {
-    @apply p-3 rounded-full min-w-fit transition-all ease-in-out duration-300 hover:bg-sky-600/20 lg:w-full;
+    @apply p-3 rounded-full min-w-fit transition-all ease-in-out duration-300 hover:bg-sky-600/20;
   }
 
   .link-item.focused {
@@ -149,4 +149,66 @@ a.card,
   span.text-5xl {
     @apply pl-2;
   }
+}
+
+.sky-gradient-animated {
+  background:
+    radial-gradient(100% 100% at 4% 3%, #fff 0%, transparent),
+    radial-gradient(100% 100% at var(--g2-1-x-position) var(--g2-1-y-position), #7cd4f4 -32%, transparent),
+    radial-gradient(100% 100% at var(--g2-2-x-position) var(--g2-2-y-position), #03ace9 0%, transparent), #fff;
+  animation-name: g-2;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  transition-timing-function: ease-in-out;
+
+  > .floating-bg {
+    @apply bg-none;
+  }
+}
+@property --g2-1-x-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 87.96875%;
+}
+@property --g2-1-y-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 91.1328125%;
+}
+@property --g2-2-x-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 13.398437500000002%;
+}
+@property --g2-2-y-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 82.734375%;
+}
+:root {
+  --g2-1-x-position: 87.96875%;
+  --g2-1-y-position: 91.1328125%;
+  --g2-2-x-position: 13.398437500000002%;
+  --g2-2-y-position: 82.734375%;
+}
+@keyframes g-2 {
+  50% {
+    --g2-1-x-position: 15%;
+    --g2-1-y-position: 15%;
+    --g2-2-x-position: 61.21093749999999%;
+    --g2-2-y-position: 13.750000000000002%;
+  }
+}
+
+.mat-stepper-vertical, .mat-stepper-horizontal {
+  --mat-stepper-container-color: #ffffff00;
+}
+
+.mdc-tab.mat-mdc-tab {
+  @apply px-1 text-lg font-normal min-w-fit rounded;
+  
+}
+
+.mat-mdc-tab-labels {
+  @apply space-x-3;
 }
