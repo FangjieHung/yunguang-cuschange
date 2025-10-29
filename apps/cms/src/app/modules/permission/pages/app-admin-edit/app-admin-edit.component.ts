@@ -1,4 +1,4 @@
-import { Component, inject, Injector, Input, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 // Antd packages
@@ -32,7 +32,6 @@ export class AppAdminEditComponent extends BBDBaseComponent implements OnInit {
     private fb: FormBuilder,
     protected override injector: Injector,) {
     super(injector);
-    this.getCaches();
     this.doFormInit();
   }
 
@@ -40,35 +39,23 @@ export class AppAdminEditComponent extends BBDBaseComponent implements OnInit {
     this.doDataInit();
   }
 
-  getCaches(): void {
-    // this.spinnerServ.show();
-    // forkJoin(
-    //   [this.corpApiServ.getCorpViews(new CorpReq()),]
-    // ).subscribe(([corpOpts]) => {
-    //   this.corpOpts = [...corpOpts || []];
-    // }).add(() => this.spinnerServ.hide());
-  }
+  // getCaches(): void { }
 
   doFormInit(): void {
     this.valForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
       name: [null, [Validators.required, Validators.maxLength(20)]],
       nameEn: [null, [Validators.maxLength(50)]],
-      nickname: [null, [Validators.maxLength(20)]],
       mobile: [null, [Validators.maxLength(12)]],
-
-      account: [null, [Validators.maxLength(100)]],
+      email: [null, [Validators.email, Validators.maxLength(100)]],
+      account: [null, [Validators.required, Validators.maxLength(100)]],
       appUserStartAt: [null, [Validators.required]],
       appUserEndAt: [null],
       appUserStatus: [null, [Validators.required]],
       password: ['', [Validators.maxLength(64)]],
-      virtualConfirmPassword: [''],
-      // contentJto: this.fb.group({
-      //   accStd: [null],
-      // })
+      confirmPassword: [''],
     }, {
       validators: [
-        Validation.match('password', 'virtualConfirmPassword')
+        Validation.match('password', 'confirmPassword')
       ]
     });
   }
@@ -150,8 +137,8 @@ export class AppAdminEditComponent extends BBDBaseComponent implements OnInit {
     }
 
     Object.assign(this.editDto, this.valForm.value);
-    // Object.assign(this.contentJto, this.f['contentJto'].value);
-    // this.editDto.content = JSON.stringify(this.contentJto);
+    if (this.editDto.appUserEndAt)
+      this.editDto.appUserEndAt = this.editDto.appUserEndAt.getEndOfDay();
     this.doDateParse();
   }
 
@@ -161,52 +148,6 @@ export class AppAdminEditComponent extends BBDBaseComponent implements OnInit {
     } else {
       this.editDto.appUserEndAt = this.dateHelper.parseNullToAppMaxUtcDate(this.editDto.appUserEndAt);
     }
-  }
-
-  onEnableCustCat(id: number): void {
-    // this.modalServ.confirm({
-    //   nzTitle: '<i>您確認要「變更狀態」?</i>',
-    //   nzContent: '<b>狀態變更為「啟用」</b>',
-    //   nzOnOk: () => {
-    //     this.spinnerServ.show();
-    //     this.customerApiServ.enableCustCat(id).subscribe({
-    //       next: (res) => {
-    //         if (!res) {
-    //           this.bbdNotifyServ.error(`操作失敗，請再重試一次。`);
-    //           return;
-    //         }
-    //         this.bbdNotifyServ.success(`狀態更新成功。`);
-    //         this.modal.destroy(true);
-    //       },
-    //       error: (err) => {
-    //         this.bbdNotifyServ.error('執行失敗', err);
-    //       },
-    //     }).add(() => this.spinnerServ.hide());
-    //   }
-    // });
-  }
-
-  onDisableCustCat(id: number): void {
-    // this.modalServ.confirm({
-    //   nzTitle: '<i>您確認要「變更狀態」?</i>',
-    //   nzContent: '<b>狀態變更為「停用」</b>',
-    //   nzOnOk: () => {
-    //     this.spinnerServ.show();
-    //     this.customerApiServ.disableCustCat(id).subscribe({
-    //       next: (res) => {
-    //         if (!res) {
-    //           this.bbdNotifyServ.error(`操作失敗，請再重試一次。`);
-    //           return;
-    //         }
-    //         this.bbdNotifyServ.success(`狀態更新成功。`);
-    //         this.modal.destroy(true);
-    //       },
-    //       error: (err) => {
-    //         this.bbdNotifyServ.error('執行失敗', err);
-    //       },
-    //     }).add(() => this.spinnerServ.hide());
-    //   }
-    // });
   }
 
 }

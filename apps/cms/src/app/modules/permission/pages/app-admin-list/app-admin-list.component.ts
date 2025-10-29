@@ -25,12 +25,9 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
   // corpOpts: CorpView[] = [];
 
   dispCols = [
-    '帳號',
-    '中文名',
-    '電子信箱',
-    '暱稱',
-    '行動電話',
-    '狀態',
+    '狀態', '帳號', '名稱',
+    '啟用日期', '停用日期',
+    '行動電話', '電子信箱'
   ];
 
   constructor(
@@ -65,6 +62,75 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
     this.dataSource = [];
   }
 
+  doEdit(id = 0): void {
+    this.modalServ.create({
+      nzTitle: id === 0 ? `新增${this.actionName}` : `編輯${this.actionName}`,
+      nzMaskClosable: false,
+      nzStyle: { 'max-width': '800px' },
+      nzCentered: true,
+      nzWidth: '95%',
+      nzContent: AppAdminEditComponent,
+      nzData: {
+        id: id,
+        // actionName: this.actionName,
+      }
+    }).afterClose.subscribe(res => {
+      if (res) {
+        this.onSearch();
+      }
+    });
+  }
+
+  onDisable(appUserId: number): void {
+    this.modalServ.confirm({
+      nzTitle: `確定要停用此${this.actionName}？`,
+      nzContent: `停用後，該${this.actionName}將無法登入系統！`,
+      nzCancelText: '取消',
+      nzOkText: '確定',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.appUserApiServ.disableAppUser(appUserId).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('停用成功');
+              this.onSearch();
+            } else {
+              this.bbdNotifyServ.error('停用失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        });
+      }
+    })
+  }
+
+  onEnable(appUserId: number): void {
+    this.modalServ.confirm({
+      nzTitle: `確定要啟用此${this.actionName}？`,
+      nzContent: `啟用後，該${this.actionName}將可恢復登入系統使用！`,
+      nzCancelText: '取消',
+      nzOkText: '確定',
+      nzOnOk: () => {
+        this.appUserApiServ.enableAppUser(appUserId).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('啟用成功');
+              this.onSearch();
+            } else {
+              this.bbdNotifyServ.error('啟用失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        });
+      }
+    })
+  }
+
   onSearch(pageIndex = 1): void {
     this.request.pageIndex = pageIndex;
     this.doParamsReset();
@@ -85,22 +151,4 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
     }).add(() => this.dataLoading = false);
   }
 
-  doEdit(id = 0): void {
-    this.modalServ.create({
-      nzTitle: id === 0 ? `新增${this.actionName}` : `編輯${this.actionName}`,
-      nzMaskClosable: false,
-      nzStyle: { 'max-width': '800px' },
-      nzCentered: true,
-      nzWidth: '95%',
-      nzContent: AppAdminEditComponent,
-      nzData: {
-        id: id,
-        // actionName: this.actionName,
-      }
-    }).afterClose.subscribe(res => {
-      if (res) {
-        this.onSearch();
-      }
-    });
-  }
 }

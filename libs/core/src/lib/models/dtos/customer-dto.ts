@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Customer } from '../entities';
+import { CustGroupDto, CustMemberDto } from './';
 
 export class CustomerDto extends Customer {
-  corpName?: string | null = null;
   avatarAttId = 0;
-  password = '';
   appUserStartAt: Date | null = null;
   appUserEndAt: Date | null = null;
   appUserStatus = 0;
+  password = '';
+  custGroup?: CustGroupDto | null = null;
+  custMember?: CustMemberDto | null = null;
 
   constructor() {
     super();

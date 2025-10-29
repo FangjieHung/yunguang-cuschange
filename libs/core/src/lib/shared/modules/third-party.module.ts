@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { QuillModule } from 'ngx-quill';;
 import { SwiperModule } from 'swiper/angular';
 
 const MODULES = [
   NgxSpinnerModule,
-  SwiperModule
+  QuillModule, SwiperModule
 ]
 
 @NgModule({

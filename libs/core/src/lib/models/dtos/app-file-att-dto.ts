@@ -1,6 +1,6 @@
-import { AppUser } from '../entities';
+import { AppFileAtt } from '../entities';
 
-export class AppFileAttDto extends AppUser {
+export class AppFileAttDto extends AppFileAtt {
 
   constructor() {
     super();

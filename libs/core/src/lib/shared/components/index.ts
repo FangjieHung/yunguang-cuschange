@@ -1,5 +1,6 @@
 export * from './widgets';
 export * from './bbd-base.component';
+export * from './bbd-quill-editor/bbd-quill-editor.component';
 export * from './bbd-quill-editor-viewer/bbd-quill-editor-viewer.component';
 export * from './bbd-file-upload/bbd-file-upload.component';
 export * from './bbd-image-upload/bbd-image-upload.component';

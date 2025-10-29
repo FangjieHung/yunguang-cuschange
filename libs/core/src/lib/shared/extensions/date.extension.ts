@@ -31,7 +31,11 @@ Date.prototype.getEndOfDay = function(): Date {
   if (!this) {
     return this;
   }
-  return endOfDay(this);
+
+  const d = endOfDay(this);
+  d.setMilliseconds(0);
+
+  return d;
 };
 
 Date.prototype.getAppMaxUtcDate = (): Date => {

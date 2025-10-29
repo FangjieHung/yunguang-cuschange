@@ -67,23 +67,23 @@ export class DefaultDashboardComponent extends BBDBaseComponent implements OnIni
   }
 
   getCaches(): void {
-    const customerReq = new PagingRequest<CustomerReq>();
-    const corpReq = new PagingRequest<CorpReq>;
-    customerReq.pageSize = 5;
-    corpReq.pageSize = 5;
-    combineLatest([
-      this.corpApiServ.getCorpViews(new CorpReq()),
-      this.customerApiServ.getCustomerViewsPaging(customerReq),
-      this.corpApiServ.getCorpViewsPaging(corpReq),
-    ]).subscribe(([
-      corpOpts,
-      customerViews,
-      corpViews,
-    ]) => {
-      this.corpOpts = [...corpOpts || []];
-      this.customerViews = customerViews?.rows || [];
-      this.corpViews = corpViews?.rows || [];
-    });
+    // const customerReq = new PagingRequest<CustomerReq>();
+    // const corpReq = new PagingRequest<CorpReq>;
+    // customerReq.pageSize = 5;
+    // corpReq.pageSize = 5;
+    // combineLatest([
+    //   this.corpApiServ.getCorpViews(new CorpReq()),
+    //   this.customerApiServ.getCustomerViewsPaging(customerReq),
+    //   this.corpApiServ.getCorpViewsPaging(corpReq),
+    // ]).subscribe(([
+    //   corpOpts,
+    //   customerViews,
+    //   corpViews,
+    // ]) => {
+    //   this.corpOpts = [...corpOpts || []];
+    //   this.customerViews = customerViews?.rows || [];
+    //   this.corpViews = corpViews?.rows || [];
+    // });
   }
 
 }

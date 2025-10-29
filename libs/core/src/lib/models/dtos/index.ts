@@ -1,11 +1,18 @@
 export * from './app-admin-dto';
 export * from './app-file-att-dto';
+export * from './app-news-msg-dto';
 export * from './app-object-store-dto';
 export * from './app-role-dto';
 export * from './app-role-route-dto';
 export * from './app-route-dto';
 export * from './app-user-dto';
 export * from './app-user-role-dto';
+export * from './banner-ad-dto';
+export * from './campaign-dto';
+export * from './cust-group-dto';
+export * from './cust-member-dto';
+export * from './customer-dto';
+
 export * from './build-comp-bundle-dtl-dto';
 export * from './build-comp-bundle-dto';
 export * from './build-component-dto';
@@ -14,5 +21,4 @@ export * from './build-proj-render-dto';
 export * from './build-proj-volume-dto';
 export * from './build-project-dto';
 export * from './corp-dto';
-export * from './customer-dto';
 export * from './app-page-website-setting-dto';

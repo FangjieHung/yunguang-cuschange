@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import {
   PagingRequest, PagingResponse, UploadFormReq,
   CustomerDto, CustomerReq, CustomerView,
+  CustGroupReq, CustGroupView,
+  CustMemberReq, CustMemberView
 } from '../models';
 
 @Injectable({
@@ -45,6 +47,20 @@ export class CustomerApiServ {
   setCustomerDto(request: CustomerDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/SetCustomerDto`, request);
   }
+  //#endregion
+
+  //#region CustGroup
+  getCustGroupViewsPaging(request: PagingRequest<CustGroupReq>): Observable<PagingResponse<CustGroupView>> {
+    return this.http.put<PagingResponse<CustGroupView>>(`${this.baseUrl}/GetCustGroupViewsPaging`, request);
+  }
+
+  //#endregion
+
+  //#region CustMember
+  getCustMemberViewsPaging(request: PagingRequest<CustMemberReq>): Observable<PagingResponse<CustMemberView>> {
+    return this.http.put<PagingResponse<CustMemberView>>(`${this.baseUrl}/GetCustMemberViewsPaging`, request);
+  }
+
   //#endregion
 
 }

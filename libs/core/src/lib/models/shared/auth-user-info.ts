@@ -4,7 +4,6 @@ export class AuthUserInfo {
   appPfm = '';
   appUserId = 0;
   adminId = 0;
-  corpId = 0;
   custId = 0;
   account = '';
   passwordExpAt: Date | null = null;

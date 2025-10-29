@@ -1,0 +1,19 @@
+export interface CustMemberView {
+  id: number;
+  custId: number;
+  idNo: string;
+  name: string;
+  nameEn: string | null;
+  gender: string | null;
+  birthAt: Date | null;
+  email: string;
+  mobile: string | null;
+  phone: string | null;
+  phoneExt: string | null;
+  resiZipCodeId: number | null;
+  resiAddr: string | null;
+  currZipCodeId: number | null;
+  currAddr: string | null;
+  recommender: string | null;
+  content?: string | null;
+}

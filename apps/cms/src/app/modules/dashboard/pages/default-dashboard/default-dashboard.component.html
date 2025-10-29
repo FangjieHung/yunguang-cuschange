@@ -67,7 +67,7 @@
         </div>
       </nz-card>
 
-      <ng-container *ngIf="dashboardCardPaths | hasAnyPermission; else welcomeScreen">
+      <!-- <ng-container *ngIf="dashboardCardPaths | hasAnyPermission; else welcomeScreen">
         <nz-card *ngIf="'/customer/list' | hasPermission" nzTitle="新進客戶" [nzExtra]="extraCustomerView"
           class="col-span-full 2xl:col-span-4">
           <nz-table #customerViewsTable [nzFrontPagination]="false" [nzShowPagination]="false" [nzData]="customerViews">
@@ -130,7 +130,7 @@
         <ng-template #extraCorpViews>
           <a routerLink="/customer/corp/list" class="text-blue-500">更多</a>
         </ng-template>
-      </ng-container>
+      </ng-container> -->
 
       <nz-card *ngIf="false" nzTitle="組合銷售排名" [nzExtra]="bundleRank" class="col-span-full 2xl:col-span-4">
         <nz-table #basicTable [nzData]="listOfData">

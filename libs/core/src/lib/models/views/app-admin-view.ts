@@ -5,9 +5,9 @@ export interface AppAdminView {
   appUserStartAt: Date | null;
   appUserEndAt: Date | null;
   appUserStatus: number;
-  email: string | null;
   name: string;
   nameEn: string | null;
-  nickname: string | null;
   mobile: string | null;
+  email: string | null;
+
 }

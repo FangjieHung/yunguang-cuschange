@@ -10,15 +10,15 @@ import {
 
 const routes: Routes = [
   {
-    path: 'app-admin/list',
+    path: 'admin/list',
     component: AppAdminListComponent
   },
   {
-    path: 'app-role/list',
+    path: 'role/list',
     component: AppRoleListComponent
   },
   {
-    path: 'app-role/assign',
+    path: 'role/assign',
     component: AppRoleAssignComponent
   },
 ];
