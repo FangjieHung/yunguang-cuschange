@@ -50,7 +50,7 @@
                 <thead>
                     <tr>
                         <th *ngFor="let item of dispCols">{{item}}</th>
-                        <th nzRight [nzWidth]="'120px'">操作</th>
+                        <th nzRight [nzWidth]="'150px'">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,18 +78,30 @@
                           <span *ngIf="data.salePrice <= 0">免費</span>
                         </td>
                         <td nzRight>
-                            <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit"
-                                class="w-11 rounded-full px-0">
-                                <span class="material-icons-outlined align-middle">more_vert</span>
-                            </button>
-                            <nz-dropdown-menu #menuEdit="nzDropdownMenu">
-                                <ul nz-menu>
-                                    <li nz-menu-item>
-                                        <button nz-button nzType="text" (click)="doEdit(data.id)"
-                                            class="w-full text-left">編輯</button>
-                                    </li>
-                                </ul>
-                            </nz-dropdown-menu>
+                          <button nz-button nzType="text" class="w-11 rounded-full px-0" (click)="onDisable(data.id)" [disabled]="+data.status >= campaignApiServ.campaignStatuses['下架']">
+                            <span class="material-icons-outlined align-middle text-red-600"
+                              [ngClass]="{'text-red-600': +data.status < campaignApiServ.campaignStatuses['下架'] , 'text-gray-400': +data.status >= campaignApiServ.campaignStatuses['下架']}">
+                              lock
+                            </span>
+                          </button>
+                          <button nz-button nzType="text" class="w-11 rounded-full px-0" (click)="onEnable(data.id)" [disabled]="+data.status < campaignApiServ.campaignStatuses['下架']">
+                            <span class="material-icons-outlined align-middle"
+                              [ngClass]="{'text-green-600': +data.status >= campaignApiServ.campaignStatuses['下架'], 'text-gray-400': +data.status <= campaignApiServ.campaignStatuses['下架']}">
+                              lock_open
+                            </span>
+                          </button>
+                          <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit"
+                            class="w-11 rounded-full px-0">
+                            <span class="material-icons-outlined align-middle">more_vert</span>
+                          </button>
+                          <nz-dropdown-menu #menuEdit="nzDropdownMenu">
+                            <ul nz-menu>
+                              <li nz-menu-item>
+                                <button nz-button nzType="text" (click)="doEdit(data.id)"
+                                  class="w-full text-left">編輯</button>
+                              </li>
+                            </ul>
+                          </nz-dropdown-menu>
                         </td>
                     </tr>
                 </tbody>

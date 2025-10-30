@@ -47,6 +47,12 @@ export class CampaignApiServ {
   getCampaignViewsPaging(request: PagingRequest<CampaignReq>): Observable<PagingResponse<CampaignView>> {
     return this.http.put<PagingResponse<CampaignView>>(`${this.baseUrl}/GetCampaignViewsPaging`, request);
   }
+  disableCampaign(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/DisableCampaign/${id}`, null);
+  }
+  enableCampaign(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/EnableCampaign/${id}`, null);
+  }
   setCampaignDto(request: CampaignDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/SetCampaignDto`, request);
   }

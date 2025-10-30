@@ -70,6 +70,56 @@ export class CampaignListComponent extends BBDBaseComponent implements OnInit {
     });
   }
 
+  onDisable(id: number): void {
+    this.modalServ.confirm({
+      nzTitle: `確定要下架此${this.actionName}？`,
+      nzContent: `下架後，該${this.actionName}將無法報名！`,
+      nzCancelText: '取消',
+      nzOkText: '確定',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.campaignApiServ.disableCampaign(id).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('下架成功');
+              this.onSearch();
+            } else {
+              this.bbdNotifyServ.error('下架失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        });
+      }
+    });
+  }
+
+  onEnable(id: number): void {
+    this.modalServ.confirm({
+      nzTitle: `確定要上架此${this.actionName}？`,
+      nzContent: `上架後，該${this.actionName}將可報名！`,
+      nzCancelText: '取消',
+      nzOkText: '確定',
+      nzOnOk: () => {
+        this.campaignApiServ.enableCampaign(id).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('上架成功');
+              this.onSearch();
+            } else {
+              this.bbdNotifyServ.error('上架失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        });
+      }
+    });
+  }
+
   onSearch(pageIndex = 1): void {
     this.request.pageIndex = pageIndex;
     this.doParamsReset();
