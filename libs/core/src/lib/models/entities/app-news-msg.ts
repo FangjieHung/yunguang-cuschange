@@ -8,6 +8,7 @@ export class AppNewsMsg extends EntityBase {
   endAt: Date | null = null;
   stickyAt: Date | null = null;
   status: number = +AppNewsMsgStatuses.發佈;
+  content: string | null = null;
 
   constructor() {
     super();

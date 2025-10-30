@@ -1,5 +1,6 @@
 export * from './app-attach.api.serv';
 export * from './app-auth.api.serv';
+export * from './app-msg.api.serv';
 export * from './app-role.api.serv';
 export * from './app-store.api.serv';
 export * from './app-user.api.serv';

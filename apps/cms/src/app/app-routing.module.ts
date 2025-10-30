@@ -21,6 +21,10 @@ const routes: Routes = [
     canActivate: [AppAuthGuard],
     children: [
       {
+        path: 'app-msg',
+        loadChildren: () => import('./modules/app-msg/app-msg.module').then(m => m.AppMsgModule)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
@@ -39,11 +43,6 @@ const routes: Routes = [
       {
         path: 'permission',
         loadChildren: () => import('./modules/permission/permission.module').then(m => m.PermissionModule)
-      },
-      // 待移除
-      {
-        path: 'user',
-        loadChildren: () => import('./modules/app-user/app-user.module').then(m => m.AppUserModule)
       },
     ]
   }

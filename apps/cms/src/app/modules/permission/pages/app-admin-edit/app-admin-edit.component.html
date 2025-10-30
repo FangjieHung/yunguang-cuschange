@@ -1,7 +1,9 @@
 <div class="">
   <form [formGroup]="valForm">
     <div class="grid grid-cols-12 gap-x-4">
-      <h2 class="w-full col-span-12 text-xl font-bold mb-4">基本資料</h2>
+      <div class="col-span-12 my-5 flex items-center gap-4 before:h-px before:flex-1 before:bg-gray-300  before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
+        <span class="text-base">基本資料</span>
+      </div>
       <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
         <mat-label>中文名稱</mat-label>
         <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
@@ -32,10 +34,9 @@
         </mat-error>
       </mat-form-field>
 
-
-
-
-      <h2 class="w-full col-span-12 text-xl font-bold mb-4">帳號設定</h2>
+      <div class="col-span-12 my-5 flex items-center gap-4 before:h-px before:flex-1 before:bg-gray-300  before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
+        <span class="text-base">帳號設定</span>
+      </div>
       <mat-form-field appearance="outline" class="w-full col-span-full"
         [ngClass]="{'sm:col-span-6': _id !== 1}">
         <mat-label>帳號</mat-label>

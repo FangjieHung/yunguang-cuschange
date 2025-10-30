@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppUserRoutingModule } from './app-user-routing.module';
+import { AppMsgRoutingModule } from './app-msg-routing.module';
 
 // Thired party packages
 import { QuillModule } from 'ngx-quill';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
-import { AppUserEditComponent, AppUserListComponent } from './pages';
+import { AppNewsMsgEditComponent, AppNewsMsgListComponent } from './pages';
 
 const CUST_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
-  AppUserEditComponent, AppUserListComponent
+  AppNewsMsgEditComponent, AppNewsMsgListComponent
 ];
 
 @NgModule({
@@ -20,9 +20,9 @@ const CUST_COMPONENTS = [
   ],
   imports: [
     CommonModule,
-    AppUserRoutingModule,
+    AppMsgRoutingModule,
     QuillModule.forRoot(),
     ...CUST_MODULES
   ]
 })
-export class AppUserModule { }
+export class AppMsgModule { }

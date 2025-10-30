@@ -49,11 +49,6 @@ const routes: Routes = [
               ),
           },
           {
-            path: 'project',
-            title: '新增專案',
-            loadChildren: () => import('./modules/project/project.module').then(m => m.ProjectModule)
-          },
-          {
             path: 'result',
             title: '',
             loadChildren: () => import('./modules/result/result.module').then(m => m.ResultModule)

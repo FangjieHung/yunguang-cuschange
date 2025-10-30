@@ -5,5 +5,6 @@ export interface AppNewsMsgView {
   startAt: Date;
   endAt: Date;
   stickyAt: Date | null;
+  status: number;
   content: string | null;
 }

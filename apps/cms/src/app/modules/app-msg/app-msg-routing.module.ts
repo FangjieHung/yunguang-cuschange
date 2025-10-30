@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  AppUserListComponent
+  AppNewsMsgListComponent
 } from './pages';
 
 const routes: Routes = [
   {
-    path: 'list',
-    component: AppUserListComponent
+    path: 'news/list',
+    component: AppNewsMsgListComponent
   }
 ];
 
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppUserRoutingModule { }
+export class AppMsgRoutingModule { }
