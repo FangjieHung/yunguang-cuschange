@@ -3,15 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  CorpListComponent,
   CustomerListComponent,
 } from './pages';
 
 const routes: Routes = [
-  {
-    path: 'corp/list',
-    component: CorpListComponent,
-  },
   {
     path: 'list',
     component: CustomerListComponent,

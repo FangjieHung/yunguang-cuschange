@@ -10,16 +10,18 @@ import { EnumValues } from 'enum-values';
 import {
   PagingRequest, PagingResponse, UploadFormReq, ValueInfo,
   AppNewsMsgDto, AppNewsMsgReq, AppNewsMsgStatuses, AppNewsMsgView,
-  BannerAdDto, BannerAdReq, BannerAdView
+  BannerAdDto, BannerAdReq, BannerAdStatuses, BannerAdView
 } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppMsgApiServ {
+  private readonly baseUrl = '/AppMsg';
   appNewsMsgStatuses = AppNewsMsgStatuses;
   appNewsMsgStatusOpts = EnumValues.getNamesAndValues(AppNewsMsgStatuses);
-  private readonly baseUrl = '/AppMsg';
+  bannerAdStatuses = BannerAdStatuses;
+  bannerAdStatusOpts = EnumValues.getNamesAndValues(BannerAdStatuses);
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +57,13 @@ export class AppMsgApiServ {
   //#endregion
 
   //#region BannerAd
+  getBannerAdStatusInfos(): ValueInfo[] {
+    // 樣式遵循 ant nzColor 標準
+    return [
+      { name: '發佈', value: BannerAdStatuses.發佈, style: 'success' },
+      { name: '下架', value: BannerAdStatuses.下架, style: 'error' }
+    ];
+  }
   getBannerAdDtoById(id: number): Observable<BannerAdDto> {
     return this.http.get<BannerAdDto>(`${this.baseUrl}/GetBannerAdDtoById/${id}`);
   }

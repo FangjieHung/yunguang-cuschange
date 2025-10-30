@@ -24,13 +24,12 @@
 
                     <div class="flex flex-col md:flex-row md:space-x-2 items-start md:mb-4">
                         <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
-                            <mat-form-field appearance="outline" class="w-full flex-1 -mb-2" slot="start">
-                                <mat-label>公司</mat-label>
-                                <mat-select [(ngModel)]="request.queryRequest.corpId">
-                                    <mat-option [value]="-1">全部</mat-option>
-                                    <mat-option [value]="0">通用元件</mat-option>
-                                    <mat-option *ngFor="let status of corpOpts" [value]="+status.id">{{status.name
-                                        }}</mat-option>
+                            <mat-form-field appearance="outline" class="w-24 flex-1 -mb-2" slot="start">
+                                <mat-label>狀態</mat-label>
+                                <mat-select [(ngModel)]="request.queryRequest.status">
+                                    <mat-option [value]="0">全部</mat-option>
+                                    <mat-option *ngFor="let opt of campaignApiServ.campaignStatusOpts"
+                                        [value]="+opt.value">{{ opt.name }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </cms-search-bar>
@@ -56,15 +55,28 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let data of listTable.data">
-                        <td>{{ data.corpName | emptyFormatter:'通用元件' }}</td>
+                        <td>
+                          <nz-tag class="mr-0 font-semibold"
+                            [nzColor]="(data.status| aryFindValue: campaignApiServ.getCampaignStatusInfos(): 'value': 'style') ?? 'default'">
+                            {{ data.status | aryFindValue: campaignApiServ.getCampaignStatusInfos() :'value':'name' }}
+                          </nz-tag>
+                        </td>
                         <td>{{ data.name }}</td>
-                        <!-- <td>
-                            <nz-tag class="mr-0 font-semibold"
-                                [nzColor]="(data.appUserStatus| aryFindValue: (appUserApiServ.getAppUserStatusInfos() | async): 'value': 'style') ?? 'default'">
-                                {{ data.appUserStatus | aryFindValue: appUserApiServ.appUserStatusOpts :'value':'name'
-                                }}
-                            </nz-tag>
-                        </td> -->
+                        <td>{{ data.startAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
+                        <td>{{ data.endAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
+                        <td>{{ data.regStartAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
+                        <td>{{ data.regEndAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
+                        <td>{{ data.isOpenReg ? 'V' : '' }}</td>
+                        <td>{{ data.maxRegNum > 0 ? (data.maxRegNum | number) : '不限' }}</td>
+                        <td>{{ data.regNum | number }}</td>
+                        <td>
+                          <span *ngIf="data.pricing > 0">${{ data.pricing | number }}</span>
+                          <span *ngIf="data.pricing <= 0">免費</span>
+                        </td>
+                        <td>
+                          <span *ngIf="data.salePrice > 0">${{ data.salePrice | number }}</span>
+                          <span *ngIf="data.salePrice <= 0">免費</span>
+                        </td>
                         <td nzRight>
                             <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit"
                                 class="w-11 rounded-full px-0">
@@ -76,25 +88,6 @@
                                         <button nz-button nzType="text" (click)="doEdit(data.id)"
                                             class="w-full text-left">編輯</button>
                                     </li>
-
-                                    <ng-container *ngIf="false">
-                                        <li nz-menu-item>
-                                            <div
-                                                class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded-sm border border-blue-400 inline-flex items-center justify-center">
-                                                操作
-                                            </div>
-                                        </li>
-                                        <!-- <li nz-menu-item>
-                                            <button nz-button nzType="text" (click)="onEnableCustCat(data.id)"
-                                                class="w-full text-left"
-                                                [disabled]="!(data.status !== customerApiServ.custCatStatuses['啟用'])">啟用狀態</button>
-                                        </li> -->
-                                        <!-- <li nz-menu-item>
-                                            <button nz-button nzType="text" (click)="onDisableCustCat(data.id)"
-                                                class="w-full text-left"
-                                                [disabled]="!(data.status !== customerApiServ.custCatStatuses['停用'])">停用狀態</button>
-                                        </li> -->
-                                    </ng-container>
                                 </ul>
                             </nz-dropdown-menu>
                         </td>

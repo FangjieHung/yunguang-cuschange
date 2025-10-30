@@ -1,19 +1,7 @@
 <div class="">
   <form [formGroup]="valForm">
     <div class="grid grid-cols-12 gap-x-4">
-      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
-        <mat-label>類別</mat-label>
-        <mat-select formControlName="type" [required]="f['type'] | ctrlHasRequired">
-          <mat-option [value]="1">{{ '學會公告' }}</mat-option>
-          <!-- <ng-container>
-
-          </ng-container> -->
-        </mat-select>
-        <mat-error class="text-xs" *ngIf="f['type'].errors">
-          <div *ngFor="let msg of formHelper.errorMsgs(f['type'].errors, '類別')">{{ msg }}</div>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+      <mat-form-field appearance="outline" class="w-full col-span-6">
         <mat-label>狀態</mat-label>
         <mat-select formControlName="status" [required]="f['status'] | ctrlHasRequired">
           <ng-container *ngFor="let opt of appMsgApiServ.appNewsMsgStatusOpts">
@@ -22,6 +10,13 @@
         </mat-select>
         <mat-error class="text-xs" *ngIf="f['status'].errors">
           <div *ngFor="let msg of formHelper.errorMsgs(f['status'].errors, '狀態')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-6">
+        <mat-label>排序</mat-label>
+        <input matInput type="number" formControlName="sort" [required]="f['sort'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['sort'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['sort'].errors, '排序')">{{ msg }}</div>
         </mat-error>
       </mat-form-field>
 
@@ -55,13 +50,27 @@
         </mat-error>
       </mat-form-field>
 
-      <ng-container formGroupName="contentJto">
-        <div class="col-span-full my-5 flex items-center gap-4 before:h-px before:flex-1 before:bg-gray-300  before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
-          <span class="text-base">消息內容</span>
-        </div>
-        <bbd-quill-editor class="w-full col-span-full" formControlName="desc" placeholder="消息內容..."></bbd-quill-editor>
-      </ng-container>
+      <mat-form-field appearance="outline" class="w-full col-span-full">
+        <mat-label>描述</mat-label>
+        <textarea matInput rows="4" type="text" formControlName="desc" [required]="f['desc'] | ctrlHasRequired">
+        </textarea>
+        <mat-error class="text-xs" *ngIf="f['desc'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['desc']?.errors, '描述')">{{
+            msg }}</div>
+        </mat-error>
+      </mat-form-field>
     </div>
+
+    <ng-container>
+      <mat-label class="col-span-full mb-2 text-xl font-black">封面圖片</mat-label>
+      <div class="grid grid-cols-12 gap-x-4">
+        <bbd-img-native-upload name="img-native-upload" class="w-full col-span-12" [(files)]="imgFiles"
+          [previewSrc]="coverImgUrl" [(_attId)]="editDto.coverAttId"></bbd-img-native-upload>
+      </div>
+      <div class="p-4 mb-4 text-base text-blue-800 rounded-lg bg-blue-50" role="alert">
+        <span class="font-medium">上傳圖片尺寸為 1024*576px</span>
+      </div>
+    </ng-container>
   </form>
 </div>
 

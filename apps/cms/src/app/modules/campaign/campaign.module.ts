@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerRoutingModule } from './customer-routing.module';
+import { CampaignRoutingModule } from './campaign-routing.module';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
 import {
-  CustomerListComponent, CustomerEditComponent,
+  CampaignListComponent, CampaignEditComponent,
 } from './pages';
 
 
 const CUSTOM_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
-  CustomerListComponent, CustomerEditComponent,
+  CampaignListComponent, CampaignEditComponent,
 ];
 
 @NgModule({
   declarations: [
     ...CUST_COMPONENTS
   ],
-  imports: [CommonModule, CustomerRoutingModule, ...CUSTOM_MODULES],
+  imports: [CommonModule, CampaignRoutingModule, ...CUSTOM_MODULES],
 })
-export class CustomerModule { }
+export class CampaignModule { }

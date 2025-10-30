@@ -7,11 +7,15 @@ import { QuillModule } from 'ngx-quill';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
-import { AppNewsMsgEditComponent, AppNewsMsgListComponent } from './pages';
+import {
+  AppNewsMsgEditComponent, AppNewsMsgListComponent,
+  BannerAdEditComponent, BannerAdListComponent
+} from './pages';
 
 const CUST_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
-  AppNewsMsgEditComponent, AppNewsMsgListComponent
+  AppNewsMsgEditComponent, AppNewsMsgListComponent,
+  BannerAdEditComponent, BannerAdListComponent
 ];
 
 @NgModule({

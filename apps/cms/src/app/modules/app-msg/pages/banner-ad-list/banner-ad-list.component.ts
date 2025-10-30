@@ -2,28 +2,28 @@ import { Component, Injector, OnInit } from '@angular/core';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import { AppNewsMsgEditComponent } from '../app-news-msg-edit/app-news-msg-edit.component';
+import { BannerAdEditComponent } from '../banner-ad-edit/banner-ad-edit.component';
 import {
   PagingRequest, PagingResponse,
-  AppNewsMsgView, AppNewsMsgReq,
+  BannerAdView, BannerAdReq,
 } from '@core/models';
 import { AppMsgApiServ, SharedFuncServ } from '@core/services';
 
 @Component({
-  selector: 'cms-app-news-msg-list',
-  templateUrl: './app-news-msg-list.component.html',
-  styleUrls: ['./app-news-msg-list.component.scss'],
+  selector: 'cms-banner-ad-list',
+  templateUrl: './banner-ad-list.component.html',
+  styleUrls: ['./banner-ad-list.component.scss'],
 })
-export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit {
-  readonly actionName = '最新消息';
+export class BannerAdListComponent extends BBDBaseComponent implements OnInit {
+  readonly actionName = '橫幅廣告';
   dataLoading = false;
-  dataSource: AppNewsMsgView[] = [];
-  request = new PagingRequest<AppNewsMsgReq>();
-  response: PagingResponse<AppNewsMsgView> | null = null;
+  dataSource: BannerAdView[] = [];
+  request = new PagingRequest<BannerAdReq>();
+  response: PagingResponse<BannerAdView> | null = null;
   // corpOpts: CorpView[] = [];
 
   dispCols = [
-    '狀態', '類別', '標題', '發佈日期', '截止日期'
+    '狀態', '標題', '發佈日期', '截止日期', '排序'
   ];
 
   constructor(
@@ -31,7 +31,7 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
     private sharedFuncServ: SharedFuncServ,
     protected override injector: Injector,) {
     super(injector);
-    this.getCaches();
+    // this.getCaches();
   }
 
   ngOnInit(): void {
@@ -39,17 +39,10 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
     this.onSearch();
   }
 
-  getCaches(): void {
-    // this.spinnerServ.show();
-    // forkJoin(
-    //   [this.corpApiServ.getCorpViews(new CorpReq()),]
-    // ).subscribe(([corpOpts]) => {
-    //   this.corpOpts = [...corpOpts || []];
-    // }).add(() => this.spinnerServ.hide());
-  }
+  // getCaches(): void { }
 
   doParamsInit(): void {
-    this.request.queryRequest = new AppNewsMsgReq();
+    this.request.queryRequest = new BannerAdReq();
     this.doParamsReset();
   }
 
@@ -65,7 +58,7 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
       nzStyle: { 'max-width': '800px' },
       nzCentered: true,
       nzWidth: '95%',
-      nzContent: AppNewsMsgEditComponent,
+      nzContent: BannerAdEditComponent,
       nzData: {
         id: id,
         // actionName: this.actionName,
@@ -86,7 +79,7 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.appMsgApiServ.disableAppNewsMsg(id).subscribe({
+        this.appMsgApiServ.disableBannerAd(id).subscribe({
           next: (res) => {
             if (res) {
               this.bbdNotifyServ.success('下架成功');
@@ -110,7 +103,7 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
       nzCancelText: '取消',
       nzOkText: '確定',
       nzOnOk: () => {
-        this.appMsgApiServ.enableAppNewsMsg(id).subscribe({
+        this.appMsgApiServ.enableBannerAd(id).subscribe({
           next: (res) => {
             if (res) {
               this.bbdNotifyServ.success('發佈成功');
@@ -131,8 +124,8 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
     this.request.pageIndex = pageIndex;
     this.doParamsReset();
     this.dataLoading = true;
-    this.sharedFuncServ.doQueryTimeOptimize<AppNewsMsgReq>(this.request.queryRequest);
-    this.appMsgApiServ.getAppNewsMsgViewsPaging(this.request).subscribe({
+    this.sharedFuncServ.doQueryTimeOptimize<BannerAdReq>(this.request.queryRequest);
+    this.appMsgApiServ.getBannerAdViewsPaging(this.request).subscribe({
       next: (res) => {
         if (!res || res.rows.isUndefinedOrNullOrEmpty()) {
           this.bbdNotifyServ.success('查無任何資料。');

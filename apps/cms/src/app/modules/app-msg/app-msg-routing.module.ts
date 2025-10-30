@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  AppNewsMsgListComponent
+  AppNewsMsgListComponent, BannerAdListComponent
 } from './pages';
 
 const routes: Routes = [
+  {
+    path: 'banner/list',
+    component: BannerAdListComponent
+  },
   {
     path: 'news/list',
     component: AppNewsMsgListComponent

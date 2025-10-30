@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
@@ -6,15 +7,15 @@ import { NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import { AppNewsMsgDto, AppNewsMsgContentJto, AppNewsMsgStatuses } from '@core/models';
+import { BannerAdDto, BannerAdStatuses, UploadFormReq } from '@core/models';
 import { AppMsgApiServ } from '@core/services';
 
 @Component({
-  selector: 'cms-app-news-msg-edit',
-  templateUrl: './app-news-msg-edit.component.html',
-  styleUrls: ['./app-news-msg-edit.component.scss'],
+  selector: 'cms-banner-ad-edit',
+  templateUrl: './banner-ad-edit.component.html',
+  styleUrls: ['./banner-ad-edit.component.scss'],
 })
-export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit {
+export class BannerAdEditComponent extends BBDBaseComponent implements OnInit {
   private _modal = inject(NzModalRef);
   private _fb = inject(FormBuilder);
   appMsgApiServ = inject(AppMsgApiServ);
@@ -22,7 +23,9 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
 
   _id = 0;
   valForm!: UntypedFormGroup;
-  editDto = new AppNewsMsgDto();
+  editDto = new BannerAdDto();
+  coverImgUrl = '';
+  imgFiles: File[] = [];
 
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
@@ -42,14 +45,12 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
 
   doFormInit(): void {
     this.valForm = this._fb.group({
-      type: [null, [Validators.required]],
-      title: [null, [Validators.maxLength(100)]],
+      title: [null, [Validators.required, Validators.maxLength(100)]],
+      desc: [null, [Validators.maxLength(150)]],
       startAt: [null, [Validators.required]],
       endAt: [null],
       status: [null, [Validators.required]],
-      contentJto: this._fb.group({
-        desc: [null]
-      })
+      sort: [0, [Validators.required]]
     });
   }
 
@@ -57,14 +58,14 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
     this._id = this.modalData?.id || 0;
     // add
     if (!this._id) {
-      this.editDto = new AppNewsMsgDto();
+      this.editDto = new BannerAdDto();
       this.editDto.startAt = new Date();
-      this.editDto.status = +AppNewsMsgStatuses.發佈;
+      this.editDto.status = +BannerAdStatuses.發佈;
       this.doFormPatchValue();
       return;
     }
     // update
-    this.appMsgApiServ.getAppNewsMsgDtoById(this._id).subscribe({
+    this.appMsgApiServ.getBannerAdDtoById(this._id).subscribe({
       next: (res) => {
         if (!res) {
           this.bbdNotifyServ.error('無法取得資料。');
@@ -73,7 +74,11 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
         }
 
         this.editDto = res;
-        this.editDto.contentJto = (this.editDto.content || '').isUndefinedOrNullOrEmpty() ? new AppNewsMsgContentJto() : JSON.parse(this.editDto.content || '{}');
+        if (this.editDto?.coverFullPath?.isUndefinedOrNullOrEmpty() == false) {
+          this.coverImgUrl = this.combineCdnUrl(this.editDto.coverFullPath);
+          console.log(this.coverImgUrl);
+        }
+
         this.doDateParse(true);
         this.doFormPatchValue();
       },
@@ -124,13 +129,31 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
     if (this.editDto.endAt)
       this.editDto.endAt = this.editDto.endAt.getEndOfDay();
     this.doDateParse();
-    this.editDto.content = JSON.stringify(this.editDto.contentJto);
+  }
+
+  onCoverFileSelected(file: File | null) {
+    if (file) {
+      this.imgFiles = [file];
+    } else {
+      this.imgFiles = [];
+    }
   }
 
   onSubmit(): void {
     this.canSubmit();
+
+    const uploadFormReq = new UploadFormReq();
+    if (this.imgFiles) {
+      uploadFormReq.append('file', this.imgFiles[0]);
+    }
+
+    uploadFormReq.jsonContent = JSON.stringify(this.editDto);
+    Object.entries(uploadFormReq).forEach(([key, value]) => {
+      uploadFormReq.append(key, value);
+    });
+
     this.spinnerServ.show();
-    this.appMsgApiServ.setAppNewsMsgDto(this.editDto).subscribe({
+    this.appMsgApiServ.uploadBannerAdDto(uploadFormReq).subscribe({
       next: (res) => {
         if (!res) {
           this.bbdNotifyServ.error(`新增失敗，請再重試一次。`);

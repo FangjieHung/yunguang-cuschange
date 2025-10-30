@@ -25,17 +25,18 @@ const routes: Routes = [
         loadChildren: () => import('./modules/app-msg/app-msg.module').then(m => m.AppMsgModule)
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: 'campaign',
+        loadChildren: () => import('./modules/campaign/campaign.module').then(m => m.CampaignModule)
       },
       {
         path: 'customer',
         loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule)
       },
       {
-        path: 'component',
-        loadChildren: () => import('./modules/component/component.module').then(m => m.ComponentModule)
+        path: 'dashboard',
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
+
       {
         path: 'setting',
         loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule)
