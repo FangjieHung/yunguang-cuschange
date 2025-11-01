@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+// Thired party packages
+import { EnumValues } from 'enum-values';
+
 // Custom packages
 import {
-  PagingRequest, PagingResponse, UploadFormReq,
-  CustomerDto, CustomerReq, CustomerView,
+  PagingRequest, PagingResponse, UploadFormReq, ValueInfo,
+  CustomerDto, CustomerReq, CustomerStatuses, CustomerTypes, CustomerView,
   CustGroupReq, CustGroupView,
   CustMemberReq, CustMemberView
 } from '../models';
@@ -14,12 +17,26 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CustomerApiServ {
-  private readonly baseUrl = '/Customer';
+export class CustApiServ {
+  private readonly baseUrl = '/Cust';
+  customerStatuses = CustomerStatuses;
+  customerStatusOpts = EnumValues.getNamesAndValues(CustomerStatuses);
+  customerTypes = CustomerTypes;
+  customerTypeOpts = EnumValues.getNamesAndValues(CustomerTypes);
 
   constructor(private http: HttpClient) { }
 
   //#region Customer
+  getCustomerStatusInfos(): ValueInfo[] {
+    const infos = [
+      { name: '審核中', value: CustomerStatuses.審核中, style: 'magenta' },
+      { name: '正式會員', value: CustomerStatuses.正式會員, style: 'green' },
+      { name: '否決申請', value: CustomerStatuses.否決申請, style: 'orange' },
+      { name: '取消會藉', value: CustomerStatuses.取消會藉, style: 'red' }
+    ];
+
+    return infos;
+  }
   getCurrCustomerDto(): Observable<CustomerDto> {
     return this.http.get<CustomerDto>(`${this.baseUrl}/GetCurrCustomerDto`);
   }

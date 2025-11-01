@@ -12,24 +12,27 @@ import {
   // Widget
   ZipCodeWidgetComponent,
 } from './components';
+import { ZipCodeControlComponent } from './controls';
 import { AntdModule, MaterialModule } from './modules';
 import {
   AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe, EmptyFormatterPipe,
-  JsonParsePipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe, HasPermissionPipe, HasAnyPermissionPipe,
+  JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe, HasPermissionPipe, HasAnyPermissionPipe,
 } from './pipes';
 import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
 
 const CUST_MODULES = [AntdModule, MaterialModule];
 const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, ZipCodeWidgetComponent, BBDConfirmDialogComponent];
+const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,
-  EmptyFormatterPipe, JsonParsePipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
+  EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
   HasPermissionPipe, HasAnyPermissionPipe,];
 const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
 
 @NgModule({
   declarations: [
     ...CUST_PIPES,
-    ...CUST_COMPONENTS
+    ...CUST_COMPONENTS,
+    ...CUST_CONTROLS
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
     ...CUST_MODULES,
     ...CUST_PIPES,
     ...CUST_COMPONENTS,
+    ...CUST_CONTROLS,
     ...THIRD_MODULES
   ]
 })

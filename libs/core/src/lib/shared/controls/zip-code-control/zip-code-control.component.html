@@ -1,0 +1,25 @@
+<form [formGroup]="valForm" class="grid grid-cols-12 gap-x-4">
+  <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+    <mat-label>{{ title | emptyFormatter: '' }}縣市</mat-label>
+    <mat-select formControlName="city" [required]="f['city'] | ctrlHasRequired"
+      (selectionChange)="f['district'].setValue(null); f['id'].setValue(null);">
+      <mat-option *ngFor="let item of cities" [value]="item">{{ item }}</mat-option>
+    </mat-select>
+    <mat-error class="text-xs" *ngIf="f['city'].errors">
+      <div *ngFor="let msg of formHelper.errorMsgs(f['city'].errors, '縣市')">{{ msg }}</div>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+    <mat-label>{{ title | emptyFormatter: '' }}鄉鎮區</mat-label>
+    <mat-select formControlName="district" [required]="f['district'] | ctrlHasRequired"
+      (selectionChange)="onDistrictSelectionChange(f['city'].value, f['district'].value, f['id'])">
+      <mat-option *ngFor="let opt of districts | aryFilter: { fieldName: 'city', fieldValue: f['city'].value }"
+        [value]="opt.district">{{ opt.code }} - {{ opt.district }}
+      </mat-option>
+    </mat-select>
+    <mat-error class="text-xs" *ngIf="f['district'].errors">
+      <div *ngFor="let msg of formHelper.errorMsgs(f['district'].errors, '鄉鎮區')">{{ msg }}
+      </div>
+    </mat-error>
+  </mat-form-field>
+</form>

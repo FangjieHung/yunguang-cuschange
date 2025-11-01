@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 
 // Custom packages
 import { } from '@core/models';
-import { AppStoreApiServ, AppUserApiServ, CorpApiServ, CustomerApiServ } from '@core/services';
+import { AppStoreApiServ, AppUserApiServ, CorpApiServ, CustApiServ } from '@core/services';
 import { BBDBaseComponent } from '@core/shared';
 import { } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { } from 'rxjs';
 })
 export class DefaultDashboardComponent extends BBDBaseComponent implements OnInit {
   constructor(
-    public customerApiServ: CustomerApiServ,
+    public custApiServ: CustApiServ,
     public corpApiServ: CorpApiServ,
     public appUserApiServ: AppUserApiServ,
     private _appStoreApiServ: AppStoreApiServ,

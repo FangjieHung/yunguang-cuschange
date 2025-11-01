@@ -8,7 +8,7 @@ export * from './arc-gen.api.serv';
 export * from './build-project.api.serv';
 export * from './campaign.api.serv';
 export * from './corp.api.serv';
-export * from './customer.api.serv';
+export * from './cust.api.serv';
 export * from './permission.serv';
 export * from './shared-data.serv';
 export * from './shared-func.serv';

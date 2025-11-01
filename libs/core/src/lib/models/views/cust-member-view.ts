@@ -1,6 +1,10 @@
 export interface CustMemberView {
   id: number;
+  appUserId?: number | null;
+  appUserStatus?: number | null;
   custId: number;
+  custStatus?: number | null;
+  custStartAt?: Date | null;
   idNo: string;
   name: string;
   nameEn: string | null;

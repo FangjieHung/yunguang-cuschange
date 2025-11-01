@@ -1,38 +1,39 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import { AppAdminEditComponent } from '../app-admin-edit/app-admin-edit.component';
+import { CustEditComponent } from '../cust-edit/cust-edit.component';
 import {
-  PagingRequest,
-  PagingResponse,
-  AppAdminView,
-  AppAdminReq,
+  PagingRequest, PagingResponse,
+  CustGroupView, CustGroupReq, CustomerTypes
 } from '@core/models';
-import { AppUserApiServ, SharedFuncServ } from '@core/services';
+import { AppUserApiServ, CustApiServ, SharedDataServ, SharedFuncServ } from '@core/services';
 
 @Component({
-  selector: 'cms-app-admin-list',
-  templateUrl: './app-admin-list.component.html',
-  styleUrls: ['./app-admin-list.component.scss'],
+  selector: 'cms-cust-group-list',
+  templateUrl: './cust-group-list.component.html',
+  styleUrls: ['./cust-group-list.component.scss'],
 })
-export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
-  readonly actionName = '管理者';
+export class CustGroupListComponent extends BBDBaseComponent implements OnInit {
+  readonly actionName = '團體會員';
+
+  private _sharedFuncServ = inject(SharedFuncServ);
+  appUserApiServ = inject(AppUserApiServ);
+  custApiServ = inject(CustApiServ);
+  sharedDataServ = inject(SharedDataServ);
+
   dataLoading = false;
-  dataSource: AppAdminView[] = [];
-  request = new PagingRequest<AppAdminReq>();
-  response: PagingResponse<AppAdminView> | null = null;
+  dataSource: CustGroupView[] = [];
+  request = new PagingRequest<CustGroupReq>();
+  response: PagingResponse<CustGroupView> | null = null;
   // corpOpts: CorpView[] = [];
 
   dispCols = [
-    '狀態', '帳號', '名稱',
-    '啟用日期', '停用日期',
-    '行動電話', '電子信箱'
+    '帳號狀態', '會員狀態', '加入日期',
+    '統一編號', '團體名稱', '團體電話', '代表人', '行動電話', '電子信箱'
   ];
 
   constructor(
-    public appUserApiServ: AppUserApiServ,
-    private sharedFuncServ: SharedFuncServ,
     protected override injector: Injector,) {
     super(injector);
     this.getCaches();
@@ -53,7 +54,7 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
   }
 
   doParamsInit(): void {
-    this.request.queryRequest = new AppAdminReq();
+    this.request.queryRequest = new CustGroupReq();
     this.doParamsReset();
   }
 
@@ -62,17 +63,17 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
     this.dataSource = [];
   }
 
-  doEdit(id = 0): void {
+  doEdit(custId = 0): void {
     this.modalServ.create({
-      nzTitle: id === 0 ? `新增${this.actionName}` : `編輯${this.actionName}`,
+      nzTitle: custId === 0 ? `新增${this.actionName}` : `編輯${this.actionName}`,
       nzMaskClosable: false,
       nzStyle: { 'max-width': '800px' },
       nzCentered: true,
       nzWidth: '95%',
-      nzContent: AppAdminEditComponent,
+      nzContent: CustEditComponent,
       nzData: {
-        id: id,
-        // actionName: this.actionName,
+        id: custId,
+        type: +CustomerTypes.團體會員
       }
     }).afterClose.subscribe(res => {
       if (res) {
@@ -83,8 +84,8 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
 
   onDisable(appUserId: number): void {
     this.modalServ.confirm({
-      nzTitle: `確定要停用此${this.actionName}？`,
-      nzContent: `停用後，該${this.actionName}將無法登入系統！`,
+      nzTitle: `確定要停用此${this.actionName}帳號？`,
+      nzContent: `停用後，該${this.actionName}帳號將無法登入！`,
       nzCancelText: '取消',
       nzOkText: '確定',
       nzOkType: 'primary',
@@ -109,8 +110,8 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
 
   onEnable(appUserId: number): void {
     this.modalServ.confirm({
-      nzTitle: `確定要啟用此${this.actionName}？`,
-      nzContent: `啟用後，該${this.actionName}將可恢復登入系統使用！`,
+      nzTitle: `確定要啟用此${this.actionName}帳號？`,
+      nzContent: `啟用後，該${this.actionName}帳號將可恢復登入使用！`,
       nzCancelText: '取消',
       nzOkText: '確定',
       nzOnOk: () => {
@@ -135,8 +136,8 @@ export class AppAdminListComponent extends BBDBaseComponent implements OnInit {
     this.request.pageIndex = pageIndex;
     this.doParamsReset();
     this.dataLoading = true;
-    this.sharedFuncServ.doQueryTimeOptimize<AppAdminReq>(this.request.queryRequest);
-    this.appUserApiServ.getAppAdminViewsPaging(this.request).subscribe({
+    this._sharedFuncServ.doQueryTimeOptimize<CustGroupReq>(this.request.queryRequest);
+    this.custApiServ.getCustGroupViewsPaging(this.request).subscribe({
       next: (res) => {
         if (!res || res.rows.isUndefinedOrNullOrEmpty()) {
           this.bbdNotifyServ.success('查無任何資料。');

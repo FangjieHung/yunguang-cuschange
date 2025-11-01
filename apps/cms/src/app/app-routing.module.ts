@@ -29,8 +29,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/campaign/campaign.module').then(m => m.CampaignModule)
       },
       {
-        path: 'customer',
-        loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule)
+        path: 'cust',
+        loadChildren: () => import('./modules/cust/cust.module').then(m => m.CustModule)
       },
       {
         path: 'dashboard',

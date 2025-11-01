@@ -10,6 +10,7 @@ export * from './file-url.pipe';
 export * from './has-any-permission.pipe';
 export * from './has-permission.pipe';
 export * from './json-parse.pipe';
+export * from './phone-formatter.pipe';
 export * from './round-default.pipe';
 export * from './safe-html.pipe';
 export * from './safe-url.pipe';

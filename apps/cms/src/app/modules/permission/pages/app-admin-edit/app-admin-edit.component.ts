@@ -10,7 +10,7 @@ import { AppAdminDto, AppUserStatuses } from '@core/models';
 import { AppUserApiServ } from '@core/services';
 
 @Component({
-  selector: 'cms-app-admin',
+  selector: 'cms-app-admin-edit',
   templateUrl: './app-admin-edit.component.html',
   styleUrls: ['./app-admin-edit.component.scss'],
 })

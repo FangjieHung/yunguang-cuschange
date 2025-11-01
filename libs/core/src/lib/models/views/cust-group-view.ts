@@ -1,6 +1,10 @@
 export interface CustGroupView {
   id: number;
+  appUserId?: number | null;
+  appUserStatus?: number | null;
   custId: number;
+  custStatus?: number | null;
+  custStartAt?: Date | null;
   taxId: string;
   name: string;
   nameEn: string | null;

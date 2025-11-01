@@ -1,4 +1,5 @@
 export * from './components';
+export * from './controls';
 export * from './guards';
 export * from './helpers';
 export * from './interceptors';

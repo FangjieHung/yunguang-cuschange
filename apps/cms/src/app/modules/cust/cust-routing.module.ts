@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  CustomerListComponent,
+  CustGroupListComponent, CustMemberListComponent
 } from './pages';
 
 const routes: Routes = [
   {
-    path: 'list',
-    component: CustomerListComponent,
+    path: 'group/list',
+    component: CustGroupListComponent
+  },
+  {
+    path: 'member/list',
+    component: CustMemberListComponent
   },
 ];
 
@@ -17,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerRoutingModule { }
+export class CustRoutingModule { }

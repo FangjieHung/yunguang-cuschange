@@ -12,16 +12,22 @@ import {
   CmsImgUploadComponent, CmsTagEditComponent, CmsPdfUploadComponent,
   CmsQuillEditorComponent,
 } from './components';
+import { CustGroupControlComponent, CustMemberControlComponent } from './controls';
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [CmsImgPreviewComponent,
   CmsPageHeaderComponent, CmsSearchBarComponent,
   CmsTagEditComponent, CmsPdfUploadComponent,
-  CmsImgUploadComponent, CmsQuillEditorComponent,];
+  CmsImgUploadComponent, CmsQuillEditorComponent
+];
+const CUST_CONTROLS = [
+  CustGroupControlComponent, CustMemberControlComponent
+];
 
 @NgModule({
   declarations: [
-    ...CUST_COMPONENTS
+    ...CUST_COMPONENTS,
+    ...CUST_CONTROLS
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,8 @@ const CUST_COMPONENTS = [CmsImgPreviewComponent,
   ],
   exports: [
     ...CUST_MODULES,
-    ...CUST_COMPONENTS
+    ...CUST_COMPONENTS,
+    ...CUST_CONTROLS
   ]
 })
 export class SharedModule { }
