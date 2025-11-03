@@ -12,13 +12,3 @@ export * from './campaign';
 export * from './cust-group';
 export * from './cust-member';
 export * from './customer';
-
-export * from './build-comp-bundle-dtl';
-export * from './build-comp-bundle';
-export * from './build-component';
-export * from './build-proj-doc';
-export * from './build-proj-render';
-export * from './build-proj-volume';
-export * from './build-project';
-export * from './corp';
-

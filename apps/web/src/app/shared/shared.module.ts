@@ -10,7 +10,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { ResultEmptyComponent, GlassBgComponent, MassRefinementRenderDialogComponent } from './components';
+import { ResultEmptyComponent, GlassBgComponent } from './components';
 
 import {
   ShapediverViewerWidgetComponent,
@@ -20,7 +20,7 @@ import {
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
   // components
-  ResultEmptyComponent, GlassBgComponent, MassRefinementRenderDialogComponent,
+  ResultEmptyComponent, GlassBgComponent,
   // widgets
   ShapediverViewerWidgetComponent,
   ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent, MapboxEditWidgetComponent,

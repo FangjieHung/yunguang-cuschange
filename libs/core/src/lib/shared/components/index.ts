@@ -1,4 +1,3 @@
-export * from './widgets';
 export * from './bbd-base.component';
 export * from './bbd-quill-editor/bbd-quill-editor.component';
 export * from './bbd-quill-editor-viewer/bbd-quill-editor-viewer.component';

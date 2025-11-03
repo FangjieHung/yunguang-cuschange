@@ -9,8 +9,6 @@ import { ThirdPartyModule } from './modules/third-party.module';
 import {
   BBDQuillEditorComponent, BBDQuillEditorViewerComponent,
   BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent,
-  // Widget
-  ZipCodeWidgetComponent,
 } from './components';
 import { ZipCodeControlComponent } from './controls';
 import { AntdModule, MaterialModule } from './modules';
@@ -21,7 +19,7 @@ import {
 import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
 
 const CUST_MODULES = [AntdModule, MaterialModule];
-const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, ZipCodeWidgetComponent, BBDConfirmDialogComponent];
+const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent];
 const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,
   EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,

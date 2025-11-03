@@ -4,7 +4,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
-import { AntdModule } from '@core/shared';
 import { DefaultDashboardComponent } from './pages';
 
 const CUSTOM_MODULES = [SharedModule];

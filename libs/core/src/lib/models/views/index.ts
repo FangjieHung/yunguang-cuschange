@@ -11,12 +11,3 @@ export * from './cust-group-view';
 export * from './cust-member-view';
 export * from './customer-view';
 export * from './zip-code-view';
-
-export * from './build-comp-bundle-dtl-view';
-export * from './build-comp-bundle-view';
-export * from './build-component-view';
-export * from './build-proj-doc-view';
-export * from './build-proj-render-view';
-export * from './build-proj-volume-view';
-export * from './build-project-view';
-export * from './corp-view';

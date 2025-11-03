@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { AppObjectStoreCodes, AppPageWebsiteSettingDto } from '@core/models';
+import { AppObjectStoreCodes } from '@core/models';
 import { AppStoreApiServ } from '@core/services';
 
 // Custom packages
@@ -17,7 +17,7 @@ import { forkJoin } from 'rxjs';
 export class PolicyComponent extends BBDBaseComponent implements OnInit {
   // Caches
   // settingDto$ = this.appStoreApiServ.getAppObjectStoreValueByCode(AppObjectStoreCodes.頁面_網站設定);
-  settingDto = new AppPageWebsiteSettingDto();
+  settingDto: any;
 
   constructor(
     private appStoreApiServ: AppStoreApiServ,
@@ -33,7 +33,7 @@ export class PolicyComponent extends BBDBaseComponent implements OnInit {
     //   this.settingDto = settingDto;
     // }).add(() => this.spinnerServ.hide());
 
-    this.settingDto = new AppPageWebsiteSettingDto();
+    this.settingDto;
     this.settingDto.policy.content = '隱私權與服務政策內容';
   }
 }
