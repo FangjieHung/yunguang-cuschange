@@ -4,7 +4,7 @@ import { Component, OnInit, Injector, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerDto, UploadFormReq } from '@core/models';
-import { AppAttachApiServ, CustomerApiServ } from '@core/services';
+import { AppAttachApiServ, CustApiServ } from '@core/services';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -29,7 +29,7 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
   }
 
   constructor(
-    public customerApiServ: CustomerApiServ,
+    public custApiServ: CustApiServ,
     private _fb: FormBuilder,
     private _router: Router,
     protected override injector: Injector,
@@ -64,7 +64,7 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
   doDataInit() {
     // update
     this.spinnerServ.show();
-    this.customerApiServ.getCurrCustomerDto().subscribe({
+    this.custApiServ.getCurrCustomerDto().subscribe({
       next: (res) => {
         if (!res) {
           this.bbdNotifyServ.error('無權限取得個人資訊。');
@@ -86,7 +86,7 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
   onSubmit(): void {
     this.canSubmit();
     this.spinnerServ.show();
-    this.customerApiServ.uploadCurrCustomerDto(this.uploadFormReq).subscribe({
+    this.custApiServ.uploadCurrCustomerDto(this.uploadFormReq).subscribe({
       next: (res) => {
         if (!res) {
           this.bbdNotifyServ.error(`${this.actionName}失敗，請再重試一次。`);
