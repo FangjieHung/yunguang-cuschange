@@ -87,6 +87,9 @@
         "production": {
           "browserTarget": "cms:build:production"
         },
+        "staging": {
+          "browserTarget": "cms:build:staging"
+        },
         "development": {
           "browserTarget": "cms:build:development"
         }

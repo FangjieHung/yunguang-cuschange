@@ -5,7 +5,7 @@ export const environment = {
   storageAuthUserName: 'tslmaiCmsStageAuthUser',
   siteName: '內容管理平台',
   siteServer: 'https://cms.tslmai.bonbondi.com',
-  apiServer: 'https://api.tslmai.bonbondi.com/Portal',
-  cdnServer: 'https://api.tslmai.bonbondi.com',
+  apiServer: 'https://stageapiv1.tslmai.starxfuture.com/Portal',
+  cdnServer: 'https://stageapiv1.tslmai.starxfuture.com',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'
 };
