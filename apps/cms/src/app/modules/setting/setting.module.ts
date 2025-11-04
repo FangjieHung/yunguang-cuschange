@@ -5,13 +5,13 @@ import { SettingRoutingModule } from './setting-routing.module';
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
 import {
-  ShapediverTicketEditComponent,
+  OrgAboutEditComponent, OrgContactEditComponent, WebPolicyEditComponent
 } from './pages';
 
 
 const CUSTOM_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
-  ShapediverTicketEditComponent,
+  OrgAboutEditComponent, OrgContactEditComponent, WebPolicyEditComponent
 ];
 
 @NgModule({

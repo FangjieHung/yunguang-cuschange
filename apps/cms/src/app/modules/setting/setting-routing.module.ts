@@ -3,13 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  ShapediverTicketEditComponent,
+  OrgAboutEditComponent, OrgContactEditComponent, WebPolicyEditComponent
 } from './pages';
 
 const routes: Routes = [
   {
-    path: 'shapediver-ticket/edit',
-    component: ShapediverTicketEditComponent,
+    path: 'org-about/edit',
+    component: OrgAboutEditComponent
+  },
+  {
+    path: 'org-contact/edit',
+    component: OrgContactEditComponent
+  },
+  {
+    path: 'web-policy/edit',
+    component: WebPolicyEditComponent
   },
 ];
 

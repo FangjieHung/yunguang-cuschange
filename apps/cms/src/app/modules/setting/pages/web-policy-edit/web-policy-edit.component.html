@@ -1,0 +1,32 @@
+<div>
+  <cms-page-header>
+    <div class="flex gap-x-2">
+      <!-- <button mat-raised-button color="primary" (click)="doEdit()">
+              <span class="material-icons-outlined pr-2 text-lg">library_add</span>
+              <span>新增{{actionName}}</span>
+            </button> -->
+    </div>
+  </cms-page-header>
+
+  <nz-card class="mx-4 mb-4 border p-5 border-slate-200 rounded-md">
+    <mat-tab-group animationDuration="100ms" [preserveContent]="true">
+      <mat-tab label="服務條款">
+        <ng-template matTabContent>
+          <bbd-quill-editor class="w-full" [(ngModel)]="editObj.terms" [ngModelOptions]="{standalone: true}" placeholder="內容..."></bbd-quill-editor>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="隱私權">
+        <ng-template matTabContent>
+          <bbd-quill-editor class="w-full" [(ngModel)]="editObj.privacy" [ngModelOptions]="{standalone: true}" placeholder="內容..."></bbd-quill-editor>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="mt-2 text-right">
+      <mat-divider class="pt-2"></mat-divider>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        <span class="material-icons-outlined pr-2 text-lg">save</span>
+        <span>儲存</span>
+      </button>
+    </div>
+  </nz-card>
+</div>

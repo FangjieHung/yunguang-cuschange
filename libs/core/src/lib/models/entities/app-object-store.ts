@@ -14,5 +14,7 @@ export class AppObjectStore extends EntityBase {
 }
 
 export enum AppObjectStoreCodes {
-  'ShapeDiverTicketKey' = 'SHAPEDIVER_TICKET',
+  '關於學會' = 'ORG_ABOUT_SETTING',
+  '學會聯絡方式設定檔' = 'ORG_CONTACT_SETTING',
+  '網站條款設定檔' = 'WEB_POLICY_SETTING'
 }
