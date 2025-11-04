@@ -18,7 +18,7 @@
             <p class="headline font-bold mt-4">知識交流與跨界合作</p>
         </h2>
 
-        <div class="relative pb-24 lg:pb-0">
+        <div class="relative pb-24 lg:pb-0" *ngIf="bannerList.length">
             <swiper [config]="bannerSwipe" class="relative w-full mt-8 lg:-mt-10 slide-1-fade">
                 <ng-template swiperSlide *ngFor="let banner of bannerList">
                     <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
@@ -37,6 +37,7 @@
                     </span></button>
             </div>
         </div>
+        <web-result-empty *ngIf="!bannerList.length" class="block my-5"></web-result-empty>
     </section>
 
     <section class="max-w-container flex flex-col">
@@ -44,7 +45,7 @@
             <span class="display d-black">Academic Activities</span>
             <p class="headline font-bold">學術活動</p>
         </h2>
-        <div class="relative">
+        <div class="relative" *ngIf="campaignList.length">
             <swiper [config]="campaignSwipe" class="w-full my-10">
                 <ng-template swiperSlide *ngFor="let campaign of campaignList" class="mb-5">
                     <web-glass-bg class="container-hover">
@@ -91,6 +92,7 @@
                     arrow_forward_ios
                 </span></button>
         </div>
+        <web-result-empty *ngIf="!campaignList.length" class="block my-5"></web-result-empty>
         <a class="link link-underline mt-auto ml-auto" target="_blank" routerLink="/campaign/list">
             看更多活動<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
         </a>
@@ -102,8 +104,8 @@
                 <span class="display d-black">Latest News</span>
                 <p class="headline">最新消息</p>
             </h2>
-            
-            <div class="news-list">
+
+            <div class="news-list" *ngIf="newsList.length">
                 <a *ngFor="let news of newsList" routerLink="/news/detail">
                     <p class="space-x-2">
                         <span> {{ news.date }}</span>
@@ -112,6 +114,8 @@
                     <h3> {{ news.title }}</h3>
                 </a>
             </div>
+
+            <web-result-empty *ngIf="!newsList.length" class="flex-auto w-full my-5"></web-result-empty>
         </div>
         <a class="link link-underline ml-auto lg:-mt-12" target="_blank" routerLink="/news/list">
             看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>

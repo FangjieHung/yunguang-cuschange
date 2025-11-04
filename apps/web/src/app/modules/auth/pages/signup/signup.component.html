@@ -27,7 +27,21 @@
                         </ol>
                     </header>
                     <web-glass-bg>
-                        <div class="pb-10">
+                        <div class="pt-4 pb-12">
+                            <section>
+                                <ul class="input-group lg:grid-cols-3">
+                                    <li>
+                                        <div class="form-label">身份別<span class="required-mark">*</span></div>
+                                        <mat-form-field appearance="outline" class="w-full fill-black">
+                                            <mat-select>
+                                                <mat-option value="" disabled selected>請選擇</mat-option>
+                                                <mat-option value="">團體</mat-option>
+                                                <mat-option value="">個人</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </li>
+                                </ul>
+                            </section>
                             <section>
                                 <h3 class="title">基本資料</h3>
                                 <ul class="input-group lg:grid-cols-3">
