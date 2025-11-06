@@ -1,5 +1,5 @@
 FROM nginx:latest
-LABEL maintainer="SxF <service@starxfuture.com>"
+LABEL maintainer="SxF <alert@starxfuture.com>"
 
 # Copy cms files
 COPY ./dist/apps/cms/ /usr/share/nginx/html

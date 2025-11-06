@@ -41,6 +41,9 @@ export class CampaignApiServ {
   getCampaignViewById(id: number): Observable<CampaignView> {
     return this.http.get<CampaignView>(`${this.baseUrl}/GetCampaignViewById/${id}`);
   }
+  getCampaignViewByUniqueId(uniqueId: string): Observable<CampaignView> {
+    return this.http.get<CampaignView>(`${this.baseUrl}/GetCampaignViewByUniqueId/${uniqueId}`);
+  }
   getCampaignViews(request: CampaignReq = new CampaignReq()): Observable<CampaignView[]> {
     return this.http.put<CampaignView[]>(`${this.baseUrl}/GetCampaignViews`, request);
   }

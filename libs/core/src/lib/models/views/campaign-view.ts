@@ -1,5 +1,6 @@
 export interface CampaignView {
   id: number;
+  uniqueId: string;
   name: string;
   startAt: Date;
   endAt: Date;

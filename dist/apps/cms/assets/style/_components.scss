@@ -1,0 +1,8 @@
+/* Button */
+.btn-primary {
+    @apply bg-sky-500 text-white rounded hover:bg-sky-600 transition-all ease-in-out;
+}
+
+.btn-lg {
+    @apply p-2 text-lg font-bold;
+}

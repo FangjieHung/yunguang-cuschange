@@ -2,6 +2,7 @@ import { EntityBase } from '../shared';
 
 export class Campaign extends EntityBase {
   id = 0;
+  uniqueId = '';
   name = '';
   startAt: Date | null = null;
   endAt: Date | null = null;

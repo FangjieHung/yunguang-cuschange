@@ -39,6 +39,9 @@ export class AppMsgApiServ {
   getAppNewsMsgViewById(id: number): Observable<AppNewsMsgView> {
     return this.http.get<AppNewsMsgView>(`${this.baseUrl}/GetAppNewsMsgViewById/${id}`);
   }
+  getAppNewsMsgViewByUniqueId(uniqueId: string): Observable<AppNewsMsgView> {
+    return this.http.get<AppNewsMsgView>(`${this.baseUrl}/GetAppNewsMsgViewByUniqueId/${uniqueId}`);
+  }
   getAppNewsMsgViews(request: AppNewsMsgReq = new AppNewsMsgReq()): Observable<AppNewsMsgView[]> {
     return this.http.put<AppNewsMsgView[]>(`${this.baseUrl}/GetAppNewsMsgViews`, request);
   }

@@ -2,6 +2,7 @@ import { EntityBase } from '../shared';
 
 export class AppNewsMsg extends EntityBase {
   id = 0;
+  uniqueId = '';
   type: number | null = null;
   title = '';
   startAt = new Date();
