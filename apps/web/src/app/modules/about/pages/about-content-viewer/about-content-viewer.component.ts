@@ -1,6 +1,5 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';

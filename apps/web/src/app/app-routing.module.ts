@@ -7,11 +7,10 @@ import { ResultErrorComponent } from './modules/result/pages';
 import { AppAuthGuard } from '@core/shared';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full'
+  // },
   {
     path: '',
     children: [
@@ -20,6 +19,11 @@ const routes: Routes = [
         component: DefaultContainerComponent,
         // canActivate: [AppAuthGuard],
         children: [
+          {
+            path: '',
+            title: '首頁',
+            loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+          },
           {
             path: 'about',
             title: '關於',
@@ -31,11 +35,6 @@ const routes: Routes = [
             loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
           },
           {
-            path: 'home',
-            title: '首頁',
-            loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
-          },
-          {
             path: 'account',
             loadChildren: () =>
               import('./modules/account/account.module').then((m) => m.AccountModule
@@ -43,6 +42,7 @@ const routes: Routes = [
           },
           {
             path: 'news',
+            title: '最新消息',
             loadChildren: () =>
               import('./modules/news/news.module').then((m) => m.NewsModule
               ),
