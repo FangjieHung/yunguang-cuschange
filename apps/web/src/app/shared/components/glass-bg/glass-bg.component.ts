@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, Input } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 
 // Custom packages
 import {
@@ -10,8 +10,6 @@ import {
   templateUrl: './glass-bg.component.html',
 })
 export class GlassBgComponent extends BBDBaseComponent implements OnInit {
-//  @Input() routerLink: string | any[] = '';
-
   constructor(
     protected override injector: Injector) {
     super(injector);

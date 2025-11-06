@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { AboutRoutingModule } from './about-routing.module';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
-import { DefaultContainerComponent, FooterComponent } from './pages';
+import { AboutContentViewerComponent } from './pages';
 
+// Config settings
 const CUSTOM_MODULES = [SharedModule];
-const CUSTOM_COMPONENTS = [DefaultContainerComponent, FooterComponent];
 
 @NgModule({
   declarations: [
-    ...CUSTOM_COMPONENTS
+    AboutContentViewerComponent
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    AboutRoutingModule,
     ...CUSTOM_MODULES
-  ]
+  ],
 })
-export class LayoutModule { }
+export class AboutModule { }

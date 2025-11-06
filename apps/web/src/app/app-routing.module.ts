@@ -8,11 +8,6 @@ import { AppAuthGuard } from '@core/shared';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    title: '帳號',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
-  },
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -25,6 +20,16 @@ const routes: Routes = [
         component: DefaultContainerComponent,
         // canActivate: [AppAuthGuard],
         children: [
+          {
+            path: 'about',
+            title: '關於',
+            loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
+          },
+          {
+            path: 'auth',
+            title: '帳號',
+            loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+          },
           {
             path: 'home',
             title: '首頁',

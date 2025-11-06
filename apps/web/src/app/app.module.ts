@@ -29,7 +29,7 @@ const CUSTOM_MODULES = [SharedModule, StatesModule];
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

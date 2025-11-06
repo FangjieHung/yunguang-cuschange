@@ -9,7 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { ResultEmptyComponent, GlassBgComponent } from './components';
+import { GlassBgComponent, ResultEmptyComponent } from './components';
 
 import {
   ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent
@@ -17,16 +17,15 @@ import {
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
-  // components
-  ResultEmptyComponent, GlassBgComponent,
-  // widgets
-  ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent
+  GlassBgComponent, ResultEmptyComponent
 ];
+const CUST_WIDGETS = [ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent];
 const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
 
 @NgModule({
   declarations: [
-    ...CUST_COMPONENTS
+    ...CUST_COMPONENTS,
+    ...CUST_WIDGETS
   ],
   imports: [
     CommonModule,
@@ -39,6 +38,7 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
   exports: [
     ...CUST_MODULES,
     ...CUST_COMPONENTS,
+    ...CUST_WIDGETS,
     ...THIRD_MODULES
   ],
   providers: []

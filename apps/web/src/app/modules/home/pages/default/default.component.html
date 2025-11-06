@@ -1,16 +1,16 @@
 <div class="default-container overflow-x-hidden">
-    <header class="hero">
-        <video autoplay loop muted class="hero-video">
-            <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
-        </video>
-        <div class="content max-w-container pt-32">
-            <h1 class="display d-white">
-                Innovating for Smarter Diagnostics
-            </h1>
-            <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
-            <p class="text-xl tracking-wide">歡迎加入智慧檢驗醫學學會，共同推動檢驗醫學的創新與發展。</p>
-        </div>
-    </header>
+  <header class="hero">
+    <video autoplay loop muted class="hero-video">
+      <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
+    </video>
+    <div class="content max-w-container pt-32">
+      <h1 class="display d-white">
+        Innovating for Smarter Diagnostics
+      </h1>
+      <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
+      <p class="text-xl tracking-wide">歡迎加入智慧檢驗醫學學會，共同推動檢驗醫學的創新與發展。</p>
+    </div>
+  </header>
 
     <section class="max-w-container pt-32">
         <h2 class="relative z-[3]">
@@ -18,12 +18,12 @@
             <p class="headline font-bold mt-4">知識交流與跨界合作</p>
         </h2>
 
-        <div class="relative pb-24 lg:pb-0" *ngIf="bannerList.length">
+        <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
             <swiper [config]="bannerSwipe" class="relative w-full mt-8 lg:-mt-10 slide-1-fade">
-                <ng-template swiperSlide *ngFor="let banner of bannerList">
+                <ng-template swiperSlide *ngFor="let item of ads">
                     <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
-                        <img [src]="banner.src" alt="" class="rounded-lg aspect-video object-cover w-full lg:w-2/3">
-                        <h3 class="text-xl tracking-wide w-full mt-5 lg:w-1/3 lg:mt-14"> {{ banner.title}}</h3>
+                        <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.title" class="rounded-lg aspect-video object-cover w-full lg:w-2/3">
+                        <h3 class="text-xl tracking-wide w-full mt-5 lg:w-1/3 lg:mt-14"> {{ item.title }}</h3>
                     </div>
                 </ng-template>
             </swiper>
@@ -37,7 +37,7 @@
                     </span></button>
             </div>
         </div>
-        <web-result-empty *ngIf="!bannerList.length" class="block my-5"></web-result-empty>
+        <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
     </section>
 
     <section class="max-w-container flex flex-col">
@@ -45,37 +45,37 @@
             <span class="display d-black">Academic Activities</span>
             <p class="headline font-bold">學術活動</p>
         </h2>
-        <div class="relative" *ngIf="campaignList.length">
+        <div class="relative" *ngIf="!(campaigns | isEmpty)">
             <swiper [config]="campaignSwipe" class="w-full my-10">
-                <ng-template swiperSlide *ngFor="let campaign of campaignList" class="mb-5">
+                <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5">
                     <web-glass-bg class="container-hover">
-                        <a routerLink="/campaign/detail" class="block w-full p-2">
+                        <a [routerLink]="['/campaign/detail', item.uniqueId]" class="block w-full p-2">
                             <div class="px-8">
                                 <ol class="date-duration">
                                     <!-- 開始日 -->
                                     <li>
                                         <p>
-                                            <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
-                                            <span>{{ campainDate | date:'E' }}</span>
+                                            <span class="text-2xl">{{ item.startAt | date:'MM' }} &#8725;</span><br>
+                                            <span>{{ item.startAt | date:'E' }}</span>
                                         </p>
-                                        <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                        <span class="text-6xl">{{ item.startAt | date:'dd' }}</span>
                                     </li>
                                     <li class="line"></li>
                                     <!-- 結束日 -->
                                     <li>
                                         <p>
-                                            <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
-                                            <span>{{ campainDate | date:'E' }}</span>
+                                            <span class="text-2xl">{{ item.endAt | date:'MM' }} &#8725;</span><br>
+                                            <span>{{ item.endAt | date:'E' }}</span>
                                         </p>
-                                        <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                        <span class="text-6xl">{{ item.endAt | date:'dd' }}</span>
                                     </li>
                                 </ol>
                                 <h3 class="title-sm"> {{
-                                    campaign.title
+                                    item.name
                                     }}</h3>
                                 <ul class="describe-list">
-                                    <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
-                                    <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                                    <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd': '-' }} ~ {{ item.regEndAt | dateFormatter: 'yyyy.MM.dd': '-' }}</li>
+                                    <!-- <li>剩餘名額<span>&#8739;</span></li> -->
                                 </ul>
                                 <mat-progress-bar mode="determinate" color="primary" value="40"
                                     class="mb-10"></mat-progress-bar>
@@ -98,27 +98,27 @@
         </a>
     </section>
 
-    <section class="max-w-container pt-32">
-        <div class="flex items-start flex-col lg:flex-row-reverse">
-            <h2 class="lg:text-right">
-                <span class="display d-black">Latest News</span>
-                <p class="headline">最新消息</p>
-            </h2>
+  <section class="max-w-container pt-32">
+    <div class="flex items-start flex-col lg:flex-row-reverse">
+      <h2 class="lg:text-right">
+        <span class="display d-black">Latest News</span>
+        <p class="headline">最新消息</p>
+      </h2>
 
-            <div class="news-list" *ngIf="newsList.length">
-                <a *ngFor="let news of newsList" routerLink="/news/detail">
-                    <p class="space-x-2">
-                        <span> {{ news.date }}</span>
-                        <span class="sort">{{ news.sort }}</span>
-                    </p>
-                    <h3> {{ news.title }}</h3>
-                </a>
-            </div>
-
-            <web-result-empty *ngIf="!newsList.length" class="flex-auto w-full my-5"></web-result-empty>
-        </div>
-        <a class="link link-underline ml-auto lg:-mt-12" target="_blank" routerLink="/news/list">
-            看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+      <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
+        <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
+          <p class="space-x-2">
+            <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
+            <span class="sort">{{ '學會公告' }}</span>
+          </p>
+          <h3> {{ item.title }}</h3>
         </a>
-    </section>
+      </div>
+
+      <web-result-empty *ngIf="newsMsgs | isEmpty" class="flex-auto w-full my-5"></web-result-empty>
+    </div>
+    <a class="link link-underline ml-auto lg:-mt-12" target="_blank" routerLink="/news/list">
+      看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
+    </a>
+  </section>
 </div>

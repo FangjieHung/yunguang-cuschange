@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, OnInit, ChangeDetectorRef, ViewChild, AfterViewInit, HostListener, ElementRef } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector, ViewChild, HostListener, ElementRef } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MatMenuTrigger } from '@angular/material/menu';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -14,7 +11,7 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./default-container.component.scss']
 })
 
-export class DefaultContainerComponent extends BBDBaseComponent implements OnInit {
+export class DefaultContainerComponent extends BBDBaseComponent {
   currentUrl = '';
   activeMenu: string | null = null;
   isMenuOpen = false;
@@ -26,10 +23,9 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     {
       label: '關於本會',
       children: [
-        { label: '本會簡介', link: '/about/introduction' },
-        { label: '組織章程', link: '/about/organization' },
-        { label: '理監事名單', link: '/about/history' },
-        { label: '委員會組織', link: '/about/honorary' },
+        { label: '本會簡介', link: '/about' },
+        { label: '組織章程', link: '/about/charter' },
+        { label: '理監事名單', link: '/about/supervisor' }
       ]
     },
     {
@@ -38,36 +34,12 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     },
     {
       label: '學術活動',
-      children: [
-        { label: '國內外研討會', link: '/campaign/list' },
-        { label: '教育積分申請', link: '/campaign/list' },
-        { label: '積分申請進度', link: '/campaign/list' },
-        { label: '活動報名查詢', link: '/campaign/list' },
-        { label: '活動花絮', link: '/campaign/list' },
-      ]
-    },
-    {
-      label: '認證專區',
-      children: [
-        { label: '訓練醫院 / 機構申請', link: '/' },
-        { label: '合格訓練醫院', link: '/' },
-        { label: '合格訓練機構', link: '/' },
-      ]
-    },
-    {
-      label: '投稿專區',
-      children: [
-        { label: '年會投稿', link: '/' },
-        { label: '雜誌投稿', link: '/' },
-        { label: '投稿進度查詢', link: '/' },
-      ]
+      link: '/campaign/list'
     }
   ];
 
-  constructor(protected override injector: Injector,
-    //changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-    //private _router: Router,
-    private activatedRoute: ActivatedRoute) {
+  constructor(
+    protected override injector: Injector) {
     super(injector);
   }
 
@@ -92,10 +64,6 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     }
   }
 
-  ngOnInit(): void {
-    console.log();
-  }
-
   toggleSideMenu() {
     this.snav.toggle();
   }
@@ -111,13 +79,4 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
   toggleSingleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-
-  /*
-  getUrlWithoutParams(url: string): string {
-    if (!url) {
-      return url;
-    }
-    return new URL(url, location.origin)?.pathname;
-  }
-    */
 }

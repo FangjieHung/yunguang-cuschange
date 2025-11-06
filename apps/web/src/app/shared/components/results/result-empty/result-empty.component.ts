@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, Input } from '@angular/core';
+import { Component, Injector, Input } from '@angular/core';
 
 // Custom packages
 import {
@@ -10,7 +10,7 @@ import {
   templateUrl: './result-empty.component.html',
   styleUrls: ['./result-empty.component.scss']
 })
-export class ResultEmptyComponent extends BBDBaseComponent implements OnInit {
+export class ResultEmptyComponent extends BBDBaseComponent {
   @Input() message = '目前尚無資料';
 
   constructor(
@@ -18,7 +18,4 @@ export class ResultEmptyComponent extends BBDBaseComponent implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {
-    console.log('init');
-  }
 }

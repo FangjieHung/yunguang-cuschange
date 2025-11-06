@@ -14,7 +14,8 @@ import { ZipCodeControlComponent } from './controls';
 import { AntdModule, MaterialModule } from './modules';
 import {
   AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe, EmptyFormatterPipe,
-  JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe, HasPermissionPipe, HasAnyPermissionPipe,
+  JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
+  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe
 } from './pipes';
 import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
 
@@ -23,7 +24,7 @@ const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent,
 const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,
   EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
-  HasPermissionPipe, HasAnyPermissionPipe,];
+  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe];
 const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
 
 @NgModule({

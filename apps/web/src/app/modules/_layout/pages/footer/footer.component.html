@@ -3,43 +3,47 @@
     <section class="web-map">
         <div class="flex flex-wrap">
             <ul>
-                <li>
+                <li *ngIf="('PHONE' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as phone">
                     <span class="label">phone</span>
-                    <p>(02) 2322-3731 轉 66 / 0910-522-912</p>
+                    <p>{{ phone }}</p>
                 </li>
-                <li>
+                <li *ngIf="('FAX' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as fax">
                     <span class="label">fax</span>
-                    <p>(02) 2322-3731 轉 11</p>
+                    <p>{{ fax }}</p>
                 </li>
-                <li>
+                <li *ngIf="('OPENING HOURS' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as opening">
                     <span class="label">opening hours</span>
-                    <p>週一至週五 08:00 ~ 12:00、13:00 ~ 17:00</p>
+                    <p>{{ opening }}</p>
                 </li>
             </ul>
             <ul>
-                <li>
+                <li *ngIf="('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as mail">
                     <span class="label">mail</span>
-                    <p>stltc.ipc2018@gmail.com</p>
+                    <p>{{ mail }}</p>
                 </li>
-                <li>
+                <li *ngIf="('LOCATION(中文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as chtAddr">
                     <span class="label">location</span>
                     <p>
-                        <span class="inline-block">100010 台北市中正區忠孝東路二段 100 號 2 樓之 5</span>
-                        <span class="inline-block text-sm">2F-5, No.100, Sec. 2, Zhongxiao E. Rd., Zhongzheng Dist.,
-                            Taipei City
-                            100, Taiwan (R.O.C.)</span>
+                        <span class="inline-block">{{ chtAddr }}</span>
+                        <span class="inline-block text-sm"
+                          *ngIf="('LOCATION(英文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as enAddr">
+                          {{ enAddr }}
+                        </span>
                     </p>
                 </li>
             </ul>
             <div class="social-links">
-                <a target="_blank" href="">
-                    <img src="assets/image/icon/fb.webp" alt="facebook">
+                <a target="_blank" [attr.href]="fbUrl" rel="noopener noreferrer"
+                  *ngIf="('Facebook' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as fbUrl">
+                  <img src="assets/image/icon/fb.webp" alt="facebook">
                 </a>
-                <a target="_blank" href="">
-                    <img src="assets/image/icon/ig.webp" alt="instagram">
+                <a target="_blank" [attr.href]="igUrl"
+                  *ngIf="('Instagram' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as igUrl">
+                   <img src="assets/image/icon/ig.webp" alt="instagram">
                 </a>
-                <a target="_blank" href="">
-                    <img src="assets/image/icon/yt.webp" alt="youtube">
+                <a target="_blank" [attr.href]="ytUrl"
+                  *ngIf="('Youtube' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as ytUrl">
+                  <img src="assets/image/icon/yt.webp" alt="youtube">
                 </a>
             </div>
         </div>

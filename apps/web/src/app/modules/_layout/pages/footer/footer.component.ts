@@ -1,8 +1,10 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { AppStoreApiServ } from '@core/services';
+import { Component, inject, Injector, OnInit } from '@angular/core';
+
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
+import { AppObjectStoreCodes, OrgContactJto } from '@core/models';
+import { AppStoreApiServ } from '@core/services';
 
 @Component({
   selector: 'web-footer',
@@ -10,16 +12,33 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent extends BBDBaseComponent implements OnInit {
-  public currYear = (new Date()).getFullYear();
+  private _appStoreApiServ = inject(AppStoreApiServ);
+
+  currYear = (new Date()).getFullYear();
+  response: OrgContactJto | null = null;
 
   constructor(
-    private _appStoreApiServ: AppStoreApiServ,
     protected override injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
-    console.log();
+    this.doDataInit();
+  }
+
+  doDataInit(): void {
+    this._appStoreApiServ.getAppObjectStoreValueByCode(AppObjectStoreCodes.學會聯絡方式設定檔).subscribe({
+      next: (res) => {
+        if (!res) {
+          return;
+        }
+
+        this.response = res;
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    });
   }
 
 }
