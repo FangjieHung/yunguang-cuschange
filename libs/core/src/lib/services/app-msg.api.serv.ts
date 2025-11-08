@@ -9,6 +9,7 @@ import { EnumValues } from 'enum-values';
 // Custom packages
 import {
   PagingRequest, PagingResponse, UploadFormReq, ValueInfo,
+  AppNewsMsgCatDto, AppNewsMsgCatReq, AppNewsMsgCatStatuses, AppNewsMsgCatView,
   AppNewsMsgDto, AppNewsMsgReq, AppNewsMsgStatuses, AppNewsMsgView,
   BannerAdDto, BannerAdReq, BannerAdStatuses, BannerAdView
 } from '../models';
@@ -18,12 +19,48 @@ import {
 })
 export class AppMsgApiServ {
   private readonly baseUrl = '/AppMsg';
+  appNewsMsgCatStatuses = AppNewsMsgCatStatuses;
+  appNewsMsgCatStatusOpts = EnumValues.getNamesAndValues(AppNewsMsgCatStatuses);
   appNewsMsgStatuses = AppNewsMsgStatuses;
   appNewsMsgStatusOpts = EnumValues.getNamesAndValues(AppNewsMsgStatuses);
   bannerAdStatuses = BannerAdStatuses;
   bannerAdStatusOpts = EnumValues.getNamesAndValues(BannerAdStatuses);
 
   constructor(private http: HttpClient) { }
+
+  //#region AppNewsMsgCat
+  getAppNewsMsgCatStatusInfos(): ValueInfo[] {
+    // 樣式遵循 ant nzColor 標準
+    return [
+      { name: '啟用', value: AppNewsMsgCatStatuses.啟用, style: 'success' },
+      { name: '停用', value: AppNewsMsgCatStatuses.停用, style: 'error' }
+    ];
+  }
+  getAppNewsMsgCatDtoById(id: number): Observable<AppNewsMsgCatDto> {
+    return this.http.get<AppNewsMsgCatDto>(`${this.baseUrl}/GetAppNewsMsgCatDtoById/${id}`);
+  }
+  getAppNewsMsgCatViewById(id: number): Observable<AppNewsMsgCatView> {
+    return this.http.get<AppNewsMsgCatView>(`${this.baseUrl}/GetAppNewsMsgCatViewById/${id}`);
+  }
+  getAppNewsMsgCatViewByUniqueId(uniqueId: string): Observable<AppNewsMsgCatView> {
+    return this.http.get<AppNewsMsgCatView>(`${this.baseUrl}/GetAppNewsMsgCatViewByUniqueId/${uniqueId}`);
+  }
+  getAppNewsMsgCatViews(request: AppNewsMsgCatReq = new AppNewsMsgCatReq()): Observable<AppNewsMsgCatView[]> {
+    return this.http.put<AppNewsMsgCatView[]>(`${this.baseUrl}/GetAppNewsMsgCatViews`, request);
+  }
+  getAppNewsMsgCatViewsPaging(request: PagingRequest<AppNewsMsgCatReq>): Observable<PagingResponse<AppNewsMsgCatView>> {
+    return this.http.put<PagingResponse<AppNewsMsgCatView>>(`${this.baseUrl}/GetAppNewsMsgCatViewsPaging`, request);
+  }
+  disableAppNewsMsgCat(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/DisableAppNewsMsgCat/${id}`, null);
+  }
+  enableAppNewsMsgCat(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/EnableAppNewsMsgCat/${id}`, null);
+  }
+  setAppNewsMsgCatDto(request: AppNewsMsgCatDto): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/SetAppNewsMsgCatDto`, request);
+  }
+  //#endregion
 
   //#region AppNewsMsg
   getAppNewsMsgStatusInfos(): ValueInfo[] {

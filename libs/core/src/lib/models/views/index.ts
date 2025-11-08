@@ -1,4 +1,5 @@
 export * from './app-admin-view';
+export * from './app-news-msg-cat-view';
 export * from './app-news-msg-view';
 export * from './app-role-route-view';
 export * from './app-role-view';

@@ -61,7 +61,7 @@
                 {{ data.status | aryFindValue: appMsgApiServ.getAppNewsMsgStatusInfos() :'value':'name' }}
               </nz-tag>
             </td>
-            <td>{{ data.type }}</td>
+            <td>{{ data.catName }}</td>
             <td>{{ data.title }}</td>
             <td>{{ data.startAt | dateFormatter: 'yyyy / MM / dd': '-' }}</td>
             <td>{{ data.endAt | dateFormatter: 'yyyy / MM / dd': '-' }}</td>

@@ -1,12 +1,13 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 
 // Antd packages
 import { NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import { AppNewsMsgDto, AppNewsMsgContentJto, AppNewsMsgStatuses } from '@core/models';
+import { AppNewsMsgCatView, AppNewsMsgDto, AppNewsMsgContentJto, AppNewsMsgStatuses } from '@core/models';
 import { AppMsgApiServ } from '@core/services';
 
 @Component({
@@ -24,6 +25,9 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
   valForm!: UntypedFormGroup;
   editDto = new AppNewsMsgDto();
 
+  // Caches
+  msgCatsCache: AppNewsMsgCatView[] = [];
+
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
     return this.valForm.controls;
@@ -32,17 +36,24 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
     protected override injector: Injector) {
     super(injector);
     this.doFormInit();
+    this.getCaches();
   }
 
   ngOnInit(): void {
     this.doDataInit();
   }
 
-  // getCaches(): void { }
+  getCaches(): void {
+    forkJoin([
+      this.storeServ.getAppNewsMsgCatsCache()
+    ]).subscribe(([cats]) => {
+      this.msgCatsCache = cats || [];
+    });
+  }
 
   doFormInit(): void {
     this.valForm = this._fb.group({
-      type: [null, [Validators.required]],
+      catId: [null, [Validators.required]],
       title: [null, [Validators.maxLength(100)]],
       startAt: [null, [Validators.required]],
       endAt: [null],

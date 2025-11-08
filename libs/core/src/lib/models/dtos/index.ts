@@ -1,5 +1,6 @@
 export * from './app-admin-dto';
 export * from './app-file-att-dto';
+export * from './app-news-msg-cat-dto';
 export * from './app-news-msg-dto';
 export * from './app-object-store-dto';
 export * from './app-role-dto';

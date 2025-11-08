@@ -1,7 +1,8 @@
 export interface AppNewsMsgView {
   id: number;
   uniqueId: string;
-  type: number;
+  catId: number;
+  catName?: string | null;
   title: string;
   startAt: Date;
   endAt: Date;

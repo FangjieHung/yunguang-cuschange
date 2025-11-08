@@ -1,4 +1,5 @@
 export * from './app-admin-req';
+export * from './app-news-msg-cat-req';
 export * from './app-news-msg-req';
 export * from './app-role-req';
 export * from './app-role-route-req';

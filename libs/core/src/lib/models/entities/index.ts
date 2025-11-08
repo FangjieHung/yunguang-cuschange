@@ -1,5 +1,6 @@
 export * from './app-admin';
 export * from './app-file-att';
+export * from './app-news-msg-cat';
 export * from './app-news-msg';
 export * from './app-object-store';
 export * from './app-role-route';
