@@ -4,7 +4,7 @@
       <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-4">
         <mat-label>狀態</mat-label>
         <mat-select formControlName="status" [required]="f['status'] | ctrlHasRequired">
-          <ng-container *ngFor="let opt of appMsgApiServ.appNewsMsgStatusOpts">
+          <ng-container *ngFor="let opt of appMsgApiServ.appNewsMsgCatStatusOpts">
             <mat-option [value]="+opt.value">{{ opt.name }}</mat-option>
           </ng-container>
         </mat-select>
