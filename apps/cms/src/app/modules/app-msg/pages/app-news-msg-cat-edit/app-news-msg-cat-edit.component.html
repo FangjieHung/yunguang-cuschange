@@ -1,0 +1,36 @@
+<div class="">
+  <form [formGroup]="valForm">
+    <div class="grid grid-cols-12 gap-x-4">
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-4">
+        <mat-label>狀態</mat-label>
+        <mat-select formControlName="status" [required]="f['status'] | ctrlHasRequired">
+          <ng-container *ngFor="let opt of appMsgApiServ.appNewsMsgStatusOpts">
+            <mat-option [value]="+opt.value">{{ opt.name }}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error class="text-xs" *ngIf="f['status'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['status'].errors, '狀態')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-4">
+        <mat-label>名稱</mat-label>
+        <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['name'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '名稱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-4">
+        <mat-label>排序</mat-label>
+        <input matInput type="number" formControlName="sort" [required]="f['sort'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['sort'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['sort'].errors, '排序')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="doCancel()">取消</button>
+  <button nz-button nzType="primary" (click)="onSubmit()">確認</button>
+</div>

@@ -14,7 +14,9 @@ import {
   getCurrAuthUserLoading,
   getCurrAuthUserCache
 } from '../+states/curr-auth-user';
-import { AppNewsMsgCatView, AppRoleView, AppRouteView, ZipCodeView } from '../models';
+import {
+  AppNewsMsgCatReq, AppNewsMsgCatStatuses, AppNewsMsgCatView,
+  AppRoleView, AppRouteView, ZipCodeView } from '../models';
 import { AppMsgApiServ } from './app-msg.api.serv';
 import { AppRoleApiServ } from './app-role.api.serv';
 import { SharedDataApiServ } from './shared-data.api.serv';
@@ -55,7 +57,9 @@ export class StoreServ {
   // AppNewsMsgCat cache
   getAppNewsMsgCatsCache(): Observable<AppNewsMsgCatView[]> {
     if (this._appNewsMsgCatsCache === null) {
-      return this._appMsgApiServ.getAppNewsMsgCatViews().pipe(
+      const req = new AppNewsMsgCatReq();
+      req.status = +AppNewsMsgCatStatuses.啟用;
+      return this._appMsgApiServ.getAppNewsMsgCatViews(req).pipe(
         map(res => (res) ? this._appNewsMsgCatsCache = res : []));
     }
 
