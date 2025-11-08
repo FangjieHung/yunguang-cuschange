@@ -63,7 +63,9 @@ export class CampaignEditComponent extends BBDBaseComponent implements OnInit {
       regNum: [null],
       status: [null, [Validators.required]],
       contentJto: this._fb.group({
+        speakers: [null],
         location: [null],
+        hasMeal: [false, [Validators.required]],
         desc: [null]
       })
     });

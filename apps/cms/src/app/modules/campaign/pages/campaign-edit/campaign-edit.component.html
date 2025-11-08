@@ -22,6 +22,19 @@
         </ng-container>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" class="w-full col-span-full">
+        <mat-label>活動講師</mat-label>
+        <ng-container formGroupName="contentJto">
+          <input matInput type="text" formControlName="speakers"
+            [required]="f['contentJto'].get('speakers') | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['contentJto'].get('speakers')?.errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('speakers')?.errors, '活動講師')">
+              {{ msg }}
+            </div>
+          </mat-error>
+        </ng-container>
+      </mat-form-field>
+
       <mat-form-field appearance="outline" class="w-full col-span-4">
         <mat-label>活動開始時間</mat-label>
         <input matInput [matDatepicker]="startAtDatepicker" formControlName="startAt"
@@ -112,7 +125,10 @@
         </ngx-mat-timepicker>
       </mat-form-field>
 
-      <mat-slide-toggle class="w-full col-span-full mb-8" formControlName="isOpenReg">不限會員</mat-slide-toggle>
+      <mat-slide-toggle class="w-full col-span-full sm:col-span-6 mb-8" formControlName="isOpenReg">不限會員</mat-slide-toggle>
+      <ng-container formGroupName="contentJto">
+        <mat-slide-toggle class="w-full col-span-full sm:col-span-6 mb-8" formControlName="hasMeal">供餐</mat-slide-toggle>
+      </ng-container>
 
       <mat-form-field appearance="outline" class="w-full col-span-4">
         <mat-label>報名費 / 0 為免費報名</mat-label>
