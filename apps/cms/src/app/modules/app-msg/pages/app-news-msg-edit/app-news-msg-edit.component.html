@@ -4,7 +4,7 @@
       <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
         <mat-label>類別</mat-label>
         <mat-select formControlName="catId" [required]="f['catId'] | ctrlHasRequired">
-          <mat-option *ngFor="let opt of msgCatsCache" [value]="opt.id">{{ opt.name }}</mat-option>
+          <mat-option *ngFor="let opt of newsCatsCache" [value]="opt.id">{{ opt.name }}</mat-option>
         </mat-select>
         <mat-error class="text-xs" *ngIf="f['catId'].errors">
           <div *ngFor="let msg of formHelper.errorMsgs(f['catId'].errors, '類別')">{{ msg }}</div>

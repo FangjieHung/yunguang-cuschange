@@ -1,66 +1,66 @@
 <div class="min-h-container w-full max-w-2xl mx-auto py-20">
-    <header *ngFor="let campaign of campaignDetail">
+    <header>
         <ol class="date-duration text-base max-w-xs">
             <!-- 開始日 -->
             <li>
                 <p>
-                    <span>{{ campainDate | date:'MM' }} &#8725;</span><br>
-                    <span>{{ campainDate | date:'E' }}</span>
+                    <span>{{ response?.startAt| date: 'MM' }} &#8725;</span><br>
+                    <span>{{ response?.startAt | date: 'E' }}</span>
                 </p>
-                <span class="text-5xl">{{ campainDate | date:'dd' }}</span>
+                <span class="text-5xl">{{ response?.startAt | date: 'dd' }}</span>
             </li>
             <li class="line"></li>
             <!-- 結束日 -->
             <li>
                 <p>
-                    <span>{{ campainDate | date:'MM' }} &#8725;</span><br>
-                    <span>{{ campainDate | date:'E' }}</span>
+                    <span>{{ response?.endAt | date: 'MM' }} &#8725;</span><br>
+                    <span>{{ response?.endAt | date: 'E' }}</span>
                 </p>
-                <span class="text-5xl">{{ campainDate | date:'dd' }}</span>
+                <span class="text-5xl">{{ response?.endAt | date: 'dd' }}</span>
             </li>
         </ol>
-        <h3 class="headline"> {{
-            campaign.title
-            }}</h3>
+        <h3 class="headline">
+          {{ response?.name }}
+        </h3>
         <ul class="describe-list">
-            <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
-            <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+            <li>報名時間<span>&#8739;</span>{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
+            <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
         </ul>
-        <mat-progress-bar mode="determinate" color="primary" value="40" class="mb-10"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" color="primary" value="100" class="mb-10"></mat-progress-bar>
 
         <ul class="info-wrap">
             <li>
                 <p class="info-label"><span class="material-symbols-rounded">people</span><span class="ml-1">活動講師</span></p>
-                <p class="ml-7">李文生、盧進德、薛博仁</p>
+                <p class="ml-7">{{ contentInfo?.speakers }}</p>
             </li>
             <li>
                 <p class="info-label"><span class="material-symbols-rounded">date_range</span><span class="ml-1">活動時間</span></p>
-                <p class="ml-7">2025/10/04 ~ 2025/10/04</p>
+                <p class="ml-7">{{ response?.startAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.endAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
             </li>
-            <li>
+            <!-- <li>
                 <p class="info-label"><span class="material-symbols-rounded">pending_actions</span><span class="ml-1">報名時間</span></p>
-                <p class="ml-7">2025/08/14 ~ 2025/09/30</p>
-            </li>
+                <p class="ml-7">{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
+            </li> -->
             <li>
                 <p class="info-label"><span class="material-symbols-rounded">location_on</span><span class="ml-1">活動地點</span></p>
-                <p class="ml-7">醫療財團法人羅許基金會羅東博愛醫院五樓大禮堂（地址：宜蘭縣羅東鎮南昌街83號）</p>
+                <p class="ml-7">{{ contentInfo?.location }}</p>
             </li>
             <li>
                 <p class="info-label"><span class="material-symbols-rounded">restaurant_menu</span><span class="ml-1">供餐</span></p>
-                <p class="ml-7">無</p>
+                <p class="ml-7">{{ contentInfo?.hasMeal ? '有' : '無' }}</p>
             </li>
-            <li>
+            <!-- <li>
                 <p class="info-label"><span class="material-symbols-rounded">category</span><span class="ml-1">活動類別</span></p>
                 <p class="ml-7">其他</p>
-            </li>
+            </li> -->
         </ul>
     </header>
-    <!-- 編輯器內容 
+
     <section class="h-auto text-base my-10 text-pretty">
-        <app-bbd-quill-editor-viewer [content]="(info.content || '{}' | jsonParse)?.desc">
-        </app-bbd-quill-editor-viewer>
+      <bbd-quill-editor-viewer [content]="contentInfo?.desc">
+      </bbd-quill-editor-viewer>
     </section>
-    -->
+
 
     <a class="link link-underline" routerLink="/campaign/list">
         <span class="material-symbols-rounded pr-2">arrow_left_alt</span>

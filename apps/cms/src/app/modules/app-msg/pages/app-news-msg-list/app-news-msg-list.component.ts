@@ -20,7 +20,6 @@ export class AppNewsMsgListComponent extends BBDBaseComponent implements OnInit 
   dataSource: AppNewsMsgView[] = [];
   request = new PagingRequest<AppNewsMsgReq>();
   response: PagingResponse<AppNewsMsgView> | null = null;
-  // corpOpts: CorpView[] = [];
 
   dispCols = [
     '狀態', '類別', '標題', '發佈日期', '截止日期'

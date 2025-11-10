@@ -21,7 +21,7 @@
                     </div>
 
                     <ng-template #singleLink>
-                        <a mat-button class="nav-link" [routerLink]="menu.link" target="_blank">
+                        <a mat-button class="nav-link" [routerLink]="menu.link">
                             {{ menu.label }}
                         </a>
                     </ng-template>
@@ -36,13 +36,13 @@
                     <span>/</span>
                     <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
                 </div>
-    
+
                 <div *ngIf="isSignin" class="flex items-center">
                     <div class="menu-wrap">
                         <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
                             <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
                         </button>
-    
+
                         <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
                             <web-glass-bg class="container-hover">
                                 <a routerLink="/account/profile">帳號設定</a>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="lg:hidden">
                     <button mat-button (click)="toggleSideMenu()" class="h-14">
                         <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>

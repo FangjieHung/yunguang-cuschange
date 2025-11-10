@@ -26,7 +26,7 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
   editDto = new AppNewsMsgDto();
 
   // Caches
-  msgCatsCache: AppNewsMsgCatView[] = [];
+  newsCatsCache: AppNewsMsgCatView[] = [];
 
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
@@ -47,7 +47,7 @@ export class AppNewsMsgEditComponent extends BBDBaseComponent implements OnInit 
     forkJoin([
       this.storeServ.getAppNewsMsgCatsCache()
     ]).subscribe(([cats]) => {
-      this.msgCatsCache = cats || [];
+      this.newsCatsCache = cats || [];
     });
   }
 

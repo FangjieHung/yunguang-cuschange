@@ -23,7 +23,6 @@ export class DefaultContainerComponent extends BBDBaseComponent {
     {
       label: '關於本會',
       children: [
-        { label: '本會簡介', link: '/about' },
         { label: '組織章程', link: '/about/charter' },
         { label: '理監事名單', link: '/about/supervisor' }
       ]

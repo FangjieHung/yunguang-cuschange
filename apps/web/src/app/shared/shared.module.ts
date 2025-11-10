@@ -9,7 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { GlassBgComponent, ResultEmptyComponent } from './components';
+import { GlassBgComponent, PaginatorComponent, ResultEmptyComponent } from './components';
 
 import {
   ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent
@@ -17,7 +17,7 @@ import {
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
-  GlassBgComponent, ResultEmptyComponent
+  GlassBgComponent, PaginatorComponent, ResultEmptyComponent
 ];
 const CUST_WIDGETS = [ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent];
 const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];

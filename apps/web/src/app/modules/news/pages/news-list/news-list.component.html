@@ -6,28 +6,31 @@
     </h2>
   </header>
 
-  <web-result-empty *ngIf="!newsList.length" class="block mt-5"></web-result-empty>
+  <web-result-empty *ngIf="dataSource | isEmpty" class="block mt-5"></web-result-empty>
 
   <section class="sort-list-container">
-
     <div class="sort-link">
-      <a class="link-item" *ngFor="let sort of sorts; let i = index" [routerLink]="sort"
-        [ngClass]="{ 'focusd': focusedIndex === i }" (click)="setFocused(i)">
-        {{ sort }}
+      <a class="link-item" [ngClass]="{ 'focusd': true }"
+        (click)="onCatChange()" >
+        所有消息
+      </a>
+      <a class="link-item" *ngFor="let cat of newsCatsCache;"
+        [ngClass]="{ 'focusd': true }" (click)="onCatChange(cat.id)">
+        {{ cat.name }}
       </a>
     </div>
 
     <div class="news-list flex-auto">
-      <a *ngFor="let news of newsList" routerLink="/news/detail">
+      <a *ngFor="let item of dataSource" [routerLink]="['/news/detail/', item.uniqueId]">
         <p class="space-x-2">
-          <span> {{ news.date }}</span>
-          <span class="sort">{{ news.sort }}</span>
+          <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
+          <span class="sort">{{ item.catName }}</span>
         </p>
-        <h3> {{ news.title }}</h3>
+        <h3> {{ item.title }}</h3>
       </a>
-      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-        class="pt-10">
-      </mat-paginator>
+      <web-paginator [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+        (pageIndexChange)="onSearch($event)">
+      </web-paginator>
     </div>
   </section>
 </div>

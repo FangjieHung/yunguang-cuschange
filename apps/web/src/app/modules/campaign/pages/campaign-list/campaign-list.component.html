@@ -18,36 +18,36 @@
         </div>
 
         <div class="campain-list">
-            <web-glass-bg class="container-hover" *ngFor="let campaign of campaignList">
-                <a href="" class="block w-full p-2">
+            <web-glass-bg class="container-hover" *ngFor="let item of dataSource">
+                <a class="block w-full p-2" [routerLink]="['/campaign/detail/', item.uniqueId]">
                     <div class="px-8">
                         <ol class="date-duration">
                             <!-- 開始日 -->
                             <li>
                                 <p>
-                                    <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
-                                    <span>{{ campainDate | date:'E' }}</span>
+                                    <span class="text-2xl">{{ item.startAt | date: 'MM' }} &#8725;</span><br>
+                                    <span>{{ item.startAt | date: 'E' }}</span>
                                 </p>
-                                <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                <span class="text-6xl">{{ item.startAt | date: 'dd' }}</span>
                             </li>
                             <li class="line"></li>
                             <!-- 結束日 -->
                             <li>
                                 <p>
-                                    <span class="text-2xl">{{ campainDate | date:'MM' }} &#8725;</span><br>
-                                    <span>{{ campainDate | date:'E' }}</span>
+                                    <span class="text-2xl">{{ item.endAt| date: 'MM' }} &#8725;</span><br>
+                                    <span>{{ item.endAt | date: 'E' }}</span>
                                 </p>
-                                <span class="text-6xl">{{ campainDate | date:'dd' }}</span>
+                                <span class="text-6xl">{{ item.endAt | date: 'dd' }}</span>
                             </li>
                         </ol>
-                        <h3 class="title-sm"> {{
-                            campaign.title
-                            }}</h3>
+                        <h3 class="title-sm">
+                          {{ item.name }}
+                        </h3>
                         <ul class="describe-list">
-                            <li>報名時間<span>&#8739;</span>{{ campaign.signupDate }}</li>
-                            <li>剩餘名額<span>&#8739;</span>{{ campaign.signupDate }}</li>
+                            <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ item.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
+                            <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
                         </ul>
-                        <mat-progress-bar mode="determinate" color="primary" value="40"
+                        <mat-progress-bar mode="determinate" color="primary" value="100"
                             class="mb-10"></mat-progress-bar>
                     </div>
                     <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
@@ -55,7 +55,7 @@
             </web-glass-bg>
         </div>
     </section>
-    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-        class="pt-10">
-    </mat-paginator>
+    <web-paginator [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+      (pageIndexChange)="onSearch($event)">
+    </web-paginator>
 </div>

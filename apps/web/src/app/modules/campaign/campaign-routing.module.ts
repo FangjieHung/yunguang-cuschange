@@ -3,8 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { CampaignListComponent, CampaignDetailComponent } from './pages';
 
 const routes: Routes = [
-  { path: 'list', component: CampaignListComponent },
-  { path: 'detail', component: CampaignDetailComponent }
+  {
+    path: 'list',
+    component: CampaignListComponent
+  },
+  {
+    path: 'detail/:uniqueId',
+    component: CampaignDetailComponent
+  }
 ];
 
 @NgModule({

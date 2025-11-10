@@ -1,5 +1,13 @@
-import { Component, OnInit, Injector} from '@angular/core';
+import { Component, inject, Injector, OnInit} from '@angular/core';
+import { forkJoin } from 'rxjs';
+
+// Custom packages
 import { BBDBaseComponent } from '@core/shared';
+import {
+  PagingRequest, PagingResponse,
+  AppNewsMsgCatView, AppNewsMsgReq, AppNewsMsgView
+} from '@core/models';
+import { AppMsgApiServ } from '@core/services';
 
 @Component({
   selector: 'app-news-list',
@@ -7,47 +15,68 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./news-list.component.scss']
 })
 export class NewsListComponent extends BBDBaseComponent implements OnInit {
-  sorts: string[] = ['所有消息', '學會公告', '活動訊息', '系統公告'];
-  focusedIndex: number | null = null;
+  private _appMsgApiServ = inject(AppMsgApiServ);
 
-  newsList = [
-    {
-      date: '2025.11.23',
-      title: '呼吸道細胞融合病毒疫苗使用建議',
-      sort: '學會公告'
-    },
-    {
-      date: '2025.10.15',
-      title: '2025年度醫療科技創新論壇開放報名',
-      sort: '活動訊息'
-    },
-    {
-      date: '2025.09.30',
-      title: '新版臨床指引正式發布，即日起生效',
-      sort: '學會公告'
-    },
-    {
-      date: '2025.08.20',
-      title: '會員系統維護通知：8/25 晚間暫停服務',
-      sort: '系統公告'
-    },
-    {
-      date: '2025.07.10',
-      title: '醫學期刊投稿流程更新說明',
-      sort: '學會公告'
-    }
-  ];
+  dataSource: AppNewsMsgView[] = [];
+  request = new PagingRequest<AppNewsMsgReq>();
+  response: PagingResponse<AppNewsMsgView> | null = null;
+
+  // Caches
+  newsCatsCache: AppNewsMsgCatView[] = [];
 
   constructor(
     protected override injector: Injector) {
     super(injector);
-  }
-
-  setFocused(index: number) {
-    this.focusedIndex = index;
+    this.getCaches();
   }
 
   ngOnInit(): void {
-    console.log();
+    this.doParamsInit();
+    this.onCatChange();
+  }
+
+  getCaches(): void {
+    forkJoin([
+      this.storeServ.getAppNewsMsgCatsCache()
+    ]).subscribe(([cats]) => {
+      this.newsCatsCache = cats || [];
+    });
+  }
+
+  doParamsInit(): void {
+    this.request.queryRequest = new AppNewsMsgReq();
+    this.doParamsReset();
+  }
+
+  doParamsReset(): void {
+    this.response = null;
+    this.dataSource = [];
+  }
+
+  doScrollToTop() {
+    window.scrollTo({ top: 0 });
+  }
+
+  onCatChange(newsCatId = 0): void {
+    this.doParamsReset();
+    this.request.queryRequest.catId = newsCatId;
+    this.onSearch();
+  }
+
+  onSearch(pageIndex = 1): void {
+    this.request.pageIndex = pageIndex;
+    this._appMsgApiServ.getAppNewsMsgViewsPaging(this.request).subscribe({
+      next: (res) => {
+        if (!res || res.rows.isUndefinedOrNullOrEmpty()) {
+          return;
+        }
+        this.response = res;
+        this.dataSource = [...this.response.rows];
+        this.doScrollToTop();
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      }
+    });
   }
 }
