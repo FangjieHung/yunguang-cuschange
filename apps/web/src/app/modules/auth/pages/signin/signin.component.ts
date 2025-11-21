@@ -15,10 +15,9 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
   // Properties
   signinReq: SigninReq = new SigninReq();
   validateForm!: UntypedFormGroup;
-  //passwordHide = true;
   hidePassword = true;
   next: string | null = null;
-  
+
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
     return this.validateForm.controls;
@@ -44,9 +43,25 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
 
   doFormInit() {
     this.validateForm = this.fb.group({
-      account: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
+      account: [null, [Validators.required, Validators.maxLength(15)]],
       password: [null, [Validators.required]]
     });
+    this.f['account'].valueChanges.subscribe(value => {
+      if (!value)
+        return;
+
+      this.f['account'].setValue(String(value).trim().toUpperCase(), { emitEvent: false });
+      console.log('account upper');
+    });
+  }
+
+  doNavDefUrl(): void {
+    if (this.next) {
+      // navigate 無法使用queryParams 字串改用 navigateByUrl
+      this.router.navigateByUrl(this.next);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   doRouteMap(): void {
@@ -92,14 +107,5 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
           this.bbdNotifyServ.error('登入失敗: 請確認電子信箱及密碼是否有效。', err);
         }
       }).add(() => this.spinnerServ.hide());
-  }
-
-  doNavDefUrl(): void {
-    if (this.next) {
-      // navigate 無法使用queryParams 字串改用 navigateByUrl
-      this.router.navigateByUrl(this.next);
-    } else {
-      this.router.navigate(['/']);
-    }
   }
 }

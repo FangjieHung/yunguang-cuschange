@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { BBDBaseComponent } from '@core/shared';
 // MatchValidator
 //import { UntypedFormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-//import { CustomerApiServ } from '@core/services';
+import { CustApiServ } from '@core/services';
 //import { CustomerDto, CustomerTypes } from '@core/models';
 //import { ActivatedRoute, Router } from '@angular/router';
 
@@ -133,6 +133,8 @@ export class SignupComponent extends BBDBaseComponent implements OnInit {
 }
 */
 export class SignupComponent extends BBDBaseComponent implements OnInit {
+  custApiServ = inject(CustApiServ);
+  
   sorts: string[] = ['個人會員', '團體會員'];
   focusedIndex: number | null = null;
 

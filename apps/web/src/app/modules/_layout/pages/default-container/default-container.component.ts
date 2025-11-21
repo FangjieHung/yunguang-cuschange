@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, Injector, ViewChild, HostListener, ElementRef, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 // Custom packages
@@ -11,7 +11,7 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./default-container.component.scss']
 })
 
-export class DefaultContainerComponent extends BBDBaseComponent {
+export class DefaultContainerComponent extends BBDBaseComponent implements OnInit {
   currentUrl = '';
   activeMenu: string | null = null;
   isMenuOpen = false;
@@ -40,6 +40,12 @@ export class DefaultContainerComponent extends BBDBaseComponent {
   constructor(
     protected override injector: Injector) {
     super(injector);
+  }
+
+  ngOnInit(): void {
+    if (this.appAuthApiServ.hasAccessToken) {
+      this.storeServ.getCurrAuthUserCache();
+    }
   }
 
   @HostListener('document:click', ['$event'])

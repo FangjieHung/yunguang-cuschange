@@ -1,0 +1,193 @@
+ <form [formGroup]="valForm">
+  <section>
+    <h3 class="title">基本資料</h3>
+    <ul class="input-group lg:grid-cols-3">
+      <li>
+        <div class="form-label">團體名稱 <span class="required-mark" *ngIf="f['name'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['name'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '名稱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">統一編號 <span class="required-mark" *ngIf="f['taxId'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="taxId" [required]="f['taxId'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['taxId'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['taxId'].errors, '統一編號')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">職稱 <span class="required-mark" *ngIf="f['ownerTitle'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="ownerTitle" [required]="f['ownerTitle'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['ownerTitle'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['ownerTitle'].errors, '職稱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">負責人 <span class="required-mark" *ngIf="f['owner'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="owner" [required]="f['owner'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['owner'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['owner'].errors, '負責人')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h3 class="title">聯絡資訊</h3>
+    <ul class="input-group lg:grid-cols-3">
+      <li>
+        <div class="form-label">聯絡電話 <span class="required-mark" *ngIf="f['phone'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="phone" [required]="f['phone'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['phone'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['phone'].errors, '聯絡電話')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">分機 <span class="required-mark" *ngIf="f['phoneExt'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="phoneExt" [required]="f['phoneExt'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['phoneExt'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['phoneExt'].errors, '分機')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">電子信箱 <span class="required-mark" *ngIf="f['email'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="email" [required]="f['email'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['email'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['email'].errors, '電子信箱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+
+      <li class="col-span-full">
+        <div class="form-label">地址 <span class="required-mark" *ngIf="f['currAddr'] | ctrlHasRequired">*</span></div>
+        <div class="multi-inputs grid-cols-6">
+          <web-zip-code-control #currZipCode formControlName="currZipCodeId"
+            [required]="f['currZipCodeId'] | ctrlHasRequired">
+          </web-zip-code-control>
+          <mat-form-field appearance="outline" class="w-full fill-black col-span-4">
+            <input matInput type="text" formControlName="currAddr" [required]="f['currAddr'] | ctrlHasRequired">
+            <mat-error class="text-xs" *ngIf="f['currAddr'].errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['currAddr'].errors, '地址')">{{ msg }}</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h3 class="title">會員代表</h3>
+    <ul class="input-group lg:grid-cols-3">
+      <li>
+        <div class="form-label">職稱 <span class="required-mark" *ngIf="f['cpTitle'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="cpTitle" [required]="f['cpTitle'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['cpTitle'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpTitle'].errors, '職稱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">姓名 <span class="required-mark" *ngIf="f['cpName'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="cpName" [required]="f['cpName'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['cpName'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpName'].errors, '姓名')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">出生日期 <span class="required-mark" *ngIf="f['cpBirthAt'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput [matDatepicker]="birthAtDatepicker" formControlName="cpBirthAt"
+          [required]="f['cpBirthAt'] | ctrlHasRequired">
+          <mat-datepicker-toggle [for]="birthAtDatepicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #birthAtDatepicker></mat-datepicker>
+          <mat-error class="text-xs" *ngIf="f['cpBirthAt'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpBirthAt'].errors, '出生日期')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+
+      <li>
+        <div class="form-label">性別 <span class="required-mark" *ngIf="f['cpGender'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <mat-select formControlName="cpGender" [required]="f['cpGender'] | ctrlHasRequired">
+            <ng-container *ngFor="let opt of sharedDataServ.genderOpts">
+              <mat-option [value]="opt.value">{{ opt.name }}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error class="text-xs" *ngIf="f['cpGender'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpGender'].errors, '性別')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">身分證號 <span class="required-mark" *ngIf="f['cpIdNo'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="cpIdNo" [required]="f['cpIdNo'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['cpIdNo'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpIdNo'].errors, '身分證號')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="input-group lg:grid-cols-3">
+      <li>
+        <div class="form-label">行動電話 <span class="required-mark" *ngIf="f['cpMobile'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="cpMobile" [required]="f['cpMobile'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['cpMobile'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpMobile'].errors, '行動電話')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">電子信箱 <span class="required-mark" *ngIf="f['cpEmail'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="cpEmail" [required]="f['cpEmail'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['cpEmail'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['cpEmail'].errors, '電子信箱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+    </ul>
+    <ul class="input-group lg:grid-cols-3">
+      <ng-container formGroupName="contentJto">
+        <li>
+          <div class="form-label">學歷 <span class="required-mark" *ngIf="f['cpEducation'] | ctrlHasRequired">*</span></div>
+          <mat-form-field appearance="outline" class="w-full fill-black">
+            <textarea matInput formControlName="cpEducation" rows="8" placeholder="學歷..." [required]="f['cpEducation'] | ctrlHasRequired">
+            </textarea>
+            <mat-error class="text-xs" *ngIf="f['contentJto'].get('cpEducation')?.errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('cpEducation')?.errors, '學歷')">{{ msg }}</div>
+            </mat-error>
+          </mat-form-field>
+        </li>
+
+        <li>
+          <div class="form-label">經歷 <span class="required-mark" *ngIf="f['cpExperience'] | ctrlHasRequired">*</span></div>
+          <mat-form-field appearance="outline" class="w-full fill-black">
+            <textarea matInput formControlName="cpExperience" rows="8" placeholder="經歷..." [required]="f['cpExperience'] | ctrlHasRequired">
+            </textarea>
+            <mat-error class="text-xs" *ngIf="f['contentJto'].get('cpExperience')?.errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('cpExperience')?.errors, '經歷')">{{ msg }}</div>
+            </mat-error>
+          </mat-form-field>
+        </li>
+      </ng-container>
+    </ul>
+  </section>
+</form>

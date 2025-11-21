@@ -23,7 +23,7 @@ export class CustEditComponent extends BBDBaseComponent implements OnInit {
   @ViewChild(CustGroupControlComponent) groupCtrl!: CustGroupControlComponent;
   @ViewChild(CustMemberControlComponent) memberCtrl!: CustMemberControlComponent;
   readonly modalData: { id: number, type: number, actionName?: string } = inject(NZ_MODAL_DATA);
-  
+
   private _fb = inject(FormBuilder);
   private _modal = inject(NzModalRef);
   appUserApiServ = inject(AppUserApiServ);
@@ -174,8 +174,6 @@ export class CustEditComponent extends BBDBaseComponent implements OnInit {
       this.bbdNotifyServ.error('送出失敗，請確認是否有欄位尚未填寫。');
       throw new Error("送出失敗");
     }
-
-
 
     Object.assign(this.editDto, this.valForm.value);
     // Object.assign(this.contentJto, this.f['contentJto'].value);

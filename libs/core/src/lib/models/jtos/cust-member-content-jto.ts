@@ -1,4 +1,5 @@
 export class CustMemberContentJto {
-  education? = ''
+  education? = '';
   experience? = '';
+  currJob? = '';
 }

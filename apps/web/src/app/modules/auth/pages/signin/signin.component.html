@@ -15,12 +15,12 @@
           <ul class="space-y-5">
             <li>
               <div class="form-label">
-                <p>Email<span class="required-mark">*</span></p>
+                <p>帳號<span class="required-mark">*</span></p>
               </div>
               <mat-form-field appearance="outline" class="w-full fill-black">
-                <input matInput type="email" formControlName="account" [required]="f['account'] | ctrlHasRequired">
+                <input matInput type="text" formControlName="account" [required]="f['account'] | ctrlHasRequired">
                 <mat-error class="text-sm" *ngIf="f['account'].errors">
-                  <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, 'Email')">{{ msg }}</div>
+                  <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, '帳號')">{{ msg }}</div>
                 </mat-error>
               </mat-form-field>
             </li>

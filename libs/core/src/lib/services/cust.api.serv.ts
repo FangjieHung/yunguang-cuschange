@@ -55,14 +55,17 @@ export class CustApiServ {
   getCustomerViewsPaging(request: PagingRequest<CustomerReq>): Observable<PagingResponse<CustomerView>> {
     return this.http.put<PagingResponse<CustomerView>>(`${this.baseUrl}/GetCustomerViewsPaging`, request);
   }
+  setCurrCustomerDto(request: CustomerDto): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/SetCurrCustomerDto`, request);
+  }
+  setCustomerDto(request: CustomerDto): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/SetCustomerDto`, request);
+  }
   signupCustomerDto(request: CustomerDto): Observable<string> {
     return this.http.post<string>(`${this.baseUrl}/SignupCustomerDto`, request);
   }
   uploadCurrCustomerDto(request: UploadFormReq): Observable<CustomerDto> {
     return this.http.post<CustomerDto>(`${this.baseUrl}/UploadCurrCustomerDto`, request);
-  }
-  setCustomerDto(request: CustomerDto): Observable<boolean> {
-    return this.http.post<boolean>(`${this.baseUrl}/SetCustomerDto`, request);
   }
   //#endregion
 
