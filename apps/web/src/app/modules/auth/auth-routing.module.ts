@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  ForgetPasswordComponent, SigninComponent, SignupComponent, PolicyComponent
+  ForgetPasswordComponent, SigninComponent, SignupComponent, SignupCompletedComponent
 } from './pages';
 
 const routes: Routes = [
@@ -20,9 +20,9 @@ const routes: Routes = [
     component: SignupComponent,
   },
   {
-    path: 'policy',
-    component: PolicyComponent,
-  },
+    path: 'signup/complete',
+    component: SignupCompletedComponent,
+  }
 ];
 
 @NgModule({

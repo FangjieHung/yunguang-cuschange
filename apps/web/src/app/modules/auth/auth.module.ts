@@ -7,15 +7,13 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import {
   ForgetPasswordComponent,
-  PolicyComponent,
-  SigninComponent, SignupComponent
+  SigninComponent, SignupComponent, SignupCompletedComponent
 } from './pages';
 
 const CUSTOM_MODULES = [SharedModule];
 const CUSTOM_COMPONENTS = [
   ForgetPasswordComponent,
-  PolicyComponent,
-  SigninComponent, SignupComponent
+  SigninComponent, SignupComponent, SignupCompletedComponent
 ];
 
 @NgModule({
