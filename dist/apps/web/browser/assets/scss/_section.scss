@@ -1,0 +1,214 @@
+/* gradient bg */
+.floating-bg {
+  @apply fixed inset-0 w-full h-[100svh] bg-gradient-to-tr from-[#e1eefc] to-white flex items-center justify-end;
+
+  img.sphere-01 {
+    @apply w-full lg:w-1/3;
+    animation: float-lt 10s infinite ease-in-out;
+  }
+
+  img.sphere-02 {
+    @apply w-1/2 lg:w-1/4;
+    animation: float-br 5s infinite ease-in-out;
+  }
+
+  @keyframes float-lt {
+    from {
+      transform: translate(50%, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(-5%, -2%);
+    }
+    to {
+      transform: translate(50%, 0) rotate(360deg);
+    }
+  }
+
+  @keyframes float-br {
+    from {
+      transform: translate(-10%, 0);
+    }
+    50% {
+      transform: translate(25%, 10%);
+    }
+    to {
+      transform: translate(-10%, 0);
+    }
+  }
+}
+
+/* Card */
+.card {
+  @apply bg-white border border-sky-200 rounded-lg shadow max-h-full overflow-auto relative;
+
+  .cover {
+    @apply aspect-[4/3] object-cover rounded;
+  }
+
+  // 只有名稱
+  .name {
+    @apply text-xl font-bold mt-2;
+  }
+
+  // 有名稱、edit btn
+  .name-wrap {
+    @apply flex items-start justify-between mt-2;
+
+    > div {
+      @apply pr-1;
+    }
+
+    h2 {
+      @apply line-clamp-2 flex-1 pt-1;
+    }
+  }
+
+  .date {
+    @apply text-base text-sky-900/50 mt-1;
+  }
+
+  .card-action {
+    @apply w-8 h-8 rounded hover:bg-stone-100 mt-0.5;
+  }
+
+  .card-action .material-symbols-rounded {
+    @apply h-auto align-middle;
+    font-size: 1.5rem;
+  }
+}
+
+a.card,
+.card.link {
+  @apply text-sky-900 ease-in-out duration-300 cursor-pointer p-4 hover:shadow-lg;
+}
+
+.card-green {
+  @apply bg-[#DDEBEB] rounded-lg;
+
+  h5 {
+    @apply text-sky-800 flex items-center;
+  }
+}
+
+/* list */
+.news-list {
+  @apply divide-y divide-sky-500/20;
+
+  a {
+    @apply block px-5 py-10 cursor-pointer ease-in-out duration-300 transition-all hover:bg-sky-300/10;
+  }
+
+  h3 {
+    @apply text-xl line-clamp-2;
+  }
+}
+
+.describe-list {
+  @apply my-4 space-y-2;
+
+  span.divider {
+    @apply px-1;
+  }
+}
+
+.mat-mdc-paginator {
+  --mat-paginator-container-background-color: transparent;
+}
+
+.sort-link {
+  @apply relative flex items-center w-full h-14 overflow-x-auto lg:h-auto lg:flex-col lg:items-start lg:space-y-3 lg:max-w-32;
+
+  .link-item {
+    @apply p-3 rounded-full min-w-fit transition-all ease-in-out duration-300 hover:bg-sky-600/20;
+  }
+
+  .link-item.focused {
+    @apply bg-sky-600/40 text-white;
+  }
+}
+
+.sort-list-container {
+  @apply flex flex-col lg:flex-row lg:space-x-32 mt-10;
+}
+
+.date-duration {
+  @apply flex items-center justify-between flex-col lg:flex-row;
+
+  > li {
+    @apply flex items-center w-fit;
+  }
+
+  li.line {
+    @apply flex-auto bg-slate-400 w-px h-10 lg:h-px mx-5;
+  }
+
+  ~ h3.title-sm {
+    @apply text-xl tracking-wide line-clamp-3 lg:line-clamp-2 min-h-[3.75rem] mt-2;
+  }
+
+  span.text-5xl {
+    @apply pl-2;
+  }
+}
+
+.sky-gradient-animated {
+  background:
+    radial-gradient(100% 100% at 4% 3%, #fff 0%, transparent),
+    radial-gradient(100% 100% at var(--g2-1-x-position) var(--g2-1-y-position), #7cd4f4 -32%, transparent),
+    radial-gradient(100% 100% at var(--g2-2-x-position) var(--g2-2-y-position), #03ace9 0%, transparent), #fff;
+  animation-name: g-2;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  transition-timing-function: ease-in-out;
+
+  > .floating-bg {
+    @apply bg-none;
+  }
+}
+@property --g2-1-x-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 87.96875%;
+}
+@property --g2-1-y-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 91.1328125%;
+}
+@property --g2-2-x-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 13.398437500000002%;
+}
+@property --g2-2-y-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 82.734375%;
+}
+:root {
+  --g2-1-x-position: 87.96875%;
+  --g2-1-y-position: 91.1328125%;
+  --g2-2-x-position: 13.398437500000002%;
+  --g2-2-y-position: 82.734375%;
+}
+@keyframes g-2 {
+  50% {
+    --g2-1-x-position: 15%;
+    --g2-1-y-position: 15%;
+    --g2-2-x-position: 61.21093749999999%;
+    --g2-2-y-position: 13.750000000000002%;
+  }
+}
+
+.mat-stepper-vertical, .mat-stepper-horizontal {
+  --mat-stepper-container-color: #ffffff00;
+}
+
+.mdc-tab.mat-mdc-tab {
+  @apply px-1 text-lg font-normal min-w-fit rounded;
+  
+}
+
+.mat-mdc-tab-labels {
+  @apply space-x-3;
+}
