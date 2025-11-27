@@ -1,36 +1,58 @@
-<div class="max-w-container pt-32">
-  <header class="mt-20 xl:mt-10">
+<div class="max-w-container">
+  <header>
     <h2>
       <span class="display d-black">Latest News</span>
       <p class="headline">最新消息</p>
     </h2>
   </header>
 
-  <web-result-empty *ngIf="dataSource | isEmpty" class="block mt-5"></web-result-empty>
-
   <section class="sort-list-container">
-    <div class="sort-link">
-      <a class="link-item" [ngClass]="{ 'focusd': true }"
-        (click)="onCatChange()" >
-        所有消息
-      </a>
-      <a class="link-item" *ngFor="let cat of newsCatsCache;"
-        [ngClass]="{ 'focusd': true }" (click)="onCatChange(cat.id)">
-        {{ cat.name }}
-      </a>
+
+    <form action="" class="pb-5">
+      <div class="search-wrap mt-5">
+        <mat-form-field appearance="outline" class="fill-black">
+          <span matPrefix class="material-symbols-rounded">search</span>
+          <input matInput type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="搜尋">
+          <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+            <span class="material-symbols-rounded">close</span>
+          </button>
+        </mat-form-field>
+        <button class="btn-primary btn-lg" [disabled]="!searchValue" [ngClass]="{'disabled-hide': !searchValue}">
+          搜尋
+        </button>
+      </div>
+      <mat-chip-listbox class="sort-link" aria-label="sort selection">
+        <mat-chip-option (click)="onCatChange()" selected>所有消息</mat-chip-option>
+        <mat-chip-option *ngFor="let cat of newsCatsCache;" (click)="onCatChange(cat.id)">{{ cat.name
+          }}</mat-chip-option>
+      </mat-chip-listbox>
+    </form>
+
+    <div class="news-list">
+
+      <!-- Loading -->
+      <web-skeleton-loader *ngIf="isLoading" class="opacity-10"></web-skeleton-loader>
+
+      <!-- 空資料 -->
+      <web-result-empty *ngIf="!isLoading && (dataSource | isEmpty)" class="block mt-5"></web-result-empty>
+
+
+      <!-- 有資料 -->
+      <div *ngIf="!isLoading && !(dataSource | isEmpty)">
+        <a *ngFor="let item of dataSource" [routerLink]="['/news/detail/', item.uniqueId]">
+          <p class="space-x-2">
+            <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
+            <span class="sort">{{ item.catName }}</span>
+          </p>
+          <h3> {{ item.title }}</h3>
+        </a>
+        <web-paginator
+          [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+          (pageIndexChange)="onSearch($event)">
+        </web-paginator>
+      </div>
     </div>
 
-    <div class="news-list flex-auto">
-      <a *ngFor="let item of dataSource" [routerLink]="['/news/detail/', item.uniqueId]">
-        <p class="space-x-2">
-          <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
-          <span class="sort">{{ item.catName }}</span>
-        </p>
-        <h3> {{ item.title }}</h3>
-      </a>
-      <web-paginator [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
-        (pageIndexChange)="onSearch($event)">
-      </web-paginator>
-    </div>
+
   </section>
 </div>

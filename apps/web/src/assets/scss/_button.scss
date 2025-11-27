@@ -2,15 +2,13 @@
   --mat-standard-button-toggle-shape: 99rem;
 }
 
-a.link {
-  @apply flex items-center cursor-pointer relative w-fit mb-2;
-}
-
 .sort {
   @apply text-sky-600;
 }
 
 .link-underline {
+  @apply flex items-center relative w-fit cursor-pointer;
+
   &::before,
   &::after {
     @apply absolute w-full h-px bg-current top-full left-0;
@@ -36,6 +34,16 @@ a.link {
   &:hover::after {
     transform: scale3d(0, 1, 1);
   }
+
+  // icon 在左
+  span ~ .material-symbols-rounded {
+    @apply pl-2 -mr-0.5;
+  }
+
+  // icon 在右
+  .material-symbols-rounded ~ span  {
+    @apply pr-1 -ml-0.5;
+  }
 }
 
 .btn-primary {
@@ -50,8 +58,19 @@ a.link {
   @apply border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
 }
 
-.mat-mdc-unelevated-button:not(:disabled) {
+[class*="btn-"] {
+  @apply opacity-100 transition-all ease-in-out duration-500;
   
+  &.disabled {
+    @apply shadow-none grayscale opacity-60;
+  }
+
+  &.disabled-hide {
+    @apply w-0 p-0 border-none overflow-hidden opacity-0;
+  }
+}
+
+.mat-mdc-unelevated-button:not(:disabled) {
 }
 
 /* reset Globel */
@@ -88,7 +107,7 @@ a[class^="btn-"] {
   }
 }
 
-.mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+.mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
   --mdc-checkbox-selected-checkmark-color: white;
 }
 /* reset Globel *

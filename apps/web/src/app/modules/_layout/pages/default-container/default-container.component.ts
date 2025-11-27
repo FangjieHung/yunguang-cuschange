@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, ViewChild, HostListener, ElementRef, OnInit } from '@angular/core';
+import { Component, Injector, inject, ViewChild, HostListener, ElementRef, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
+import { AppStoreApiServ } from '@core/services';
+import { AppObjectStoreCodes, OrgContactJto } from '@core/models';
 
 @Component({
   selector: 'web-default-container',
@@ -18,6 +20,9 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
 
   @ViewChild('snav') snav!: MatSidenav;
   @ViewChild('logoImg', { static: false }) logoRef!: ElementRef<HTMLImageElement>
+
+  private _appStoreApiServ = inject(AppStoreApiServ);
+  response: OrgContactJto | null = null;
 
   navList = [
     {
@@ -37,16 +42,37 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     }
   ];
 
+  accountMenu = [
+    { label: '我的課程', link: '/' },
+    { label: '會員中心', link: '/auth/' },
+  ];
+
   constructor(
     protected override injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
+    this.doDataInit();
     if (this.appAuthApiServ.hasAccessToken) {
       this.storeServ.getCurrAuthUserCache();
     }
   }
+
+    doDataInit(): void {
+      this._appStoreApiServ.getAppObjectStoreValueByCode(AppObjectStoreCodes.學會聯絡方式設定檔).subscribe({
+        next: (res) => {
+          if (!res) {
+            return;
+          }
+  
+          this.response = res;
+        },
+        error: (err) => {
+          this.bbdNotifyServ.error('執行失敗', err);
+        },
+      });
+    }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {

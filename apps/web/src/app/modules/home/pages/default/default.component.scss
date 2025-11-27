@@ -15,7 +15,7 @@ header.hero {
 }
 
 .default-container {
-    @apply relative;
+    @apply relative overflow-x-hidden;
 
     section.max-w-container {
         @apply min-h-[80svh] py-[5vh];
@@ -24,4 +24,8 @@ header.hero {
 
 .news-list {
     @apply min-w-0 flex-auto w-full my-6 xl:w-auto xl:mr-6;
+}
+
+h2.display {
+    @apply text-pretty;
 }

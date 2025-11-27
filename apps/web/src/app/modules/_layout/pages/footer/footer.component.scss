@@ -17,30 +17,3 @@ footer {
     @apply w-full flex flex-col lg:flex-row lg:justify-between pt-6 border-t border-white opacity-40;
 }
 
-.web-map {
-    @apply flex-auto;
-
-    ul {
-        @apply space-y-4 mr-6 mb-6 lg:mr-12 lg:mb-12;
-    }
-
-    li {
-        @apply space-y-1 max-w-md;
-    }
-
-    li .label {
-        @apply uppercase opacity-60;
-    }
-}
-
-.social-links {
-    @apply flex items-center mt-auto ml-auto mb-4;
-
-    > a {
-        @apply p-2 rounded-full transition-all ease-in-out hover:bg-sky-300/10;
-    }
-
-    a > img {
-        @apply w-8 h-8 object-contain;
-    }
-}

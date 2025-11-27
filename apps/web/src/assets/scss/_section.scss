@@ -92,10 +92,8 @@ a.card,
 
 /* list */
 .news-list {
-  @apply divide-y divide-sky-500/20;
-
-  a {
-    @apply block px-5 py-10 cursor-pointer ease-in-out duration-300 transition-all hover:bg-sky-300/10;
+  > a {
+    @apply block py-5 border-b border-sky-700 border-opacity-30 transition-all ease-in-out hover:border-opacity-100;
   }
 
   h3 {
@@ -116,38 +114,50 @@ a.card,
 }
 
 .sort-link {
-  @apply relative flex items-center w-full h-14 overflow-x-auto lg:h-auto lg:flex-col lg:items-start lg:space-y-3 lg:max-w-32;
+  @apply min-w-fit w-32;
 
-  .link-item {
-    @apply p-3 rounded-full min-w-fit transition-all ease-in-out duration-300 hover:bg-sky-600/20;
+  .mat-mdc-standard-chip {
+    --mdc-chip-elevated-container-color: #ffffffbd;
   }
 
-  .link-item.focused {
-    @apply bg-sky-600/40 text-white;
+  .mdc-evolution-chip-set__chips {
+    @apply lg:flex-col lg:space-y-3;
+  }
+
+  .mdc-evolution-chip__cell {
+    justify-content: center;
   }
 }
 
 .sort-list-container {
-  @apply flex flex-col lg:flex-row lg:space-x-32 mt-10;
+  @apply grid grid-cols-1 lg:grid-cols-3 lg:gap-32;
+
+  .news-list {
+    @apply lg:col-span-2;
+  }
 }
 
 .date-duration {
-  @apply flex items-center justify-between flex-col lg:flex-row;
+  @apply flex items-center justify-between text-sm lg:text-lg;
 
   > li {
-    @apply flex items-center w-fit;
+    @apply flex items-start w-fit leading-none;
   }
 
   li.line {
-    @apply flex-auto bg-slate-400 w-px h-10 lg:h-px mx-5;
+    @apply flex-auto bg-slate-400 w-full h-px mx-5;
+  }
+
+  .month-wrap {
+    @apply pr-1 min-w-fit flex flex-col h-full space-y-1 lg:space-y-3;
+  }
+
+  .date {
+    @apply text-4xl -mt-0.5 lg:text-6xl lg:-mt-2;
   }
 
   ~ h3.title-sm {
     @apply text-xl tracking-wide line-clamp-3 lg:line-clamp-2 min-h-[3.75rem] mt-2;
-  }
-
-  span.text-5xl {
-    @apply pl-2;
   }
 }
 
@@ -200,15 +210,26 @@ a.card,
   }
 }
 
-.mat-stepper-vertical, .mat-stepper-horizontal {
+.mat-stepper-vertical,
+.mat-stepper-horizontal {
   --mat-stepper-container-color: #ffffff00;
 }
 
 .mdc-tab.mat-mdc-tab {
   @apply px-1 text-lg font-normal min-w-fit rounded;
-  
 }
 
 .mat-mdc-tab-labels {
   @apply space-x-3;
+}
+
+.tab-label-lg {
+
+  .mdc-tab__text-label {
+    @apply text-xl font-bold lg:text-2xl lg:pb-2 2xl:text-3xl;
+  }
+
+  .mdc-tab__text-label {
+    --mat-tab-header-inactive-label-text-color: #000;
+  }
 }

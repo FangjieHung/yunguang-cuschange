@@ -1,17 +1,18 @@
- <form [formGroup]="valForm">
+<form [formGroup]="valForm" class="account">
   <web-glass-bg>
-    <div class="pt-4 pb-12">
+    <div class="inner-wrap">
       <ng-container *ngIf="type === +custApiServ.customerTypes['團體會員']">
         <web-cust-group-control #groupCtrl formControlName="custGroup"></web-cust-group-control>
       </ng-container>
       <ng-container *ngIf="type === +custApiServ.customerTypes['個人會員']">
         <web-cust-member-control #memberCtrl formControlName="custMember"></web-cust-member-control>
       </ng-container>
-      <section>
+      <section class="form-section">
         <h3 class="title">您的密碼</h3>
         <ul class="input-group lg:grid-cols-2">
           <li>
-            <div class="form-label">密碼 <span class="required-mark" *ngIf="f['password'] | ctrlHasRequired">*</span></div>
+            <div class="form-label">密碼 <span class="required-mark" *ngIf="f['password'] | ctrlHasRequired">*</span>
+            </div>
             <mat-form-field appearance="outline" class="w-full fill-black">
               <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password"
                 [required]="f['password'] | ctrlHasRequired">
@@ -25,7 +26,8 @@
             </mat-form-field>
           </li>
           <li>
-            <div class="form-label">確認密碼 <span class="required-mark" *ngIf="f['confirmPassword'] | ctrlHasRequired">*</span></div>
+            <div class="form-label">確認密碼 <span class="required-mark"
+                *ngIf="f['confirmPassword'] | ctrlHasRequired">*</span></div>
             <mat-form-field appearance="outline" class="w-full fill-black">
               <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="confirmPassword"
                 [required]="f['confirmPassword'] | ctrlHasRequired">
@@ -44,7 +46,7 @@
       </section>
     </div>
   </web-glass-bg>
-  <div class="toolbar col-span-full">
-    <button class="btn-primary" (click)="onSubmit()">送出</button>
+  <div class="toolbar">
+    <button class="btn-primary btn-lg" (click)="onSubmit()">送出</button>
   </div>
 </form>

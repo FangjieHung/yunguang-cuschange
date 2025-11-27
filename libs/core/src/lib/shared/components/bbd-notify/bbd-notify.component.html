@@ -1,7 +1,7 @@
 <section class="flex items-center" role="alert">
   
   <span [ngClass]="data.iconStyle || ''" class="material-symbols-rounded">{{data.icon || 'info'}}</span>
-  <p class="flex-auto pl-2 truncate">
+  <p class="flex-auto pl-2 truncate text-white">
     {{data.text || '' }}
   </p>
   <button class="btn-ghost w-10" (click)="snackBarRef.dismiss()">

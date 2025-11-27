@@ -1,39 +1,23 @@
-web-glass-bg {
-    @apply block w-full;
+.display {
+    @apply text-pretty fixed bottom-5 left-5;
 }
 
-.title {
-    @apply text-black mb-4;
-}
+.tab-container {
+    @apply grid grid-cols-1 gap-5 lg:grid-cols-3;
 
-form {
-    @apply p-4 grid gap-6 lg:grid-cols-3;
-
-    web-glass-bg {
-        @apply lg:col-span-2;
-    }
-
-    web-glass-bg section {
-        @apply px-8 pt-4;
-    }
-
-    .multi-inputs {
-        @apply grid gap-2;
-    }
-
-    section > ul:not(:first-of-type) {
-        @apply border-t-2 border-white/50 pt-5;
+    header {
+        @apply mt-5 mx-4 sm:mx-0;
     }
 }
 
-.btn-white {
-    @apply px-5 py-3;
+header > ol {
+    @apply text-base list-circle pl-7 space-y-2;
 }
 
-.toolbar {
-    @apply flex items-center justify-end space-x-2;
-
-    .btn-primary {
-        @apply my-4 h-14 w-40 rounded-full;
+.max-w-container {
+    
+    @media screen and (max-width: 640px) {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

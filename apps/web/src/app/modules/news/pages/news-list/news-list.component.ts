@@ -1,4 +1,4 @@
-import { Component, inject, Injector, OnInit} from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
 // Custom packages
@@ -15,6 +15,9 @@ import { AppMsgApiServ } from '@core/services';
   styleUrls: ['./news-list.component.scss']
 })
 export class NewsListComponent extends BBDBaseComponent implements OnInit {
+  searchValue = '';
+  isLoading = true;
+
   private _appMsgApiServ = inject(AppMsgApiServ);
 
   dataSource: AppNewsMsgView[] = [];
@@ -64,18 +67,29 @@ export class NewsListComponent extends BBDBaseComponent implements OnInit {
   }
 
   onSearch(pageIndex = 1): void {
+    this.isLoading = true;
     this.request.pageIndex = pageIndex;
+
     this._appMsgApiServ.getAppNewsMsgViewsPaging(this.request).subscribe({
       next: (res) => {
+
+        // API 失敗或沒資料
         if (!res || res.rows.isUndefinedOrNullOrEmpty()) {
+          this.isLoading = false;
+          this.dataSource = [];
+          this.response = res || { totalCount: 0, pageIndex, pageSize: this.request.pageSize };
           return;
         }
+
+        // 有資料
         this.response = res;
         this.dataSource = [...this.response.rows];
         this.doScrollToTop();
+        this.isLoading = false;
       },
       error: (err) => {
         this.bbdNotifyServ.error('執行失敗', err);
+        this.isLoading = false;
       }
     });
   }

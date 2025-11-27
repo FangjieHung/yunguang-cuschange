@@ -18,6 +18,7 @@ import {
   HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe
 } from './pipes';
 import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
+import { ImageFallbackDirective } from './../directives';
 
 const CUST_MODULES = [AntdModule, MaterialModule];
 const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent];
@@ -26,12 +27,14 @@ const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, C
   EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
   HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe];
 const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
+const CUST_DIRECTIVES = [ImageFallbackDirective];
 
 @NgModule({
   declarations: [
+    ...CUST_DIRECTIVES,
     ...CUST_PIPES,
     ...CUST_COMPONENTS,
-    ...CUST_CONTROLS
+    ...CUST_CONTROLS,
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
     ...CUST_PIPES,
     ...CUST_COMPONENTS,
     ...CUST_CONTROLS,
-    ...THIRD_MODULES
+    ...THIRD_MODULES,
+    ...CUST_DIRECTIVES
   ]
 })
 export class SharedModule { }

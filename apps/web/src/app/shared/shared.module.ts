@@ -9,7 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { GlassBgComponent, PaginatorComponent, ResultEmptyComponent } from './components';
+import { GlassBgComponent, SkeletonLoaderComponent, PaginatorComponent, ResultEmptyComponent } from './components';
 import { CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent } from './controls';
 import {
   CustEditWidgetComponent,
@@ -18,7 +18,7 @@ import {
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
-  GlassBgComponent, PaginatorComponent, ResultEmptyComponent
+  GlassBgComponent, SkeletonLoaderComponent, PaginatorComponent, ResultEmptyComponent
 ];
 const CUST_CONTROLS = [CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent];
 const CUST_WIDGETS = [CustEditWidgetComponent, ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent];

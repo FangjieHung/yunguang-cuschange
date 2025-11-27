@@ -1,4 +1,4 @@
-<div class="default-container overflow-x-hidden">
+<div class="default-container">
   <header class="hero">
     <video autoplay loop muted class="hero-video">
       <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
@@ -12,113 +12,120 @@
     </div>
   </header>
 
-    <section class="max-w-container pt-32">
-        <h2 class="relative z-[3]">
-            <span class="display d-black text-pretty">Knowledge Exchange</span>
-            <p class="headline font-bold mt-4">知識交流與跨界合作</p>
-        </h2>
+  <div class="space-y-20 py-20">
+    <section class="max-w-container">
+      <h2 class="display d-black">Knowledge Exchange</h2>
 
-        <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
-            <swiper [config]="bannerSwipe" class="relative w-full mt-8 lg:-mt-10 slide-1-fade">
-                <ng-template swiperSlide *ngFor="let item of ads">
-                    <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
+      <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
+        <swiper [config]="bannerSwipe" class="relative w-full mt-8 slide-1-fade">
+          <ng-template swiperSlide *ngFor="let item of ads">
+            <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
+              <!--
                         <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.title" class="rounded-lg aspect-video object-cover w-full lg:w-2/3">
-                        <h3 class="text-xl tracking-wide w-full mt-5 lg:w-1/3 lg:mt-14"> {{ item.title }}</h3>
-                    </div>
-                </ng-template>
-            </swiper>
-
-            <div class="swipe-btn-wrap-b">
-                <button class="btn-primary swiper-btn-banner-prev"><span class="material-symbols-rounded">
-                        arrow_back_ios
-                    </span></button>
-                <button class="btn-primary swiper-btn-banner-next"><span class="material-symbols-rounded">
-                        arrow_forward_ios
-                    </span></button>
+                        -->
+              <img src="assets/image/demo/002.jpg" class="rounded-lg aspect-video object-cover w-full lg:w-2/3 lg:mt-4">
+              <div class="w-full mt-5 lg:w-1/3 lg:mt-0">
+                <h3 class="headline font-bold">{{ item.title }} 知識交流與跨界合作</h3>
+                <p class="text-xl"> {{ item.title }}</p>
+              </div>
             </div>
+          </ng-template>
+        </swiper>
+
+        <div class="swipe-btn-wrap-b">
+          <button class="btn-primary swiper-btn-banner-prev"><span class="material-symbols-rounded">
+              arrow_back_ios
+            </span></button>
+          <button class="btn-primary swiper-btn-banner-next"><span class="material-symbols-rounded">
+              arrow_forward_ios
+            </span></button>
         </div>
-        <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
+      </div>
+      <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
     </section>
 
     <section class="max-w-container flex flex-col">
-        <h2 class="text-center">
-            <span class="display d-black">Academic Activities</span>
-            <p class="headline font-bold">學術活動</p>
-        </h2>
-        <div class="relative" *ngIf="!(campaigns | isEmpty)">
-            <swiper [config]="campaignSwipe" class="w-full my-10">
-                <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5">
-                    <web-glass-bg class="container-hover">
-                        <a [routerLink]="['/campaign/detail', item.uniqueId]" class="block w-full p-2">
-                            <div class="px-8">
-                                <ol class="date-duration">
-                                    <!-- 開始日 -->
-                                    <li>
-                                        <p>
-                                            <span class="text-2xl">{{ item.startAt | date:'MM' }} &#8725;</span><br>
-                                            <span>{{ item.startAt | date:'E' }}</span>
-                                        </p>
-                                        <span class="text-6xl">{{ item.startAt | date:'dd' }}</span>
-                                    </li>
-                                    <li class="line"></li>
-                                    <!-- 結束日 -->
-                                    <li>
-                                        <p>
-                                            <span class="text-2xl">{{ item.endAt | date:'MM' }} &#8725;</span><br>
-                                            <span>{{ item.endAt | date:'E' }}</span>
-                                        </p>
-                                        <span class="text-6xl">{{ item.endAt | date:'dd' }}</span>
-                                    </li>
-                                </ol>
-                                <h3 class="title-sm"> {{
-                                    item.name
-                                    }}</h3>
-                                <ul class="describe-list">
-                                    <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd': '-' }} ~ {{ item.regEndAt | dateFormatter: 'yyyy.MM.dd': '-' }}</li>
-                                    <!-- <li>剩餘名額<span>&#8739;</span></li> -->
-                                </ul>
-                                <mat-progress-bar mode="determinate" color="primary" value="40"
-                                    class="mb-10"></mat-progress-bar>
-                            </div>
-                            <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
-                        </a>
-                    </web-glass-bg>
-                </ng-template>
-            </swiper>
-            <button class="btn-primary swiper-btn-between prev"><span class="material-symbols-rounded">
-                    arrow_back_ios
-                </span></button>
-            <button class="btn-primary swiper-btn-between next"><span class="material-symbols-rounded">
-                    arrow_forward_ios
-                </span></button>
-        </div>
-        <web-result-empty *ngIf="!campaignList.length" class="block my-5"></web-result-empty>
-        <a class="link link-underline mt-auto ml-auto" target="_blank" routerLink="/campaign/list">
-            看更多活動<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
-        </a>
+      <h2 class="text-center">
+        <span class="display d-black">Academic Activities</span>
+        <p class="headline font-bold">學術活動</p>
+      </h2>
+      <div class="relative" *ngIf="!(campaigns | isEmpty)">
+        <swiper [config]="campaignSwipe" class="w-full my-10">
+          <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5">
+            <web-glass-bg class="container-hover">
+              <a [routerLink]="['/campaign/detail', item.uniqueId]" class="block w-full p-2">
+                <div class="px-8">
+                  <ol class="date-duration">
+                    <!-- 開始日 -->
+                    <li>
+                      <p>
+                        <span class="text-2xl">{{ item.startAt | date:'MM' }} &#8725;</span><br>
+                        <span>{{ item.startAt | date:'E' }}</span>
+                      </p>
+                      <span class="text-6xl">{{ item.startAt | date:'dd' }}</span>
+                    </li>
+                    <!-- 結束日 -->
+                    <ng-container *ngIf="item.endAt">
+                      <li class="line"></li>
+                      <li>
+                        <p>
+                          <span class="text-2xl">{{ item.endAt | date:'MM' }} &#8725;</span><br>
+                          <span>{{ item.endAt | date:'E' }}</span>
+                        </p>
+                        <span class="text-6xl">{{ item.endAt | date:'dd' }}</span>
+                      </li>
+                    </ng-container>
+                  </ol>
+                  <h3 class="title-sm"> {{
+                    item.name
+                    }}</h3>
+                  <ul class="describe-list">
+                    <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd': '-' }} ~ {{
+                      item.regEndAt | dateFormatter: 'yyyy.MM.dd': '-' }}</li>
+                    <!-- <li>剩餘名額<span>&#8739;</span></li> -->
+                  </ul>
+                  <mat-progress-bar mode="determinate" color="primary" value="40" class="mb-10"></mat-progress-bar>
+                </div>
+                <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
+              </a>
+            </web-glass-bg>
+          </ng-template>
+        </swiper>
+        <button class="btn-primary swiper-btn-between prev"><span class="material-symbols-rounded">
+            arrow_back_ios
+          </span></button>
+        <button class="btn-primary swiper-btn-between next"><span class="material-symbols-rounded">
+            arrow_forward_ios
+          </span></button>
+      </div>
+      <web-result-empty *ngIf="!campaignList.length" class="block my-5"></web-result-empty>
+      <a class="link-underline mt-auto ml-auto" target="_blank" routerLink="/campaign/list">
+        <span>看更多活動</span><span class="material-symbols-rounded">arrow_right_alt</span>
+      </a>
     </section>
 
-  <section class="max-w-container pt-32">
-    <div class="flex items-start flex-col lg:flex-row-reverse">
-      <h2 class="lg:text-right">
-        <span class="display d-black">Latest News</span>
-        <p class="headline">最新消息</p>
-      </h2>
+    <section class="max-w-container">
+      <div class="flex items-start flex-col lg:flex-row-reverse">
+        <h2 class="lg:text-right">
+          <span class="display d-black">Latest News</span>
+          <p class="headline">最新消息</p>
+        </h2>
 
-      <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
-        <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
-          <p class="space-x-2">
-            <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
-            <span class="sort">{{ '學會公告' }}</span>
-          </p>
-          <h3> {{ item.title }}</h3>
-        </a>
+        <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
+          <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
+            <p class="space-x-2">
+              <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
+              <span class="sort">{{ '學會公告' }}</span>
+            </p>
+            <h3> {{ item.title }}</h3>
+          </a>
+        </div>
+
+        <web-result-empty *ngIf="newsMsgs | isEmpty" class="flex-auto w-full my-5"></web-result-empty>
       </div>
-
-      <web-result-empty *ngIf="newsMsgs | isEmpty" class="flex-auto w-full my-5"></web-result-empty>
-    </div>
-    <a class="link link-underline ml-auto lg:-mt-12" target="_blank" routerLink="/news/list">
-      看更多消息<span class="material-symbols-rounded pl-2">arrow_right_alt</span>
-    </a>
-  </section>
+      <a class="link-underline ml-auto lg:mt-5" target="_blank" routerLink="/news/list">
+        <span>看更多消息</span><span class="material-symbols-rounded">arrow_right_alt</span>
+      </a>
+    </section>
+  </div>
 </div>

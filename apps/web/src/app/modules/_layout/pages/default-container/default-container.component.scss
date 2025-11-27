@@ -11,10 +11,10 @@
 }
 
 [id="logoImg"] {
-    @apply transition-all ease-in-out duration-500 absolute p-3 w-32 xs:w-40 4xl:w-48;
+    @apply bg-white bg-opacity-0 rounded-full backdrop-blur border border-white border-opacity-0 transition-all ease-in-out duration-500 absolute p-3 w-32 xs:w-40 lg:w-44 4xl:w-48;
 
     &.img-shrink {
-        @apply w-20 p-0;
+        @apply w-24 p-1 bg-opacity-50 border-opacity-100;
     }
 }
 
@@ -28,7 +28,11 @@
 }
 
 .main-container {
-    @apply flex-1 h-full overflow-y-auto relative;
+    @apply flex-1 h-full overflow-y-auto relative pt-32 pb-5 xs:pt-36 lg:pt-44;
+
+    &:has(.hero) {
+        @apply pt-0;
+    }
 }
 
 .mat-sidenav {
@@ -40,8 +44,30 @@
     @apply shadow-none;
 }
 
+.menu-button .material-symbols-rounded {
+    @apply opacity-100 w-6;
+    transition: all 0.3s ease;
+
+    &.hide {
+        @apply opacity-0 w-0;
+    }
+}
+
 mat-sidenav-container {
     @apply flex-auto;
+
+    &:has(.mat-drawer-opened) {
+        height: 100svh;
+        overflow: auto;
+    }
+}
+
+.sidemenu-inner {
+    @apply mt-32 divide-y divide-black/30 xs:mt-40;
+
+    .btn-stroke-white {
+        @apply w-full max-w-sm mr-auto;
+    }
 }
 
 .menu-button .material-symbols-rounded {
@@ -51,4 +77,33 @@ mat-sidenav-container {
     &.hide {
         @apply opacity-0 w-0;
     }
+}
+
+.sidenav-container {
+    @apply bg-sky-50/30 backdrop-blur-xl w-full px-8 py-4;
+}
+
+.social-icon-wrap {
+    @apply flex items-center justify-start space-x-2 mt-5 w-full md:max-w-96;
+
+    .divider {
+        @apply border-t border-white/50 flex-auto;
+    }
+
+    > a {
+        @apply w-11 h-11 p-2 flex items-center;
+    }
+}
+
+.sidenav-list {
+    @apply py-3;
+
+    a,
+    button {
+        @apply text-base px-1 py-3 block;
+    }
+}
+
+.web-map {
+    @apply mt-5 space-y-3;
 }

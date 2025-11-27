@@ -1,5 +1,5 @@
-<div class="max-w-container pt-32">
-    <header class="mt-20 xl:mt-10">
+<div class="max-w-container">
+    <header >
         <h2>
             <span class="display d-black">Academic Activities</span>
             <p class="headline">學術活動</p>
@@ -7,55 +7,62 @@
     </header>
 
     <web-result-empty *ngIf="false" class="block mt-5"></web-result-empty>
+    <web-result-empty *ngIf="dataSource | isEmpty" class="block mt-5"></web-result-empty>
 
-    <section class="sort-list-container">
-
-        <div class="sort-link">
-            <a class="link-item" *ngFor="let sort of sorts; let i = index" routerLink="/campaign/detail"
-                [ngClass]="{ 'focusd': focusedIndex === i }" (click)="setFocused(i)">
-                {{ sort }}
-            </a>
-        </div>
-
-        <div class="campain-list">
-            <web-glass-bg class="container-hover" *ngFor="let item of dataSource">
-                <a class="block w-full p-2" [routerLink]="['/campaign/detail/', item.uniqueId]">
-                    <div class="px-8">
-                        <ol class="date-duration">
-                            <!-- 開始日 -->
-                            <li>
-                                <p>
-                                    <span class="text-2xl">{{ item.startAt | date: 'MM' }} &#8725;</span><br>
-                                    <span>{{ item.startAt | date: 'E' }}</span>
-                                </p>
-                                <span class="text-6xl">{{ item.startAt | date: 'dd' }}</span>
-                            </li>
+    <form action="" class="search-wrap mt-5 md:w-1/2 xl:w-1/3">
+        <mat-form-field appearance="outline" class="fill-black">
+            <span matPrefix class="material-symbols-rounded">search</span>
+            <input matInput type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="搜尋">
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </mat-form-field>
+        <button class="btn-primary btn-lg" [disabled]="!searchValue" [ngClass]="{'disabled-hide': !searchValue}">
+            搜尋
+        </button>
+    </form>
+    <section class="campain-list">
+        <web-glass-bg class="container-hover" *ngFor="let item of dataSource">
+            <a class="block p-2" [routerLink]="['/campaign/detail/', item.uniqueId]">
+                <div class="p-3">
+                    <ol class="date-duration">
+                        <!-- 開始日 -->
+                        <li>
+                            <div class="month-wrap">
+                                <p>{{ item.startAt | date: 'MM' }} &#8725;</p>
+                                <p>{{ item.startAt | date: 'E' }}.</p>
+                            </div>
+                            <p class="date">{{ item.startAt | date: 'dd' }}</p>
+                        </li>
+                        <!-- 結束日 -->
+                        <ng-container *ngIf="item.endAt">
                             <li class="line"></li>
-                            <!-- 結束日 -->
                             <li>
-                                <p>
-                                    <span class="text-2xl">{{ item.endAt| date: 'MM' }} &#8725;</span><br>
-                                    <span>{{ item.endAt | date: 'E' }}</span>
-                                </p>
-                                <span class="text-6xl">{{ item.endAt | date: 'dd' }}</span>
+                                <div class="month-wrap">
+                                    <p>{{ item.endAt | date: 'MM' }} &#8725;</p>
+                                    <p>{{ item.endAt | date: 'E' }}.</p>
+                                </div>
+                                <p class="date">{{ item.endAt | date: 'dd' }}</p>
                             </li>
-                        </ol>
-                        <h3 class="title-sm">
-                          {{ item.name }}
-                        </h3>
-                        <ul class="describe-list">
-                            <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ item.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
-                            <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
-                        </ul>
-                        <mat-progress-bar mode="determinate" color="primary" value="100"
-                            class="mb-10"></mat-progress-bar>
-                    </div>
-                    <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
-                </a>
-            </web-glass-bg>
-        </div>
+                        </ng-container>
+                    </ol>
+                    <h3 class="title-sm">
+                        {{ item.name }}
+                    </h3>
+                    <ul class="describe-list">
+                        <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{
+                            item.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
+                        <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
+                    </ul>
+                    <mat-progress-bar mode="determinate" color="primary" value="100"
+                        class="mb-5"></mat-progress-bar>
+                </div>
+                <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
+            </a>
+        </web-glass-bg>
     </section>
-    <web-paginator [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
-      (pageIndexChange)="onSearch($event)">
+    <web-paginator
+        [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+        (pageIndexChange)="onSearch($event)">
     </web-paginator>
 </div>

@@ -1,5 +1,6 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
 
+
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import {
@@ -14,22 +15,18 @@ import { CampaignApiServ } from '@core/services';
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent extends BBDBaseComponent implements OnInit {
+  searchValue = '';
   campaignApiServ = inject(CampaignApiServ);
 
   dataSource: CampaignView[] = [];
   request = new PagingRequest<CampaignReq>();
   response: PagingResponse<CampaignView> | null = null;
 
-  sorts: string[] = ['所有課程', '研討會', '訓練課程', '工作坊'];
   focusedIndex: number | null = null;
 
   constructor(
     protected override injector: Injector) {
     super(injector);
-  }
-
-  setFocused(index: number) {
-    this.focusedIndex = index;
   }
 
   ngOnInit(): void {

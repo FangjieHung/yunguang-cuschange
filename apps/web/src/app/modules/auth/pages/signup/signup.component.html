@@ -1,40 +1,39 @@
-<div class="sky-gradient-animated overflow-auto">
-  <div class="floating-bg opacity-70">
-    <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
-    <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
-  </div>
-
-  <div class="max-w-container relative">
-    <h2>
-      <span class="display d-black text-pretty">Join the Future of Smart Diagnostics</span>
-      <p class="headline font-bold mt-4">註冊會員</p>
-    </h2>
-
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="個人會員">
-        <header class="mb-2">
-          <ol class="text-base list-circle pl-4 space-y-2 mt-4">
-            <li>
+<div class="pt-10 xl:pt-5 4xl:pt-0">
+  <span class="display d-black">Join the Future<br/>of Smart Diagnostics</span>
+  <div class="max-w-container px-0">
+    <mat-tab-group class="tab-label-lg stretch-none-dk">
+      <mat-tab label="註冊個人會員">
+        <div class="tab-container">
+          <header>
+            <ol>
+              <li>
                 入會費用：個人會員入會費參佰元，常年費陸佰元，合計玖佰元。
-            </li>
-            <li>學生會員入會費貳佰元，常年費參佰元，合計伍佰元。</li>
-            <li>Regular membership: Joining fee 300 NTD, Annual fee 600 NTD, Total 900 NTD
-            </li>
-            <li>
+              </li>
+              <li>學生會員入會費貳佰元，常年費參佰元，合計伍佰元。</li>
+              <li>Regular membership: Joining fee 300 NTD, Annual fee 600 NTD, Total 900 NTD
+              </li>
+              <li>
                 Student membership: Joining fee 200 NTD, Annual fee 300 NTD, Total 500 NTD
-            </li>
-          </ol>
-        </header>
-        <web-cust-edit-widget [custId]="0" [type]="+custApiServ.customerTypes['個人會員']"></web-cust-edit-widget>
+              </li>
+            </ol>
+          </header>
+          <div class="lg:col-span-2">
+            <web-cust-edit-widget [custId]="0" [type]="+custApiServ.customerTypes['個人會員']"></web-cust-edit-widget>
+          </div>
+        </div>
       </mat-tab>
-      <mat-tab label="團體會員">
-        <header class="mb-2">
-          <ol class="text-base list-circle pl-4 space-y-2 mt-4">
-            <li>團體會員入會費參仟元，常年費參仟元，合計陸仟元。</li>
-            <li>Group membership: Joining fee 3000 NTD, Annual fee 3000 NTD, Total 6000 NTD</li>
-          </ol>
-        </header>
-        <web-cust-edit-widget [custId]="0" [type]="+custApiServ.customerTypes['團體會員']"></web-cust-edit-widget>
+      <mat-tab label="註冊團體會員">
+        <div class="tab-container">
+          <header>
+            <ol>
+              <li>團體會員入會費參仟元，常年費參仟元，合計陸仟元。</li>
+              <li>Group membership: Joining fee 3000 NTD, Annual fee 3000 NTD, Total 6000 NTD</li>
+            </ol>
+          </header>
+          <div class="lg:col-span-2">
+            <web-cust-edit-widget [custId]="0" [type]="+custApiServ.customerTypes['團體會員']"></web-cust-edit-widget>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

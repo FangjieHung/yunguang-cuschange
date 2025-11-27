@@ -1,4 +1,4 @@
-<div class="min-h-container w-full max-w-2xl mx-auto py-20">
+<div class="min-h-container w-full max-w-2xl mx-auto p-5">
     <header>
         <p class="space-x-2 label">
             <span>{{ response?.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
@@ -11,8 +11,8 @@
       </bbd-quill-editor-viewer>
     </section>
 
-    <a class="link link-underline" routerLink="/news/list">
-      <span class="material-symbols-rounded pr-2">arrow_left_alt</span>
-      消息列表
+    <a class="link-underline" routerLink="/news/list">
+      <span class="material-symbols-rounded">arrow_left_alt</span>
+      <span>消息列表</span>
     </a>
 </div>

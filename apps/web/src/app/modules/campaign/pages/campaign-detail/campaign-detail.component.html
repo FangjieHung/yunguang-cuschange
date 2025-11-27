@@ -9,44 +9,52 @@
                 </p>
                 <span class="text-5xl">{{ response?.startAt | date: 'dd' }}</span>
             </li>
-            <li class="line"></li>
             <!-- 結束日 -->
-            <li>
-                <p>
-                    <span>{{ response?.endAt | date: 'MM' }} &#8725;</span><br>
-                    <span>{{ response?.endAt | date: 'E' }}</span>
-                </p>
-                <span class="text-5xl">{{ response?.endAt | date: 'dd' }}</span>
-            </li>
+            <ng-container *ngIf="response?.endAt">
+                <li class="line"></li>
+                <li>
+                    <p>
+                        <span>{{ response?.endAt | date: 'MM' }} &#8725;</span><br>
+                        <span>{{ response?.endAt | date: 'E' }}</span>
+                    </p>
+                    <span class="text-5xl">{{ response?.endAt | date: 'dd' }}</span>
+                </li>
+            </ng-container>
         </ol>
         <h3 class="headline">
-          {{ response?.name }}
+            {{ response?.name }}
         </h3>
         <ul class="describe-list">
-            <li>報名時間<span>&#8739;</span>{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
+            <li>報名時間<span>&#8739;</span>{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{
+                response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
             <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
         </ul>
         <mat-progress-bar mode="determinate" color="primary" value="100" class="mb-10"></mat-progress-bar>
 
         <ul class="info-wrap">
             <li>
-                <p class="info-label"><span class="material-symbols-rounded">people</span><span class="ml-1">活動講師</span></p>
+                <p class="info-label"><span class="material-symbols-rounded">people</span><span class="ml-1">活動講師</span>
+                </p>
                 <p class="ml-7">{{ contentInfo?.speakers }}</p>
             </li>
             <li>
-                <p class="info-label"><span class="material-symbols-rounded">date_range</span><span class="ml-1">活動時間</span></p>
-                <p class="ml-7">{{ response?.startAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.endAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
+                <p class="info-label"><span class="material-symbols-rounded">date_range</span><span
+                        class="ml-1">活動時間</span></p>
+                <p class="ml-7">{{ response?.startAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.endAt |
+                    dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
             </li>
             <!-- <li>
                 <p class="info-label"><span class="material-symbols-rounded">pending_actions</span><span class="ml-1">報名時間</span></p>
                 <p class="ml-7">{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
             </li> -->
             <li>
-                <p class="info-label"><span class="material-symbols-rounded">location_on</span><span class="ml-1">活動地點</span></p>
+                <p class="info-label"><span class="material-symbols-rounded">location_on</span><span
+                        class="ml-1">活動地點</span></p>
                 <p class="ml-7">{{ contentInfo?.location }}</p>
             </li>
             <li>
-                <p class="info-label"><span class="material-symbols-rounded">restaurant_menu</span><span class="ml-1">供餐</span></p>
+                <p class="info-label"><span class="material-symbols-rounded">restaurant_menu</span><span
+                        class="ml-1">供餐</span></p>
                 <p class="ml-7">{{ contentInfo?.hasMeal ? '有' : '無' }}</p>
             </li>
             <!-- <li>
@@ -57,13 +65,13 @@
     </header>
 
     <section class="h-auto text-base my-10 text-pretty">
-      <bbd-quill-editor-viewer [content]="contentInfo?.desc">
-      </bbd-quill-editor-viewer>
+        <bbd-quill-editor-viewer [content]="contentInfo?.desc">
+        </bbd-quill-editor-viewer>
     </section>
 
 
-    <a class="link link-underline" routerLink="/campaign/list">
-        <span class="material-symbols-rounded pr-2">arrow_left_alt</span>
-        活動列表
+    <a class="link-underline" routerLink="/campaign/list">
+        <span class="material-symbols-rounded">arrow_left_alt</span>
+        <span>活動列表</span>
     </a>
 </div>

@@ -26,7 +26,7 @@ input:is(:-webkit-autofill, :autofill) {
 // Normalize
 .mat-mdc-form-field {
     .mat-mdc-text-field-wrapper {
-        @apply rounded-full;
+        @apply rounded-3xl;
     }
 
     .mat-mdc-form-field-flex {
@@ -39,7 +39,7 @@ input:is(:-webkit-autofill, :autofill) {
 
     .mdc-notched-outline__leading,
     .mdc-notched-outline__trailing {
-        --mdc-outlined-text-field-container-shape: 3rem;
+        --mdc-outlined-text-field-container-shape: 1.5rem;
     }
 
     // form hint
@@ -77,16 +77,10 @@ input:is(:-webkit-autofill, :autofill) {
     @apply rounded-full;
 }
 
-
-
 .mat-mdc-form-field-flex {
     .mat-mdc-form-field-icon-prefix,
     .mat-mdc-form-field-icon-suffix {
         font-size: 0.875rem;
-
-        + .mat-mdc-form-field-infix {
-            padding: 0.65rem 0.3rem;
-        }
     }
 
     .mat-mdc-form-field-icon-prefix {
@@ -103,7 +97,7 @@ input:is(:-webkit-autofill, :autofill) {
 
     .mat-mdc-form-field-icon-prefix .material-symbols-rounded,
     .mat-mdc-form-field-suffix .material-symbols-rounded {
-        @apply text-xl align-middle;
+        @apply text-2xl align-middle mx-2;
     }
 }
 
@@ -174,7 +168,7 @@ input:is(:-webkit-autofill, :autofill) {
 
 .fill-black.mat-mdc-form-field {
     .mat-mdc-text-field-wrapper {
-        @apply bg-black/10;
+        @apply bg-sky-800/10;
     }
 
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) {
@@ -216,10 +210,6 @@ input:is(:-webkit-autofill, :autofill) {
     }
 }
 
-.form-section {
-    @apply pl-10;
-}
-
 .inputs-container {
     @apply px-5 py-4 flex-auto overflow-auto;
 }
@@ -256,4 +246,40 @@ input:is(:-webkit-autofill, :autofill) {
 
 .mdc-checkbox {
     padding: 0;
+}
+
+form.account {
+    .inner-wrap {
+        @apply pt-5 md:pt-7;
+    }
+
+    .form-section {
+        @apply px-6 pb-4 md:px-8 md:pb-6;
+    }
+
+    .form-section > ul:not(:first-of-type) {
+        @apply border-t-2 border-white/50 pt-5;
+    }
+
+    h3.title {
+        @apply mb-2;
+    }
+
+    .multi-inputs {
+        @apply grid gap-2;
+    }
+
+    .toolbar {
+        @apply flex items-center justify-end space-x-2 py-5;
+
+        .btn-primary {
+            @apply md:w-40;
+        }
+    }
+}
+
+.stretch-none-dk.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs {
+    .mat-mdc-tab-header .mat-mdc-tab {
+        @apply lg:grow-0;
+    }
 }
