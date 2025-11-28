@@ -19,6 +19,6 @@ export class AccountComponent extends BBDBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('');
+    console.log('init header');
   }
 }

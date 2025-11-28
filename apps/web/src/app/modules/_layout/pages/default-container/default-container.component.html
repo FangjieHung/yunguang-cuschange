@@ -81,11 +81,10 @@
                     </div>
                 </a>
                 <div *ngIf="isSignin">
-                    <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{ item.label
-                        }}
+                    <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{ item.label }}
                     </a>
-                    <div class="border-t border-white/30 pt-3 mt-3">
-                        <a routerLink="/account/reset-password" (click)="snav.close()">密碼修改</a>
+                    <div>
+                        <a routerLink="/account/password" (click)="snav.close()">密碼修改</a>
                         <button (click)="appAuthApiServ.signout();snav.close();">登出</button>
                     </div>
                 </div>
