@@ -19,16 +19,16 @@
 }
 
 .avatar-btn {
-    @apply flex items-center min-w-fit;
+    @apply flex items-center min-w-fit cursor-pointer;
 
     .user {
-        @apply rounded-xl min-w-8 w-9 h-9 bg-sky-200 text-sky-600 flex items-center justify-center font-bold;
+        @apply rounded-full min-w-8 w-9 h-9 bg-sky-200 text-sky-600 flex items-center justify-center font-bold;
         font-size: 0.875rem;
     }
 }
 
 .main-container {
-    @apply flex-1 h-full overflow-y-auto relative pt-32 pb-5 xs:pt-36 lg:pt-44;
+    @apply min-h-full overflow-y-auto relative pt-32 pb-5 xs:pt-36 lg:pt-44;
 
     &:has(.hero) {
         @apply pt-0;

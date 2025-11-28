@@ -7,10 +7,6 @@ import { ResultErrorComponent } from './modules/result/pages';
 import { AppAuthGuard } from '@core/shared';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
     children: [
@@ -36,9 +32,7 @@ const routes: Routes = [
           },
           {
             path: 'account',
-            loadChildren: () =>
-              import('./modules/account/account.module').then((m) => m.AccountModule
-              ),
+            loadChildren: () => import('./modules/account/account.module').then((m) => m.AccountModule),
           },
           {
             path: 'news',

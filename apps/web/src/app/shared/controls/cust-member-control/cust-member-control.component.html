@@ -142,7 +142,7 @@
         <li>
           <div class="form-label">學歷 <span class="required-mark" *ngIf="f['education'] | ctrlHasRequired">*</span></div>
           <mat-form-field appearance="outline" class="w-full fill-black">
-            <textarea matInput formControlName="education" rows="8" placeholder="您的學歷..."
+            <textarea matInput formControlName="education" rows="4" placeholder="您的學歷..."
               [required]="f['education'] | ctrlHasRequired"></textarea>
             <mat-error class="text-xs" *ngIf="f['contentJto'].get('education')?.errors">
               <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('education')?.errors, '學歷')">{{ msg }}
@@ -154,7 +154,7 @@
           <div class="form-label">經歷 <span class="required-mark" *ngIf="f['experience'] | ctrlHasRequired">*</span>
           </div>
           <mat-form-field appearance="outline" class="w-full fill-black">
-            <textarea matInput formControlName="experience" rows="8" placeholder="您的經歷..."
+            <textarea matInput formControlName="experience" rows="4" placeholder="您的經歷..."
               [required]="f['experience'] | ctrlHasRequired"></textarea>
             <mat-error class="text-xs" *ngIf="f['contentJto'].get('experience')?.errors">
               <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('experience')?.errors, '經歷')">{{ msg }}

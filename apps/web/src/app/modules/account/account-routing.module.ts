@@ -3,14 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  ProfileComponent
+  ProfileComponent, PasswordComponent,
+  AccountComponent
 } from './pages';
 
 const routes: Routes = [
   {
-    path: 'profile',
-    component: ProfileComponent,
-  },
+    path: '',
+    component: AccountComponent,
+    children: [
+      { path: 'profile', component: ProfileComponent },
+      { path: 'password', component: PasswordComponent },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({

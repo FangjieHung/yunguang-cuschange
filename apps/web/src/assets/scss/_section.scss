@@ -233,3 +233,28 @@ a.card,
     --mat-tab-header-inactive-label-text-color: #000;
   }
 }
+
+.sub-sidenav {
+  
+  &.mat-drawer-container,
+  .mat-drawer {
+    @apply bg-white/0;
+  }
+
+  .mat-drawer-inner-container {
+    min-height: fit-content;
+  }
+  
+  .mat-drawer-side {
+    @apply min-h-fit border-r-0;
+  }
+
+  mat-nav-list {
+    @apply border-l border-solid;
+  }
+
+  .mdc-list-item--with-one-line.active,
+  .mdc-list-item:focus {
+    @apply border-l-2 border-sky-400;;
+  }
+}

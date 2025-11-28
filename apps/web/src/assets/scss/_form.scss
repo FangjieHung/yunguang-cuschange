@@ -61,14 +61,6 @@ input:is(:-webkit-autofill, :autofill) {
     @apply grid gap-x-5 gap-y-2;
 }
 
-.divide-wrap {
-    @apply divide-y-2 divide-white/50 space-y-4;
-
-    ul:not(:first-of-type) {
-        @apply pt-7;
-    }
-}
-
 .section-title {
     @apply col-span-full flex items-center justify-between mb-3;
 }
@@ -258,7 +250,7 @@ form.account {
     }
 
     .form-section > ul:not(:first-of-type) {
-        @apply border-t-2 border-white/50 pt-5;
+        @apply border-t-2 border-black/5 pt-7 pb-6;
     }
 
     h3.title {
@@ -272,8 +264,8 @@ form.account {
     .toolbar {
         @apply flex items-center justify-end space-x-2 py-5;
 
-        .btn-primary {
-            @apply md:w-40;
+        .btn-primary.btn-lg {
+            @apply w-fit md:w-40;
         }
     }
 }

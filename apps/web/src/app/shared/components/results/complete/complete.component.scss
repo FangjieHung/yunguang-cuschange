@@ -1,0 +1,80 @@
+/* Complete */
+svg {
+    @apply w-20 block mr-4 mb-4 xl:w-24;
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    &.circle {
+        -webkit-animation: dash 0.9s ease-in-out;
+        animation: dash 0.9s ease-in-out;
+    }
+    &.line {
+        stroke-dashoffset: 1000;
+        -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+        animation: dash 0.9s 0.35s ease-in-out forwards;
+    }
+    &.check {
+        stroke-dashoffset: -100;
+        -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+        animation: dash-check 0.9s 0.35s ease-in-out forwards;
+    }
+}
+
+.display {
+    @apply tracking-wide mt-1;
+    color: var(--md-sys-color-primary);
+}
+
+.fade-in-left {
+    @apply opacity-0 delay-200 -translate-x-10;
+    animation: fadeInLeft 1s ease-out forwards; /* Apply the animation */
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at its original position */
+  }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-webkit-keyframes dash-check {
+    0% {
+        stroke-dashoffset: -100;
+    }
+    100% {
+        stroke-dashoffset: 900;
+    }
+}
+
+@keyframes dash-check {
+    0% {
+        stroke-dashoffset: -100;
+    }
+    100% {
+        stroke-dashoffset: 900;
+    }
+}
