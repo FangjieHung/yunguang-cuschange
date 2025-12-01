@@ -12,16 +12,16 @@
       <div class="search-wrap mt-5">
         <mat-form-field appearance="outline" class="fill-black">
           <span matPrefix class="material-symbols-rounded">search</span>
-          <input matInput type="text" [(ngModel)]="request.queryRequest.queryString" name="searchValue" placeholder="搜尋">
+          <input matInput type="text" [(ngModel)]="request.queryRequest.queryString" name="searchValue"
+            placeholder="搜尋">
           <button *ngIf="request.queryRequest.queryString" matSuffix mat-icon-button aria-label="Clear"
             (click)="request.queryRequest.queryString = null; onSearch();">
             <span class="material-symbols-rounded">close</span>
           </button>
         </mat-form-field>
         <button class="btn-primary btn-lg" [ngClass]="{'disabled-hide': !request.queryRequest.queryString}"
-          [disabled]="!request.queryRequest.queryString"
-          (click)="onSearch()">
-            搜尋
+          [disabled]="!request.queryRequest.queryString" (click)="onSearch()">
+          搜尋
         </button>
       </div>
       <mat-chip-listbox class="sort-link" aria-label="sort selection">
@@ -41,19 +41,20 @@
 
 
       <!-- 有資料 -->
-      <div *ngIf="!isLoading && !(dataSource | isEmpty)">
+      <ng-container *ngIf="!isLoading && !(dataSource | isEmpty)">
         <a *ngFor="let item of dataSource" [routerLink]="['/news/detail/', item.uniqueId]">
-          <p class="space-x-2">
-            <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
-            <span class="sort">{{ item.catName }}</span>
-          </p>
+          <div class="info-wrap">
+            <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+            <p>{{ item.catName }} &#8739;</p>
+            <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
+          </div>
           <h3> {{ item.title }}</h3>
         </a>
         <web-paginator
           [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
           (pageIndexChange)="onSearch($event)">
         </web-paginator>
-      </div>
+      </ng-container>
     </div>
 
 

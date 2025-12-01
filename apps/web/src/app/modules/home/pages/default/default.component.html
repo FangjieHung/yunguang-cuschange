@@ -14,32 +14,33 @@
 
   <div class="space-y-20 py-20">
     <section class="max-w-container">
-      <h2 class="display d-black">Knowledge Exchange</h2>
-
-      <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
-        <swiper [config]="bannerSwipe" class="relative w-full mt-8 slide-1-fade">
-          <ng-template swiperSlide *ngFor="let item of ads">
-            <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
-              <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.title"
-                class="rounded-lg aspect-video object-cover w-full lg:w-2/3 lg:mt-4">
-              <div class="w-full mt-5 lg:w-1/3 lg:mt-0">
-                <h3 class="headline font-bold">{{ item.title }}</h3>
-                <p class="text-xl"> {{ item.desc }}</p>
+      <div class="px-5">
+        <h2 class="display d-black">Knowledge Exchange</h2>
+        <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
+          <swiper [config]="bannerSwipe" class="relative w-full mt-8 slide-1-fade">
+            <ng-template swiperSlide *ngFor="let item of ads">
+              <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
+                <!-- [src]="combineCdnUrl(item.coverFullPath || '')"-->
+                <img src="/assets/image/demo/002.jpg" [alt]="item.title"
+                  class="rounded-lg aspect-video object-cover w-full lg:w-2/3 lg:mt-4">
+                <div class="w-full mt-5 lg:w-1/3 lg:mt-0">
+                  <h3 class="headline font-bold">{{ item.title }}</h3>
+                  <p class="text-xl"> {{ item.desc }}</p>
+                </div>
               </div>
-            </div>
-          </ng-template>
-        </swiper>
-
-        <div class="swipe-btn-wrap-b">
-          <button class="btn-primary swiper-btn-banner-prev"><span class="material-symbols-rounded">
-              arrow_back_ios
-            </span></button>
-          <button class="btn-primary swiper-btn-banner-next"><span class="material-symbols-rounded">
-              arrow_forward_ios
-            </span></button>
+            </ng-template>
+          </swiper>
+          <div class="swipe-btn-wrap-b">
+            <button class="btn-primary swiper-btn-banner prev"><span class="material-symbols-rounded">
+                arrow_back_ios
+              </span></button>
+            <button class="btn-primary swiper-btn-banner next"><span class="material-symbols-rounded">
+                arrow_forward_ios
+              </span></button>
+          </div>
         </div>
+        <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
       </div>
-      <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
     </section>
 
     <section class="max-w-container flex flex-col">
@@ -49,28 +50,28 @@
       </h2>
       <div class="relative" *ngIf="!(campaigns | isEmpty)">
         <swiper [config]="campaignSwipe" class="w-full my-10">
-          <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5">
+          <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5 pl-5">
             <web-glass-bg class="container-hover">
-              <a [routerLink]="['/campaign/detail', item.uniqueId]" class="block w-full p-2">
-                <div class="px-8">
+              <a class="block p-2" [routerLink]="['/campaign/detail', item.uniqueId]">
+                <div class="p-3">
                   <ol class="date-duration">
                     <!-- 開始日 -->
                     <li>
-                      <p>
-                        <span class="text-2xl">{{ item.startAt | date:'MM' }} &#8725;</span><br>
-                        <span>{{ item.startAt | date:'E' }}</span>
-                      </p>
-                      <span class="text-6xl">{{ item.startAt | date:'dd' }}</span>
+                      <div class="month-wrap">
+                        <p>{{ item.startAt | date: 'MM' }} &#8725;</p>
+                        <p>{{ item.startAt | date: 'E' }}.</p>
+                      </div>
+                      <p class="date">{{ item.startAt | date: 'dd' }}</p>
                     </li>
                     <!-- 結束日 -->
                     <ng-container *ngIf="!(item.endAt | isSameDate: item.startAt)">
                       <li class="line"></li>
                       <li>
-                        <p>
-                          <span class="text-2xl">{{ item.endAt | date:'MM' }} &#8725;</span><br>
-                          <span>{{ item.endAt | date:'E' }}</span>
-                        </p>
-                        <span class="text-6xl">{{ item.endAt | date:'dd' }}</span>
+                        <div class="month-wrap">
+                          <p>{{ item.endAt | date: 'MM' }} &#8725;</p>
+                          <p>{{ item.endAt | date: 'E' }}.</p>
+                        </div>
+                        <p class="date">{{ item.endAt | date: 'dd' }}</p>
                       </li>
                     </ng-container>
                   </ol>
@@ -89,32 +90,33 @@
             </web-glass-bg>
           </ng-template>
         </swiper>
-        <button class="btn-primary swiper-btn-between prev"><span class="material-symbols-rounded">
+        <button class="btn-primary swiper-btn-between swiper-btn-campaign prev"><span class="material-symbols-rounded">
             arrow_back_ios
           </span></button>
-        <button class="btn-primary swiper-btn-between next"><span class="material-symbols-rounded">
+        <button class="btn-primary swiper-btn-between swiper-btn-campaign next"><span class="material-symbols-rounded">
             arrow_forward_ios
           </span></button>
       </div>
       <web-result-empty *ngIf="!campaignList.length" class="block my-5"></web-result-empty>
-      <a class="link-underline mt-auto ml-auto" target="_blank" routerLink="/campaign/list">
+      <a class="link-underline mt-auto ml-auto mr-5" target="_blank" routerLink="/campaign/list">
         <span>看更多活動</span><span class="material-symbols-rounded">arrow_right_alt</span>
       </a>
     </section>
 
     <section class="max-w-container">
       <div class="flex items-start flex-col lg:flex-row-reverse">
-        <h2 class="lg:text-right">
+        <h2 class="lg:text-right min-w-fit">
           <span class="display d-black">Latest News</span>
           <p class="headline">最新消息</p>
         </h2>
 
         <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
           <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
-            <p class="space-x-2">
-              <span> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
-              <span class="sort">{{ '學會公告' }}</span>
-            </p>
+            <div class="info-wrap">
+              <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+              <p>{{ '學會公告' }} &#8739;</p>
+              <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
+            </div>
             <h3> {{ item.title }}</h3>
           </a>
         </div>

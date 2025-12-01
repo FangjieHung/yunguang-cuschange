@@ -18,14 +18,18 @@ header.hero {
     @apply relative overflow-x-hidden;
 
     section.max-w-container {
-        @apply min-h-[80svh] py-[5vh];
+        // @apply xl:min-h-[80svh] xl:py-[5vh];
     }
 }
 
 .news-list {
-    @apply min-w-0 flex-auto w-full my-6 xl:w-auto xl:mr-6;
+    @apply min-w-0 flex-auto w-full my-6 xl:w-auto xl:mr-20;
 }
 
 h2.display {
     @apply text-pretty;
+}
+
+.swiper-btn-campaign {
+    @apply hidden xl:flex;
 }

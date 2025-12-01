@@ -1,23 +1,23 @@
 <div class="min-h-container w-full max-w-2xl mx-auto py-20">
     <header>
-        <ol class="date-duration text-base max-w-xs">
+        <ol class="date-duration">
             <!-- 開始日 -->
             <li>
-                <p>
-                    <span>{{ response?.startAt| date: 'MM' }} &#8725;</span><br>
-                    <span>{{ response?.startAt | date: 'E' }}</span>
-                </p>
-                <span class="text-5xl">{{ response?.startAt | date: 'dd' }}</span>
+                <div class="month-wrap">
+                    <p>{{ response?.startAt| date: 'MM' }} &#8725;</p>
+                    <p>{{ response?.startAt | date: 'E' }}.</p>
+                </div>
+                <p class="date">{{ response?.startAt | date: 'dd' }}</p>
             </li>
             <!-- 結束日 -->
             <ng-container *ngIf="!(response?.endAt | isSameDate: response?.startAt)">
                 <li class="line"></li>
                 <li>
-                    <p>
-                        <span>{{ response?.endAt | date: 'MM' }} &#8725;</span><br>
-                        <span>{{ response?.endAt | date: 'E' }}</span>
-                    </p>
-                    <span class="text-5xl">{{ response?.endAt | date: 'dd' }}</span>
+                    <div class="month-wrap">
+                        <p>{{ response?.endAt | date: 'MM' }} &#8725;</p>
+                        <p>{{ response?.endAt | date: 'E' }}.</p>
+                    </div>
+                    <p class="date">{{ response?.endAt | date: 'dd' }}</p>
                 </li>
             </ng-container>
         </ol>

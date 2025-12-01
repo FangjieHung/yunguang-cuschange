@@ -93,11 +93,27 @@ a.card,
 /* list */
 .news-list {
   > a {
-    @apply block py-5 border-b border-sky-700 border-opacity-30 transition-all ease-in-out hover:border-opacity-100;
+    @apply block py-10 border-b border-sky-700 border-opacity-30 transition-all ease-in-out hover:border-opacity-100;
+
+    &:first-of-type {
+      @apply pt-0;
+    }
   }
 
   h3 {
-    @apply text-xl line-clamp-2;
+    @apply text-2xl line-clamp-2 mt-1;
+  }
+
+  .info-wrap {
+    @apply flex items-center space-x-2 text-lg;
+
+    .material-symbols-rounded {
+      @apply text-xl;
+    }
+  }
+
+  .pin {
+    @apply bg-sky-200 text-sky-700 text-sm font-semibold px-2 py-1 flex items-center rounded;
   }
 }
 
@@ -224,7 +240,6 @@ a.card,
 }
 
 .tab-label-lg {
-
   .mdc-tab__text-label {
     @apply text-xl font-bold lg:text-2xl lg:pb-2 2xl:text-3xl;
   }
@@ -235,7 +250,6 @@ a.card,
 }
 
 .sub-sidenav {
-  
   &.mat-drawer-container,
   .mat-drawer {
     @apply bg-white/0;
@@ -244,7 +258,7 @@ a.card,
   .mat-drawer-inner-container {
     min-height: fit-content;
   }
-  
+
   .mat-drawer-side {
     @apply min-h-fit border-r-0;
   }
@@ -255,6 +269,6 @@ a.card,
 
   .mdc-list-item--with-one-line.active,
   .mdc-list-item:focus {
-    @apply border-l-2 border-sky-400;;
+    @apply border-l-2 border-sky-400;
   }
 }

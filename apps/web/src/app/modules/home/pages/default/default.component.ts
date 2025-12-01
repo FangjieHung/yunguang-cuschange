@@ -60,20 +60,22 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
   ];
 
   campaignSwipe = {
-    spaceBetween: 32,
     navigation: {
-      nextEl: '.swiper-btn-between.next',
-      prevEl: '.swiper-btn-between.prev',
+      nextEl: '.swiper-btn-campaign.next',
+      prevEl: '.swiper-btn-campaign.prev',
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
+        slidesPerView: 1.2,
       },
       768: {
-        slidesPerView: 2,
+        slidesPerView: 2.5,
       },
       1280: {
-        slidesPerView: 3,
+        slidesPerView: 3.2,
+      },
+      1600: {
+        slidesPerView: 3.5,
       },
     },
   };
@@ -82,8 +84,8 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
     slidesPerView: 1,
     spaceBetween: 32,
     navigation: {
-      nextEl: '.swiper-btn-banner-next',
-      prevEl: '.swiper-btn-banner-prev',
+      nextEl: '.swiper-btn-banner.next',
+      prevEl: '.swiper-btn-banner.prev',
     },
   };
 
@@ -99,7 +101,7 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
     this.getCaches();
   }
 
-    ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     this.updateLogoScale();
   }
 

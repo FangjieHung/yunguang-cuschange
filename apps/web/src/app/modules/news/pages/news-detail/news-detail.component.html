@@ -1,10 +1,11 @@
-<div class="min-h-container w-full max-w-2xl mx-auto p-5">
-    <header>
-        <p class="space-x-2 label">
-            <span>{{ response?.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</span>
-            <span class="sort"> 學會公告</span>
-        </p>
-        <h3 class="headline">{{ response?.title }}</h3>
+<div class="min-h-container w-full max-w-3xl mx-auto p-5">
+    <header class="news-list">
+        <div class="info-wrap">
+            <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+            <p>學會公告 &#8739;</p>
+            <p>{{ response?.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
+          </div>
+        <h2 class="headline">{{ response?.title }}</h2>
     </header>
     <section class="h-auto text-base my-10 text-pretty">
       <bbd-quill-editor-viewer [content]="(response?.content || '{}' | jsonParse)?.desc">
