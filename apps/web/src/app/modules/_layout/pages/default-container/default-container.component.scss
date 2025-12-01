@@ -10,14 +10,6 @@
     }
 }
 
-[id="logoImg"] {
-    @apply bg-white bg-opacity-0 rounded-full backdrop-blur border border-white border-opacity-0 transition-all ease-in-out duration-500 absolute p-3 w-32 xs:w-40 lg:w-44 4xl:w-48;
-
-    &.img-shrink {
-        @apply w-24 p-1 bg-opacity-50 border-opacity-100;
-    }
-}
-
 .avatar-btn {
     @apply flex items-center min-w-fit cursor-pointer;
 
@@ -28,7 +20,11 @@
 }
 
 .main-container {
-    @apply min-h-full overflow-y-auto relative pt-32 pb-5 xs:pt-36 lg:pt-44;
+    @apply pt-32 pb-5 overflow-y-auto relative;
+
+    @media screen and (min-width: 1024px) {
+        min-height: calc(100svh - 20.8rem);
+    }
 
     &:has(.hero) {
         @apply pt-0;
@@ -63,7 +59,7 @@ mat-sidenav-container {
 }
 
 .sidemenu-inner {
-    @apply mt-32 divide-y divide-black/30 xs:mt-40;
+    @apply mt-24 divide-y divide-black/30;
 
     .btn-stroke-white {
         @apply w-full max-w-sm mr-auto;

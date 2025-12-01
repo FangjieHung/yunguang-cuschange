@@ -7,7 +7,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import {
   ProfileComponent,
-  PasswordComponent,
+  ResetPasswordComponent,
   AccountComponent
 } from './pages';
 
@@ -15,7 +15,7 @@ import {
 const CUSTOM_MODULES = [SharedModule];
 const CUSTOM_COMPONENTS = [
   ProfileComponent,
-  PasswordComponent,
+  ResetPasswordComponent,
   AccountComponent
 ];
 

@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center px-4 pt-10 md:pt-0 md:pb-10">
+<div class="flex items-center justify-center px-4 md:pb-10">
 
   <web-glass-bg class="block w-full mx-auto md:max-w-sm">
       <div class="p-6">
@@ -39,11 +39,10 @@
           <div class="mb-5 space-y-5">
             <div class="flex justify-between items-center">
               <mat-checkbox color="primary"><span class="text-base -ml-2">記住我</span></mat-checkbox>
-              <a *ngIf="false" class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
-              <a class="btn-text" href="mailto:hello@sparkgen.cc">忘記密碼? </a>
+              <a class="btn-text" routerLink="/auth/forget-password">忘記密碼?</a>
             </div>
             <button class="btn-primary btn-lg" (click)="onSubmit()">登入</button>
-            <a mat-button routerLink="/auth/signup" class="btn-lg">註冊</a>
+            <a routerLink="/auth/signup" class="btn-lg">註冊</a>
           </div>
         </form>
 

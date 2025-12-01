@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  ForgetPasswordComponent, SigninComponent, SignupComponent, SignupCompletedComponent
+  ForgetResetPasswordComponent, SigninComponent, SignupComponent, SignupCompletedComponent
 } from './pages';
 
 const routes: Routes = [
   {
     path: 'forget-password',
-    component: ForgetPasswordComponent
+    component: ForgetResetPasswordComponent
   },
   {
     path: 'signin',

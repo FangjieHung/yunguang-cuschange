@@ -6,13 +6,13 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BBDBaseComponent } from '@core/shared';
 
 @Component({
-  selector: 'web-password',
-  templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss'],
+  selector: 'web-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss'],
 })
 
-export class PasswordComponent extends BBDBaseComponent implements OnInit {
-
+export class ResetPasswordComponent extends BBDBaseComponent implements OnInit {
+passwordHide = true;
 
   constructor(
     protected override injector: Injector) {

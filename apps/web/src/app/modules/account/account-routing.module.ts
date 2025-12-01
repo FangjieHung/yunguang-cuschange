@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  ProfileComponent, PasswordComponent,
+  ProfileComponent, ResetPasswordComponent,
   AccountComponent
 } from './pages';
 
@@ -13,7 +13,7 @@ const routes: Routes = [
     component: AccountComponent,
     children: [
       { path: 'profile', component: ProfileComponent },
-      { path: 'password', component: PasswordComponent },
+      { path: 'password', component: ResetPasswordComponent },
       { path: '', redirectTo: 'profile', pathMatch: 'full' }
     ]
   }

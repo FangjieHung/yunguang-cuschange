@@ -2,6 +2,7 @@
     <web-glass-bg>
         <div class="inner-wrap">
             <section class="form-section">
+                <h3 class="title">個人資料</h3>
                 <ul class="input-group lg:grid-cols-3">
                     <li>
                         <div class="form-label">
@@ -96,7 +97,7 @@
                             <p>地址<span *ngIf="f['addr'] | ctrlHasRequired" class="required-mark">*</span></p>
                         </div>
                         <div class="multi-inputs grid-cols-3">
-                            
+
                             <!-- 會怪怪的好像沒有 import
                             <web-zip-code-control #currZipCode formControlName="currZipCodeId"
                                 [required]="f['currZipCodeId'] | ctrlHasRequired">

@@ -1,7 +1,9 @@
 <nav class="nav-bar">
-    <a routerLink="/">
-        <img id="logoImg" #logoImg src="assets/image/logo/mark.png" alt="logo">
-    </a>
+    <div id="logoImg" [class.img-scaleLarge]="isLogoLarge$ | async">
+        <a routerLink="/">
+            <img src="assets/image/logo/mark.png" alt="logo">
+        </a>
+    </div>
 
     <div class="ml-auto mt-3 flex items-center space-x-4">
         <web-glass-bg class="container-hover hidden lg:block">
@@ -36,7 +38,7 @@
                     <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
                 </div>
 
-                <div *ngIf="isSignin" class="flex items-center">
+                <div *ngIf="isSignin" class="hidden items-center lg:flex">
                     <div class="menu-wrap">
                         <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
                             <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
@@ -44,15 +46,19 @@
 
                         <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
                             <web-glass-bg class="container-hover">
-                                <a routerLink="/account/profile">個人資料</a>
-                                <button (click)="appAuthApiServ.signout()">登出</button>
+                                <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{
+                                    item.label }}
+                                </a>
+                                <button (click)="appAuthApiServ.signout()">
+                                    <span class="material-symbols-rounded pr-2">logout</span>登出
+                                </button>
                             </web-glass-bg>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:hidden">
-                    <button (click)="toggleSideMenu()" class="h-12 w-10">
+                    <button (click)="toggleSideMenu()" class="h-10 w-11">
                         <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
                         <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
                     </button>
@@ -68,60 +74,23 @@
 
         <div class="sidemenu-inner">
             <mat-nav-list class="sidenav-list">
-                <a *ngFor="let menu of navList" [routerLink]="menu.link" (click)="snav.close()">
-                    {{ menu.label }}
-                </a>
-            </mat-nav-list>
-            <mat-nav-list class="sidenav-list">
-                <a (click)="snav.close()">
-                    <span *ngIf="!isSignin" routerLink="/auth/signin">會員登入</span>
-                    <div *ngIf="isSignin" class="flex justify-between">
-                        <span class="truncate w-24">Hi! {{ (currUserInfo?.name || '-') }} </span>
-
-                    </div>
+                <a *ngIf="!isSignin" (click)="snav.close()">
+                    <span routerLink="/auth/signin">會員登入</span>
                 </a>
                 <div *ngIf="isSignin">
                     <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{ item.label }}
                     </a>
                     <div>
-                        <a routerLink="/account/password" (click)="snav.close()">密碼修改</a>
-                        <button (click)="appAuthApiServ.signout();snav.close();">登出</button>
+                        <button (click)="appAuthApiServ.signout();snav.close();">
+                            登出</button>
                     </div>
                 </div>
             </mat-nav-list>
-
-            <section>
-                <ul class="web-map">
-                    <li *ngIf="('PHONE' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as phone">
-                        <span class="label">phone</span>
-                        <p>{{ phone }}</p>
-                    </li>
-                    <li *ngIf="('FAX' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as fax">
-                        <span class="label">fax</span>
-                        <p>{{ fax }}</p>
-                    </li>
-                    <li
-                        *ngIf="('OPENING HOURS' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as opening">
-                        <span class="label">Opening Hours</span>
-                        <p>{{ opening }}</p>
-                    </li>
-                </ul>
-
-                <div class="social-icon-wrap">
-                    <a target="_blank" [attr.href]="fbUrl" rel="noopener noreferrer"
-                        *ngIf="('Facebook' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as fbUrl">
-                        <img src="assets/image/icon/fb.webp" alt="facebook">
-                    </a>
-                    <a target="_blank" [attr.href]="igUrl"
-                        *ngIf="('Instagram' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as igUrl">
-                        <img src="assets/image/icon/ig.webp" alt="instagram">
-                    </a>
-                    <a target="_blank" [attr.href]="ytUrl"
-                        *ngIf="('Youtube' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as ytUrl">
-                        <img src="assets/image/icon/yt.webp" alt="youtube">
-                    </a>
-                </div>
-            </section>
+            <mat-nav-list class="sidenav-list">
+                <a *ngFor="let menu of navList" [routerLink]="menu.link" (click)="snav.close()">
+                    {{ menu.label }}
+                </a>
+            </mat-nav-list>
         </div>
     </mat-sidenav>
 

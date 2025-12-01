@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, inject, ViewChild, HostListener, ElementRef, OnInit } from '@angular/core';
+import { Component, Injector, inject, ViewChild, HostListener, OnInit } from '@angular/core';
+import { LogoStateService } from '../../../../shared/services/logo-state.service';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Observable } from 'rxjs';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -14,12 +16,12 @@ import { AppObjectStoreCodes, OrgContactJto } from '@core/models';
 })
 
 export class DefaultContainerComponent extends BBDBaseComponent implements OnInit {
+  isLogoLarge$!: Observable<boolean>;
   currentUrl = '';
   activeMenu: string | null = null;
   isMenuOpen = false;
 
   @ViewChild('snav') snav!: MatSidenav;
-  @ViewChild('logoImg', { static: false }) logoRef!: ElementRef<HTMLImageElement>
 
   private _appStoreApiServ = inject(AppStoreApiServ);
   response: OrgContactJto | null = null;
@@ -44,12 +46,15 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
 
   accountMenu = [
     { label: '我的課程', link: '/' },
-    { label: '會員中心', link: '/auth/' },
+    { label: '個人資料', link: '/account/profile' },
+    { label: '重設密碼', link: '/account/password' }
   ];
 
   constructor(
+    private logoStateService: LogoStateService,
     protected override injector: Injector) {
     super(injector);
+    this.isLogoLarge$ = this.logoStateService.isLargeLogo$;
   }
 
   ngOnInit(): void {
@@ -59,20 +64,20 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     }
   }
 
-    doDataInit(): void {
-      this._appStoreApiServ.getAppObjectStoreValueByCode(AppObjectStoreCodes.學會聯絡方式設定檔).subscribe({
-        next: (res) => {
-          if (!res) {
-            return;
-          }
-  
-          this.response = res;
-        },
-        error: (err) => {
-          this.bbdNotifyServ.error('執行失敗', err);
-        },
-      });
-    }
+  doDataInit(): void {
+    this._appStoreApiServ.getAppObjectStoreValueByCode(AppObjectStoreCodes.學會聯絡方式設定檔).subscribe({
+      next: (res) => {
+        if (!res) {
+          return;
+        }
+
+        this.response = res;
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    });
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -80,18 +85,6 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     const clickedInsideMenu = target.closest('.menu-wrap');
     if (!clickedInsideMenu) {
       this.activeMenu = null;
-    }
-  }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const logo = this.logoRef.nativeElement;
-
-    if (scrollY > 50) {
-      logo.classList.add('img-shrink');
-    } else {
-      logo.classList.remove('img-shrink');
     }
   }
 
