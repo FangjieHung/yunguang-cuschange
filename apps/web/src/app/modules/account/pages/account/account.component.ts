@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -11,14 +11,12 @@ import { BBDBaseComponent } from '@core/shared';
   styleUrls: ['./account.component.scss'],
 })
 
-export class AccountComponent extends BBDBaseComponent implements OnInit {
+export class AccountComponent extends BBDBaseComponent {
 
   constructor(
     protected override injector: Injector) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    console.log('init header');
-  }
+  // ngOnInit(): void { }
 }

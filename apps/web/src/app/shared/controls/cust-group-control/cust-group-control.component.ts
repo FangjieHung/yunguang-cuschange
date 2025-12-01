@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, inject, Injector, OnInit, forwardRef, ViewChild } from '@angular/core';
+import { Component, inject, Injector, forwardRef, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 // Custom packages
@@ -25,7 +25,7 @@ import { ZipCodeControlComponent } from '@core/shared'
     }
   ]
 })
-export class CustGroupControlComponent extends BBDBaseComponent implements OnInit, ControlValueAccessor {
+export class CustGroupControlComponent extends BBDBaseComponent implements ControlValueAccessor {
   @ViewChild('currZipCode') currZipCode!: ZipCodeControlComponent;
 
   private _fb = inject(FormBuilder);
@@ -46,9 +46,7 @@ export class CustGroupControlComponent extends BBDBaseComponent implements OnIni
   }
 
   // Custom control required methods
-  ngOnInit(): void {
-    console.log('init');
-  }
+  // ngOnInit(): void { }
 
   // NG_VALUE_ACCESSOR 實作
   writeValue(value: CustGroupDto) {

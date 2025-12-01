@@ -21,14 +21,14 @@
 
 // 放兩側
 .swiper-btn-between {
-    @apply absolute z-10 inset-y-0 m-auto;
+    @apply absolute inset-y-0 m-auto z-10;
 
     &.prev {
-        @apply -left-10;
+        @apply left-1 4xl:-left-10;
     }
 
     &.next {
-        @apply -right-10;
+        @apply right-1 4xl:-right-10;
     }
 }
 

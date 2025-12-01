@@ -129,7 +129,6 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
     this.groupCtrl?.markAllAsTouched();
     this.memberCtrl?.markAllAsTouched();
     this.valForm.markAllAsTouched();
-    console.log(this.valForm);
     if (this.valForm.valid === false) {
       Object.values(this.valForm.controls).forEach(control => {
         if (control.invalid) {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, inject, Injector, OnInit, forwardRef, ViewChild } from '@angular/core';
+import { Component, inject, Injector, forwardRef, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 // Custom packages
@@ -25,7 +25,7 @@ import { ZipCodeControlComponent } from '@core/shared'
     }
   ]
 })
-export class CustMemberControlComponent extends BBDBaseComponent implements OnInit, ControlValueAccessor {
+export class CustMemberControlComponent extends BBDBaseComponent implements ControlValueAccessor {
   @ViewChild('resiZipCode') resiZipCode!: ZipCodeControlComponent;
   @ViewChild('currZipCode') currZipCode!: ZipCodeControlComponent;
 
@@ -47,9 +47,7 @@ export class CustMemberControlComponent extends BBDBaseComponent implements OnIn
   }
 
   // Custom control required methods
-  ngOnInit(): void {
-    console.log('init');
-  }
+  // ngOnInit(): void { }
 
   // NG_VALUE_ACCESSOR 實作
   writeValue(value: CustMemberDto) {
@@ -80,7 +78,6 @@ export class CustMemberControlComponent extends BBDBaseComponent implements OnIn
   }
 
   validate(): ValidationErrors | null {
-    console.log(this.valForm);
     if (this.valForm.invalid)
       return { invalid: true };
 

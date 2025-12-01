@@ -5,12 +5,15 @@
  * Copyright (c) 2013, salesforce.com
  */
 .ql-container {
-  box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  margin: 0px;
-  position: relative;
+  @apply box-border text-base m-0 relative;
+  font-family: "Noto Sans TC", Helvetica, Arial, sans-serif;
+  
+  p, li, figcaption {
+    @apply text-black text-justify;
+  }
 }
+
+
 .ql-container.ql-disabled .ql-tooltip {
   visibility: hidden;
 }
@@ -517,12 +520,12 @@
     stroke: #444;
   }
 }
-.ql-snow {
-  box-sizing: border-box;
-}
+
+.ql-snow,
 .ql-snow * {
-  box-sizing: border-box;
+  @apply box-border leading-relaxed tracking-wide text-pretty;
 }
+
 .ql-snow .ql-hidden {
   display: none;
 }

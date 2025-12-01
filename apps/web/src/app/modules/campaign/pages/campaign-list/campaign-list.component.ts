@@ -44,6 +44,8 @@ export class CampaignListComponent extends BBDBaseComponent implements OnInit {
   }
 
   doScrollToTop() {
+    if (!this.isBrowser)
+      return;
     window.scrollTo({ top: 0 });
   }
 

@@ -93,7 +93,8 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
     private logoStateService: LogoStateService,
     protected override injector: Injector) {
     super(injector);
-    gsap.registerPlugin(ScrollTrigger);
+    if (this.isBrowser)
+      gsap.registerPlugin(ScrollTrigger);
   }
 
   ngOnInit(): void {
@@ -111,6 +112,8 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
   }
 
   private updateLogoScale(): void {
+    if (!this.isBrowser)
+      return;
 
     const scrollY = window.scrollY || document.documentElement.scrollTop;
     const threshold = window.innerHeight * 0.2; // 20vh

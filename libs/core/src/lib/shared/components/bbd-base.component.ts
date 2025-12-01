@@ -1,4 +1,5 @@
-import { Injector } from '@angular/core';
+import { inject, Injector, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 // Antd packages
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
@@ -19,6 +20,8 @@ import { AppEnv, AppTokenInfo, AuthUserInfo } from '../../models';
 import { BBDNotifyService } from './bbd-notify/bbd-notify.service';
 
 export abstract class BBDBaseComponent {
+  protected readonly platformId = inject(PLATFORM_ID);
+
   // Antd services
   protected drawerServ: NzDrawerService;
   protected messageServ: NzMessageService;
@@ -39,6 +42,9 @@ export abstract class BBDBaseComponent {
   dateHelper = DateHelper;
 
   // Gets & Sets
+  get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
   get isSignin(): boolean {
     return this.appAuthApiServ.isSignin;
   }

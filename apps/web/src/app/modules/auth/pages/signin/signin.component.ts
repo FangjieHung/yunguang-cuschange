@@ -51,7 +51,6 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
         return;
 
       this.f['account'].setValue(String(value).trim().toUpperCase(), { emitEvent: false });
-      console.log('account upper');
     });
   }
 

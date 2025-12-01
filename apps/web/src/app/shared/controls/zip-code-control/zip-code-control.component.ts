@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Injector, Input, forwardRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 // Custom packages
@@ -25,7 +25,7 @@ import { ZipCodeView } from '@core/models';
     }
   ]
 })
-export class ZipCodeControlComponent extends BBDBaseComponent implements OnInit, ControlValueAccessor {
+export class ZipCodeControlComponent extends BBDBaseComponent implements ControlValueAccessor {
   valForm!: UntypedFormGroup;
   cities: any[] = [];
   districts: any[] = [];
@@ -42,9 +42,7 @@ export class ZipCodeControlComponent extends BBDBaseComponent implements OnInit,
     this.getCaches();
   }
 
-  ngOnInit(): void {
-    console.log('init');
-  }
+  // ngOnInit(): void { }
 
   writeValue(value: any) {
     this.valForm = this.fb.group({
