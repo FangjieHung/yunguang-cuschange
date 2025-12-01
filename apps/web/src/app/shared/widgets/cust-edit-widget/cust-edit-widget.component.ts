@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // Custom packages
-import { BBDBaseComponent } from '@core/shared';
+import { BBDBaseComponent, Validation } from '@core/shared';
 import { CustGroupDto, CustMemberDto, CustomerDto } from '@core/models';
 import { CustApiServ } from '@core/services';
 import { CustGroupControlComponent, CustMemberControlComponent } from '../../controls/';
@@ -18,6 +19,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
   @ViewChild(CustMemberControlComponent) memberCtrl!: CustMemberControlComponent;
 
   private _fb = inject(FormBuilder);
+  private _router = inject(Router);
   custApiServ = inject(CustApiServ);
 
   valForm!: UntypedFormGroup;
@@ -96,12 +98,16 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
   doFormInit(): void {
     this.valForm = this._fb.group({
       account: [null, [Validators.required, Validators.maxLength(10)]],
-      password: ['', [Validators.maxLength(64)]],
-      confirmPassword: [''],
+      password: ['', [Validators.required, Validators.maxLength(64)]],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(64)]],
       type: [null, [Validators.required]],
       code: [null, [Validators.maxLength(8)]],
       custGroup: [null],
       custMember: [null]
+    }, {
+      validators: [
+        Validation.match('password', 'confirmPassword')
+      ]
     });
 
     this.f['custGroup'].valueChanges.subscribe((res) => {
@@ -167,6 +173,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
             return;
           }
           this.bbdNotifyServ.success(this.custId ? `修改會員資料成功。` : `註冊會員成功。`);
+          this._router.navigate(['/auth/signup/complete']);
         },
         error: (err) => {
           this.bbdNotifyServ.error('執行失敗', err);

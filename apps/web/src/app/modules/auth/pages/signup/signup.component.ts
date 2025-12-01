@@ -1,4 +1,4 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector } from '@angular/core';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -9,15 +9,11 @@ import { CustApiServ } from '@core/services';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent extends BBDBaseComponent implements OnInit {
+export class SignupComponent extends BBDBaseComponent {
   custApiServ = inject(CustApiServ);
 
   constructor(protected override injector: Injector) {
     super(injector);
-  }
-
-  ngOnInit(): void {
-    console.log('');
   }
 }
 
@@ -25,12 +21,8 @@ export class SignupComponent extends BBDBaseComponent implements OnInit {
   selector: 'app-signup-completed',
   templateUrl: './signup-completed.component.html'
 })
-export class SignupCompletedComponent extends BBDBaseComponent implements OnInit {
+export class SignupCompletedComponent extends BBDBaseComponent {
   constructor(protected override injector: Injector) {
     super(injector);
-  }
-
-  ngOnInit(): void {
-    console.log('');
   }
 }
