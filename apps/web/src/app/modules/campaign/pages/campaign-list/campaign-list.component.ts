@@ -15,7 +15,6 @@ import { CampaignApiServ } from '@core/services';
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent extends BBDBaseComponent implements OnInit {
-  searchValue = '';
   campaignApiServ = inject(CampaignApiServ);
 
   dataSource: CampaignView[] = [];

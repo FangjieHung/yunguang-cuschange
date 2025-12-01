@@ -12,13 +12,16 @@
       <div class="search-wrap mt-5">
         <mat-form-field appearance="outline" class="fill-black">
           <span matPrefix class="material-symbols-rounded">search</span>
-          <input matInput type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="搜尋">
-          <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <input matInput type="text" [(ngModel)]="request.queryRequest.queryString" name="searchValue" placeholder="搜尋">
+          <button *ngIf="request.queryRequest.queryString" matSuffix mat-icon-button aria-label="Clear"
+            (click)="request.queryRequest.queryString = null; onSearch();">
             <span class="material-symbols-rounded">close</span>
           </button>
         </mat-form-field>
-        <button class="btn-primary btn-lg" [disabled]="!searchValue" [ngClass]="{'disabled-hide': !searchValue}">
-          搜尋
+        <button class="btn-primary btn-lg" [ngClass]="{'disabled-hide': !request.queryRequest.queryString}"
+          [disabled]="!request.queryRequest.queryString"
+          (click)="onSearch()">
+            搜尋
         </button>
       </div>
       <mat-chip-listbox class="sort-link" aria-label="sort selection">
