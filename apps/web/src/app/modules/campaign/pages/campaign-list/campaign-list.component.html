@@ -35,7 +35,7 @@
                             <p class="date">{{ item.startAt | date: 'dd' }}</p>
                         </li>
                         <!-- 結束日 -->
-                        <ng-container *ngIf="item.endAt">
+                        <ng-container *ngIf="!(item.endAt | isSameDate: item.startAt)">
                             <li class="line"></li>
                             <li>
                                 <div class="month-wrap">

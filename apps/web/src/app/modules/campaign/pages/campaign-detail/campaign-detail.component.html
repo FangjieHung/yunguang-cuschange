@@ -10,7 +10,7 @@
                 <span class="text-5xl">{{ response?.startAt | date: 'dd' }}</span>
             </li>
             <!-- 結束日 -->
-            <ng-container *ngIf="response?.endAt">
+            <ng-container *ngIf="!(response?.endAt | isSameDate: response?.startAt)">
                 <li class="line"></li>
                 <li>
                     <p>

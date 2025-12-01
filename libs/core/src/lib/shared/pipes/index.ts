@@ -10,6 +10,7 @@ export * from './file-url.pipe';
 export * from './has-any-permission.pipe';
 export * from './has-permission.pipe';
 export * from './is-empty.pipe';
+export * from './is-same-date.pipe';
 export * from './json-parse.pipe';
 export * from './phone-formatter.pipe';
 export * from './round-default.pipe';

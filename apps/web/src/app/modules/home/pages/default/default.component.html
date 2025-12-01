@@ -63,7 +63,7 @@
                       <span class="text-6xl">{{ item.startAt | date:'dd' }}</span>
                     </li>
                     <!-- 結束日 -->
-                    <ng-container *ngIf="item.endAt">
+                    <ng-container *ngIf="!(item.endAt | isSameDate: item.startAt)">
                       <li class="line"></li>
                       <li>
                         <p>

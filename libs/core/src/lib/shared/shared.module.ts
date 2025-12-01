@@ -15,7 +15,7 @@ import { AntdModule, MaterialModule } from './modules';
 import {
   AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe, EmptyFormatterPipe,
   JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
-  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe
+  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe, IsSameDatePipe
 } from './pipes';
 import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
 import { ImageFallbackDirective } from './../directives';
@@ -25,7 +25,7 @@ const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent,
 const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,
   EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,
-  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe];
+  HasPermissionPipe, HasAnyPermissionPipe, IsEmptyPipe, IsSameDatePipe];
 const THIRD_MODULES = [ThirdPartyModule, BBDNotifyModule];
 const CUST_DIRECTIVES = [ImageFallbackDirective];
 
