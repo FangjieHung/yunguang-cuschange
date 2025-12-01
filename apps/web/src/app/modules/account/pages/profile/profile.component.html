@@ -1,125 +1,15 @@
 <form [formGroup]="valForm" class="account">
     <web-glass-bg>
-        <div class="inner-wrap">
-            <section class="form-section">
-                <h3 class="title">個人資料</h3>
-                <ul class="input-group lg:grid-cols-3">
-                    <li>
-                        <div class="form-label">
-                            <p>電子信箱(帳號) <span *ngIf="f['email'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="email"
-                                [required]="f['email'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['email'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['email'].errors, '電子信箱(帳號)')">{{ msg }}
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-                    <li>
-                        <div class="form-label">
-                            <p>姓名<span *ngIf="f['name'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['name'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '姓名')">{{ msg }}</div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-                    <li>
-                        <div class="form-label">
-                            <p>英文名<span *ngIf="f['nameEn'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="nameEn"
-                                [required]="f['nameEn'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['nameEn'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['nameEn'].errors, '英文名')">{{ msg }}</div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-                    <li>
-                        <div class="form-label">
-                            <p>暱稱<span *ngIf="f['nickname'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="nickname"
-                                [required]="f['nickname'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['nickname'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['nickname'].errors, '暱稱')">{{ msg }}
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-                    <li>
-                        <div class="form-label">
-                            <p>手機<span *ngIf="f['mobile'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="mobile"
-                                [required]="f['mobile'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['mobile'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['mobile'].errors, '手機')">{{ msg }}</div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-
-                    <li>
-                        <div class="form-label">
-                            <p>室話<span *ngIf="f['phone'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="phone"
-                                [required]="f['phone'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['phone'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['phone'].errors, '室話')">{{ msg }}</div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-                    <li>
-                        <div class="form-label">
-                            <p>分機<span *ngIf="f['phoneExt'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <mat-form-field appearance="outline" class="w-full fill-black">
-                            <input matInput type="text" formControlName="phoneExt"
-                                [required]="f['phoneExt'] | ctrlHasRequired">
-                            <mat-error class="text-xs" *ngIf="f['phoneExt'].errors">
-                                <div *ngFor="let msg of formHelper.errorMsgs(f['phoneExt'].errors, '分機')">{{ msg }}
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </li>
-
-                    <li class="col-span-full">
-                        <div class="form-label">
-                            <p>地址<span *ngIf="f['addr'] | ctrlHasRequired" class="required-mark">*</span></p>
-                        </div>
-                        <div class="multi-inputs grid-cols-3">
-
-                            <!-- 會怪怪的好像沒有 import
-                            <web-zip-code-control #currZipCode formControlName="currZipCodeId"
-                                [required]="f['currZipCodeId'] | ctrlHasRequired">
-                            </web-zip-code-control>
-                            -->
-
-                            <mat-form-field appearance="outline" class="w-full fill-black">
-                                <input matInput type="text" formControlName="addr"
-                                    [required]="f['addr'] | ctrlHasRequired">
-                                <mat-error class="text-xs" *ngIf="f['addr'].errors">
-                                    <div *ngFor="let msg of formHelper.errorMsgs(f['addr'].errors, '地址Ｆ')">{{ msg }}
-                                    </div>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-        </div>
+      <div class="inner-wrap">
+        <ng-container *ngIf="custType === +custApiServ.customerTypes['團體會員']">
+          <web-cust-group-control #groupCtrl formControlName="custGroup"></web-cust-group-control>
+        </ng-container>
+        <ng-container *ngIf="custType === +custApiServ.customerTypes['個人會員']">
+          <web-cust-member-control #memberCtrl formControlName="custMember"></web-cust-member-control>
+        </ng-container>
+      </div>
     </web-glass-bg>
     <div class="toolbar">
-        <button mat-button routerLink="/">取消</button>
         <button class="btn-primary btn-lg" (click)="onSubmit()">送出</button>
     </div>
 </form>

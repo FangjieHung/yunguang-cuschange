@@ -13,7 +13,6 @@ const routes: Routes = [
       {
         path: '',
         component: DefaultContainerComponent,
-        // canActivate: [AppAuthGuard],
         children: [
           {
             path: '',
@@ -32,6 +31,7 @@ const routes: Routes = [
           },
           {
             path: 'account',
+            canActivate: [AppAuthGuard],
             loadChildren: () => import('./modules/account/account.module').then((m) => m.AccountModule),
           },
           {

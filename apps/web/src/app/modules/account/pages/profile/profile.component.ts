@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Component, OnInit, Injector, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, inject, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CustomerDto, UploadFormReq } from '@core/models';
-import { AppAttachApiServ, CustApiServ } from '@core/services';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
+import { CustomerDto } from '@core/models';
+import { CustApiServ } from '@core/services';
+import { CustGroupControlComponent, CustMemberControlComponent } from '../../../../shared/controls';
 
 @Component({
   selector: 'web-profile',
@@ -16,22 +16,23 @@ import { BBDBaseComponent } from '@core/shared';
 })
 
 export class ProfileComponent extends BBDBaseComponent implements OnInit {
-  private appAttachApiServ = inject(AppAttachApiServ);
-  readonly actionName = '個人資訊修改';
+  @ViewChild(CustGroupControlComponent) groupCtrl!: CustGroupControlComponent;
+  @ViewChild(CustMemberControlComponent) memberCtrl!: CustMemberControlComponent;
+
+  private _fb = inject(FormBuilder);
+  private _router = inject(Router);
+  custApiServ = inject(CustApiServ);
+
   valForm!: UntypedFormGroup;
   editDto = new CustomerDto();
-  uploadFormReq = new UploadFormReq();
-  imgFiles: any;
-  imgUrl = '';
+  custType = 0;
+
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
     return this.valForm.controls;
   }
 
   constructor(
-    public custApiServ: CustApiServ,
-    private _fb: FormBuilder,
-    private _router: Router,
     protected override injector: Injector,
   ) {
     super(injector);
@@ -41,17 +42,55 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
     this.doDataInit();
   }
 
+  doDataInit() {
+    this.custApiServ.getCurrCustomerDto().subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error('無存取權限，請確認您的帳號是否啟用。');
+          this._router.navigate(['/']);
+          return;
+        }
+
+        this.custType = res.type || 0;
+        if (!this.custType) {
+          this.bbdNotifyServ.error('無存取權限，請確認您的帳號是否啟用。');
+          this._router.navigate(['/']);
+          return;
+        }
+
+        this.editDto = res;
+        this.doDateParse(true);
+        this.doFormPatchValue();
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    });
+  }
+
+  doDateParse(isInit = false): void {
+    if (isInit) {
+      this.editDto.appUserEndAt = this.dateHelper.parseAppMaxUtcDateToNull(this.editDto.appUserEndAt);
+      this.editDto.endAt = this.dateHelper.parseAppMaxUtcDateToNull(this.editDto.endAt);
+      this.editDto.expAt = this.dateHelper.parseAppMaxUtcDateToNull(this.editDto.expAt);
+    } else {
+      this.editDto.appUserEndAt = this.dateHelper.parseNullToAppMaxUtcDate(this.editDto.appUserEndAt);
+      this.editDto.endAt = this.dateHelper.parseNullToAppMaxUtcDate(this.editDto.endAt);
+      this.editDto.expAt = this.dateHelper.parseNullToAppMaxUtcDate(this.editDto.expAt);
+    }
+  }
+
   doFormInit(): void {
     this.valForm = this._fb.group({
-      email: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
-      name: [null, [Validators.required, Validators.maxLength(20)]],
-      nameEn: [null, [Validators.maxLength(50)]],
-      nickname: [null, [Validators.maxLength(20)]],
-      mobile: [null, [Validators.maxLength(12)]],
-      phone: [null, [Validators.maxLength(12)]],
-      phoneExt: [null, [Validators.maxLength(8)]],
-      zipCodeId: [null,],
-      addr: [null, [Validators.maxLength(100)]],
+      custGroup: [null],
+      custMember: [null]
+    });
+
+    this.f['custGroup'].valueChanges.subscribe((res) => {
+      this.f['account'].setValue(res?.taxId || '', { emitEvent: false });
+    });
+    this.f['custMember'].valueChanges.subscribe((res) => {
+      this.f['account'].setValue(res?.idNo || '', { emitEvent: false });
     });
   }
   doFormPatchValue(): void {
@@ -61,49 +100,11 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
     this.valForm.patchValue(this.editDto);
   }
 
-  doDataInit() {
-    // update
-    this.spinnerServ.show();
-    this.custApiServ.getCurrCustomerDto().subscribe({
-      next: (res) => {
-        if (!res) {
-          this.bbdNotifyServ.error('無權限取得個人資訊。');
-          this._router.navigate(['/']);
-          return;
-        }
-
-        this.editDto = res;
-        // this.doMaxDateTrans(true);
-        this.doFormPatchValue();
-        // this.getImgUrl();
-      },
-      error: (err) => {
-        this.bbdNotifyServ.error(`查詢失敗: 錯誤訊息：「${err?.errorMessage}」`);
-      },
-    }).add(() => this.spinnerServ.hide());
-  }
-
-  onSubmit(): void {
-    this.canSubmit();
-    this.spinnerServ.show();
-    this.custApiServ.uploadCurrCustomerDto(this.uploadFormReq).subscribe({
-      next: (res) => {
-        if (!res) {
-          this.bbdNotifyServ.error(`${this.actionName}失敗，請再重試一次。`);
-          return;
-        }
-        // this.editDto = res;
-        this.doDataInit();
-        this.bbdNotifyServ.success(`${this.actionName}成功。`);
-      },
-      error: (err) => {
-        this.bbdNotifyServ.error(`操作失敗: 錯誤訊息：「${err?.errorMessage}」`);
-      },
-    }).add(() => this.spinnerServ.hide());
-  }
-
   canSubmit() {
+    this.groupCtrl?.markAllAsTouched();
+    this.memberCtrl?.markAllAsTouched();
     this.valForm.markAllAsTouched();
+
     if (this.valForm.valid === false) {
       Object.values(this.valForm.controls).forEach(control => {
         if (control.invalid) {
@@ -120,37 +121,24 @@ export class ProfileComponent extends BBDBaseComponent implements OnInit {
     }
 
     Object.assign(this.editDto, this.valForm.value);
-    this.doDtoToForm();
-    // this.doMaxDateTrans();
+    this.doDateParse();
   }
 
-  doDtoToForm(): void {
-    this.uploadFormReq = new UploadFormReq();
-    // 圖片上傳
-    if (this.imgFiles) {
-      this.uploadFormReq.append('file', this.imgFiles[0]);
-    }
-
-    this.uploadFormReq.jsonContent = JSON.stringify(this.editDto);
-    Object.entries(this.uploadFormReq).forEach(([key, value]) => {
-      this.uploadFormReq.append(key, value);
-    });
-  }
-
-  getImgUrl(): void {
-    if (!this.editDto.avatarAttId || this.editDto.avatarAttId <= 0)
-      return;
-
-    this.appAttachApiServ.getAppFileAttObjectUrl(this.editDto.avatarAttId)
-      .subscribe({
-        next: (res) => {
-          if (!res) {
-            this.imgUrl = '';
-            return;
-          }
-
-          this.imgUrl = res;
+  onSubmit(): void {
+    this.canSubmit();
+    this.spinnerServ.show();
+    this.custApiServ.setCurrCustomerDto(this.editDto).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error(`修改會員資料失敗，請再重試一次。`);
+          return;
         }
-      });
+        this.bbdNotifyServ.success(`修改會員資料成功。`);
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    }).add(() => this.spinnerServ.hide());
   }
+
 }
