@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { environment as env } from '../../../environments/environment';
 
 // Custom packages
 import { DefaultComponent } from './pages';
@@ -7,7 +8,13 @@ import { DefaultComponent } from './pages';
 const routes: Routes = [
   {
     path: '',
-    component: DefaultComponent
+    component: DefaultComponent,
+    data: {
+      title: `${env.siteName}`,
+      decscription: `${env.siteName}`,
+      url: `${env.siteServer}`,
+      image: `${env.siteServer}/favicon.ico`
+    }
   }
 ];
 

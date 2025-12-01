@@ -1,7 +1,7 @@
 <div class="min-h-container w-full max-w-3xl mx-auto p-5">
     <header class="news-list">
         <div class="info-wrap">
-            <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+            <p class="pin" *ngIf="response?.stickyAt"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
             <p>學會公告 &#8739;</p>
             <p>{{ response?.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
           </div>

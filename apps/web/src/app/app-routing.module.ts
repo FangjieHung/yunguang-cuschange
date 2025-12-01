@@ -16,17 +16,14 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            title: '首頁',
             loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
           },
           {
             path: 'about',
-            title: '關於',
             loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
           },
           {
             path: 'auth',
-            title: '帳號',
             loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
           },
           {
@@ -36,7 +33,6 @@ const routes: Routes = [
           },
           {
             path: 'news',
-            title: '最新消息',
             loadChildren: () =>
               import('./modules/news/news.module').then((m) => m.NewsModule
               ),
@@ -55,7 +51,6 @@ const routes: Routes = [
           {
             path: '**',
             component: ResultErrorComponent,
-            title: '錯誤'
           },
         ],
       },

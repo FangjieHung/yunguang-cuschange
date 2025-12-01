@@ -1,11 +1,39 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutContentViewerComponent } from './pages';
+import { environment as env } from '../../../environments/environment';
 
 const routes: Routes = [
-  { path: 'charter', component: AboutContentViewerComponent },
-  { path: 'privacy', component: AboutContentViewerComponent },
-  { path: 'terms', component: AboutContentViewerComponent }
+  {
+    path: 'charter',
+    component: AboutContentViewerComponent,
+    data: {
+      title: `組織章程｜${env.siteName}`,
+      decscription: '組織章程',
+      url: `${env.siteServer}/charter`,
+      image: `${env.siteServer}/favicon.ico`
+    }
+  },
+  {
+    path: 'privacy',
+    component: AboutContentViewerComponent,
+    data: {
+      title: `隱私權｜${env.siteName}`,
+      decscription: '隱私權',
+      url: `${env.siteServer}/privacy`,
+      image: `${env.siteServer}/favicon.ico`
+    }
+  },
+  {
+    path: 'terms',
+    component: AboutContentViewerComponent,
+    data: {
+      title: `服務條款｜${env.siteName}`,
+      decscription: '服務條款',
+      url: `${env.siteServer}/terms`,
+      image: `${env.siteServer}/favicon.ico`
+    }
+  }
 ];
 
 @NgModule({

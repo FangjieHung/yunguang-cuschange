@@ -31,7 +31,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
       label: '關於本會',
       children: [
         { label: '組織章程', link: '/about/charter' },
-        { label: '理監事名單', link: '/about/supervisor' }
+        // { label: '理監事名單', link: '/about/supervisor' }
       ]
     },
     {
@@ -45,7 +45,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
   ];
 
   accountMenu = [
-    { label: '我的課程', link: '/' },
+    // { label: '我的課程', link: '/' },
     { label: '個人資料', link: '/account/profile' },
     { label: '重設密碼', link: '/account/password' }
   ];

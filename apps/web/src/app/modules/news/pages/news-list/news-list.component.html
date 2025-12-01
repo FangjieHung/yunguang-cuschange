@@ -44,7 +44,7 @@
       <ng-container *ngIf="!isLoading && !(dataSource | isEmpty)">
         <a *ngFor="let item of dataSource" [routerLink]="['/news/detail/', item.uniqueId]">
           <div class="info-wrap">
-            <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+            <p class="pin" *ngIf="item.stickyAt"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
             <p>{{ item.catName }} &#8739;</p>
             <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
           </div>

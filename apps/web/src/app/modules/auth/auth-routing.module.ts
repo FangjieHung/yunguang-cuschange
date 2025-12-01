@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { environment as env } from '../../../environments/environment';
 
 // Custom packages
 import {
@@ -9,19 +10,43 @@ import {
 const routes: Routes = [
   {
     path: 'forget-password',
-    component: ForgetResetPasswordComponent
+    component: ForgetResetPasswordComponent,
+    data: {
+      title: `忘記密碼｜${env.siteName}`,
+      decscription: '忘記密碼',
+      url: `${env.siteServer}/auth/forget-password`,
+      image: `${env.siteServer}/favicon.ico`
+    }
   },
   {
     path: 'signin',
     component: SigninComponent,
+    data: {
+      title: `登入｜${env.siteName}`,
+      decscription: '登入',
+      url: `${env.siteServer}/auth/signin`,
+      image: `${env.siteServer}/favicon.ico`
+    }
   },
   {
     path: 'signup',
     component: SignupComponent,
+    data: {
+      title: `申請入會｜${env.siteName}`,
+      decscription: '申請入會',
+      url: `${env.siteServer}/auth/signup`,
+      image: `${env.siteServer}/favicon.ico`
+    }
   },
   {
     path: 'signup/complete',
     component: SignupCompletedComponent,
+    data: {
+      title: `申請完成｜${env.siteName}`,
+      decscription: '申請完成',
+      url: `${env.siteServer}/auth/signup/complete`,
+      image: `${env.siteServer}/favicon.ico`
+    }
   }
 ];
 

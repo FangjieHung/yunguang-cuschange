@@ -113,7 +113,7 @@
         <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
           <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
             <div class="info-wrap">
-              <p class="pin"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
+              <p class="pin" *ngIf="item.stickyAt"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
               <p>{{ '學會公告' }} &#8739;</p>
               <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
             </div>
