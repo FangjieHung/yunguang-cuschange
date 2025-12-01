@@ -1,10 +1,11 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment as env } from '../../../../../environments/environment';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import { AppNewsMsgView } from '@core/models';
-import { AppMsgApiServ } from '@core/services';
+import { AppMsgApiServ, SEOServ } from '@core/services';
 
 @Component({
   selector: 'app-news-detail',
@@ -12,9 +13,10 @@ import { AppMsgApiServ } from '@core/services';
   styleUrls: ['./news-detail.component.scss']
 })
 export class NewsDetailComponent extends BBDBaseComponent implements OnInit {
+  private _appMsgApiServ = inject(AppMsgApiServ);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
-  private _appMsgApiServ = inject(AppMsgApiServ);
+  private _seoServ = inject(SEOServ);
 
   private _uniqueId = '';
   response: AppNewsMsgView | null = null;
@@ -41,6 +43,14 @@ export class NewsDetailComponent extends BBDBaseComponent implements OnInit {
           }
 
           this.response = res;
+
+          // SEO tags
+          const seoData = this._route.snapshot.data;
+          this._seoServ.updateMetaTags(
+            `${this.response.title}｜${env.siteName}`,
+            `${env.siteServer}/news/detail/${this._uniqueId}`,
+            seoData['image'],
+            this.response.title);
         },
         error: (err) => {
           this.bbdNotifyServ.error(`截入失敗: 錯誤訊息：「${err?.errorMessage}」`);

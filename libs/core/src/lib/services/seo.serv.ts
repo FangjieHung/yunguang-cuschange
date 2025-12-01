@@ -1,0 +1,60 @@
+import { Injectable, Injector } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { AppEnv } from '../models/shared';
+import { APP_ENV } from '../shared/helpers';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SEOServ {
+  appEnv: AppEnv;
+
+  get metaTitle(): string {
+    return this.title.getTitle();
+  }
+
+  set metaTitle(content: string) {
+    if (!content) {
+      this.title.setTitle(this.appEnv.siteName);
+      return;
+    }
+
+    this.title.setTitle(content);
+  }
+
+  constructor(
+    private meta: Meta,
+    private title: Title,
+    protected injector: Injector) {
+      this.appEnv = injector.get(APP_ENV);
+      // this.initMetaTags();
+  }
+
+  initMetaTags() {
+    this.metaTitle = '';
+    this.meta.addTags([
+      { property: 'og:site_name', content: this.appEnv.siteName },
+      { property: 'og:title', content: this.appEnv.siteName },
+      { property: 'og:url', content: this.appEnv.siteServer },
+      { property: 'og:image', content: `${this.appEnv.siteServer}/favicon.ico` },
+      { property: 'og:description', content: this.appEnv.siteName },
+      { name: 'keywords', content: '台灣人工智慧檢驗醫學學會,人工智慧,檢驗醫學' },
+      { name: 'description', content: this.appEnv.siteName }
+    ]);
+  }
+
+  updateMetaTags(
+    title = this.appEnv.siteName,
+    url = this.appEnv.siteServer,
+    image = `${this.appEnv.siteServer}/favicon.ico`,
+    description = this.appEnv.siteName
+  ) {
+    this.metaTitle = title;
+    this.meta.updateTag({ property: 'og:site_name', content: this.appEnv.siteName });
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:url', content: url });
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ name: 'description', content: description });
+  }
+}

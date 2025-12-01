@@ -1,4 +1,5 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
 // Custom packages
@@ -7,7 +8,7 @@ import {
   PagingRequest, PagingResponse,
   AppNewsMsgCatView, AppNewsMsgReq, AppNewsMsgView
 } from '@core/models';
-import { AppMsgApiServ } from '@core/services';
+import { AppMsgApiServ, SEOServ } from '@core/services';
 
 @Component({
   selector: 'app-news-list',
@@ -19,6 +20,8 @@ export class NewsListComponent extends BBDBaseComponent implements OnInit {
   isLoading = true;
 
   private _appMsgApiServ = inject(AppMsgApiServ);
+  private _route = inject(ActivatedRoute);
+  private _seoServ = inject(SEOServ);
 
   dataSource: AppNewsMsgView[] = [];
   request = new PagingRequest<AppNewsMsgReq>();
@@ -36,6 +39,8 @@ export class NewsListComponent extends BBDBaseComponent implements OnInit {
   ngOnInit(): void {
     this.doParamsInit();
     this.onCatChange();
+    const seoData = this._route.snapshot.data;
+    this._seoServ.updateMetaTags(seoData['title'], seoData['url'], seoData['image'], seoData['description']);
   }
 
   getCaches(): void {

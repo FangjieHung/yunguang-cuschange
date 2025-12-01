@@ -16,7 +16,6 @@ import {
 } from '@core/models';
 import { AppMsgApiServ, CampaignApiServ } from '@core/services';
 
-
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',

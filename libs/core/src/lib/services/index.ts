@@ -7,6 +7,7 @@ export * from './app-user.api.serv';
 export * from './campaign.api.serv';
 export * from './cust.api.serv';
 export * from './permission.serv';
+export * from './seo.serv';
 export * from './shared-data.serv';
 export * from './shared-func.serv';
 export * from './store.serv';
