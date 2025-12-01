@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 // Custom packages
+import { APP_ENV } from '../shared/helpers';
 import {
-  PagingRequest, PagingResponse, ValueInfo,
+  AppEnv, PagingRequest, PagingResponse, ValueInfo,
   AppAdminDto, AppAdminReq, AppAdminView,
   AppUserStatuses, AuthUserInfo,
   ChangePasswordReq, ForgetPasswordReq
@@ -21,7 +22,9 @@ export class AppUserApiServ {
   private readonly baseUrl = '/AppUser';
   appUserStatuses = AppUserStatuses;
   appUserStatusOpts = EnumValues.getNamesAndValues(AppUserStatuses);
-  constructor(private http: HttpClient) { }
+  constructor(
+    @Inject(APP_ENV) private appEnv: AppEnv,
+    private http: HttpClient) { }
 
   //#region AppAdmin
   getCurrAppAdminDto(): Observable<AppAdminDto> {
@@ -77,6 +80,7 @@ export class AppUserApiServ {
     return this.http.put<boolean>(`${this.baseUrl}/EnableAppUser/${id}`, null);
   }
   forgetPassword(request: ForgetPasswordReq): Observable<boolean> {
+    request.appPfm = this.appEnv.appPfm;
     return this.http.put<boolean>(`${this.baseUrl}/ForgetPassword`, request);
   }
 
