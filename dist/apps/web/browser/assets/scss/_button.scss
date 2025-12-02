@@ -286,10 +286,6 @@ button.btn-gradient {
   .img-wrap p {
     @apply text-center mt-2;
   }
-
-  img[src*="empty-img.png"] {
-    @apply grayscale;
-  }
 }
 
 .radio-single-img-container {
