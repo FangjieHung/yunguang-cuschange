@@ -11,14 +11,14 @@ const routes: Routes = [
       title: `最新消息｜${env.siteName}`,
       decscription: '最新消息',
       url: `${env.siteServer}/news/list`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
     path: 'detail/:uniqueId',
     component: NewsDetailComponent,
     data: {
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];

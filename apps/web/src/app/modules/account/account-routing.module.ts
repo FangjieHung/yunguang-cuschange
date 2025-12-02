@@ -25,7 +25,7 @@ const routes: Routes = [
           title: `會員資料｜${env.siteName}`,
           decscription: '會員資料',
           url: `${env.siteServer}/account/profile`,
-          image: `${env.siteServer}/favicon.ico`
+          image: `${env.siteServer}/assets/image/og/tslmai.png`
         }
       },
       {
@@ -35,7 +35,7 @@ const routes: Routes = [
           title: `重設密碼｜${env.siteName}`,
           decscription: '重設密碼',
           url: `${env.siteServer}/account/password`,
-          image: `${env.siteServer}/favicon.ico`
+          image: `${env.siteServer}/assets/image/og/tslmai.png`
         }
       }
     ]

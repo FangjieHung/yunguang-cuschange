@@ -11,14 +11,14 @@ const routes: Routes = [
       title: `學術活動｜${env.siteName}`,
       decscription: '學術活動',
       url: `${env.siteServer}/campaign/list`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
     path: 'detail/:uniqueId',
     component: CampaignDetailComponent,
     data: {
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];

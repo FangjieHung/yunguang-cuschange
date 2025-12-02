@@ -13,7 +13,7 @@ const routes: Routes = [
       title: `${env.siteName}`,
       decscription: `${env.siteName}`,
       url: `${env.siteServer}`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];

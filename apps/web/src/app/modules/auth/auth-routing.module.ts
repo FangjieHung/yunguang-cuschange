@@ -15,7 +15,7 @@ const routes: Routes = [
       title: `忘記密碼｜${env.siteName}`,
       decscription: '忘記密碼',
       url: `${env.siteServer}/auth/forget-password`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
       title: `登入｜${env.siteName}`,
       decscription: '登入',
       url: `${env.siteServer}/auth/signin`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
       title: `申請入會｜${env.siteName}`,
       decscription: '申請入會',
       url: `${env.siteServer}/auth/signup`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
@@ -45,7 +45,7 @@ const routes: Routes = [
       title: `申請完成｜${env.siteName}`,
       decscription: '申請完成',
       url: `${env.siteServer}/auth/signup/complete`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];

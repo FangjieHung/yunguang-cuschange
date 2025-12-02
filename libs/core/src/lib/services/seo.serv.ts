@@ -36,7 +36,7 @@ export class SEOServ {
       { property: 'og:site_name', content: this.appEnv.siteName },
       { property: 'og:title', content: this.appEnv.siteName },
       { property: 'og:url', content: this.appEnv.siteServer },
-      { property: 'og:image', content: `${this.appEnv.siteServer}/favicon.ico` },
+      { property: 'og:image', content: `${this.appEnv.siteServer}/assets/image/og/tslmai.png` },
       { property: 'og:description', content: this.appEnv.siteName },
       { name: 'keywords', content: '台灣人工智慧檢驗醫學學會,人工智慧,檢驗醫學' },
       { name: 'description', content: this.appEnv.siteName }
@@ -46,7 +46,7 @@ export class SEOServ {
   updateMetaTags(
     title = this.appEnv.siteName,
     url = this.appEnv.siteServer,
-    image = `${this.appEnv.siteServer}/favicon.ico`,
+    image = `${this.appEnv.siteServer}/assets/image/og/tslmai.png`,
     description = this.appEnv.siteName
   ) {
     this.metaTitle = title;

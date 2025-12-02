@@ -13,7 +13,7 @@ const routes: Routes = [
       title: `404｜${env.siteName}`,
       decscription: `404 找不到頁面`,
       url: `${env.siteServer}/result/error`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];

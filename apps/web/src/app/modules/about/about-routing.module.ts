@@ -11,7 +11,7 @@ const routes: Routes = [
       title: `組織章程｜${env.siteName}`,
       decscription: '組織章程',
       url: `${env.siteServer}/charter`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
       title: `隱私權｜${env.siteName}`,
       decscription: '隱私權',
       url: `${env.siteServer}/privacy`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   },
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
       title: `服務條款｜${env.siteName}`,
       decscription: '服務條款',
       url: `${env.siteServer}/terms`,
-      image: `${env.siteServer}/favicon.ico`
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
   }
 ];
