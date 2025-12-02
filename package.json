@@ -17,7 +17,9 @@
     "build:cms": "nx build cms --prod --build-optimizer",
     "build-stage:cms": "nx build cms --configuration=staging --build-optimizer --output-path=dist-stage/apps/cms",
     "build:web": "nx build web --prod --build-optimizer",
-    "build-stage:web": "nx build web --configuration=staging --build-optimizer --output-path=dist-stage/apps/web"
+    "build:web-ssr": "nx build web --prod && nx run web:server:production",
+    "build-stage:web": "nx build web --configuration=staging --build-optimizer --output-path=dist-stage/apps/web",
+    "build-stage:web-ssr": "nx build webapp --configuration=staging --output-path=dist-stage/apps/web && nx run web:server-stage:staging"
   },
   "private": true,
   "dependencies": {

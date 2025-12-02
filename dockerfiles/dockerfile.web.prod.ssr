@@ -1,0 +1,12 @@
+FROM node:18-alpine
+LABEL maintainer="SxF <alert@starxfuture.com>"
+
+WORKDIR /web
+
+# Copy web files
+COPY ./dist/apps/web/ /web/dist
+
+# Expose port 80
+EXPOSE 80
+
+CMD ["node", "./dist/server/main.js"]
