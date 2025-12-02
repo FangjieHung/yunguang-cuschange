@@ -1,16 +1,3 @@
-.bg-image {
-    @apply absolute inset-0 w-full h-full object-cover;
-}
-
-.signin-img {
-    @apply w-full h-full object-cover;
-}
-
-.signin-container {
-    @apply bg-white grid md:grid-cols-2 w-full max-w-4xl shadow-lg border border-sky-200 relative overflow-hidden;
-    border-radius: 2.25rem
-}
-
-.logo-tl {
-    @apply absolute top-8 left-9 w-36;
+.terms-wrap {
+    @apply flex flex-wrap justify-center text-center text-sm m-auto text-slate-500;
 }

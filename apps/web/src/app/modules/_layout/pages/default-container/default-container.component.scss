@@ -59,7 +59,7 @@ mat-sidenav-container {
 }
 
 .sidemenu-inner {
-    @apply mt-24 divide-y divide-black/30;
+    @apply mt-32 divide-y divide-black/30 xs:mt-40;
 
     .btn-stroke-white {
         @apply w-full max-w-sm mr-auto;

@@ -1,8 +1,12 @@
 <div class="default-container">
   <header class="hero">
-    <video autoplay loop muted class="hero-video">
-      <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/mp4">
+    <video autoplay muted playsinline loop class="hero-video" #heroVideo>
+      <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/webm">
+      <source src="/assets/video/hero-landscape-720.mp4" media="(min-width: 1024px)" type="video/mp4">
+      <source src="/assets/video/hero-portrait.webm" type="video/webm">
+      <source src="/assets/video/hero-portrait-720.mp4" type="video/mp4">
     </video>
+    
     <div class="content max-w-container">
       <h1 class="display d-white">
         Innovating for Smarter Diagnostics
@@ -12,7 +16,7 @@
     </div>
   </header>
 
-  <div class="space-y-20 py-20">
+  <div class="space-y-20 py-20 xl:space-y-32 xl:py-32">
     <section class="max-w-container">
       <div class="px-5">
         <h2 class="display d-black">Knowledge Exchange</h2>
@@ -97,7 +101,7 @@
             arrow_forward_ios
           </span></button>
       </div>
-      <web-result-empty *ngIf="!campaignList.length" class="block my-5"></web-result-empty>
+      <web-result-empty *ngIf="(campaigns | isEmpty)" class="block my-5"></web-result-empty>
       <a class="link-underline mt-auto ml-auto mr-5" target="_blank" routerLink="/campaign/list">
         <span>看更多活動</span><span class="material-symbols-rounded">arrow_right_alt</span>
       </a>

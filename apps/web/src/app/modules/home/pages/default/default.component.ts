@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit, Injector, AfterViewInit, HostListener, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, Injector, AfterViewInit, HostListener, OnDestroy, inject, ViewChild, ElementRef } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { forkJoin } from 'rxjs';
@@ -22,6 +22,7 @@ import { AppMsgApiServ, CampaignApiServ } from '@core/services';
   styleUrls: ['./default.component.scss'],
 })
 export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
   private _appMsgApiServ = inject(AppMsgApiServ);
   campaignApiServ = inject(CampaignApiServ);
 
@@ -59,6 +60,8 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
   ];
 
   campaignSwipe = {
+    centeredSlides: true,
+    loop: true,
     navigation: {
       nextEl: '.swiper-btn-campaign.next',
       prevEl: '.swiper-btn-campaign.prev',
@@ -68,13 +71,13 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
         slidesPerView: 1.2,
       },
       768: {
-        slidesPerView: 2.5,
+        slidesPerView: 2.2,
       },
       1280: {
         slidesPerView: 3.2,
       },
       1600: {
-        slidesPerView: 3.5,
+        slidesPerView: 3,
       },
     },
   };
@@ -103,6 +106,11 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
 
   ngAfterViewInit(): void {
     this.updateLogoScale();
+    const video = this.heroVideo.nativeElement;
+    video.muted = true; // 確保靜音
+    video.play().catch(err => {
+      console.warn('Autoplay failed:', err);
+    });
   }
 
   @HostListener('window:scroll', [])
