@@ -24,7 +24,7 @@
 
                     <div class="flex flex-col md:flex-row md:space-x-2 items-start md:mb-4">
                         <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
-                            <mat-form-field appearance="outline" class="w-24 flex-1 -mb-2" slot="start">
+                            <mat-form-field appearance="outline" class="selector" slot="start">
                                 <mat-label>狀態</mat-label>
                                 <mat-select [(ngModel)]="request.queryRequest.status">
                                     <mat-option [value]="0">全部</mat-option>

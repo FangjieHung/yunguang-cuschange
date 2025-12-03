@@ -1,14 +1,24 @@
-@import "@angular/material/theming";
-@include mat-core();
+@use "@angular/material" as mat;
 
-$app-primary: mat-palette($mat-blue);
-$app-accent: mat-palette($mat-orange);
-$app-warn: mat-palette($mat-pink);
+// 1. 定義 palettes（新 API）
+$app-primary: mat.define-palette(mat.$blue-palette);
+$app-accent: mat.define-palette(mat.$orange-palette);
+$app-warn: mat.define-palette(mat.$pink-palette);
 
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-theme);
+// 2. 使用新版 define-light-theme（需含 color/typography/density）
+$app-theme: mat.define-light-theme((
+  color: (
+    primary: $app-primary,
+    accent: $app-accent,
+    warn: $app-warn,
+  ),
+  typography: mat.define-typography-config(), // 保持預設字體
+  density: 0, // 0 = normal density
+));
 
-/* Form */
+// 3. 套用到所有 Angular Material 元件
+@include mat.all-component-themes($app-theme);
+
 
 // input
 .mat-mdc-text-field-wrapper.mdc-text-field .mdc-notched-outline__notch {

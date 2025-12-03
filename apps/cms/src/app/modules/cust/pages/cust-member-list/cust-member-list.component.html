@@ -21,28 +21,26 @@
             </p>
           </ng-template>
 
-          <div class="flex flex-col md:flex-row md:space-x-2 items-start md:mb-4">
-            <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
-              <mat-form-field appearance="outline" class="w-32 flex-1 -mb-2" slot="start">
-                <mat-label>帳號狀態</mat-label>
-                <mat-select [(ngModel)]="request.queryRequest.appUserStatus">
-                  <mat-option [value]="0">全部</mat-option>
-                  <mat-option *ngFor="let opt of appUserApiServ.appUserStatusOpts" [value]="+opt.value">
-                    {{ opt.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="outline" class="w-32 flex-1 -mb-2" slot="start">
-                <mat-label>會員狀態</mat-label>
-                <mat-select [(ngModel)]="request.queryRequest.custStatus">
-                  <mat-option [value]="0">全部</mat-option>
-                  <mat-option *ngFor="let opt of custApiServ.customerStatusOpts" [value]="+opt.value">
-                    {{ opt.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </cms-search-bar>
-          </div>
+          <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
+            <mat-form-field appearance="outline" class="selector" slot="start">
+              <mat-label>帳號狀態</mat-label>
+              <mat-select [(ngModel)]="request.queryRequest.appUserStatus">
+                <mat-option [value]="0">全部</mat-option>
+                <mat-option *ngFor="let opt of appUserApiServ.appUserStatusOpts" [value]="+opt.value">
+                  {{ opt.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="selector" slot="start">
+              <mat-label>會員狀態</mat-label>
+              <mat-select [(ngModel)]="request.queryRequest.custStatus">
+                <mat-option [value]="0">全部</mat-option>
+                <mat-option *ngFor="let opt of custApiServ.customerStatusOpts" [value]="+opt.value">
+                  {{ opt.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </cms-search-bar>
         </nz-collapse-panel>
       </nz-collapse>
     </section>
