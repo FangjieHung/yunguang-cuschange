@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutContentViewerComponent } from './pages';
+import { AboutContentViewerComponent, CommitteeComponent, SupervisorComponent } from './pages';
 import { environment as env } from '../../../environments/environment';
 
 const routes: Routes = [
@@ -13,6 +13,14 @@ const routes: Routes = [
       url: `${env.siteServer}/charter`,
       image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
+  },
+  {
+    path: 'supervisor',
+    component: SupervisorComponent,
+  },
+  {
+    path: 'committee',
+    component: CommitteeComponent,
   },
   {
     path: 'privacy',

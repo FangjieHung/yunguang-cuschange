@@ -4,14 +4,14 @@ import { AboutRoutingModule } from './about-routing.module';
 
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
-import { AboutContentViewerComponent } from './pages';
+import { AboutContentViewerComponent, CommitteeComponent, SupervisorComponent } from './pages';
 
 // Config settings
 const CUSTOM_MODULES = [SharedModule];
 
 @NgModule({
   declarations: [
-    AboutContentViewerComponent
+    AboutContentViewerComponent, CommitteeComponent, SupervisorComponent
   ],
   imports: [
     CommonModule,

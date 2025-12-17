@@ -1,0 +1,107 @@
+<div class="max-w-container">
+    <header>
+        <h2>
+            <span class="display d-black">Board Members</span>
+            <p class="headline">理監事成員</p>
+        </h2>
+    </header>
+
+    <!--
+    <web-result-empty *ngIf="dataSource | isEmpty" class="block mt-5"></web-result-empty>
+
+    <form action="" class="search-wrap mt-5 md:w-1/2 xl:w-1/3">
+        <mat-form-field appearance="outline" class="fill-black">
+            <span matPrefix class="material-symbols-rounded">search</span>
+            <input matInput type="text" [(ngModel)]="request.queryRequest.queryString" name="searchValue" placeholder="搜尋">
+            <button *ngIf="request.queryRequest.queryString" matSuffix mat-icon-button aria-label="Clear" (click)="request.queryRequest.queryString = null; onSearch();">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </mat-form-field>
+        <button class="btn-primary btn-lg" [ngClass]="{'disabled-hide': !request.queryRequest.queryString}"
+          [disabled]="!request.queryRequest.queryString"
+          (click)="onSearch()">
+            搜尋
+        </button>
+    </form>
+    <web-glass-bg class="container-hover"></web-glass-bg>
+    -->
+
+    <section class="py-16 space-y-16">
+
+        <ol class="chairman-wrap">
+            <li *ngFor="let member of chairman" class="member-item">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ol>
+
+        <ul class="standing-directors-wrap">
+            <li *ngFor="let member of standingDirectors" class="member-item">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="directors-wrap grid-cols-2 lg:grid-cols-5">
+            <li *ngFor="let member of directors" class="member-item ">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="directors-wrap grid-cols-2 lg:grid-cols-4">
+            <li *ngFor="let member of supervisors" class="member-item">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ul>
+
+        <ol class="chairman-wrap">
+            <li *ngFor="let member of secretariat" class="member-item">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ol>
+    </section>
+
+</div>

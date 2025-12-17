@@ -37,7 +37,8 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
       label: '關於本會',
       children: [
         { label: '組織章程', link: '/about/charter' },
-        // { label: '理監事名單', link: '/about/supervisor' }
+        { label: '理監事名單', link: '/about/supervisor' },
+        { label: '委員會組織', link: '/about/committee' },
       ]
     },
     {
