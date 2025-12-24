@@ -17,10 +17,22 @@ const routes: Routes = [
   {
     path: 'supervisor',
     component: SupervisorComponent,
+    data: {
+      title: `理監事成員｜${env.siteName}`,
+      decscription: '理監事成員',
+      url: `${env.siteServer}/supervisor`,
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
+    }
   },
   {
     path: 'committee',
     component: CommitteeComponent,
+    data: {
+      title: `委員會組織｜${env.siteName}`,
+      decscription: '委員會組織',
+      url: `${env.siteServer}/committee`,
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
+    }
   },
   {
     path: 'privacy',
