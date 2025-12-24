@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
-import { CampaignListComponent, CampaignDetailComponent } from './pages';
+import { CampaignListComponent, CampaignDetailComponent, CampRegQueryListComponent, CampaignRegisterComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -20,6 +20,14 @@ const routes: Routes = [
     data: {
       image: `${env.siteServer}/assets/image/og/tslmai.png`
     }
+  },
+  {
+    path: 'register', // 完成報名結果頁
+    component: CampaignRegisterComponent,
+  },
+    {
+    path: 'reg', // 報名填表頁
+    component: CampRegQueryListComponent,
   }
 ];
 

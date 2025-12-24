@@ -20,7 +20,7 @@
 }
 
 .main-container {
-    @apply pt-32 pb-5 overflow-y-auto relative;
+    @apply pt-32 pb-5 relative;
 
     @media screen and (min-width: 1024px) {
         min-height: calc(100svh - 20.8rem);

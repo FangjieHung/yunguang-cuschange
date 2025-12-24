@@ -32,13 +32,10 @@
     </form>
 
     <div class="news-list">
-
       <!-- Loading -->
-      <web-skeleton-loader *ngIf="isLoading" class="opacity-10"></web-skeleton-loader>
-
+      <bbd-loading-indicator *ngIf="isLoading" [type]="'skeleton'" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
       <!-- 空資料 -->
       <web-result-empty *ngIf="!isLoading && (dataSource | isEmpty)" class="block mt-5"></web-result-empty>
-
 
       <!-- 有資料 -->
       <ng-container *ngIf="!isLoading && !(dataSource | isEmpty)">

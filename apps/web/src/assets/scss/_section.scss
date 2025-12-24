@@ -120,6 +120,10 @@ a.card,
 .describe-list {
   @apply my-4 space-y-2;
 
+  li {
+    @apply flex items-start;
+  }
+
   span.divider {
     @apply px-1;
   }
@@ -252,7 +256,7 @@ a.card,
 .sub-sidenav {
   &.mat-drawer-container,
   .mat-drawer {
-    @apply bg-white/0;
+    @apply bg-white/0;    
   }
 
   .mat-drawer-inner-container {

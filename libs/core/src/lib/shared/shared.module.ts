@@ -8,7 +8,7 @@ import { ThirdPartyModule } from './modules/third-party.module';
 // Custom packages
 import {
   BBDQuillEditorComponent, BBDQuillEditorViewerComponent,
-  BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent,
+  BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent, BBDLoadingIndicatorComponent,
 } from './components';
 import { ZipCodeControlComponent } from './controls';
 import { AntdModule, MaterialModule } from './modules';
@@ -21,7 +21,7 @@ import { BBDNotifyModule } from './components/bbd-notify/bbd-notify.module';
 import { ImageFallbackDirective } from './../directives';
 
 const CUST_MODULES = [AntdModule, MaterialModule];
-const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent];
+const CUST_COMPONENTS = [BBDQuillEditorComponent, BBDQuillEditorViewerComponent, BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent, BBDLoadingIndicatorComponent];
 const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,
   EmptyFormatterPipe, JsonParsePipe, PhoneFormatterPipe, SafeHtmlPipe, SafeUrlPipe, FileUrlPipe, RoundDefaultPipe, AreaConvertPipe,

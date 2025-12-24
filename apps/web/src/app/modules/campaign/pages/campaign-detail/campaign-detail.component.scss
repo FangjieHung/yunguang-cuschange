@@ -1,7 +1,31 @@
-.info-wrap {
+.campaign-detail-container {
+    @apply relative w-full px-5 max-w-5xl mx-auto grid items-start grid-cols-1 lg:grid-cols-3 gap-10;
+
+    .info-container {
+        @apply lg:col-span-2;
+    }
+}
+
+.info-list-wrap {
     @apply mb-7 space-y-7 border-b pb-7;
 
     .info-label {
         @apply flex items-center font-medium text-sky-600;
+    }
+}
+
+.action-container {
+    
+}
+
+.option-wrap {
+    @apply text-lg divide-y pb-4;
+
+    li {
+        @apply flex items-center justify-between py-3;
+    }
+
+    .option-name {
+        @apply font-bold;
     }
 }
