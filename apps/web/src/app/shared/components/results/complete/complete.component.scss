@@ -22,8 +22,8 @@ svg {
     }
 }
 
-.display {
-    @apply tracking-wide mt-1;
+.complete-title {
+    @apply text-7xl tracking-wide mt-1;
     color: var(--md-sys-color-primary);
 }
 

@@ -22,11 +22,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'register', // 完成報名結果頁
+    path: 'reg', // 報名填表頁
     component: CampaignRegisterComponent,
   },
-    {
-    path: 'reg', // 報名填表頁
+  {
+    path: 'complete', // 完成報名結果頁
     component: CampRegQueryListComponent,
   }
 ];

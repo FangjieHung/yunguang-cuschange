@@ -1,0 +1,19 @@
+.info-header {
+    @apply max-w-fit px-2 pt-2;
+}
+
+web-glass-bg .inner-wrap {
+    @apply pt-5 overflow-y-auto;
+
+    @media screen and (min-width: 1280px) {
+        max-height: calc(100svh - 23rem);
+    }
+}
+
+.customer-info {
+    @apply grid grid-cols-2 xl:grid-cols-3 gap-4 p-6;
+
+    .info-label {
+        @apply text-sky-600 font-medium;
+    }
+}

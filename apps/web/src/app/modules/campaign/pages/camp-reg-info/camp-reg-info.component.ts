@@ -16,77 +16,18 @@ import { CampaignApiService, CommerceApiService } from 'src/app/services';
 import { BBDBaseComponent } from '@core/shared';
 
 @Component({
-  selector: 'app-camp-reg-query-list',
-  templateUrl: './camp-reg-query-list.component.html',
-  styleUrls: ['./camp-reg-query-list.component.scss']
+  selector: 'app-camp-reg-info',
+  templateUrl: './camp-reg-info.component.html',
+  styleUrls: ['./camp-reg-info.component.scss']
 })
-export class CampRegQueryListComponent extends BBDBaseComponent implements OnInit {
-  orderInfo = [
-    {
-      icon: 'barcode',
-      infoName: '訂單編號',
-      content: '123456789',
-    },
-    {
-      icon: 'event',
-      infoName: '成立日期',
-      content: '2025/11/23',
-    },
-    {
-      icon: 'attach_money',
-      infoName: '訂單金額',
-      content: 'NT $789',
-    },
-    {
-      icon: '',
-      infoName: '發票種類',
-      content: '個人',
-    },
-    {
-      icon: '',
-      infoName: '發票抬頭',
-      content: '林育臻',
-    },
-    {
-      icon: '',
-      infoName: '統編',
-      content: '',
-    },
-  ]
-
-
-customerInfo = [
-  {
-    name: '林育臻',
-    nationalId: 'A123456789',
-    gender: '女',
-    dietType: '素食',
-    groupCode: 'GRP-2025-01',
-
-    email: 'yuzhen.lin@example.com',
-    mobile: '0912-345-678',
-    extPhone: '02-2222-3333#168',
-    emergencyContactName: '林怡君',
-    emergencyContactRelation: '母親',
-    emergencyContactPhone: '0922-888-777',
-
-    needCourseCertificate: true,
-    needLongTermCarePoints: false,
-    needNursingCredits: true,
-
-    organization: '範例醫院',
-    department: '感染科',
-    title: '主治醫師',
-  }
-];
-
+export class CampRegInfoComponent extends BBDBaseComponent implements OnInit {
   constructor(
     protected override injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
-    console.log('CampRegQueryListComponent');
+    console.log('CampRegInfoComponent');
   }
   /*
   // Properties

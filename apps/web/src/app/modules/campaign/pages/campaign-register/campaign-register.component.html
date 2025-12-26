@@ -1,206 +1,88 @@
-<bbd-loading-indicator [type]="'spinner'" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
+<bbd-loading-indicator *ngIf="false" [type]="'spinner'" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
 <div class="min-h-container">
-  <!-- 資料讀取中 -->
-  <div class="text-center mt-28">
-    <h3 class="font-bold text-lg mb-7">活動資料讀取中，請稍候</h3>
-    <mat-progress-bar mode="buffer"></mat-progress-bar>
-  </div>
+  <div class="max-w-container grid grid-cols-1 gap-y-2 gap-x-10 xl:grid-cols-3">
 
-  <!-- 報名表-->
-  <div class="flex items-start flex-col max-w-5xl mx-auto md:flex-row">
-    <div class="px-6 max-w-2xl md:max-w-sm lg:pl-0 mx-auto">
-      <h1 class="font-bold text-2xl mt-3 mb-1 tracking-wide">
-        台灣人工智慧檢驗醫學學會冬季學術研討會
-      </h1>
-      <p class="text-sm mb-4">
-        2024 / 01 / 01 (一) ~ 2024 / 01 / 31 (三)
-      </p>
-      <div class="text-gray-600">
-        <h2 class="mb-2 font-medium">取消方式</h2>
-        <p class="text-sm tracking-wider">
-          一般報名請聯絡本會進行取消或退款作業；會員報名可登入平台至我的活動進行取消作業。
-        </p>
-      </div>
-    </div>
+    <!-- Info -->
+    <header class="info-header">
+      <app-camp-reg-info></app-camp-reg-info>
+    </header>
 
-    <!--
-    <mat-horizontal-stepper labelPosition="bottom" class="w-full max-w-2xl mx-auto md:max-w-5xl">
-      <mat-step>
-        <ng-template matStepLabel>基本資料</ng-template>
-        <div class="grid grid-cols-2 gap-2">
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>姓名</mat-label>
-            <input matInput type="text" placeholder="姓名" value="張三">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>身分證字號 (申請學分用)</mat-label>
-            <input matInput type="text" placeholder="身分證字號" value="A123456789">
-          </mat-form-field>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2">
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>性別</mat-label>
-            <mat-select>
-              <mat-option value="M">男性</mat-option>
-              <mat-option value="F">女性</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>膳食類型</mat-label>
-            <mat-select>
-              <mat-option value="葷食">葷食</mat-option>
-              <mat-option value="素食">素食</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>團體代碼</mat-label>
-            <input matInput type="text" placeholder="團體代碼 (非必填)">
-          </mat-form-field>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2">
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>需要上課證明</mat-label>
-            <mat-select>
-              <mat-option value="1">是</mat-option>
-              <mat-option value="0">否</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>需要長照積分</mat-label>
-            <mat-select>
-              <mat-option value="true">是</mat-option>
-              <mat-option value="false">否</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>需要護理學分</mat-label>
-            <mat-select>
-              <mat-option value="true">是</mat-option>
-              <mat-option value="false">否</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label>現職機構</mat-label>
-            <input matInput type="text" placeholder="現職機構" value="範例醫院">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>任職科別</mat-label>
-            <input matInput type="text" placeholder="任職科別" value="感染科">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>現任職稱</mat-label>
-            <input matInput type="text" placeholder="現任職稱" value="主治醫師">
-          </mat-form-field>
-        </div>
-
-        <button matStepperNext class="btn btn-yellow rounded-lg shadow-sm block px-5 py-3 mt-4 ml-auto">
-          下一步
-        </button>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>聯絡資料</ng-template>
-        <div class="grid grid-cols-6 gap-2">
-          <mat-form-field appearance="outline" class="col-span-6">
-            <mat-label>電子信箱</mat-label>
-            <input matInput type="email" placeholder="電子信箱" value="example@email.com">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-3">
-            <mat-label>行動電話</mat-label>
-            <input matInput type="tel" placeholder="行動電話" value="0912-345-678">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label>聯絡電話</mat-label>
-            <input matInput type="tel" placeholder="聯絡電話" value="(02) 1234-5678">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-1">
-            <mat-label>分機</mat-label>
-            <input matInput type="tel" placeholder="分機" value="123">
-          </mat-form-field>
-        </div>
-
-        <div class="grid grid-cols-6 gap-2">
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label>聯絡縣市</mat-label>
-            <mat-select>
-              <mat-option value="台北市">台北市</mat-option>
-              <mat-option value="新北市">新北市</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label>鄉鎮區</mat-label>
-            <mat-select>
-              <mat-option value="信義區">信義區</mat-option>
-              <mat-option value="大安區">大安區</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label>郵遞區號</mat-label>
-            <input matInput type="text" placeholder="郵遞區號" value="110" readonly />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-6">
-            <mat-label>地址</mat-label>
-            <input matInput type="text" placeholder="地址" value="信義路五段7號">
-          </mat-form-field>
-        </div>
-
-        <div class="flex justify-between items-center mt-4">
-          <button matStepperPrevious class="text-btn">
-            <mat-icon aria-hidden="false" aria-label="back" class="text-xl mb-1">arrow_back_ios</mat-icon>上一步
-          </button>
-          <button matStepperNext class="btn btn-yellow rounded-lg shadow-sm block px-5 py-3">下一步</button>
-        </div>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>付款資訊</ng-template>
-        <div>
-          <div class="bg-cyan-800 rounded p-4 text-white">
-            <h2 class="text-2xl font-medium">郵政劃撥</h2>
-            <ul class="py-3">
-              <li><span class="opacity-60 pr-1">帳號</span>22841641</li>
-              <li><span class="opacity-60 pr-1">戶名</span>台灣長期照顧感染預防暨控制學會</li>
-            </ul>
+    <!-- 報名表-->
+    <div class="account-wrap xl:col-span-2">
+      <mat-horizontal-stepper labelPosition="bottom">
+        <mat-step>
+          <ng-template matStepLabel>基本資料</ng-template>
+          <web-glass-bg>
+            <div class="inner-wrap">
+              <web-cust-member-control></web-cust-member-control>
+            </div>
+          </web-glass-bg>
+          <div class="toolbar">
+            <button matStepperNext class="btn-primary btn-lg">下一步</button>
           </div>
-          <p class="mt-4">
-            請回傳繳款證明至
-            <a href="mailto:stltc.ipc2018@gmail.com" class="text-cyan-600 font-bold px-1">stltc.ipc2018@gmail.com</a>
-            <br />感謝您的配合。
-          </p>
-        </div>
+        </mat-step>
 
-        <div class="mt-4 mb-6 rounded border-gray-200 border p-5 text-center space-y-2 sm:text-left">
-          <div class="pb-3">
-            <p>本會使用</p>
-            <img src="assets/image/logo/newebpay-logo.png" alt="藍新金流" class="mx-auto sm:ml-0">
+        <mat-step>
+          <ng-template matStepLabel>課程需求</ng-template>
+
+          <web-glass-bg>
+            <div class="inner-wrap">
+              <section class="form-section">
+                <ul class="input-group lg:grid-cols-2">
+                  <li>
+                    <div class="form-label">膳食類型</div>
+                    <mat-form-field appearance="outline" class="w-full fill-black">
+                      <mat-select value="不拘">
+                        <mat-option value="不拘" checked>不拘</mat-option>
+                        <mat-option value="葷食">葷食</mat-option>
+                        <mat-option value="素食">素食</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </li>
+
+                  <li>
+                    <div class="form-label">團體代碼 (選填)</div>
+                    <mat-form-field appearance="outline" class="w-full fill-black">
+                      <input matInput type="text" placeholder="團體代碼">
+                    </mat-form-field>
+                  </li>
+
+                  <li class="flex flex-col space-y-3">
+                    <mat-checkbox color="primary"><span class="-ml-2">需要上課證明</span></mat-checkbox>
+                    <mat-checkbox color="primary"><span class="-ml-2">需要長照積分</span></mat-checkbox>
+                    <mat-checkbox color="primary"><span class="-ml-2">需要護理學分</span></mat-checkbox>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </web-glass-bg>
+          <div class="toolbar">
+            <button matStepperPrevious mat-button>上一步</button>
+            <button matStepperNext class="btn-primary btn-lg">下一步</button>
           </div>
-          <p>提供 <span class="font-bold">信用卡、WebATM、ATM、超商代碼</span> 等繳款多元付款方式。</p>
-          <p>按下「前往付款」後將跳轉至金流付款頁面 <span class="opacity-50">(SSL 256 bits 安全加密機制)</span>，請安心付款。</p>
-        </div>
+        </mat-step>
 
-        <div class="flex justify-between items-center mt-4">
-          <button matStepperPrevious class="text-btn">
-            <mat-icon aria-hidden="false" aria-label="back" class="text-xl mb-1">arrow_back_ios</mat-icon>上一步
-          </button>
-          <button type="submit" matStepperNext class="btn btn-yellow rounded-lg shadow-sm block px-10 py-3">前往付款</button>
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-    -->
-  </div>
+        <mat-step>
+          <ng-template matStepLabel>付款資訊</ng-template>
 
-  <!-- 報名成功訊息 -->
-  <div class="relative flex items-center justify-between flex-wrap basic-container py-4">
-    <div class="flex-auto my-10 mb-20 text-center px-3">
-      <p class="font-bold text-2xl">您已完成報名</p>
-      <a class="block mx-auto mt-5 rounded-lg btn btn-cyan text-xl p-3 w-1/3 min-w-max">查看我的活動</a>
-      <p class="font-bold text-lg">如需追蹤報名狀態，可到我的活動查看資訊</p>
+          <web-glass-bg>
+            <div class="px-5 py-14 max-w-fit mx-auto">
+              <div class="pb-3">
+                <p>本會使用</p>
+                <img src="assets/image/icon/ecpay_logo.png" alt="藍新金流" class="mx-auto sm:ml-0">
+              </div>
+              <p>提供 <span class="font-bold">信用卡、WebATM、ATM、超商代碼</span> 等繳款多元付款方式。</p>
+              <p>按下「前往付款」後將跳轉至金流付款頁面 <span class="opacity-70">(SSL 256 bits 安全加密機制)</span>，請安心付款。</p>
+
+              <button routerLink="/campaign/complete" class="btn-primary btn-lg mt-5">前往付款</button>
+            </div>
+          </web-glass-bg>
+
+          <div class="toolbar">
+            <button matStepperPrevious mat-button>上一步</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
-    <img src="assets/image/illustrate/writing.svg" alt="empty content" class="w-4/5 max-w-xl px-3 mx-auto">
   </div>
 </div>

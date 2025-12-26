@@ -33,7 +33,7 @@
       </ul>
       <mat-progress-bar mode="determinate" color="primary" value="100" class="mb-10"></mat-progress-bar>
 
-      <ul class="info-list-wrap">
+      <ul class="icon-list-container border-b pb-7">
         <li>
           <p class="info-label"><span class="material-symbols-rounded">people</span><span class="ml-1">活動講師</span>
           </p>
@@ -75,7 +75,7 @@
 
   </section>
 
-  <section class="action-container" #actionBox>
+  <section class="action-container">
     <web-glass-bg>
       <!-- 開放報名 -->
       <div class="p-5">
@@ -91,7 +91,7 @@
           </li>
         </ul>
 
-        <button class="btn-primary btn-lg">立即報名</button>
+        <button routerLink="/campaign/reg" class="btn-primary btn-lg">立即報名</button>
       </div>
     </web-glass-bg>
 
