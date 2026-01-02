@@ -60,7 +60,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       photoUrl: 'assets/image/members/standing-directors-02.png'
     },
     {
-      name: '郭偉成 醫師',
+      name: '郭律成 醫師',
       title: '常務理事',
       describe: [
         '臺大醫院內科部主治醫師',
@@ -81,24 +81,6 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
 
   directors = [
     {
-      name: '郭錦輯 教授',
-      title: '理事',
-      describe: [
-        '中國醫藥大學附設醫院大數據中心副院長',
-        '中國醫藥大學附設醫院醫學研究部副主任',
-        '中國醫藥大學附設醫院內科部醫藥系主治醫師'
-      ],
-      photoUrl: 'assets/image/members/directors-01.png'
-    },
-    {
-      name: '黃昱瑨 醫師',
-      title: '理事',
-      describe: [
-        '國立臺灣大學醫學院附設醫院檢驗醫學部主治醫師'
-      ],
-      photoUrl: 'assets/image/members/directors-02.png'
-    },
-    {
       name: '王唯堯 副教授',
       title: '理事',
       describe: [
@@ -106,6 +88,22 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
         '中山醫學大學醫學系副教授'
       ],
       photoUrl: 'assets/image/members/directors-03.png'
+    },
+    {
+      name: '余志強 副教授',
+      title: '理事',
+      describe: [
+        '亞洲大學附設醫院檢驗部主任'
+      ],
+      photoUrl: 'assets/image/members/directors-08.png'
+    },
+    {
+      name: '吳亞倫 工程師',
+      title: '理事',
+      describe: [
+        '中國醫藥大學附設醫院人工智慧醫學診斷中心演算法工程師'
+      ],
+      photoUrl: 'assets/image/members/directors-10.png'
     },
     {
       name: '施宏謀 醫師',
@@ -117,20 +115,23 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       ],
       photoUrl: 'assets/image/members/directors-04.png'
     },
+
     {
-      name: '賴志政 醫師',
+      name: '郭錦輯 教授',
       title: '理事',
       describe: [
-        '奇美醫學中心加護醫學部主治醫師'
+        '中國醫藥大學附設醫院大數據中心副院長',
+        '中國醫藥大學附設醫院醫學研究部副主任',
+        '中國醫藥大學附設醫院內科部醫藥系主治醫師'
       ],
-      photoUrl: 'assets/image/members/directors-05.png'
+      photoUrl: 'assets/image/members/directors-01.png'
     },
     {
       name: '陳一心 醫師',
       title: '理事',
       describe: [
         '臺中慈濟醫院腎臟內科主任',
-        '中國大學人工智慧與資料科學研究所助理教授'
+        '中興大學人工智慧與資料科學研究所助理教授'
       ],
       photoUrl: 'assets/image/members/directors-06.png'
     },
@@ -143,40 +144,39 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       photoUrl: 'assets/image/members/directors-07.png'
     },
     {
-      name: '余志強 副教授',
+      name: '黃昱璁 醫師',
       title: '理事',
       describe: [
-        '亞洲大學附設醫院檢驗部主任'
+        '國立臺灣大學醫學院附設醫院檢驗醫學部主治醫師'
       ],
-      photoUrl: 'assets/image/members/directors-08.png'
+      photoUrl: 'assets/image/members/directors-02.png'
     },
     {
-      name: '賴靜憶 醫檢師',
+      name: '賴志政 醫師',
       title: '理事',
       describe: [
-        '中國醫藥大學附設醫院醫學檢驗部'
+        '奇美醫學中心加護醫學部主治醫師'
       ],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
-      //photoUrl: 'assets/image/members/directors-09.png'
+      photoUrl: 'assets/image/members/directors-05.png'
     },
     {
-      name: '吳亞倫 工程師',
+      name: '賴靜憶 副主任',
       title: '理事',
       describe: [
-        '中國醫藥大學附設醫院人工智慧醫學診斷中心演算法工程師'
+        '台中榮民總醫院病理檢驗部 品保副主任'
       ],
-      photoUrl: 'assets/image/members/directors-10.png'
-    }
+      photoUrl: 'assets/image/members/directors-09.png'
+    },
   ];
 
   supervisors = [
     {
-      name: '林正修 醫師',
+      name: '王敦仁 醫檢師',
       title: '監事',
       describe: [
-        '彰化基督教醫院醫師'
+        '馬信紀念醫院院長辦公室專員'
       ],
-      photoUrl: 'assets/image/members/supervisors-01.png'
+      photoUrl: 'assets/image/members/supervisors-04.png'
     },
     {
       name: '李岱芬 醫檢師',
@@ -187,25 +187,27 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       photoUrl: 'assets/image/members/supervisors-02.png'
     },
     {
+      name: '林正修 醫師',
+      title: '監事',
+      describe: [
+        '中國醫藥大學附設醫院 檢驗醫學部顧問主治醫師',
+        '台中市立老人復健綜合醫院 檢驗醫學科主任'
+      ],
+      photoUrl: 'assets/image/members/supervisors-01.png'
+    },
+    {
       name: '林進福 醫檢師',
       title: '監事',
       describe: [
-        '中國醫藥大學附設醫院醫事檢驗師'
+        '童綜合醫療社團法人童綜合醫院',
+        '臨床病理科 技術主任'
       ],
       photoUrl: 'assets/image/illustration/avatar-defualt.svg'
       // photoUrl: 'assets/image/members/supervisors-04.png'
     },
-    {
-      name: '王敦仁 醫檢師',
-      title: '監事',
-      describe: [
-        '馬信紀念醫院院長辦公室專員'
-      ],
-      photoUrl: 'assets/image/members/supervisors-04.png'
-    }
   ];
 
-  secretariat = [
+  secretaryGeneral = [
     {
       name: '蕭瓊子 副主任',
       title: '秘書長',
@@ -213,7 +215,47 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
         '中國醫藥大學附設醫院檢驗醫學部副主任',
         '亞洲大學助理教授'
       ],
-      photoUrl: 'assets/image/members/secretariat.png'
+      photoUrl: 'assets/image/members/secretary-general.png'
+    }
+  ];
+
+  DeputySecretaryGeneral = [
+    {
+      name: '蔡雅雯',
+      title: '南區副秘書長',
+      describe: [
+        '奇美醫院院長室專員',
+        '奇美醫院醫檢師'
+      ],
+      photoUrl: 'assets/image/members/deputy-secretary-001.png'
+    },
+
+    {
+      name: '朱學緯',
+      title: '北區副秘書長',
+      describe: [],
+      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+    },
+    {
+      name: '何文育',
+      title: '中區副秘書長',
+      describe: [],
+      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+    },
+  ];
+
+  secretariat = [
+    {
+      name: '薛翔中',
+      title: '秘書處',
+      describe: [],
+      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+    },
+    {
+      name: '吳慧芸',
+      title: '秘書處',
+      describe: [],
+      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
     }
   ];
 

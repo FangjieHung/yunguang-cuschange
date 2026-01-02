@@ -47,8 +47,8 @@
     }
 }
 
-.standing-directors-wrap {
-    @apply grid grid-cols-2 gap-5 lg:gap-16 items-start;
+.directors-row-wrap {
+    @apply grid gap-5 lg:gap-16 items-start;
 
     .member-item {
         @apply md:flex-row md:space-x-5;
@@ -59,6 +59,6 @@
     }
 }
 
-.directors-wrap {
+.directors-col-wrap {
     @apply grid gap-4 lg:gap-10 items-start;
 }
