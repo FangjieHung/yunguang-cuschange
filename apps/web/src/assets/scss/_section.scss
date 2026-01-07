@@ -54,7 +54,6 @@ web-glass-bg.card {
   }
 }
 
-
 /* list */
 .news-list {
   > a {
@@ -83,11 +82,11 @@ web-glass-bg.card {
 }
 
 .icon-list-container {
-    @apply mb-7 space-y-7;
+  @apply mb-7 space-y-7;
 
-    .info-label {
-        @apply flex items-center font-medium text-sky-600;
-    }
+  .info-label {
+    @apply flex items-center font-medium text-sky-600;
+  }
 }
 
 .describe-list {
@@ -107,7 +106,7 @@ web-glass-bg.card {
 }
 
 .mat-horizontal-stepper-wrapper .mat-horizontal-content-container {
-    padding: 0;
+  padding: 0;
 }
 
 .mat-mdc-paginator {
@@ -192,7 +191,11 @@ web-glass-bg.card {
 .sub-sidenav {
   &.mat-drawer-container,
   .mat-drawer {
-    @apply bg-white/0;    
+    @apply bg-white/0 w-full;
+  }
+
+  .mat-drawer-content {
+    @apply w-full;
   }
 
   .mat-drawer-inner-container {

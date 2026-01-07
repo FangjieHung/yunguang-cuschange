@@ -51,7 +51,7 @@
 }
 
 .btn-white {
-  @apply border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
+  @apply cursor-pointer border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
 }
 
 [class*="btn-"] {

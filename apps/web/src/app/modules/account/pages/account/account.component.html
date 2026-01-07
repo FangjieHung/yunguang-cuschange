@@ -1,13 +1,21 @@
 <mat-sidenav-container class="sub-sidenav">
-    <div class="hidden lg:block">
-        <mat-nav-list>
-            <a mat-list-item routerLink="profile" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">個人資料</a>
-            <a mat-list-item routerLink="password" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">重設密碼</a>
-        </mat-nav-list>
+    <div class="px-2 max-w-screen-2xl w-full mx-auto flex items-start">
+        <div class="hidden lg:block">
+            <mat-nav-list>
+                <a mat-list-item routerLink="camp-reg-rec" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">我的活動</a>
+                <a mat-list-item routerLink="bill-rec" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">繳費紀錄</a>
+                <a mat-list-item routerLink="profile" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">個人資料</a>
+                <a mat-list-item routerLink="password" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">重設密碼</a>
+            </mat-nav-list>
+        </div>
+
+        <div class="w-full flex-auto mx-auto lg:px-10">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-    <div class="w-full mx-auto lg:px-10">
-        <router-outlet></router-outlet>
-    </div>
+
 </mat-sidenav-container>

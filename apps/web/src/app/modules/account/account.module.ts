@@ -6,17 +6,19 @@ import { AccountRoutingModule } from './account-routing.module';
 //import { SharedModule } from '@core/shared';
 import { SharedModule } from '../../shared/shared.module';
 import {
+  AccountComponent,
   ProfileComponent,
   ResetPasswordComponent,
-  AccountComponent
+  MyBillRecComponent, MyCampRegRecComponent
 } from './pages';
 
 // Config settings
 const CUSTOM_MODULES = [SharedModule];
 const CUSTOM_COMPONENTS = [
+  AccountComponent,
   ProfileComponent,
   ResetPasswordComponent,
-  AccountComponent
+  MyBillRecComponent, MyCampRegRecComponent
 ];
 
 @NgModule({

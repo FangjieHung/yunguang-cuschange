@@ -1,0 +1,84 @@
+<div class="p-4">
+  <h2 class="headline">繳費紀錄</h2>
+  <form action="" class="search-wrap max-w-2xl mb-6">
+    <mat-form-field appearance="outline" class="fill-black max-w-40">
+      <mat-select name="srcYear" placeholder="請選擇區間">
+        <mat-option value="1">近 1 年</mat-option>
+        <mat-option value="2">近 2 年</mat-option>
+        <mat-option value="3">近 3 年</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="fill-black">
+      <span matPrefix class="material-symbols-rounded">search</span>
+      <input matInput type="text" name="searchValue" placeholder="搜尋">
+      <button matSuffix mat-icon-button aria-label="Clear">
+        <span class="material-symbols-rounded">close</span>
+      </button>
+    </mat-form-field>
+    <button class="btn-primary btn-lg">
+      <!-- [ngClass]="{'disabled-hide': !request.queryRequest.queryString}" -->
+      搜尋
+    </button>
+  </form>
+
+  <bbd-loading-indicator *ngIf="!isLoading" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
+  <!-- 空資料 -->
+  <web-result-empty *ngIf="!isLoading && (dataSource | isEmpty)" [message]="'查無活動資料'"
+    class="block mt-5"></web-result-empty>
+
+  <!-- 有資料 -->
+  <ng-container *ngIf="isLoading && (dataSource | isEmpty)">
+    <web-glass-bg>
+      <mat-accordion class="accordion-transparent block p-2">
+        <mat-expansion-panel class="rounded-full" hideToggle *ngFor="let item of payments">
+          <mat-expansion-panel-header class="py-2">
+            <div class="header-wrap">
+              <div class="panel-title-wrap">
+                <div>
+                  <p class="title-label">{{ item.category }} </p>
+                  <p class="title-sub">{{ item.dueDate }}</p>
+                </div>
+                <div>
+                  <p class="panel-title">{{ item.title }}</p>
+                  <p>應繳金額：${{ item.amount | number:'1.0-0' }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="status-wrap" [ngClass]="statusMeta[item.status].colorClass">
+              <span class="material-symbols-rounded">{{ statusMeta[item.status].icon }}</span>
+              <span class="status-label">{{ statusMeta[item.status].label }}</span>
+            </div>
+          </mat-expansion-panel-header>
+
+          <div class="panel-content">
+            <ul class="list-circle">
+              <li>繳費會員 : {{ item.memberName }}</li>
+              <li>行動電話 : {{ item.mobile }}</li>
+              <li>電子信箱 : {{ item.email }}</li>
+              <li>
+                繳費金額：
+                <ng-container>
+                  ${{ item.paidAmount | number:'1.0-0' }}
+                </ng-container>
+                <ng-template #noPaidAmount>-</ng-template>
+              </li>
+              <li>繳費方式 : {{ item.payMethod || '-' }}</li>
+              <li>金流繳費編號 : {{ item.payId || '-' }}</li>
+              <li>繳費時間 : {{ item.payTime || '-' }}</li>
+            </ul>
+
+            <div class="btns-wrap">
+              <a class="btn-white"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a>
+              <button type="button" class="btn-white"><span
+                  class="material-symbols-rounded pr-1">print</span>列印證明</button>
+              <button type="button" class="btn-primary"><span
+                  class="material-symbols-rounded pr-1">payments</span>前往付款</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </web-glass-bg>
+    <mat-paginator [hidePageSize]="true" [pageSize]="10" [pageIndex]="0" [length]="4">
+    </mat-paginator>
+  </ng-container>
+</div>

@@ -4,8 +4,8 @@ import { environment as env } from '../../../environments/environment';
 
 // Custom packages
 import {
-  ProfileComponent, ResetPasswordComponent,
-  AccountComponent
+  ProfileComponent, ResetPasswordComponent, AccountComponent,
+  MyBillRecComponent, MyCampRegRecComponent
 } from './pages';
 
 const routes: Routes = [
@@ -37,7 +37,15 @@ const routes: Routes = [
           url: `${env.siteServer}/account/password`,
           image: `${env.siteServer}/assets/image/og/tslmai.png`
         }
-      }
+      },
+      {
+        path: 'bill-rec',
+        component: MyBillRecComponent
+      },
+      {
+        path: 'camp-reg-rec',
+        component: MyCampRegRecComponent
+      },
     ]
   }
 ];
