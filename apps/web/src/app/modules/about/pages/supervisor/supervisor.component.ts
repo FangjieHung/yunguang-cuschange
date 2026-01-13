@@ -73,7 +73,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '謝文祥 副部長',
       title: '常務理事',
       describe: [
-        '義大醫療財團法人體系行政中心醫療品質部副部長'
+        '義大醫療財團法人行政中心智慧醫療部部長兼醫療品質部副部長'
       ],
       photoUrl: 'assets/image/members/standing-directors-04.png'
     }
@@ -85,7 +85,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       title: '理事',
       describe: [
         '中山醫學大學附設醫院感染科主治醫師',
-        '中山醫學大學醫學系副教授'
+        '中山醫學大學醫學系專任副教授'
       ],
       photoUrl: 'assets/image/members/directors-03.png'
     },
@@ -163,7 +163,8 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '賴靜憶 副主任',
       title: '理事',
       describe: [
-        '台中榮民總醫院病理檢驗部 品保副主任'
+        '台中榮民總醫院病理檢驗部 品保副主任',
+        '中國醫藥大學附設醫院醫事檢驗師'
       ],
       photoUrl: 'assets/image/members/directors-09.png'
     },
@@ -174,7 +175,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '王敦仁 醫檢師',
       title: '監事',
       describe: [
-        '馬信紀念醫院院長辦公室專員'
+        '淡水馬偕紀念醫院醫事檢驗科擔任醫事檢驗師'
       ],
       photoUrl: 'assets/image/members/supervisors-04.png'
     },
@@ -182,7 +183,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '李岱芬 醫檢師',
       title: '監事',
       describe: [
-        '國立臺灣大學醫學院附設醫院檢驗醫學部病毒檢驗組組長'
+        '國立台灣大學醫學院附設醫院醫事檢驗師'
       ],
       photoUrl: 'assets/image/members/supervisors-02.png'
     },
@@ -190,6 +191,7 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '林正修 醫師',
       title: '監事',
       describe: [
+        '彰化基督教醫院醫師',
         '中國醫藥大學附設醫院 檢驗醫學部顧問主治醫師',
         '台中市立老人復健綜合醫院 檢驗醫學科主任'
       ],
@@ -199,10 +201,9 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '林進福 醫檢師',
       title: '監事',
       describe: [
-        '童綜合醫療社團法人童綜合醫院',
-        '臨床病理科 技術主任'
+        '中國醫藥大學附設醫院醫事檢驗師'
       ],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+      photoUrl: 'assets/image/illustration/avatar-defualt-male.svg'
       // photoUrl: 'assets/image/members/supervisors-04.png'
     },
   ];
@@ -227,20 +228,24 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
         '奇美醫院院長室專員',
         '奇美醫院醫檢師'
       ],
-      photoUrl: 'assets/image/members/deputy-secretary-001.png'
+      photoUrl: 'assets/image/members/deputy-secretary-001.jpg'
     },
 
     {
       name: '朱學緯',
       title: '北區副秘書長',
-      describe: [],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+      describe: [
+        '國立台灣大學附設醫院醫檢師'
+      ],
+      photoUrl: 'assets/image/members/deputy-secretary-002.jpg'
     },
     {
       name: '何文育',
       title: '中區副秘書長',
-      describe: [],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+      describe: [
+        '中國醫藥大學北港附設醫院院務秘書'
+      ],
+      photoUrl: 'assets/image/illustration/avatar-defualt-male.svg'
     },
   ];
 
@@ -249,15 +254,23 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '薛翔中',
       title: '秘書處',
       describe: [],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+      photoUrl: 'assets/image/illustration/avatar-defualt-male.svg'
     },
     {
       name: '吳慧芸',
       title: '秘書處',
       describe: [],
-      photoUrl: 'assets/image/illustration/avatar-defualt.svg'
+      photoUrl: 'assets/image/illustration/avatar-defualt-female.svg'
     }
   ];
+
+  alternate = [
+    { name: '陳嘉文', title: '監事備 1', describe: ['衛生福利部豐原醫院醫事檢驗科主任'], photoUrl: 'assets/image/illustration/avatar-defualt-male.svg' },
+    { name: '何文育', title: '理事備 2', describe: ['中國醫藥大學北港附設醫院院務秘書'], photoUrl: 'assets/image/illustration/avatar-defualt-male.svg' },
+    { name: '張煜昌', title: '理事備 3', describe: ['中國醫藥大學附設醫院醫事檢驗師'], photoUrl: 'assets/image/illustration/avatar-defualt-male.svg' },
+    { name: '蔡雅雯', title: '理事備 4', describe: ['奇美醫院專員'], photoUrl: 'assets/image/illustration/avatar-defualt-female.svg' },
+    { name: '鄭敏琳', title: '理事備 5', describe: ['長安醫院檢驗科科主任'], photoUrl: 'assets/image/illustration/avatar-defualt-female.svg' }
+  ]
 
   constructor(
     protected override injector: Injector) {

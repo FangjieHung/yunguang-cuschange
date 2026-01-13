@@ -113,6 +113,20 @@
                 </div>
             </li>
         </ul>
-    </section>
 
+        <ul class="directors-row-wrap grid-cols-2 lg:grid-cols-3">
+            <li *ngFor="let member of alternate" class="member-item">
+                <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
+                <div class="member-info">
+                    <span class="member-title">{{ member.title }}</span>
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <ol class="member-describe">
+                        <li *ngFor="let position of member.describe">
+                            {{ position }}
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ul>
+    </section>
 </div>
