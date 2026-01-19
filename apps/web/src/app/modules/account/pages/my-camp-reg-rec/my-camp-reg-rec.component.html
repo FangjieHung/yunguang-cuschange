@@ -14,13 +14,13 @@
     </button>
   </form>
 
-  <bbd-loading-indicator [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
+  <bbd-loading-indicator *ngIf="false" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
   <!-- 空資料 -->
-  <web-result-empty *ngIf="!isLoading && (dataSource | isEmpty)" [message]="'查無活動資料'"
+  <web-result-empty *ngIf="isLoading && (dataSource | isEmpty)" [message]="'查無活動資料'"
     class="block mt-5"></web-result-empty>
 
   <!-- 有資料 -->
-  <ng-container *ngIf="isLoading && (dataSource | isEmpty)">
+  <ng-container *ngIf="!isLoading && (dataSource | isEmpty)">
     <web-glass-bg>
       <mat-accordion class="accordion-transparent block p-2">
         <mat-expansion-panel class="rounded-full" hideToggle>

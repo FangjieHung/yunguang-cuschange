@@ -14,7 +14,7 @@ import { CampaignApiServ, SEOServ } from '@core/services';
   styleUrls: ['./campaign-detail.component.scss']
 })
 export class CampaignDetailComponent extends BBDBaseComponent implements OnInit {
-  isLoading = true;
+  isLoading = false;
   private _campaignApiServ = inject(CampaignApiServ);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);

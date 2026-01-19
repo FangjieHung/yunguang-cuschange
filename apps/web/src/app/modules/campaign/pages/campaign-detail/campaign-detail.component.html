@@ -71,12 +71,10 @@
       <bbd-quill-editor-viewer [content]="contentInfo?.desc">
       </bbd-quill-editor-viewer>
     </section>
-
-
   </section>
 
   <section class="action-container">
-    <web-glass-bg>
+    <web-glass-bg *ngIf="false">
       <!-- 開放報名 -->
       <div class="p-5">
         <ul class="option-wrap">
@@ -94,7 +92,6 @@
         <button routerLink="/campaign/reg" class="btn-primary btn-lg">立即報名</button>
       </div>
     </web-glass-bg>
-
   </section>
 
   <a class="link-underline mb-4" routerLink="/campaign/list">

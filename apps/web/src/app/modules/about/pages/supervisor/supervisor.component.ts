@@ -73,7 +73,10 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
       name: '謝文祥 副部長',
       title: '常務理事',
       describe: [
-        '義大醫療財團法人行政中心智慧醫療部部長兼醫療品質部副部長'
+        '義大醫療體系行政中心',
+        '智慧醫療部 部長',
+        '醫療品質部 副部長',
+        '義大醫院醫學教育委員會 副主席'
       ],
       photoUrl: 'assets/image/members/standing-directors-04.png'
     }
