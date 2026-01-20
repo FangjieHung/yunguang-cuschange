@@ -38,55 +38,19 @@
 }
 
 /* Card */
-.card {
-  @apply bg-white border border-sky-200 rounded-lg shadow max-h-full overflow-auto relative;
+web-glass-bg.card {
+  @apply block;
 
-  .cover {
-    @apply aspect-[4/3] object-cover rounded;
+  .liquidGlass-wrapper {
+    @apply overflow-hidden;
   }
 
-  // 只有名稱
-  .name {
-    @apply text-xl font-bold mt-2;
+  .card-header {
+    @apply bg-sky-800/10 px-6 pt-4 pb-3 border-b border-sky-800/20;
   }
 
-  // 有名稱、edit btn
-  .name-wrap {
-    @apply flex items-start justify-between mt-2;
-
-    > div {
-      @apply pr-1;
-    }
-
-    h2 {
-      @apply line-clamp-2 flex-1 pt-1;
-    }
-  }
-
-  .date {
-    @apply text-base text-sky-900/50 mt-1;
-  }
-
-  .card-action {
-    @apply w-8 h-8 rounded hover:bg-stone-100 mt-0.5;
-  }
-
-  .card-action .material-symbols-rounded {
-    @apply h-auto align-middle;
-    font-size: 1.5rem;
-  }
-}
-
-a.card,
-.card.link {
-  @apply text-sky-900 ease-in-out duration-300 cursor-pointer p-4 hover:shadow-lg;
-}
-
-.card-green {
-  @apply bg-[#DDEBEB] rounded-lg;
-
-  h5 {
-    @apply text-sky-800 flex items-center;
+  .card-title {
+    @apply font-medium text-xl;
   }
 }
 
@@ -117,12 +81,32 @@ a.card,
   }
 }
 
+.icon-list-container {
+  @apply mb-7 space-y-7;
+
+  .info-label {
+    @apply flex items-center font-medium text-sky-600;
+  }
+}
+
 .describe-list {
   @apply my-4 space-y-2;
+
+  li {
+    @apply flex items-start;
+  }
+
+  li.title {
+    @apply text-sky-500 font-bold space-x-2;
+  }
 
   span.divider {
     @apply px-1;
   }
+}
+
+.mat-horizontal-stepper-wrapper .mat-horizontal-content-container {
+  padding: 0;
 }
 
 .mat-mdc-paginator {
@@ -154,7 +138,7 @@ a.card,
 }
 
 .date-duration {
-  @apply flex items-center justify-between text-sm lg:text-lg;
+  @apply flex items-center justify-between text-sm lg:text-lg w-full max-w-96;
 
   > li {
     @apply flex items-start w-fit leading-none;
@@ -177,53 +161,8 @@ a.card,
   }
 }
 
-.sky-gradient-animated {
-  background:
-    radial-gradient(100% 100% at 4% 3%, #fff 0%, transparent),
-    radial-gradient(100% 100% at var(--g2-1-x-position) var(--g2-1-y-position), #7cd4f4 -32%, transparent),
-    radial-gradient(100% 100% at var(--g2-2-x-position) var(--g2-2-y-position), #03ace9 0%, transparent), #fff;
-  animation-name: g-2;
-  animation-iteration-count: infinite;
-  animation-duration: 10s;
-  transition-timing-function: ease-in-out;
-
-  > .floating-bg {
-    @apply bg-none;
-  }
-}
-@property --g2-1-x-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 87.96875%;
-}
-@property --g2-1-y-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 91.1328125%;
-}
-@property --g2-2-x-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 13.398437500000002%;
-}
-@property --g2-2-y-position {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 82.734375%;
-}
-:root {
-  --g2-1-x-position: 87.96875%;
-  --g2-1-y-position: 91.1328125%;
-  --g2-2-x-position: 13.398437500000002%;
-  --g2-2-y-position: 82.734375%;
-}
-@keyframes g-2 {
-  50% {
-    --g2-1-x-position: 15%;
-    --g2-1-y-position: 15%;
-    --g2-2-x-position: 61.21093749999999%;
-    --g2-2-y-position: 13.750000000000002%;
-  }
+.complete-container {
+  @apply w-full max-w-md mx-auto mt-10 space-y-5;
 }
 
 .mat-stepper-vertical,
@@ -252,7 +191,11 @@ a.card,
 .sub-sidenav {
   &.mat-drawer-container,
   .mat-drawer {
-    @apply bg-white/0;
+    @apply bg-white/0 w-full;
+  }
+
+  .mat-drawer-content {
+    @apply w-full;
   }
 
   .mat-drawer-inner-container {
