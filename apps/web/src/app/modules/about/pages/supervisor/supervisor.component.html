@@ -114,7 +114,8 @@
             </li>
         </ul>
 
-        <ul class="directors-row-wrap grid-cols-2 lg:grid-cols-3">
+        <!-- 備選 -->
+        <ul *ngIf="false" class="directors-row-wrap grid-cols-2 lg:grid-cols-3">
             <li *ngFor="let member of alternate" class="member-item">
                 <img [src]="member.photoUrl || 'assets/image/illustration/avatar-defualt.svg'" [alt]="member.name">
                 <div class="member-info">
