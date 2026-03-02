@@ -9,7 +9,8 @@ import { EnumValues } from 'enum-values';
 // Custom packages
 import {
   PagingRequest, PagingResponse, ValueInfo,
-  CampaignDto, CampaignReq, CampaignStatuses, CampaignView
+  CampaignDto, CampaignReq, CampaignStatuses, CampaignView,
+  CampRegDto, CampRegReq, CampRegView
 } from '../models';
 
 @Injectable({
@@ -58,6 +59,18 @@ export class CampaignApiServ {
   }
   setCampaignDto(request: CampaignDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/SetCampaignDto`, request);
+  }
+  //#endregion
+
+  //#region CampReg
+  campRegister(request: CampRegDto): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/CampRegister`, request);
+  }
+  cancelCampReg(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CancelCampReg/${id}`, null);
+  }
+  getCampRegViewsPaging(request: PagingRequest<CampRegReq>): Observable<PagingResponse<CampRegView>> {
+    return this.http.put<PagingResponse<CampRegView>>(`${this.baseUrl}/GetCampRegViewsPaging`, request);
   }
   //#endregion
 

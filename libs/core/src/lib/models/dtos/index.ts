@@ -13,3 +13,5 @@ export * from './campaign-dto';
 export * from './cust-group-dto';
 export * from './cust-member-dto';
 export * from './customer-dto';
+export * from './camp-reg-dto';
+export * from './camp-attend-log-dto';

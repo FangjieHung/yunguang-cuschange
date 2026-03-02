@@ -12,3 +12,5 @@ export * from './cust-group-view';
 export * from './cust-member-view';
 export * from './customer-view';
 export * from './zip-code-view';
+export * from './camp-reg-view';
+export * from './camp-attend-log-view';

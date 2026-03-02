@@ -17,3 +17,5 @@ export * from './reset-password-req';
 export * from './signin-req';
 export * from './upload-form-req';
 export * from './zip-code-req';
+export * from './camp-reg-req';
+export * from './camp-attend-log-req';
