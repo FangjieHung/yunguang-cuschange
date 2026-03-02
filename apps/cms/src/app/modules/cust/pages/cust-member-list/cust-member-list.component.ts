@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit } from '@angular/core';
+import * as XLSX from 'xlsx';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import { CustEditComponent } from '../cust-edit/cust-edit.component';
 import {
-  PagingRequest, PagingResponse,
-  CustMemberView, CustMemberReq, CustomerTypes
+  PagingRequest, PagingResponse, ZipCodeView,
+  CustomerDto, CustMemberDto, CustMemberView, CustMemberReq, CustomerTypes
 } from '@core/models';
 import { AppUserApiServ, CustApiServ, SharedDataServ, SharedFuncServ } from '@core/services';
 
@@ -26,7 +28,7 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
   dataSource: CustMemberView[] = [];
   request = new PagingRequest<CustMemberReq>();
   response: PagingResponse<CustMemberView> | null = null;
-  // corpOpts: CorpView[] = [];
+  zipCodes: ZipCodeView[] = [];
 
   dispCols = [
     '帳號狀態', '會員狀態', '加入日期',
@@ -45,12 +47,9 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
   }
 
   getCaches(): void {
-    // this.spinnerServ.show();
-    // forkJoin(
-    //   [this.corpApiServ.getCorpViews(new CorpReq()),]
-    // ).subscribe(([corpOpts]) => {
-    //   this.corpOpts = [...corpOpts || []];
-    // }).add(() => this.spinnerServ.hide());
+    // this.storeServ.getZipCodesCache().subscribe(res => {
+    //   this.zipCodes = res;
+    // });
   }
 
   doParamsInit(): void {
@@ -131,6 +130,67 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
         });
       }
     })
+  }
+
+  onUpload(target: any) {
+    const files = target?.files;
+    if (!files || files.length === 0) {
+      this.bbdNotifyServ.warning('提示，您未選取要上傳的檔案。');
+      return;
+    }
+
+    const dtos: CustomerDto[] = [];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const workbook = XLSX.read(e.target.result, { type: 'binary', cellDates: true });
+      XLSX.utils.sheet_to_json(workbook.Sheets['發起人名單'])?.map((item: any) => {
+        const dto = new CustomerDto();
+        dto.custMember = new CustMemberDto();
+        dto.type = +this.custApiServ.customerTypes.個人會員;
+        dto.code = String(item['會員編號'] || '');
+        dto.startAt = new Date('2026/01/01');
+        dto.status = +this.custApiServ.customerStatuses.正式會員;
+        dto.appUserStatus = 60;
+        dto.appUserStartAt = new Date('2026/01/01');
+        dto.password = String(item['身分證字號'] || 'A123456789').trim();
+        dto.name = String(item['姓名'] || '');
+        dto.custMember.name = String(item['姓名'] || '');
+        dto.custMember.IdNo = String(item['身分證字號'] || 'A123456789').trim()
+        dto.custMember.gender = String(item['性別'] || '').isUndefinedOrNullOrEmpty() ? null : (String(item['性別'] || '') === '男') ? 'M' : 'F';
+
+        const rawBirthStrs = String(item['出生年月日'] || '').split('.');
+        const newBirthStr = `${(Number(rawBirthStrs[0]) + 1911).toString()}/${rawBirthStrs[1]}/${rawBirthStrs[2]}`;
+        dto.custMember.birthAt = new Date(newBirthStr);
+        dto.custMember.email = String(item['e-mail'] || '');
+        dto.custMember.mobile = String(item['手機'] || '');
+        dto.custMember.phone = String(item['連絡電話'] || '');
+        dto.custMember.phoneExt = String(item['分機'] || '');
+        dto.custMember.content = JSON.stringify(
+          {
+            education: null,
+            experience: String(item['現職'] || '')
+          }
+        );
+
+        const city = String(item['戶籍縣市'] || '');
+        const district = String(item['區/鎮/鄉'] || '');
+        if (city.isUndefinedOrNullOrEmpty() == false && district.isUndefinedOrNullOrEmpty() == false) {
+          dto.custMember.resiZipCodeId = this.zipCodes.find(cond => cond.city === city && cond.district === district)?.id || null;
+          dto.custMember.currZipCodeId = this.zipCodes.find(cond => cond.city === city && cond.district === district)?.id || null;
+        }
+        dto.custMember.resiAddr = String(item['戶籍地址'] || '');
+        dto.custMember.currAddr = String(item['戶籍地址'] || '');
+        dtos.push(dto);
+      });
+
+      console.log(dtos);
+      this.spinnerServ.show();
+      this.custApiServ.setCustomerDtos(dtos)
+        .subscribe(res => {
+          console.log(res);
+        }).add(() => this.spinnerServ.hide());
+    };
+    reader.readAsArrayBuffer(target?.files[0]);
   }
 
   onSearch(pageIndex = 1): void {

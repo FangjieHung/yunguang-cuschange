@@ -61,6 +61,9 @@ export class CustApiServ {
   setCustomerDto(request: CustomerDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/SetCustomerDto`, request);
   }
+  setCustomerDtos(request: CustomerDto[]): Observable<string[]> {
+    return this.http.post<string[]>(`${this.baseUrl}/SetCustomerDtos`, request);
+  }
   signupCustomerDto(request: CustomerDto): Observable<string> {
     return this.http.post<string>(`${this.baseUrl}/SignupCustomerDto`, request);
   }
