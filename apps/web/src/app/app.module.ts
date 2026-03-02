@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -41,7 +41,8 @@ const CUSTOM_MODULES = [SharedModule, StatesModule];
     AppEnvHelper.getValueProvider(env),
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpResponseInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JWTAuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JWTAuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'zh-Hant' }
   ],
   bootstrap: [AppComponent],
 })

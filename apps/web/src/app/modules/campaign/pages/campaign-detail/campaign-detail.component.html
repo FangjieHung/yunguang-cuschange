@@ -74,22 +74,29 @@
   </section>
 
   <section class="action-container">
-    <web-glass-bg *ngIf="false">
+    <web-glass-bg>
       <!-- 開放報名 -->
       <div class="p-5">
         <ul class="option-wrap">
           <li>
-            <span class="option-name">一般會員</span>
-            <span class="option-price">NT$976</span>
+            <span class="option-name">非會員</span>
+            <ng-container *ngIf="response?.isOpenReg; else notOpenReg">
+              <span class="option-price" *ngIf="response?.pricing">NT$ {{response?.pricing | number}}</span>
+              <span class="option-price" *ngIf="!response?.pricing">免費</span>
+            </ng-container>
+            <ng-template #notOpenReg>
+              <span class="option-price">不開放報名</span>
+            </ng-template>
           </li>
 
           <li>
             <span class="option-name">正式會員</span>
-            <span class="option-price">免費</span>
+            <span class="option-price" *ngIf="response?.salePrice">NT$ {{response?.salePrice | number}}</span>
+            <span class="option-price" *ngIf="!response?.salePrice">免費</span>
           </li>
         </ul>
 
-        <button routerLink="/campaign/reg" class="btn-primary btn-lg">立即報名</button>
+        <button [routerLink]="['/campaign/register/', response?.uniqueId]" class="btn-primary btn-lg">立即報名</button>
       </div>
     </web-glass-bg>
   </section>

@@ -8,9 +8,10 @@ import { EnumValues } from 'enum-values';
 
 // Custom packages
 import {
-  PagingRequest, PagingResponse, ValueInfo,
+  PagingRequest, PagingResponse, PayInfo, ValueInfo,
   CampaignDto, CampaignReq, CampaignStatuses, CampaignView,
-  CampRegDto, CampRegReq, CampRegView
+  CampRegDto, CampRegReq, CampRegStatuses, CampRegView,
+  CampAttendLogCertStatuses
 } from '../models';
 
 @Injectable({
@@ -24,18 +25,6 @@ export class CampaignApiServ {
   constructor(private http: HttpClient) { }
 
   //#region Campaign
-  getCampaignStatusInfos(): ValueInfo[] {
-    const infos = [
-      { name: '尚未開放', value: CampaignStatuses.尚未開放, style: 'magenta' },
-      { name: '報名中', value: CampaignStatuses.報名中, style: 'green' },
-      { name: '候補中', value: CampaignStatuses.候補中, style: 'volcano' },
-      { name: '額滿', value: CampaignStatuses.額滿, style: 'orange' },
-      { name: '截止', value: CampaignStatuses.截止, style: 'purple' },
-      { name: '下架', value: CampaignStatuses.下架, style: 'red' }
-    ];
-
-    return infos;
-  }
   getCampaignDtoById(id: number): Observable<CampaignDto> {
     return this.http.get<CampaignDto>(`${this.baseUrl}/GetCampaignDtoById/${id}`);
   }
@@ -63,15 +52,38 @@ export class CampaignApiServ {
   //#endregion
 
   //#region CampReg
-  campRegister(request: CampRegDto): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/CampRegister`, request);
-  }
-  cancelCampReg(id: number): Observable<boolean> {
-    return this.http.put<boolean>(`${this.baseUrl}/CancelCampReg/${id}`, null);
+  getCampRegStatusInfos(): ValueInfo[] {
+    const infos = [
+      { name: '候補中', value: CampRegStatuses.候補中, style: 'orange' },
+      { name: '待付款', value: CampRegStatuses.待付款, style: 'magenta' },
+      { name: '已報名', value: CampRegStatuses.已報名, style: 'green' },
+      { name: '待退款', value: CampRegStatuses.待退款, style: 'volcano' },
+      { name: '已取消', value: CampRegStatuses.已取消, style: 'red' }
+    ];
+
+    return infos;
   }
   getCampRegViewsPaging(request: PagingRequest<CampRegReq>): Observable<PagingResponse<CampRegView>> {
     return this.http.put<PagingResponse<CampRegView>>(`${this.baseUrl}/GetCampRegViewsPaging`, request);
   }
+  campRegister(request: CampRegDto): Observable<PayInfo> {
+    return this.http.post<PayInfo>(`${this.baseUrl}/CampRegister`, request);
+  }
+  cancelCampReg(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CancelCampReg/${id}`, null);
+  }
   //#endregion
 
+  //#region CampAttendLog
+  getCampAttendLogCertStatusInfos(): ValueInfo[] {
+    const infos = [
+      { name: '待審核', value: CampAttendLogCertStatuses.待審核, style: 'orange' },
+      { name: '已核發', value: CampAttendLogCertStatuses.已核發, style: 'green' },
+      { name: '不符核發資格', value: CampAttendLogCertStatuses.不符核發資格, style: 'volcano' },
+      { name: '已取消', value: CampAttendLogCertStatuses.已取消, style: 'red' }
+    ];
+
+    return infos;
+  }
+   //#endregion
 }

@@ -3,31 +3,38 @@
     <!-- 開始日 -->
     <li>
       <div class="month-wrap">
-        <p>03 &#8725;</p>
-        <p>五.</p>
+        <p>{{ campInfo?.startAt | date:'MM' }} &#8725;</p>
+        <p>{{ campInfo?.startAt | date:'EEEEE' }}.</p>
       </div>
-      <p class="date">15</p>
+      <p class="date">{{ campInfo?.startAt | date:'dd' }}</p>
     </li>
     <!-- 結束日 -->
     <li class="line"></li>
     <li>
       <div class="month-wrap">
-        <p>03 &#8725;</p>
-        <p>五.</p>
+        <p>{{ campInfo?.endAt | date:'MM' }} &#8725;</p>
+        <p>{{ campInfo?.endAt | date:'EEEEE' }}.</p>
       </div>
-      <p class="date">15</p>
+      <p class="date">{{ campInfo?.endAt | date:'dd' }}</p>
     </li>
   </ol>
   <h3 class="headline">
-    2024 春季感染控制研討會暨工作坊
+    {{ campInfo?.name }}
   </h3>
   <ul class="describe-list">
-    <li class="title"><span class="min-w-fit">課程費用</span>
-      <span class="flex-auto">NT$976</span>
+    <li class="title"><span class="min-w-fit">活動費用</span>
+      <span class="flex-auto" *ngIf="((price || 0) > 0); else forFree">NT$ {{ price | number }}</span>
+      <ng-template #forFree>
+        <span class="flex-auto" *ngIf="price === null"> - </span>
+        <span class="flex-auto" *ngIf="price !== null">免費</span>
+      </ng-template>
     </li>
-    <li><span class="min-w-fit">報名時間</span><span>&#8739;</span><span class="flex-auto">2024.02.01 09:00 ~ 2024.03.10
-        18:00</span></li>
-    <li><span class="min-w-fit">取消方式</span><span>&#8739;</span><span
-        class="flex-auto">一般報名請聯絡本會進行取消或退款作業；會員報名可登入平台至我的活動進行取消作業。</span></li>
+    <li>
+      <span class="min-w-fit">報名時間</span><span>&#8739;</span><span class="flex-auto">{{ campInfo?.regStartAt | date:'yyyy.MM.dd HH:mm' }} ~ {{ campInfo?.regEndAt | date:'yyyy.MM.dd HH:mm' }}</span>
+    </li>
+    <li>
+      <span class="min-w-fit">取消方式</span><span>&#8739;</span><span
+        class="flex-auto">非會員報名請聯絡本會進行取消或退款作業；會員報名可登入平台至我的活動進行取消作業。</span>
+      </li>
   </ul>
 </div>

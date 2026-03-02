@@ -4,7 +4,7 @@
 
     <!-- Info -->
     <header class="info-header">
-      <app-camp-reg-info></app-camp-reg-info>
+      <app-camp-reg-info [campInfo]="response"></app-camp-reg-info>
     </header>
 
     <!-- 報名表-->
@@ -18,11 +18,11 @@
             </div>
           </web-glass-bg>
           <div class="toolbar">
-            <button matStepperNext class="btn-primary btn-lg">下一步</button>
+            <button class="btn-primary btn-lg">確認報名</button>
           </div>
         </mat-step>
 
-        <mat-step>
+        <mat-step *ngIf="false">
           <ng-template matStepLabel>課程需求</ng-template>
 
           <web-glass-bg>
@@ -58,11 +58,11 @@
           </web-glass-bg>
           <div class="toolbar">
             <button matStepperPrevious mat-button>上一步</button>
-            <button matStepperNext class="btn-primary btn-lg">下一步</button>
+            <button matStepperNext class="btn-primary btn-lg">完成報名</button>
           </div>
         </mat-step>
 
-        <mat-step>
+        <mat-step *ngIf="false">
           <ng-template matStepLabel>付款資訊</ng-template>
 
           <web-glass-bg>

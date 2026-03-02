@@ -5,5 +5,6 @@ export * from './auth-user-route';
 export * from './entity-base';
 export * from './paging-request';
 export * from './paging-response';
+export * from './pay-info';
 export * from './query-request-base';
 export * from './value-info';

@@ -9,8 +9,8 @@ export const environment = {
   storageAuthUserName: 'tslmaiWebDevAuthUser',
   siteName: '台灣人工智慧檢驗醫學學會',
   siteServer: 'http://localhost:4200',
-  apiServer: 'https://apiv1.tslmai.org.tw/Portal',
-  cdnServer: 'https://apiv1.tslmai.org.tw',
+  apiServer: 'http://localhost:5038/Portal',
+  cdnServer: 'http://localhost:5038/',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'
 };
 

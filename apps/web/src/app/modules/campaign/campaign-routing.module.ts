@@ -22,7 +22,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'reg', // 報名填表頁
+    path: 'register/:campUniqueId',
     component: CampaignRegisterComponent,
   },
   {
