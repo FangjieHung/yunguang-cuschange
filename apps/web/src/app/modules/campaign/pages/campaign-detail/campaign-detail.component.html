@@ -6,20 +6,22 @@
         <!-- 開始日 -->
         <li>
           <div class="month-wrap">
-            <p>{{ response?.startAt| date: 'MM' }} &#8725;</p>
-            <p>{{ response?.startAt | date: 'E' }}.</p>
+            <p>{{ response?.startAt | date : 'MM' }} &#8725;</p>
+            <p>{{ response?.startAt | date : 'E' }}.</p>
           </div>
-          <p class="date">{{ response?.startAt | date: 'dd' }}</p>
+          <p class="date">{{ response?.startAt | date : 'dd' }}</p>
         </li>
         <!-- 結束日 -->
-        <ng-container *ngIf="!(response?.endAt | isSameDate: response?.startAt)">
+        <ng-container
+          *ngIf="!(response?.endAt | isSameDate : response?.startAt)"
+        >
           <li class="line"></li>
           <li>
             <div class="month-wrap">
-              <p>{{ response?.endAt | date: 'MM' }} &#8725;</p>
-              <p>{{ response?.endAt | date: 'E' }}.</p>
+              <p>{{ response?.endAt | date : 'MM' }} &#8725;</p>
+              <p>{{ response?.endAt | date : 'E' }}.</p>
             </div>
-            <p class="date">{{ response?.endAt | date: 'dd' }}</p>
+            <p class="date">{{ response?.endAt | date : 'dd' }}</p>
           </li>
         </ng-container>
       </ol>
@@ -27,36 +29,53 @@
         {{ response?.name }}
       </h3>
       <ul class="describe-list">
-        <li>報名時間<span>&#8739;</span>{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{
-          response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
+        <li>
+          報名時間<span>&#8739;</span
+          >{{ response?.regStartAt | dateFormatter : 'yyyy.MM.dd HH:mm' }} ~
+          {{ response?.regEndAt | dateFormatter : 'yyyy.MM.dd HH:mm' }}
+        </li>
         <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
       </ul>
-      <mat-progress-bar mode="determinate" color="primary" value="100" class="mb-10"></mat-progress-bar>
+      <mat-progress-bar
+        mode="determinate"
+        color="primary"
+        value="100"
+        class="mb-10"
+      ></mat-progress-bar>
 
       <ul class="icon-list-container border-b pb-7">
         <li>
-          <p class="info-label"><span class="material-symbols-rounded">people</span><span class="ml-1">活動講師</span>
+          <p class="info-label">
+            <span class="material-symbols-rounded">people</span
+            ><span class="ml-1">活動講師</span>
           </p>
           <p class="ml-7">{{ contentInfo?.speakers }}</p>
         </li>
         <li>
-          <p class="info-label"><span class="material-symbols-rounded">date_range</span><span class="ml-1">活動時間</span>
+          <p class="info-label">
+            <span class="material-symbols-rounded">date_range</span
+            ><span class="ml-1">活動時間</span>
           </p>
-          <p class="ml-7">{{ response?.startAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.endAt |
-            dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
+          <p class="ml-7">
+            {{ response?.startAt | dateFormatter : 'yyyy.MM.dd HH:mm' }} ~
+            {{ response?.endAt | dateFormatter : 'yyyy.MM.dd HH:mm' }}
+          </p>
         </li>
         <!-- <li>
                 <p class="info-label"><span class="material-symbols-rounded">pending_actions</span><span class="ml-1">報名時間</span></p>
                 <p class="ml-7">{{ response?.regStartAt | dateFormatter: 'yyyy.MM.dd HH:mm' }} ~ {{ response?.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</p>
             </li> -->
         <li>
-          <p class="info-label"><span class="material-symbols-rounded">location_on</span><span class="ml-1">活動地點</span>
+          <p class="info-label">
+            <span class="material-symbols-rounded">location_on</span
+            ><span class="ml-1">活動地點</span>
           </p>
           <p class="ml-7">{{ contentInfo?.location }}</p>
         </li>
         <li>
-          <p class="info-label"><span class="material-symbols-rounded">restaurant_menu</span><span
-              class="ml-1">供餐</span>
+          <p class="info-label">
+            <span class="material-symbols-rounded">restaurant_menu</span
+            ><span class="ml-1">供餐</span>
           </p>
           <p class="ml-7">{{ contentInfo?.hasMeal ? '有' : '無' }}</p>
         </li>
@@ -75,28 +94,80 @@
 
   <section class="action-container">
     <web-glass-bg>
-      <!-- 開放報名 -->
       <div class="p-5">
         <ul class="option-wrap">
           <li>
             <span class="option-name">非會員</span>
             <ng-container *ngIf="response?.isOpenReg; else notOpenReg">
-              <span class="option-price" *ngIf="response?.pricing">NT$ {{response?.pricing | number}}</span>
+              <span class="option-price" *ngIf="response?.pricing"
+                >NT$ {{ response?.pricing | number }}</span
+              >
               <span class="option-price" *ngIf="!response?.pricing">免費</span>
             </ng-container>
             <ng-template #notOpenReg>
               <span class="option-price">不開放報名</span>
             </ng-template>
           </li>
-
           <li>
             <span class="option-name">正式會員</span>
-            <span class="option-price" *ngIf="response?.salePrice">NT$ {{response?.salePrice | number}}</span>
+            <span class="option-price" *ngIf="response?.salePrice"
+              >NT$ {{ response?.salePrice | number }}</span
+            >
             <span class="option-price" *ngIf="!response?.salePrice">免費</span>
           </li>
         </ul>
 
-        <button [routerLink]="['/campaign/register/', response?.uniqueId]" class="btn-primary btn-lg">立即報名</button>
+        <!-- 按鈕狀態切換 -->
+        <ng-container [ngSwitch]="response?.regStatus">
+          <!-- 已報名 → 取消報名-->
+          <ng-container *ngSwitchCase="'registered'">
+            <div class="reg-info-block">
+              <span class="material-symbols-rounded">event_available</span>
+              <div>
+                <p class="reg-info-label">活動報名時間</p>
+                <p class="reg-info-value">
+                  {{ response?.regStartAt | dateFormatter : 'yyyy.MM.dd HH:mm' }} ~
+                  {{ response?.regEndAt | dateFormatter : 'yyyy.MM.dd HH:mm' }}
+                </p>
+              </div>
+            </div>
+            <button class="btn-primary disabled btn-lg">
+              <span class="material-symbols-rounded pr-1">check</span>
+              已報名</button>
+            <button mat-button color="primary" class="mx-auto text-sm mt-1">取消報名</button>
+          </ng-container>
+
+          <!-- 已取消 → 重新報名 -->
+          <ng-container *ngSwitchCase="'cancelled'">
+            <div class="reg-info-block">
+              <span class="material-symbols-rounded">event_busy</span>
+              <div>
+                <p class="reg-info-label">前次取消時間</p>
+                <p class="reg-info-value">
+                  {{
+                    response?.cancelledAt | dateFormatter : 'yyyy.MM.dd HH:mm'
+                  }}
+                </p>
+              </div>
+            </div>
+            <button
+              [routerLink]="['/campaign/register/', response?.uniqueId]"
+              class="btn-primary btn-lg">重新報名
+            </button>
+          </ng-container>
+
+          <!-- 尚未開放 --> 
+          <ng-container *ngSwitchCase="null">
+            <button class="btn-primary disabled btn-lg" disabled>尚未開放</button>
+          </ng-container>
+
+          <!-- 預設：立即報名 -->
+          <ng-container *ngSwitchDefault>
+            <button [routerLink]="['/campaign/register/', response?.uniqueId]" class="btn-primary btn-lg">
+              立即報名
+            </button>
+          </ng-container>
+        </ng-container>
       </div>
     </web-glass-bg>
   </section>

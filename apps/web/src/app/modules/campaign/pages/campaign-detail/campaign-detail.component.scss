@@ -1,23 +1,35 @@
 .campaign-detail-container {
-    @apply relative w-full px-5 max-w-5xl mx-auto grid items-start grid-cols-1 lg:grid-cols-3 gap-10;
+  @apply relative w-full px-5 max-w-5xl mx-auto grid items-start grid-cols-1 lg:grid-cols-3 gap-10;
 
-    .info-container {
-        @apply lg:col-span-2;
-    }
-}
-
-.action-container {
-    
+  .info-container {
+    @apply lg:col-span-2;
+  }
 }
 
 .option-wrap {
-    @apply text-lg divide-y pb-4;
+  @apply text-lg divide-y pb-4;
 
-    li {
-        @apply flex items-center justify-between py-3;
-    }
+  li {
+    @apply flex items-center justify-between py-3;
+  }
 
-    .option-name {
-        @apply font-bold;
-    }
+  .option-name {
+    @apply font-bold;
+  }
+}
+
+.reg-info-block {
+  @apply flex items-start gap-1 mb-4;
+
+  .material-symbols-rounded {
+    @apply text-slate-500 text-xl;
+  }
+
+  .reg-info-label {
+    @apply text-sm text-gray-500 mb-0.5;
+  }
+
+  .reg-info-value {
+    @apply text-sm font-medium;
+  }
 }
