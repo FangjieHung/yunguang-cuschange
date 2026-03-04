@@ -9,11 +9,9 @@
 
     <!-- 報名表-->
     <div class="account-wrap xl:col-span-2">
-
-      <web-glass-bg class="w-fit block mx-auto">
+      <web-glass-bg class="w-fit block mx-auto" *ngIf="isCompleted">
         <div class="p-10">
-          <web-complete message="活動報名完成" *ngIf="isCompleted"></web-complete>
-          <a routerLink="/account/camp-reg-rec" class="btn-primary btn-lg max-w-xs mx-auto mt-5">查看報名紀錄</a>
+          <web-complete message="活動報名完成"></web-complete>
         </div>
       </web-glass-bg>
 

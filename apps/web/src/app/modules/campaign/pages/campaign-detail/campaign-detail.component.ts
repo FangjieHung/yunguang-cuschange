@@ -37,6 +37,8 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
       this._uniqueId = params.get('uniqueId') || '';
       this.doDataInit();
     });
+
+    this.storeServ.getZipCodesCache().subscribe();
   }
 
   doDataInit(): void {
