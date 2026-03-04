@@ -55,8 +55,9 @@
                             item.regEndAt | dateFormatter: 'yyyy.MM.dd HH:mm' }}</li>
                         <!-- <li>剩餘名額<span>&#8739;</span>{{ 保留第二階段用 }}</li> -->
                     </ul>
-                    <mat-progress-bar mode="determinate" color="primary" value="100"
-                        class="mb-5"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" color="primary" class="mb-5"
+                      [value]="item.maxRegNum ? (item.regNum || 0) / (item.maxRegNum || 1) * 100 : 0"
+                    ></mat-progress-bar>
                 </div>
                 <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
             </a>

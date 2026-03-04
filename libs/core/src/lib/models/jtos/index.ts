@@ -1,4 +1,5 @@
 export * from './app-news-msg-content-jto';
+export * from './camp-reg-content-jto';
 export * from './campaign-content-jto';
 export * from './cust-group-content-jto';
 export * from './cust-member-content-jto';

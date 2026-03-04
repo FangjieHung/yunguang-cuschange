@@ -10,7 +10,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
 import { GlassBgComponent, PaginatorComponent, ResultEmptyComponent, CompleteComponent } from './components';
-import { CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent } from './controls';
+import {
+  CampRegControlComponent,
+  CustGroupControlComponent, CustMemberControlComponent,
+  ZipCodeControlComponent
+} from './controls';
 import {
   CustEditWidgetComponent,
   ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent
@@ -20,7 +24,7 @@ const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
   GlassBgComponent, PaginatorComponent, ResultEmptyComponent, CompleteComponent
 ];
-const CUST_CONTROLS = [CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent];
+const CUST_CONTROLS = [CampRegControlComponent,CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent];
 const CUST_WIDGETS = [CustEditWidgetComponent, ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent];
 const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
 

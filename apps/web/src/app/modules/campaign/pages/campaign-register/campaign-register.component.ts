@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment as env } from '../../../../../environments/environment';
 
@@ -7,6 +8,7 @@ import { environment as env } from '../../../../../environments/environment';
 import { BBDBaseComponent } from '@core/shared';
 import { CampaignView } from '@core/models';
 import { CampaignApiServ, SEOServ } from '@core/services';
+import { CampRegControlComponent } from '../../../../shared/controls';
 
 @Component({
   selector: 'app-campaign-register',
@@ -14,17 +16,27 @@ import { CampaignApiServ, SEOServ } from '@core/services';
   styleUrls: ['./campaign-register.component.scss']
 })
 export class CampaignRegisterComponent extends BBDBaseComponent implements OnInit {
+  @ViewChild(CampRegControlComponent) regDataCtrl!: CampRegControlComponent;
+
   private _campaignApiServ = inject(CampaignApiServ);
+  private _fb = inject(FormBuilder);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _seoServ = inject(SEOServ);
 
   private _campUniqueId = '';
+  isCompleted = false;
+  valForm!: UntypedFormGroup;
   response: CampaignView | null = null;
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.valForm.controls;
+  }
 
   constructor(
     protected override injector: Injector) {
     super(injector);
+    this.doFormInit();
   }
 
   ngOnInit(): void {
@@ -44,6 +56,7 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
           }
 
           this.response = res;
+          this.doFormPatchValue();
 
           // SEO tags
           const seoData = this._route.snapshot.data;
@@ -60,7 +73,65 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
       });
   }
 
+  doFormInit(): void {
+    this.valForm = this._fb.group({
+      regData: [null]
+    });
+  }
+
+  doFormPatchValue(): void {
+    if (!this.response) {
+      return;
+    }
+    this.valForm.patchValue(this.response);
+  }
+
+  canSubmit() {
+    this.regDataCtrl?.markAllAsTouched();
+    this.valForm.markAllAsTouched();
+    if (this.valForm.valid === false) {
+      Object.values(this.valForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+      this.bbdNotifyServ.error('送出失敗，請確認是否有欄位尚未填寫。');
+      throw new Error("送出失敗");
+    }
+    if (!this.response || !this.response.regData) {
+      this.bbdNotifyServ.error('送出失敗，請確認是否有欄位尚未填寫。');
+      throw new Error("送出失敗");
+    }
+
+    Object.assign(this.response, this.valForm.value);
+    this.response.regData.campId = this.response.id;
+  }
+
   onGoHome(): void {
     this._router.navigate(['/']);
+  }
+
+  onSubmit(): void {
+    this.canSubmit();
+    if (!this.response?.regData) {
+      this.bbdNotifyServ.error('送出失敗，請確認是否有欄位尚未填寫。');
+      throw new Error("送出失敗");
+    }
+
+    this.spinnerServ.show();
+    this._campaignApiServ.campRegister(this.response.regData).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error(`報名失敗，請再重試一次。`);
+          return;
+        }
+        this.bbdNotifyServ.success(`報名成功。`);
+        this.isCompleted = true;
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    }).add(() => this.spinnerServ.hide());
   }
 }

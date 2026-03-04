@@ -10,11 +10,12 @@ export class CampReg extends EntityBase {
   custName = '';
   custEmail = '';
   custMobile = '';
-  custZipCodeId = 0;
+  custZipCodeId: number | null = null;
   custAddr = '';
   custOrderId = 0;
   cxlAt: Date | null = null;
   status: number = +CampRegStatuses.候補中;
+  content: string | null = null;
 
   constructor() {
     super();

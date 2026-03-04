@@ -9,17 +9,20 @@
 
     <!-- 報名表-->
     <div class="account-wrap xl:col-span-2">
-      <mat-horizontal-stepper labelPosition="bottom">
+      <web-complete message="活動報名完成" *ngIf="isCompleted"></web-complete>
+      <mat-horizontal-stepper labelPosition="bottom" *ngIf="!isCompleted">
         <mat-step>
-          <ng-template matStepLabel>基本資料</ng-template>
-          <web-glass-bg>
-            <div class="inner-wrap">
-              <web-cust-member-control></web-cust-member-control>
+          <form [formGroup]="valForm">
+            <ng-template matStepLabel>基本資料</ng-template>
+            <web-glass-bg>
+              <div class="inner-wrap">
+                <web-camp-reg-control #regDataCtrl formControlName="regData"></web-camp-reg-control>
+              </div>
+            </web-glass-bg>
+            <div class="toolbar">
+              <button class="btn-primary btn-lg" (click)="onSubmit()">確認報名</button>
             </div>
-          </web-glass-bg>
-          <div class="toolbar">
-            <button class="btn-primary btn-lg">確認報名</button>
-          </div>
+          </form>
         </mat-step>
 
         <mat-step *ngIf="false">

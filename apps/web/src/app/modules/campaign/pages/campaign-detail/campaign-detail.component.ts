@@ -15,14 +15,17 @@ import { CampaignApiServ, SEOServ } from '@core/services';
 })
 export class CampaignDetailComponent extends BBDBaseComponent implements OnInit {
   isLoading = false;
-  private _campaignApiServ = inject(CampaignApiServ);
+
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _seoServ = inject(SEOServ);
+  campaignApiServ = inject(CampaignApiServ);
 
   private _uniqueId = '';
+  nowAt = new Date();
   response: CampaignView | null = null;
   contentInfo: any;
+  currRegStatus: '' | 'loading' | 'registering' | 'registered' | 'cancelled' | 'fulled' | 'closed' = 'loading';
 
   constructor(
     protected override injector: Injector) {
@@ -37,7 +40,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
   }
 
   doDataInit(): void {
-    this._campaignApiServ.getCampaignViewByUniqueId(this._uniqueId)
+    this.campaignApiServ.getCampaignViewByUniqueId(this._uniqueId)
       .subscribe({
         next: (res) => {
           if (!res) {
@@ -47,6 +50,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
 
           this.response = res;
           this.contentInfo = JSON.parse(this.response.content || '{}');
+          this.initRegStatus();
 
           // SEO tags
           const seoData = this._route.snapshot.data;
@@ -61,6 +65,81 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
           this.onGoHome();
         },
       });
+  }
+
+  initRegStatus() {
+    if (!this.response) {
+      this.currRegStatus = '';
+      return;
+    }
+
+    const campStatus = +this.response.status;
+    switch (campStatus) {
+      case +this.campaignApiServ.campaignStatuses.尚未開放: {
+        this.currRegStatus = '';
+        return;
+      }
+      case +this.campaignApiServ.campaignStatuses.截止: {
+        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+          this.currRegStatus = 'registered';
+          return;
+        }
+        this.currRegStatus = 'closed';
+        return;
+      }
+      case +this.campaignApiServ.campaignStatuses.額滿: {
+        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+          this.currRegStatus = 'registered';
+          return;
+        }
+        this.currRegStatus = 'fulled';
+        return;
+      }
+      case +this.campaignApiServ.campaignStatuses.報名中: {
+        if (!this.response.isOpenReg && !this.isSignin) {
+          this.currRegStatus = '';
+          return;
+        }
+        if (!this.response.regData || this.response.regData.id <= 0) {
+          this.currRegStatus = 'registering';
+          return;
+        }
+        if (this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+          this.currRegStatus = 'registered';
+          return;
+        }
+        if (this.response.regData.status >= +this.campaignApiServ.campRegStatuses.待退款) {
+          this.currRegStatus = 'cancelled';
+          return;
+        }
+        return;
+      }
+      default:
+        this.currRegStatus = '';
+        return;
+    }
+  }
+
+  onCancelReg() {
+    if (!this.response || !this.response.regData || this.response.regData.id <= 0) {
+      this.bbdNotifyServ.error('取消報名失敗，無法取得報名資料。');
+      return;
+    }
+
+    this.spinnerServ.show();
+    this.campaignApiServ.cancelCampReg(this.response.regData.id).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error(`取消報名失敗，請再重試一次。`);
+          return;
+        }
+        this.bbdNotifyServ.success(`取消成功。`);
+        this.doDataInit();
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    }).add(() => this.spinnerServ.hide());
   }
 
   onGoHome(): void {

@@ -6,7 +6,7 @@ import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, 
 import { BBDBaseComponent } from '@core/shared';
 import { CustMemberContentJto, CustMemberDto } from '@core/models';
 import { SharedDataServ } from '@core/services';
-import { ZipCodeControlComponent } from '@core/shared'
+import { ZipCodeControlComponent } from '../zip-code-control/zip-code-control.component';
 
 @Component({
   selector: 'web-cust-member-control',

@@ -21,6 +21,8 @@ export class CampaignApiServ {
   private readonly baseUrl = '/Campaign';
   campaignStatuses = CampaignStatuses;
   campaignStatusOpts = EnumValues.getNamesAndValues(CampaignStatuses);
+  campRegStatuses = CampRegStatuses;
+  campRegStatusOpts = EnumValues.getNamesAndValues(CampRegStatuses);
 
   constructor(private http: HttpClient) { }
 

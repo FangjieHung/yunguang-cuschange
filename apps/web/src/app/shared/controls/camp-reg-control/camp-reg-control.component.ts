@@ -4,28 +4,28 @@ import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, 
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import { CustGroupContentJto, CustGroupDto } from '@core/models';
+import { CampRegContentJto, CampRegDto } from '@core/models';
 import { SharedDataServ } from '@core/services';
 import { ZipCodeControlComponent } from '../zip-code-control/zip-code-control.component';
 
 @Component({
-  selector: 'web-cust-group-control',
-  templateUrl: './cust-group-control.component.html',
-  styleUrls: ['./cust-group-control.component.scss'],
+  selector: 'web-camp-reg-control',
+  templateUrl: './camp-reg-control.component.html',
+  styleUrls: ['./camp-reg-control.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CustGroupControlComponent),
+      useExisting: forwardRef(() => CampRegControlComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => CustGroupControlComponent),
+      useExisting: forwardRef(() => CampRegControlComponent),
       multi: true
     }
   ]
 })
-export class CustGroupControlComponent extends BBDBaseComponent implements ControlValueAccessor {
+export class CampRegControlComponent extends BBDBaseComponent implements ControlValueAccessor {
   @ViewChild('currZipCode') currZipCode!: ZipCodeControlComponent;
 
   private _fb = inject(FormBuilder);
@@ -49,19 +49,22 @@ export class CustGroupControlComponent extends BBDBaseComponent implements Contr
   // ngOnInit(): void { }
 
   // NG_VALUE_ACCESSOR 實作
-  writeValue(value: CustGroupDto) {
+  writeValue(value: CampRegDto) {
     if (!value)
-      return;
+      value = new CampRegDto();
 
-    value.contentJto = (value?.content || '').isUndefinedOrNullOrEmpty() ? new CustGroupContentJto() : JSON.parse(value?.content || '{}');
+    value.contentJto = (value.content || '').isUndefinedOrNullOrEmpty() ? new CampRegContentJto() : JSON.parse(value.content || '{}');
+    if (!value.custZipCodeId)
+      value.custZipCodeId = null;
+
     this.valForm.patchValue(value);
   }
 
-  onChange: (value: CustGroupDto) => void = () => void 0;
+  onChange: (value: CampRegDto) => void = () => void 0;
   registerOnChange(fn: (value: any) => void) {
     this.onChange = fn;
     this.valForm.valueChanges.subscribe((res) => {
-      res.content = JSON.stringify(res.contentJto || new CustGroupContentJto());
+      res.content = JSON.stringify(res.contentJto || new CampRegContentJto());
       this.onChange(res);
     })
   }
@@ -93,36 +96,30 @@ export class CustGroupControlComponent extends BBDBaseComponent implements Contr
   doFormInit(): void {
     this.valForm = this._fb.group({
       id: [0],
+      regAt: [new Date()],
+      campId: [0],
+      campName: [null],
       custId: [0],
-      taxId: [null, [Validators.required, Validators.maxLength(10)]],
-      name: [null, [Validators.required, Validators.maxLength(50)]],
-      email: [null, [Validators.required, Validators.email, Validators.maxLength(150)]],
-      phone: [null, [Validators.required, Validators.maxLength(12)]],
-      phoneExt: [null, [Validators.maxLength(8)]],
-      currZipCodeId: [null, [Validators.required]],
-      currAddr: [null, [Validators.required, Validators.maxLength(100)]],
-      owner: [null, [Validators.required, Validators.maxLength(50)]],
-      ownerTitle: [null, [Validators.required, Validators.maxLength(30)]],
-      cpName: [null, [Validators.required, Validators.maxLength(50)]],
-      cpGender: [null, [Validators.required, Validators.maxLength(1)]],
-      cpBirthAt: [null, [Validators.required]],
-      cpIdNo: [null, [Validators.required, Validators.maxLength(10)]],
-      cpMobile: [null, [Validators.required, Validators.maxLength(12)]],
-      cpTitle: [null, [Validators.required, Validators.maxLength(30)]],
-      cpEmail: [null, [Validators.required, Validators.email, Validators.maxLength(150)]],
+      custIdNo: [null, [Validators.required, Validators.maxLength(10)]],
+      custName: [null, [Validators.required, Validators.maxLength(50)]],
+      custEmail: [null, [Validators.required, Validators.maxLength(150)]],
+      custMobile: [null, [Validators.required, Validators.maxLength(12)]],
+      custZipCodeId: [null, [Validators.required]],
+      custAddr: [null, [Validators.required, Validators.maxLength(100)]],
+      custOrderId: [0],
+      cxlAt: [null],
+      status: [0],
       crtBy: [null],
       crtAt: [null],
       contentJto: this._fb.group({
-        cpTitle: [null],
-        cpEducation: [null],
-        cpExperience: [null]
+        currJob: [null, [Validators.required]]
       })
     });
 
-    this.f['cpIdNo'].valueChanges.subscribe((res) => {
+    this.f['custIdNo'].valueChanges.subscribe((res) => {
       const upperStr = String(res || '').trim().toUpperCase();
       if (upperStr.isUndefinedOrNullOrEmpty() == false && upperStr !== res)
-        this.f['cpIdNo'].setValue(upperStr, { emitEvent: false });
+        this.f['custIdNo'].setValue(upperStr, { emitEvent: false });
     });
   }
 

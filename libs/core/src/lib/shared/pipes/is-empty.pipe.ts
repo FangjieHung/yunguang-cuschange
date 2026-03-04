@@ -6,9 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: false
 })
 export class IsEmptyPipe implements PipeTransform {
-  transform(value: string | number | null | any[]): boolean {
+  transform(value: Date | string | number | null | any[]): boolean {
     if (!value) {
       return true;
+    }
+    if (value instanceof Date)  {
+      return value.isMaxUtcDate();
     }
 
     if (Array.isArray(value) === true) {

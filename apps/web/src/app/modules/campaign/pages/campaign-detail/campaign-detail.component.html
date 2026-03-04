@@ -39,7 +39,7 @@
       <mat-progress-bar
         mode="determinate"
         color="primary"
-        value="100"
+        [value]="response?.maxRegNum ? (response?.regNum || 0) / (response?.maxRegNum || 1) * 100 : 0"
         class="mb-10"
       ></mat-progress-bar>
 
@@ -118,23 +118,25 @@
         </ul>
 
         <!-- 按鈕狀態切換 -->
-        <ng-container [ngSwitch]="response?.regStatus">
+        <ng-container [ngSwitch]="currRegStatus">
           <!-- 已報名 → 取消報名-->
           <ng-container *ngSwitchCase="'registered'">
             <div class="reg-info-block">
               <span class="material-symbols-rounded">event_available</span>
               <div>
-                <p class="reg-info-label">活動報名時間</p>
+                <p class="reg-info-label">報名時間</p>
                 <p class="reg-info-value">
-                  {{ response?.regStartAt | dateFormatter : 'yyyy.MM.dd HH:mm' }} ~
-                  {{ response?.regEndAt | dateFormatter : 'yyyy.MM.dd HH:mm' }}
+                  {{ response?.regData?.regAt| dateFormatter : 'yyyy.MM.dd HH:mm' }}
                 </p>
               </div>
             </div>
             <button class="btn-primary disabled btn-lg">
               <span class="material-symbols-rounded pr-1">check</span>
               已報名</button>
-            <button mat-button color="primary" class="mx-auto text-sm mt-1">取消報名</button>
+            <button mat-button color="primary" class="mx-auto text-sm mt-1"
+              *ngIf="nowAt < (response?.startAt || nowAt)" (click)="onCancelReg()">
+              取消報名
+            </button>
           </ng-container>
 
           <!-- 已取消 → 重新報名 -->
@@ -144,28 +146,36 @@
               <div>
                 <p class="reg-info-label">前次取消時間</p>
                 <p class="reg-info-value">
-                  {{
-                    response?.cancelledAt | dateFormatter : 'yyyy.MM.dd HH:mm'
-                  }}
+                  {{ response?.regData?.cxlAt | dateFormatter : 'yyyy.MM.dd HH:mm' }}
                 </p>
               </div>
             </div>
-            <button
+            <button *ngIf="nowAt < (response?.regEndAt || nowAt)"
               [routerLink]="['/campaign/register/', response?.uniqueId]"
               class="btn-primary btn-lg">重新報名
             </button>
           </ng-container>
 
-          <!-- 尚未開放 --> 
-          <ng-container *ngSwitchCase="null">
-            <button class="btn-primary disabled btn-lg" disabled>尚未開放</button>
+          <!-- 報名額滿 -->
+          <ng-container *ngSwitchCase="'fulled'">
+            <button class="btn-primary disabled btn-lg" disabled>報名已額滿</button>
           </ng-container>
 
-          <!-- 預設：立即報名 -->
-          <ng-container *ngSwitchDefault>
+          <!-- 報名截止 -->
+          <ng-container *ngSwitchCase="'closed'">
+            <button class="btn-primary disabled btn-lg" disabled>報名已截止</button>
+          </ng-container>
+
+          <!-- 立即報名 -->
+          <ng-container *ngSwitchCase="'registering'">
             <button [routerLink]="['/campaign/register/', response?.uniqueId]" class="btn-primary btn-lg">
               立即報名
             </button>
+          </ng-container>
+
+          <!-- 尚未開放 -->
+          <ng-container *ngSwitchDefault>
+            <button class="btn-primary disabled btn-lg" disabled>尚未開放</button>
           </ng-container>
         </ng-container>
       </div>

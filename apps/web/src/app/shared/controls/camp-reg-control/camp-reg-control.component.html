@@ -1,0 +1,79 @@
+<form [formGroup]="valForm" class="account-wrap">
+  <section class="form-section">
+    <h3 class="title">基本資料</h3>
+    <ul class="input-group lg:grid-cols-3">
+      <li>
+        <div class="form-label">姓名 <span class="required-mark" *ngIf="f['custName'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="custName" [required]="f['custName'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['custName'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['custName'].errors, '姓名')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <li>
+        <div class="form-label">
+          <p>身分證號<span class="required-mark" *ngIf="f['custIdNo'] | ctrlHasRequired">*</span></p>
+        </div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="custIdNo" [required]="f['custIdNo'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['custIdNo'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['custIdNo'].errors, '身分證號')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+      <ng-container formGroupName="contentJto">
+        <li>
+          <div class="form-label">現職 <span class="required-mark" *ngIf="f['contentJto'].get('currJob') | ctrlHasRequired">*</span></div>
+          <mat-form-field appearance="outline" class="w-full fill-black">
+            <input matInput type="text" formControlName="currJob" [required]="f['currJob'] | ctrlHasRequired">
+            <mat-error class="text-xs" *ngIf="f['contentJto'].get('currJob')?.errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['contentJto'].get('currJob')?.errors, '現職')">{{ msg }}
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </li>
+      </ng-container>
+    </ul>
+  </section>
+
+  <section class="form-section">
+    <h3 class="title">聯絡資訊</h3>
+    <ul class="input-group lg:grid-cols-2">
+      <li>
+        <div class="form-label">聯絡手機 <span class="required-mark" *ngIf="f['custMobile'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="custMobile" [required]="f['custMobile'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['custMobile'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['custMobile'].errors, '聯絡手機')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+
+      <li>
+        <div class="form-label">電子信箱 <span class="required-mark" *ngIf="f['custEmail'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="custEmail" [required]="f['custEmail'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['custEmail'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['custEmail'].errors, '電子信箱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+
+      <li class="col-span-full">
+        <div class="form-label">聯絡地址 <span class="required-mark" *ngIf="f['custAddr'] | ctrlHasRequired">*</span></div>
+        <div class="multi-inputs md:grid-cols-3">
+          <web-zip-code-control #currZipCode class="w-full" formControlName="custZipCodeId"
+            [required]="f['custZipCodeId'] | ctrlHasRequired">
+          </web-zip-code-control>
+          <mat-form-field appearance="outline" class="w-full fill-black md:col-span-2">
+            <input matInput type="text" formControlName="custAddr" [required]="f['custAddr'] | ctrlHasRequired">
+            <mat-error class="text-xs" *ngIf="f['custAddr'].errors">
+              <div *ngFor="let msg of formHelper.errorMsgs(f['custAddr'].errors, '聯絡地址')">{{ msg }}</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </li>
+    </ul>
+  </section>
+</form>
