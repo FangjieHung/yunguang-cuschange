@@ -9,25 +9,6 @@ import {
 } from '@core/models';
 import { CampaignApiServ } from '@core/services';
 
-interface PaymentRecord {
-  id: number;
-  orderType: string;
-  orderDesc: string;
-  orderDate: string;
-  totalAmount: number;
-  status: '已繳費' | '待繳費' | '已取消';
-  statusIcon: string;
-  statusColor: string;
-  customerName: string;
-  phone: string;
-  email: string;
-  paymentMethod?: string;
-  paymentNumber?: string;
-  paymentDate?: string;
-  showPrintButton: boolean;
-  showPayButton: boolean;
-}
-
 @Component({
   selector: 'app-my-camp-reg-rec',
   templateUrl: './my-camp-reg-rec.component.html',
