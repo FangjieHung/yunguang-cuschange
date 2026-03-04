@@ -94,7 +94,7 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if (!res) {
-            this.bbdNotifyServ.error('登入失敗: 請確認電子信箱及密碼是否有效。');
+            this.bbdNotifyServ.error('登入失敗: 請確認您的帳號及密碼是否有效。');
             return;
           }
           this.storeServ.getCurrAuthUserCache();
@@ -103,7 +103,7 @@ export class SigninComponent extends BBDBaseComponent implements OnInit {
         },
         error: (err) => {
           this.appAuthApiServ.signout();
-          this.bbdNotifyServ.error('登入失敗: 請確認電子信箱及密碼是否有效。', err);
+          this.bbdNotifyServ.error('登入失敗: 請確認您的帳號及密碼是否有效。', err);
         }
       }).add(() => this.spinnerServ.hide());
   }
