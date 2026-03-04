@@ -100,6 +100,11 @@
                                 <button nz-button nzType="text" (click)="doEdit(data.id)"
                                   class="w-full text-left">編輯</button>
                               </li>
+                              <li nz-menu-divider></li>
+                              <li nz-menu-item>
+                                <button nz-button nzType="text" (click)="onExportRegList(data.id)"
+                                  class="w-full text-left">匯出報名清單</button>
+                              </li>
                             </ul>
                           </nz-dropdown-menu>
                         </td>

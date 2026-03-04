@@ -27,6 +27,18 @@ export class CampaignApiServ {
   constructor(private http: HttpClient) { }
 
   //#region Campaign
+  getCampaignStatusInfos(): ValueInfo[] {
+    const infos = [
+      { name: '尚未開放', value: CampaignStatuses.尚未開放, style: 'magenta' },
+      { name: '報名中', value: CampaignStatuses.報名中, style: 'green' },
+      { name: '候補中', value: CampaignStatuses.候補中, style: 'volcano' },
+      { name: '額滿', value: CampaignStatuses.額滿, style: 'orange' },
+      { name: '截止', value: CampaignStatuses.截止, style: 'purple' },
+      { name: '下架', value: CampaignStatuses.下架, style: 'red' }
+    ];
+
+    return infos;
+  }
   getCampaignDtoById(id: number): Observable<CampaignDto> {
     return this.http.get<CampaignDto>(`${this.baseUrl}/GetCampaignDtoById/${id}`);
   }
@@ -64,6 +76,9 @@ export class CampaignApiServ {
     ];
 
     return infos;
+  }
+  getCampRegViews(request: CampRegReq): Observable<CampRegView[]> {
+    return this.http.put<CampRegView[]>(`${this.baseUrl}/GetCampRegViews`, request);
   }
   getCampRegViewsPaging(request: PagingRequest<CampRegReq>): Observable<PagingResponse<CampRegView>> {
     return this.http.put<PagingResponse<CampRegView>>(`${this.baseUrl}/GetCampRegViewsPaging`, request);
