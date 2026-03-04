@@ -3,6 +3,9 @@ export interface CampRegView {
   regAt: Date;
   campId: number;
   campName: string;
+  campUniqueId?: string | null;
+  campStartAt?: Date | null;
+  campEndAt?: Date | null;
   custId: number;
   custIdNo: string;
   custName: string;

@@ -20,56 +20,64 @@
     class="block mt-5"></web-result-empty>
 
   <!-- 有資料 -->
-  <ng-container *ngIf="!isLoading && (dataSource | isEmpty)">
-    <web-glass-bg>
+   <!-- *ngIf="!isLoading && (dataSource | isEmpty)" -->
+  <ng-container>
+    <web-glass-bg *ngFor="let item of dataSource">
       <mat-accordion class="accordion-transparent block p-2">
         <mat-expansion-panel class="rounded-full" hideToggle>
           <mat-expansion-panel-header class="py-2">
             <div class="header-wrap">
-              <p class="panel-title">2024春季感染控制研討會</p>
-              <span class="title-sub">活動時間：2025/12/21 13:30 ~ 2025/12/21 18:30</span>
-            </div>
-
-            <!-- 報名成功 -->
-            <div class="status-wrap text-green-600">
-              <span class="material-symbols-rounded">check_circle</span>
-              <span class="status-label">報名成功</span>
-            </div>
-            <!-- 已取消 -->
-            <div class="status-wrap text-gray-500">
-              <span class="material-symbols-rounded">cancel</span>
-              <span class="status-label">已取消</span>
+              <p class="panel-title">{{ item.campName }}</p>
+              <span class="title-sub">活動時間：{{ item.campStartAt | dateFormatter:'yyyy/MM/dd': '-' }} ~ {{ item.campEndAt | dateFormatter:'yyyy/MM/dd': '-' }}</span>
             </div>
             <!-- 待付款 -->
-            <div class="status-wrap text-amber-600">
+            <div class="status-wrap text-amber-600" *ngIf="+item.status === + campaignApiServ.campRegStatuses['待付款']">
               <span class="material-symbols-rounded">pending</span>
               <span class="status-label">待付款</span>
             </div>
+            <!-- 報名成功 -->
+            <div class="status-wrap text-green-600" *ngIf="+item.status === + campaignApiServ.campRegStatuses['已報名']">
+              <span class="material-symbols-rounded">check_circle</span>
+              <span class="status-label">報名成功</span>
+            </div>
+            <!-- 待退款 -->
+            <div class="status-wrap text-pink-500" *ngIf="+item.status === + campaignApiServ.campRegStatuses['待退款']">
+              <span class="material-symbols-rounded">credit_card_clock</span>
+              <span class="status-label">待退款</span>
+            </div>
+            <!-- 已取消 -->
+            <div class="status-wrap text-red-500" *ngIf="+item.status === + campaignApiServ.campRegStatuses['已取消']">
+              <span class="material-symbols-rounded">cancel</span>
+              <span class="status-label">已取消</span>
+            </div>
+
           </mat-expansion-panel-header>
 
           <div class="panel-content">
             <ul class="list-circle">
-              <li>報名學員 : 張三</li>
-              <li>身份證號 : A123456789</li>
-              <li>行動電話 : 0912-345-678</li>
-              <li>電子信箱 : example@email.com</li>
-              <li>繳費方式 : 信用卡</li>
-              <li>金流繳費編號 : PAY20240315001</li>
-              <li>報名時間 : 2025/12/21 13:30</li>
+              <li>報名姓名 : {{ item.custName }}</li>
+              <li>身份證號 : {{ item.custIdNo }}</li>
+              <li>行動電話 : {{ item.custMobile }}</li>
+              <li>電子信箱 : {{ item.custEmail }}</li>
+              <!-- <li>繳費方式 : 信用卡</li>
+              <li>金流繳費編號 : PAY20240315001</li> -->
+              <li>報名時間 : {{ item.regAt | dateFormatter:'yyyy/MM/dd HH:mm': '-' }}</li>
             </ul>
             <div class="btns-wrap">
-              <a class="btn-white"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a>
-              <button type="button" class="btn-white"><span
+              <a class="btn-white" [routerLink]="['/campaign/detail/', item.campUniqueId]"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a>
+              <!-- <button type="button" class="btn-white"><span
                   class="material-symbols-rounded pr-1">print</span>列印證明</button>
               <button type="button" class="btn-primary"><span
-                  class="material-symbols-rounded pr-1">payments</span>前往付款</button>
+                  class="material-symbols-rounded pr-1">payments</span>前往付款</button> -->
             </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
     </web-glass-bg>
-    <mat-paginator [hidePageSize]="true" [pageSize]="10" [pageIndex]="0" [length]="3">
-    </mat-paginator>
+    <web-paginator
+      [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+      (pageIndexChange)="onSearch($event)">
+    </web-paginator>
   </ng-container>
 
 
