@@ -2,6 +2,7 @@ export * from './app-env';
 export * from './app-token-info';
 export * from './auth-user-info';
 export * from './auth-user-route';
+export * from './camp-attend-stat';
 export * from './entity-base';
 export * from './paging-request';
 export * from './paging-response';

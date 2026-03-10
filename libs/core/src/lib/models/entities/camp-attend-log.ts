@@ -22,3 +22,9 @@ export enum CampAttendLogCertStatuses {
   '不符核發資格' = 80,
   '已取消' = 100
 }
+
+export enum CampAttendLogSignTypes {
+  '第一次簽到' = 11,
+  '第二次簽到' = 12,
+  '簽退' = 90
+}

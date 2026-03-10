@@ -5,12 +5,14 @@ import { CampaignRoutingModule } from './campaign-routing.module';
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
 import {
+  CampAttendSignListComponent,
   CampaignListComponent, CampaignEditComponent,
 } from './pages';
 
 
 const CUSTOM_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
+  CampAttendSignListComponent,
   CampaignListComponent, CampaignEditComponent,
 ];
 

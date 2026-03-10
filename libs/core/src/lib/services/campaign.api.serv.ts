@@ -11,7 +11,8 @@ import {
   PagingRequest, PagingResponse, PayInfo, ValueInfo,
   CampaignDto, CampaignReq, CampaignStatuses, CampaignView,
   CampRegDto, CampRegReq, CampRegStatuses, CampRegView,
-  CampAttendLogCertStatuses
+  CampAttendLogCertStatuses, CampAttendLogReq, CampAttendLogSignTypes, CampAttendLogView,
+  CampAttendStat
 } from '../models';
 
 @Injectable({
@@ -23,6 +24,10 @@ export class CampaignApiServ {
   campaignStatusOpts = EnumValues.getNamesAndValues(CampaignStatuses);
   campRegStatuses = CampRegStatuses;
   campRegStatusOpts = EnumValues.getNamesAndValues(CampRegStatuses);
+  campAttendLogCertStatuses = CampAttendLogCertStatuses;
+  campAttendLogCertStatusOpts = EnumValues.getNamesAndValues(CampAttendLogCertStatuses);
+  campAttendLogSignTypes = CampAttendLogSignTypes;
+  campAttendLogSignTypeOpts = EnumValues.getNamesAndValues(CampAttendLogSignTypes);
 
   constructor(private http: HttpClient) { }
 
@@ -101,6 +106,18 @@ export class CampaignApiServ {
     ];
 
     return infos;
+  }
+  getCampAttendStat(campId: number): Observable<CampAttendStat> {
+    return this.http.get<CampAttendStat>(`${this.baseUrl}/GetCampAttendStat/${campId}`);
+  }
+  getSignCampAttendLogViewsByCampIdPaging(request: PagingRequest<CampAttendLogReq>): Observable<PagingResponse<CampAttendLogView>> {
+    return this.http.put<PagingResponse<CampAttendLogView>>(`${this.baseUrl}/GetSignCampAttendLogViewsByCampIdPaging`, request);
+  }
+  cancelSignCampAttendLog(request: CampAttendLogReq): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CancelSignCampAttendLog`, request);
+  }
+  signCampAttendLog(request: CampAttendLogReq): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/SignCampAttendLog`, request);
   }
    //#endregion
 }
