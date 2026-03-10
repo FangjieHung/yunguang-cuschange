@@ -19,7 +19,7 @@
               <mat-form-field appearance="outline" class="selector" slot="start">
                 <mat-label>活動</mat-label>
                 <mat-select [(ngModel)]="request.queryRequest.campId" (ngModelChange)="onSearch()">
-                  <mat-option [value]="0">全部</mat-option>
+                  <mat-option [value]="0">請先選擇作業活動</mat-option>
                   <mat-option *ngFor="let opt of campaignOpts" [value]="+opt.id">
                     <div class="flex items-center">
                       <span>【{{opt.status | aryFindValue:campaignApiServ.campaignStatusOpts:'value':'name'}}】</span>
