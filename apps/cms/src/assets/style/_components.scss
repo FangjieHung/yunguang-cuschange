@@ -13,10 +13,14 @@ cms-search-bar {
 }
 
 .search-bar-wrap {
-    @apply flex flex-col pt-2 md:flex-row md:space-x-2 items-start;
+    @apply flex flex-col pt-2 md:flex-row flex-wrap md:gap-x-2 items-start;
+
+    .inner-group {
+        @apply flex flex-wrap items-center gap-2 w-full 2xl:w-2/3;
+    }
 
     mat-form-field {
-        @apply md:-mb-3;
+        @apply w-full min-w-44 md:w-auto md:-mb-2;
     }
 
     .selector {
