@@ -175,10 +175,10 @@ export class SupervisorComponent extends BBDBaseComponent implements OnInit {
 
   supervisors = [
     {
-      name: '王敦仁 醫檢師',
+      name: '王敦仁 專員',
       title: '監事',
       describe: [
-        '淡水馬偕紀念醫院醫事檢驗科擔任醫事檢驗師'
+        '馬偕紀念醫院/總院院長辦公室/專員'
       ],
       photoUrl: 'assets/image/members/supervisors-04.png'
     },
