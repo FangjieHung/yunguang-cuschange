@@ -73,6 +73,9 @@ export class CustApiServ {
   //#endregion
 
   //#region CustGroup
+  getCustGroupViews(request: CustGroupReq): Observable<CustGroupView[]> {
+    return this.http.put<CustGroupView[]>(`${this.baseUrl}/GetCustGroupViews`, request);
+  }
   getCustGroupViewsPaging(request: PagingRequest<CustGroupReq>): Observable<PagingResponse<CustGroupView>> {
     return this.http.put<PagingResponse<CustGroupView>>(`${this.baseUrl}/GetCustGroupViewsPaging`, request);
   }
@@ -80,6 +83,9 @@ export class CustApiServ {
   //#endregion
 
   //#region CustMember
+  getCustMemberViews(request: CustMemberReq): Observable<CustMemberView[]> {
+    return this.http.put<CustMemberView[]>(`${this.baseUrl}/GetCustMemberViews`, request);
+  }
   getCustMemberViewsPaging(request: PagingRequest<CustMemberReq>): Observable<PagingResponse<CustMemberView>> {
     return this.http.put<PagingResponse<CustMemberView>>(`${this.baseUrl}/GetCustMemberViewsPaging`, request);
   }

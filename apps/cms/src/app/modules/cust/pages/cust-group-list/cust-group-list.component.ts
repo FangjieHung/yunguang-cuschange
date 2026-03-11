@@ -1,5 +1,9 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
 
+// Third party packages
+import { format } from 'date-fns';
+import * as XLSX from 'xlsx';
+
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import { CustEditComponent } from '../cust-edit/cust-edit.component';
@@ -130,6 +134,50 @@ export class CustGroupListComponent extends BBDBaseComponent implements OnInit {
         });
       }
     })
+  }
+
+  onExport(): void {
+    const req = this.request.queryRequest;
+    this.spinnerServ.show();
+    this.custApiServ.getCustGroupViews(req).subscribe({
+      next: (rows: CustGroupView[]) => {
+        if (!rows || rows.length === 0) {
+          this.bbdNotifyServ.success('查無任何資料。');
+          return;
+        }
+
+        const fmtDate = (d?: Date | null) => d ? format(d, 'yyyy/MM/dd') : '-';
+        const data = rows.map(r => {
+          const appUserStatusName = r.appUserStatus !== undefined && r.appUserStatus !== null
+            ? this.appUserApiServ.appUserStatusOpts.find(o => +o.value === r.appUserStatus)?.name || ''
+            : '';
+          const custStatusName = r.custStatus !== undefined && r.custStatus !== null
+            ? this.custApiServ.getCustomerStatusInfos().find(o => +o.value === r.custStatus)?.name || ''
+            : '';
+
+          return {
+            '帳號狀態': appUserStatusName,
+            '會員狀態': custStatusName,
+            '加入日期': fmtDate(r.custStartAt),
+            '統一編號': r.taxId,
+            '團體名稱': r.name,
+            '團體電話': r.phone || '',
+            '代表人': r.cpName,
+            '行動電話': r.cpMobile || '',
+            '電子信箱': r.cpEmail || ''
+          };
+        });
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, '團體會員');
+        const fileName = `團體會員清單_${new Date().toISOString().slice(0,10)}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('匯出失敗', err);
+      }
+    }).add(() => this.spinnerServ.hide());
   }
 
   onSearch(pageIndex = 1): void {

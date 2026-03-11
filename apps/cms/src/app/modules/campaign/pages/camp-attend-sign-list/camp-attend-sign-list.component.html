@@ -83,29 +83,22 @@
       [nzData]="dataSource" [nzLoading]="dataLoading" [nzSize]="'small'">
       <thead>
         <tr>
-          <th>報名時間</th>
-          <th>活動名稱</th>
-          <th>會員名稱</th>
-          <th>身份證號</th>
-          <th nzWidth="60px" nzAlign="center">報名狀態</th>
-          <th>第一次簽到時間</th>
-          <th>第二次簽到時間</th>
-          <th>簽退時間</th>
+          <th *ngFor="let item of dispCols">{{item}}</th>
           <th nzRight [nzWidth]="'120px'">操作</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of listTable.data">
-          <td>{{ data.campRegAt| dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
-          <td>{{ data.campName }}</td>
-          <td>{{ data.custName }}</td>
-          <td>{{ data.custIdNo }}</td>
           <td>
             <nz-tag class="font-semibold"
               [nzColor]="(data.campRegStatus | aryFindValue: campaignApiServ.getCampRegStatusInfos(): 'value': 'style') ?? 'default'">
               {{ data.campRegStatus | aryFindValue: campaignApiServ.getCampRegStatusInfos(): 'value': 'name' }}
             </nz-tag>
           </td>
+          <td>{{ data.campRegAt| dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
+          <td>{{ data.campName }}</td>
+          <td>{{ data.custName }}</td>
+          <td>{{ data.custIdNo }}</td>
           <td>{{ data.start1At | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
           <td>{{ data.start2At | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
           <td>{{ data.endAt | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>

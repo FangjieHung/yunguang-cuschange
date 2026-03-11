@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit } from '@angular/core';
+
+// Third party packages
+import { format } from 'date-fns';
 import * as XLSX from 'xlsx';
 
 // Custom packages
@@ -130,6 +133,54 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
         });
       }
     })
+  }
+
+  onExport() {
+    // use current search conditions to fetch full list and export
+    const req = this.request.queryRequest;
+    this.spinnerServ.show();
+    this.custApiServ.getCustMemberViews(req).subscribe({
+      next: (rows: CustMemberView[]) => {
+        if (!rows || rows.length === 0) {
+          this.bbdNotifyServ.success('查無任何資料。');
+          return;
+        }
+
+        const fmtDate = (d?: Date | null) => d ? format(d, 'yyyy/MM/dd') : '-';
+        const data = rows.map(r => {
+          const appUserStatusName = r.appUserStatus !== undefined && r.appUserStatus !== null
+            ? this.appUserApiServ.appUserStatusOpts.find(o => +o.value === r.appUserStatus)?.name || ''
+            : '';
+          const custStatusName = r.custStatus !== undefined && r.custStatus !== null
+            ? this.custApiServ.getCustomerStatusInfos().find(o => +o.value === r.custStatus)?.name || ''
+            : '';
+          const genderName = r.gender
+            ? this.sharedDataServ.genderOpts.find(o => o.value === r.gender)?.name || ''
+            : '';
+
+          return {
+            '帳號狀態': appUserStatusName,
+            '會員狀態': custStatusName,
+            '加入日期': fmtDate(r.custStartAt),
+            '身份證號': r.idNo,
+            '姓名': r.name,
+            '性別': genderName,
+            '出生日期': fmtDate(r.birthAt),
+            '行動電話': r.mobile || '',
+            '電子信箱': r.email || ''
+          };
+        });
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, `${this.actionName}清單`);
+        const fileName = `${this.actionName}清單_${new Date().toISOString().slice(0,10)}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('匯出失敗', err);
+      }
+    }).add(() => this.spinnerServ.hide());
   }
 
   onUpload(target: any) {

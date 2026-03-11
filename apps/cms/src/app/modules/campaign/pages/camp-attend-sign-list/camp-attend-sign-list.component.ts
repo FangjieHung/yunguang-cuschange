@@ -28,8 +28,11 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
   response: PagingResponse<CampAttendLogView> | null = null;
   campaignOpts: CampaignView[] = [];
   attendStat: CampAttendStat = {} as CampAttendStat;
-
   combinedCode = '';
+  dispCols = [
+    '狀態', '報名時間', '活動名稱', '會員名稱', '身份證號',
+    '第一次簽到時間', '第二次簽到時間', '簽退時間'
+  ];
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
