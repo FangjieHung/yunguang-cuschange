@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  CampAttendSignListComponent, CampaignListComponent,
+  CampAttendSignListComponent, CampaignListComponent, CampRegListComponent,
 } from './pages';
 
 const routes: Routes = [
   {
     path: 'list',
     component: CampaignListComponent,
+  },
+  {
+    path: 'reg/list',
+    component: CampRegListComponent
   },
   {
     path: 'attend-sign/list',

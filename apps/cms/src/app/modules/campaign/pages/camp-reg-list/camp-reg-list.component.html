@@ -1,0 +1,99 @@
+<div>
+  <cms-page-header>
+    <div class="flex gap-x-2">
+      <button mat-raised-button (click)="onExport()">
+        <span class="material-icons-outlined pr-2 text-lg">file_download</span>
+        <span>匯出</span>
+      </button>
+    </div>
+  </cms-page-header>
+
+  <nz-card class="mx-4 mb-4 border border-slate-200 rounded-md">
+    <section class="relative">
+      <nz-collapse nzGhost>
+        <nz-collapse-panel [nzHeader]="panelHeader" [nzShowArrow]="false" [nzActive]="true" #panel
+          class="collapse-fit mx-4 mb-3 md:mb-0">
+          <ng-template #panelHeader>
+            <p class="flex items-center text-base min-w-max">
+              <span class="material-icons-outlined text-2xl -ml-3 mb-0.5">manage_search</span>
+              <span class="font-medium pl-1">篩選查詢</span>
+              <span nz-icon nzType="right" class="ant-collapse-arrow px-2" [nzRotate]="panel.nzActive ? 90 : 0"></span>
+            </p>
+          </ng-template>
+
+          <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
+            <mat-form-field appearance="outline" class="selector" slot="start">
+              <mat-label>報名狀態</mat-label>
+              <mat-select [(ngModel)]="request.queryRequest.status">
+                <mat-option [value]="0">全部</mat-option>
+                <mat-option *ngFor="let opt of campaignApiServ.campRegStatusOpts" [value]="+opt.value">
+                  {{ opt.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </cms-search-bar>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </section>
+
+    <div>
+      <nz-empty [nzNotFoundContent]="contentTpl" class="py-10" *ngIf="false">
+        <ng-template #contentTpl>
+          <span>目前尚無資料</span>
+        </ng-template>
+      </nz-empty>
+
+      <nz-table class="overflow-x-auto m-4" #listTable [nzFrontPagination]="false" [nzShowPagination]="false"
+        [nzData]="dataSource" [nzLoading]="dataLoading" [nzSize]="'small'">
+        <thead>
+          <tr>
+            <th *ngFor="let item of dispCols">{{item}}</th>
+            <th nzRight [nzWidth]="'150px'">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listTable.data">
+            <td>
+              <nz-tag class="mr-0 font-semibold"
+                [nzColor]="(data.status | aryFindValue: campaignApiServ.getCampRegStatusInfos(): 'value': 'style') ?? 'default'">
+                {{ data.status | aryFindValue: campaignApiServ.getCampRegStatusInfos() :'value':'name' }}
+              </nz-tag>
+            </td>
+            <td>{{ data.regAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
+            <td>{{ data.campName }}</td>
+            <td>{{ data.custName }}</td>
+            <td>{{ data.custIdNo }}</td>
+            <td>{{ data.custEmail }}</td>
+            <td>{{ data.custMobile }}</td>
+            <td>
+              <span>
+                {{ data.custZipCodeId | aryFindValue: zipCodes: 'id': 'city' }}{{ data.custZipCodeId | aryFindValue: zipCodes: 'id': 'district' }}{{ data.custAddr }}
+              </span>
+            </td>
+            <td nzRight>
+              <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit"
+                class="w-11 rounded-full px-0">
+                <span class="material-icons-outlined align-middle">more_vert</span>
+              </button>
+              <nz-dropdown-menu #menuEdit="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onCancel(data.id)"
+                      [disabled]="+(data?.status || 0) === campaignApiServ.campRegStatuses['已取消']"
+                      class="w-full text-left">取消</button>
+                  </li>
+                </ul>
+              </nz-dropdown-menu>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+      <section>
+        <nz-pagination class="flex justify-end mt-3 mb-4 px-4 lg:px-6" [nzPageIndex]="response?.pageIndex"
+          [nzPageSize]="response?.pageSize" [nzTotal]="response?.totalCount" (nzPageIndexChange)="onSearch($event);">
+        </nz-pagination>
+      </section>
+    </div>
+  </nz-card>
+</div>

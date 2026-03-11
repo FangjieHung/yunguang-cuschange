@@ -6,14 +6,14 @@ import { CampaignRoutingModule } from './campaign-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import {
   CampAttendSignListComponent,
-  CampaignListComponent, CampaignEditComponent,
+  CampaignListComponent, CampaignEditComponent, CampRegListComponent,
 } from './pages';
 
 
 const CUSTOM_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
   CampAttendSignListComponent,
-  CampaignListComponent, CampaignEditComponent,
+  CampaignListComponent, CampaignEditComponent, CampRegListComponent,
 ];
 
 @NgModule({
