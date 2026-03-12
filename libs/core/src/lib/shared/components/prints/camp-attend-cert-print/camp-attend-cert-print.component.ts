@@ -15,14 +15,21 @@ export class CampAttendCertPrintComponent extends BBDBaseComponent implements On
 
   private _modal = inject(NzModalRef);
 
+  rocYear: number;
+
   constructor(
     protected override injector: Injector
   ) {
     super(injector);
+    this.rocYear = new Date().getFullYear() - 1911;
   }
 
   ngOnInit(): void {
     console.log();
+  }
+
+  print(): void {
+    window.print();
   }
 
   doCancel(): void {
