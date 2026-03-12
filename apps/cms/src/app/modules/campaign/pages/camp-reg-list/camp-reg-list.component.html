@@ -82,6 +82,18 @@
                       [disabled]="+(data?.status || 0) === campaignApiServ.campRegStatuses['已取消']"
                       class="w-full text-left">取消</button>
                   </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('cert')"
+                      class="w-full text-left">參加證明</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('receipt')"
+                      class="w-full text-left">電子收據</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('407receipt')"
+                      class="w-full text-left">407 繳費證明</button>
+                  </li>
                 </ul>
               </nz-dropdown-menu>
             </td>

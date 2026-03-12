@@ -1,4 +1,4 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit, Type } from '@angular/core';
 import { format } from 'date-fns';
 import * as XLSX from 'xlsx';
 
@@ -9,6 +9,7 @@ import {
   CampRegReq, CampRegView
 } from '@core/models';
 import { CampaignApiServ, SharedDataServ, SharedFuncServ } from '@core/services';
+import { CampAttendCertPrintComponent, PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent } from '@core/shared';
 
 @Component({
   selector: 'cms-camp-reg-list',
@@ -125,6 +126,37 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
         this.bbdNotifyServ.error('匯出失敗', err);
       }
     }).add(() => this.spinnerServ.hide());
+  }
+
+  onPrint(printName: 'cert' | 'receipt' | '407receipt') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let component: Type<any>;
+    let title: string;
+
+    switch (printName) {
+      case 'cert':
+        component = CampAttendCertPrintComponent;
+        title = '參加證明';
+        break;
+      case 'receipt':
+        component = PaymentReceiptPrintComponent;
+        title = '繳費收據';
+        break;
+      case '407receipt':
+        component = Payment407ReceiptPrintComponent;
+        title = '407繳費收據';
+        break;
+      default:
+        return;
+    }
+
+    this.modalServ.create({
+      nzTitle: title,
+      nzContent: component,
+      nzWidth: '80%',
+      nzFooter: null,
+      nzMaskClosable: true
+    });
   }
 
   onSearch(pageIndex = 1): void {
