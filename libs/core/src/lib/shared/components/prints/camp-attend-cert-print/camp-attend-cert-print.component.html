@@ -1,1 +1,74 @@
-<p>camp-attend-cert-print works!</p>
+<div class="cert-container bg-gray-200 p-8">
+  <div id="cert-content" class="cert-content-a4 font-sans">
+
+    <!-- Placeholders for corner ornaments -->
+    <img src="https://placehold.co/100x100/D4AF37/D4AF37.png" alt="Gold ornament" class="absolute top-[12mm] left-[12mm] h-16 w-16 opacity-80">
+    <img src="https://placehold.co/100x100/D4AF37/D4AF37.png" alt="Gold ornament" class="absolute top-[12mm] right-[12mm] h-16 w-16 opacity-80 -scale-x-100">
+    <img src="https://placehold.co/100x100/D4AF37/D4AF37.png" alt="Gold ornament" class="absolute bottom-[12mm] left-[12mm] h-16 w-16 opacity-80 -scale-y-100">
+    <img src="https://placehold.co/100x100/D4AF37/D4AF37.png" alt="Gold ornament" class="absolute bottom-[12mm] right-[12mm] h-16 w-16 opacity-80 -scale-x-100 -scale-y-100">
+
+    <div class="relative z-10 flex flex-col h-full text-center items-center p-[5mm]">
+      <!-- Header / Emblem -->
+      <header class="w-full flex flex-col items-center">
+        <img src="https://placehold.co/120x120/D4AF37/FFFFFF?text=GOLD+EMBLEM" alt="Gold Emblem" class="h-20 w-20 mb-4 rounded-full">
+        <h1 class="font-serif text-5xl font-bold tracking-widest text-[--cert-navy]">
+          參加證明
+        </h1>
+        <p class="font-serif text-lg text-gray-500 mt-1">CERTIFICATE OF ATTENDANCE</p>
+      </header>
+      
+      <!-- Main Content -->
+      <main class="w-full flex-grow flex flex-col items-center justify-center text-gray-700 my-8">
+        <p class="text-lg tracking-wider">茲證明</p>
+        <p class="font-script text-6xl my-4 text-[--cert-gold]">
+          {{ modalData?.user?.name || '請填入姓名' }}
+        </p>
+        <p class="text-base max-w-lg leading-relaxed">
+          完成
+          <strong class="text-[--cert-navy]">{{ modalData?.campaign?.name || '研討會主題' }}</strong>
+          課程，並積極參與所有議程，展現卓越之學習精神，特此證明。
+        </p>
+        <div class="w-48 h-px bg-[--cert-gold] my-8"></div>
+        <div class="text-left w-full max-w-md mx-auto space-y-2 text-sm">
+          <p><strong class="w-24 inline-block text-[--cert-navy]">主辦單位：</strong> {{ modalData?.campaign?.organizer || '（待提供）' }}</p>
+          <p><strong class="w-24 inline-block text-[--cert-navy]">活動時數：</strong> 共計 {{ modalData?.campaign?.hours || '0' }} 小時</p>
+          <p><strong class="w-24 inline-block text-[--cert-navy]">活動日期：</strong> {{ modalData?.campaign?.startDate | date:'yyyy/MM/dd' }}</p>
+        </div>
+      </main>
+
+      <!-- Footer / Stamps & Signatures -->
+      <footer class="w-full mt-auto flex justify-between items-end">
+        <div class="flex flex-col items-center">
+          <div class="relative h-24 w-24">
+            <img src="https://placehold.co/150x150/D4AF37/FFFFFF?text=STAMP" alt="Gold Stamp" class="h-24 w-24 rounded-full opacity-20">
+            <p class="absolute inset-0 flex items-center justify-center font-bold text-sm text-[--cert-gold] opacity-80">
+              主辦單位
+            </p>
+          </div>
+          <p class="text-xs text-gray-500 mt-2">主辦單位印章</p>
+        </div>
+        <div class="flex space-x-16">
+          <div class="flex flex-col items-center">
+            <div class="w-48 border-b border-gray-500 pb-1 text-center"></div>
+            <p class="text-xs text-gray-500 mt-2">單位負責人簽章</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-48 border-b border-gray-500 pb-1 text-center"></div>
+            <p class="text-xs text-gray-500 mt-2">理事長簽章</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- Buttons -->
+<div class="bg-gray-100 p-4 flex justify-end space-x-2 no-print">
+  <button type="button" (click)="print()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <i class="material-icons-outlined text-base align-middle mr-1">print</i>
+    列印
+  </button>
+  <button type="button" (click)="doCancel()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+    關閉
+  </button>
+</div>
