@@ -28,10 +28,6 @@ export class CampAttendCertPrintComponent extends BBDBaseComponent implements On
     console.log();
   }
 
-  print(): void {
-    window.print();
-  }
-
   doCancel(): void {
     this._modal.destroy();
   }

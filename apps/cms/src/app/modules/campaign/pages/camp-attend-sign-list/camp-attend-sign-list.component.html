@@ -18,16 +18,22 @@
             <div  slot="start" class="inner-group">
               <mat-form-field appearance="outline" class="flex-auto">
                 <mat-label>活動</mat-label>
-                <mat-select [(ngModel)]="request.queryRequest.campId" (ngModelChange)="onSearch()">
-                  <mat-option [value]="0">請先選擇作業活動</mat-option>
-                  <mat-option *ngFor="let opt of campaignOpts" [value]="+opt.id">
-                    <div class="flex items-center">
-                      <span>【{{opt.status | aryFindValue:campaignApiServ.campaignStatusOpts:'value':'name'}}】</span>
-                      <p class="flex-1 truncate">{{opt.name}}</p>
-                      <span class="px-1"> {{opt.startAt | dateFormatter: 'yyyy-MM-dd': '-'}} </span>
-                    </div>
-                  </mat-option>
-                </mat-select>
+                <input matInput type="text"
+                  [matAutocomplete]="campAutocomplete"
+                  [formControl]="campaignCtrl"
+                  placeholder="請先選擇作業活動" />
+                <mat-autocomplete #campAutocomplete="matAutocomplete"
+                  (optionSelected)="onCampaignSelected($event)">
+                  <mat-optgroup *ngFor="let statusGroup of filteredCampaigns"
+                    [label]="statusGroup.status | aryFindValue:campaignApiServ.campaignStatusOpts:'value':'name'">
+                    <mat-option *ngFor="let opt of statusGroup.campaigns" [value]="opt.id">
+                      <div class="flex items-center w-full">
+                        <p class="flex-1 truncate">{{opt.name}}</p>
+                        <span class="px-1 text-xs text-gray-500"> {{opt.startAt | dateFormatter: 'yyyy-MM-dd': '-'}} </span>
+                      </div>
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-autocomplete>
               </mat-form-field>
               <mat-form-field appearance="outline" class="selector">
                 <mat-label>作業類型</mat-label>

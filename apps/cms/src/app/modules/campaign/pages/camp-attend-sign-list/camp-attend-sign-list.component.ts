@@ -1,5 +1,8 @@
 import { Component, ElementRef, inject, Injector, OnInit, ViewChild, HostListener } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { combineLatest, of } from 'rxjs';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -27,6 +30,8 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
   request = new PagingRequest<CampAttendLogReq>();
   response: PagingResponse<CampAttendLogView> | null = null;
   campaignOpts: CampaignView[] = [];
+  filteredCampaigns: Array<{ status: number; campaigns: CampaignView[] }> = [];
+  campaignCtrl = new FormControl<string | null>(null);
   attendStat: CampAttendStat = {} as CampAttendStat;
   combinedCode = '';
   dispCols = [
@@ -68,6 +73,7 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
 
   ngOnInit(): void {
     this.doParamsInit();
+    this.initAutocomplete();
     this.onSearch();
   }
 
@@ -81,6 +87,65 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
     this.dataSource = [];
   }
 
+  initAutocomplete(): void {
+    this.campaignCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        debounceTime(300),
+        map((value) => {
+          const filterValue = (value || '').toLowerCase();
+          return this.filterCampaigns(filterValue);
+        })
+      )
+      .subscribe((filtered) => {
+        this.filteredCampaigns = filtered;
+      });
+  }
+
+  filterCampaigns(filterValue: string): Array<{ status: number; campaigns: CampaignView[] }> {
+    const filtered = this.campaignOpts.filter((campaign) =>
+      campaign.name.toLowerCase().includes(filterValue)
+    );
+
+    // Group by status
+    const grouped = new Map<number, CampaignView[]>();
+    filtered.forEach((campaign) => {
+      const status = campaign.status;
+      if (!grouped.has(status)) {
+        grouped.set(status, []);
+      }
+      const campaigns = grouped.get(status);
+      if (campaigns) {
+        campaigns.push(campaign);
+      }
+    });
+
+    return Array.from(grouped.entries()).map(([status, campaigns]) => ({
+      status,
+      campaigns
+    }));
+  }
+
+  onCampaignSelected(event: MatAutocompleteSelectedEvent): void {
+    const selectedId = event.option.value;
+    const selectedCampaign = this.campaignOpts.find((camp) => +camp.id === +selectedId);
+
+    if (selectedCampaign) {
+      this.request.queryRequest.campId = +selectedCampaign.id;
+      this.campaignCtrl.setValue(selectedCampaign.name);
+    } else {
+      this.request.queryRequest.campId = 0;
+      this.campaignCtrl.setValue('');
+    }
+
+    this.onSearch();
+
+    // 使用 setTimeout 讓 DOM 先完成更新，再執行 focus
+    setTimeout(() => {
+      this.signCodeEl.nativeElement.focus();
+    }, 0);
+  }
+
   getCaches(): void {
     const campReq = new CampaignReq();
     campReq.takeCount = 30;
@@ -88,6 +153,8 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
     combineLatest([this.campaignApiServ.getCampaignViews(campReq)]
     ).subscribe(([campaignViews]) => {
       this.campaignOpts = [...campaignViews || []];
+      // Initialize filtered campaigns
+      this.filteredCampaigns = this.filterCampaigns('');
     });
   }
 

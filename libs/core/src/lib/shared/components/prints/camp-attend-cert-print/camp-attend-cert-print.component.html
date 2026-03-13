@@ -1,5 +1,5 @@
 <div class="mock-wrapper">
-  <div class="cert">
+  <div class="cert" id="print-section">
 <img src="assets/img/illustration/sphere-001.webp" alt="Sphere" class="cert__background-sphere">
     <header class="cert__header">
       <h1 class="cert__title">
@@ -39,8 +39,8 @@
         </li>
       </ul>
     </main>
-    
-    
+
+
 
     <footer class="cert__footer">
       <section class="cert__signature-area">
@@ -58,7 +58,7 @@
   <button mat-button type="button" (click)="doCancel()">
     <span>關閉</span>
   </button>
-  <button mat-flat-button color="primary" type="button" (click)="print()">
+  <button mat-flat-button color="primary" type="button" printSectionId="print-section" ngxPrint>
     <i class="material-icons-outlined">print</i>
     <span>列印</span>
   </button>
