@@ -1,1 +1,65 @@
-<p>camp-attend-cert-print works!</p>
+<div class="mock-wrapper">
+  <div class="cert">
+<img src="assets/img/illustration/sphere-001.webp" alt="Sphere" class="cert__background-sphere">
+    <header class="cert__header">
+      <h1 class="cert__title">
+        <span>台灣人工智慧</span>
+        <span>檢驗醫學學會</span>
+        <span class="cert__title--subtitle">研討會出席證明</span>
+      </h1>
+      <img src="assets/img/logo/mark.png" alt="Mark" class="cert__logo">
+    </header>
+
+    <main class="cert__main">
+      <section class="cert__intro">
+        <p>茲證明</p>
+        <p><strong class="user__name">{{ modalData?.user?.name || '請填入姓名' }}</strong></p>
+        <p>
+          參加本學會主辦
+          <strong>{{ modalData?.campaign?.name || '研討會主題' }}</strong>
+        </p>
+      </section>
+
+      <ul class="cert__details">
+        <li class="cert__details-item">
+          <strong>主辦單位：</strong>
+          <span>{{ modalData?.campaign?.organizer || '待提供' }}</span>
+        </li>
+        <li class="cert__details-item">
+          <strong>協辦單位：</strong>
+          <span>{{ modalData?.campaign?.co_organizer || '無' }}</span>
+        </li>
+        <li class="cert__details-item">
+          <strong>活動時數：</strong>
+          <span>共計 {{ modalData?.campaign?.hours || '--' }} 小時</span>
+        </li>
+        <li class="cert__details-item">
+          <strong>活動日期：</strong>
+          <span>{{ modalData?.campaign?.startDate | date:'yyyy/MM/dd' }}</span>
+        </li>
+      </ul>
+    </main>
+    
+    
+
+    <footer class="cert__footer">
+      <section class="cert__signature-area">
+        <p>理事長簽章</p>
+        <img src="assets/img/logo/chairman-stamp.png" alt="Chairman Stamp" class="cert__chairman-stamp">
+        <p class="cert__date">中華民國 {{ rocYear }} 年 {{ 'now' | date:'MM' }} 月 {{ 'now' | date:'dd' }} 日</p>
+      </section>
+
+      <img src="assets/img/logo/society-stamp.png" alt="Society Stamp" class="cert__society-stamp">
+    </footer>
+  </div>
+</div>
+
+<div class="print-buttons">
+  <button mat-button type="button" (click)="doCancel()">
+    <span>關閉</span>
+  </button>
+  <button mat-flat-button color="primary" type="button" (click)="print()">
+    <i class="material-icons-outlined">print</i>
+    <span>列印</span>
+  </button>
+</div>
