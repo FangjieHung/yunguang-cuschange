@@ -34,7 +34,7 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
   }
 
   dispCols = [
-    '狀態', '報名時間', '活動名稱', '姓名', '身分證號', '電子信箱', '行動電話', '聯絡地址'
+    '狀態', '報名時間', '活動名稱', '會員別', '會員編號', '姓名', '身分證號', '電子信箱', '行動電話', '聯絡地址'
   ];
 
   constructor(
@@ -107,6 +107,8 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
           return {
             '報名時間': format(r.regAt, 'yyyy/MM/dd HH:mm'),
             '活動名稱': r.campName,
+            '會員別': r.custId > 0 ? '會員' : '非會員',
+            '會員編號': r.custCode || '',
             '姓名': r.custName,
             '身分證號': r.custIdNo,
             '電子信箱': r.custEmail,

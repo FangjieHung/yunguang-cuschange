@@ -61,6 +61,8 @@
             </td>
             <td>{{ data.regAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-' }}</td>
             <td>{{ data.campName }}</td>
+            <td>{{ data.custId > 0 ? '' : '非' }}會員</td>
+            <td>{{ data.custCode }}</td>
             <td>{{ data.custName }}</td>
             <td>{{ data.custIdNo }}</td>
             <td>{{ data.custEmail }}</td>

@@ -34,7 +34,7 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
   zipCodes: ZipCodeView[] = [];
 
   dispCols = [
-    '帳號狀態', '會員狀態', '加入日期',
+    '帳號狀態', '會員狀態', '會員編號', '加入日期',
     '身份證號', '姓名', '性別', '出生日期', '行動電話', '電子信箱'
   ];
 
@@ -161,6 +161,7 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
           return {
             '帳號狀態': appUserStatusName,
             '會員狀態': custStatusName,
+            '會員編號': r.code || '',
             '加入日期': fmtDate(r.custStartAt),
             '身份證號': r.idNo,
             '姓名': r.name,

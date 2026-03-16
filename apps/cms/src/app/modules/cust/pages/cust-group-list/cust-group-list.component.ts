@@ -33,7 +33,7 @@ export class CustGroupListComponent extends BBDBaseComponent implements OnInit {
   // corpOpts: CorpView[] = [];
 
   dispCols = [
-    '帳號狀態', '會員狀態', '加入日期',
+    '帳號狀態', '會員狀態', '會員編號', '加入日期',
     '統一編號', '團體名稱', '團體電話', '代表人', '行動電話', '電子信箱'
   ];
 
@@ -158,6 +158,7 @@ export class CustGroupListComponent extends BBDBaseComponent implements OnInit {
           return {
             '帳號狀態': appUserStatusName,
             '會員狀態': custStatusName,
+            '會員編號': r.code || '',
             '加入日期': fmtDate(r.custStartAt),
             '統一編號': r.taxId,
             '團體名稱': r.name,
