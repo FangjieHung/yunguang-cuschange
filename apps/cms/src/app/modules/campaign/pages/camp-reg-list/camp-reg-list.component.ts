@@ -130,23 +130,49 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
     }).add(() => this.spinnerServ.hide());
   }
 
-  onPrint(printName: 'cert' | 'receipt' | '407receipt') {
+  onPrint(printName: 'cert' | 'receipt' | '407receipt', data?: CampRegView) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let component: Type<any>;
     let title: string;
+    let componentParams: Record<string, any> | undefined;
 
     switch (printName) {
       case 'cert':
         component = CampAttendCertPrintComponent;
         title = '參加證明';
+        componentParams = {
+          modalData: {
+            user: {
+              name: data?.custName,
+            },
+            campaign: {
+              name: data?.campName,
+            }
+          }
+        };
         break;
       case 'receipt':
         component = PaymentReceiptPrintComponent;
         title = '繳費收據';
+        componentParams = {
+          modalData: {
+            payerName: data?.custName,
+            reason: data?.campName,
+            receiptNo: data?.id?.toString(),
+          }
+        };
         break;
       case '407receipt':
         component = Payment407ReceiptPrintComponent;
-        title = '407繳費收據';
+        title = '407 繳費證明';
+        componentParams = {
+          modalData: {
+            payerName: data?.custName,
+            reason: data?.campName,
+            receiptNo: data?.id?.toString(),
+            amount: data?.content || '0'
+          }
+        };
         break;
       default:
         return;
@@ -155,6 +181,7 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
     this.modalServ.create({
       nzTitle: title,
       nzContent: component,
+      nzData: componentParams,
       nzWidth: '80%',
       nzFooter: null,
       nzMaskClosable: true

@@ -7,19 +7,27 @@ import { NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'bbd-camp-attend-cert-print',
-  templateUrl: './camp-attend-cert-print.component.html',
-  styleUrls: ['./camp-attend-cert-print.component.scss']
+  templateUrl: './camp-attend-cert-print.component.html'
 })
 export class CampAttendCertPrintComponent extends BBDBaseComponent implements OnInit {
   readonly modalData: any = inject(NZ_MODAL_DATA);
-
   private _modal = inject(NzModalRef);
 
   rocYear: number;
 
-  constructor(
-    protected override injector: Injector
-  ) {
+  printStyle = {
+    '@page': {
+      size: 'A4 portrait',
+      margin: '0'
+    },
+
+    'body': {
+      '-webkit-print-color-adjust': 'exact',
+      'print-color-adjust': 'exact'
+    }
+  };
+
+  constructor(protected override injector: Injector) {
     super(injector);
     this.rocYear = new Date().getFullYear() - 1911;
   }

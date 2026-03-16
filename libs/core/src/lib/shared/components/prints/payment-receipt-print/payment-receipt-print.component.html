@@ -1,1 +1,84 @@
-<p>payment-receipt-print works!</p>
+<div class="mock-wrapper bg-gray-200 p-8 flex justify-center items-center min-h-screen print:hidden">
+  <div
+    class="receipt relative aspect-[210/297] w-full max-w-3xl p-10 shadow-lg border border-gray-200 bg-white print:shadow-none print:border-none print:max-w-none"
+    id="print-section"
+  >
+    <header class="receipt__header">
+      <div class="flex items-start justify-between">
+        <div class="text-sm text-red-600 font-semibold">
+          <p>收據編號 NO. <span>{{ modalData?.receiptNo || '1150001' }}</span></p>
+          <p>存根聯</p>
+        </div>
+        <div class="text-right">
+          <p class="text-base font-bold">台灣人工智慧檢驗醫學學會</p>
+          <p class="text-lg font-semibold mt-2">電子收據</p>
+        </div>
+        <div class="text-sm text-slate-600 text-right">
+          <p>立案證書：{{ modalData?.certificateNo || '台內團字第1140023141號' }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4 text-sm">
+        <p>列印日期：<strong>{{ printDate }}</strong></p>
+      </div>
+    </header>
+
+    <section class="receipt__table mt-6 text-sm border border-slate-400">
+      <div class="grid grid-cols-12 border-b border-slate-400">
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">繳費人</div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2">{{ modalData?.payerName || '請填入繳費人' }}</div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">民國年 / 次</div>
+        <div class="col-span-3 px-2 py-2">{{ modalData?.fiscalYearTerm || '112 / 1' }}</div>
+      </div>
+      <div class="grid grid-cols-12 border-b border-slate-400">
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">事由</div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2">{{ modalData?.reason || '課程報名費' }}</div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">繳費方式</div>
+        <div class="col-span-3 px-2 py-2">{{ modalData?.paymentMethod || '信用卡付款 / 金融轉帳' }}</div>
+      </div>
+      <div class="grid grid-cols-12 border-b border-slate-400">
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">應繳金額</div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2">新台幣 <strong>{{ modalData?.amount || '0' }}</strong></div>
+        <div class="col-span-3 border-r border-slate-400 px-2 py-2 font-semibold">合計</div>
+        <div class="col-span-3 px-2 py-2">新台幣 <strong>{{ modalData?.total || modalData?.amount || '0' }}</strong> 元</div>
+      </div>
+    </section>
+
+    <section class="receipt__signatures mt-6 grid grid-cols-5 gap-2 text-center text-sm">
+      <div>
+        <div class="font-semibold">理事長</div>
+        <div class="mt-4">{{ modalData?.chairman || '薛博仁' }}</div>
+      </div>
+      <div>
+        <div class="font-semibold">秘書長</div>
+        <div class="mt-4">{{ modalData?.secretary || '蕭瓊子' }}</div>
+      </div>
+      <div>
+        <div class="font-semibold">會計</div>
+        <div class="mt-4">{{ modalData?.accountant || '薛翔中' }}</div>
+      </div>
+      <div class="col-span-2">
+        <div class="font-semibold">經辦人</div>
+        <div class="mt-4">{{ modalData?.handler || '吳慧芸' }}</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="print-buttons pt-4 flex justify-end gap-2 print:hidden">
+  <button mat-button type="button" (click)="doCancel()">
+    <span>關閉</span>
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    printSectionId="print-section"
+    [printStyle]="printStyle"
+    [useExistingCss]="true"
+    ngxPrint
+  >
+    <i class="material-icons-outlined">print</i>
+    <span>列印</span>
+  </button>
+</div>
