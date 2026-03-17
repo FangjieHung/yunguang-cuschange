@@ -6,33 +6,55 @@ import { RouterModule } from '@angular/router';
 // Third party packages
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SwiperModule } from 'swiper/angular';
 
 // Custom packages
 import { SharedModule as CoreSharedModule } from '@core/shared';
-import { GlassBgComponent, PaginatorComponent, ResultEmptyComponent, CompleteComponent } from './components';
+import {
+  GlassBgComponent,
+  PaginatorComponent,
+  ResultEmptyComponent,
+  CompleteComponent,
+} from './components';
 import {
   CampRegControlComponent,
-  CustGroupControlComponent, CustMemberControlComponent,
-  ZipCodeControlComponent
+  CustGroupControlComponent,
+  CustMemberControlComponent,
+  ZipCodeControlComponent,
 } from './controls';
 import {
   CustEditWidgetComponent,
-  ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent
+  ImagePreviewDialogWidgetComponent,
+  JsonViewDialogWidgetComponent,
 } from './widgets';
+import { PartnerLogosComponent } from './components/partner-logos/partner-logos.component';
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
-  GlassBgComponent, PaginatorComponent, ResultEmptyComponent, CompleteComponent
+  GlassBgComponent,
+  PaginatorComponent,
+  ResultEmptyComponent,
+  CompleteComponent,
 ];
-const CUST_CONTROLS = [CampRegControlComponent,CustGroupControlComponent, CustMemberControlComponent, ZipCodeControlComponent];
-const CUST_WIDGETS = [CustEditWidgetComponent, ImagePreviewDialogWidgetComponent, JsonViewDialogWidgetComponent];
-const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
+const CUST_CONTROLS = [
+  CampRegControlComponent,
+  CustGroupControlComponent,
+  CustMemberControlComponent,
+  ZipCodeControlComponent,
+];
+const CUST_WIDGETS = [
+  CustEditWidgetComponent,
+  ImagePreviewDialogWidgetComponent,
+  JsonViewDialogWidgetComponent,
+];
+const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule, SwiperModule];
 
 @NgModule({
   declarations: [
     ...CUST_COMPONENTS,
     ...CUST_CONTROLS,
-    ...CUST_WIDGETS
+    ...CUST_WIDGETS,
+    PartnerLogosComponent,
   ],
   imports: [
     CommonModule,
@@ -40,15 +62,16 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule];
     RouterModule,
     ReactiveFormsModule,
     ...CUST_MODULES,
-    ...THIRD_MODULES
+    ...THIRD_MODULES,
   ],
   exports: [
     ...CUST_MODULES,
     ...CUST_COMPONENTS,
     ...CUST_CONTROLS,
     ...CUST_WIDGETS,
-    ...THIRD_MODULES
+    ...THIRD_MODULES,
+    PartnerLogosComponent,
   ],
-  providers: []
+  providers: [],
 })
-export class SharedModule { }
+export class SharedModule {}
