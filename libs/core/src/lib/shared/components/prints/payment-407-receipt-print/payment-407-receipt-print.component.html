@@ -1,88 +1,114 @@
-<div class="mock-wrapper bg-gray-200 p-8 flex justify-center items-center min-h-screen print:hidden">
+<div class="print-mock">
   <div
-    class="receipt relative aspect-[210/297] w-full max-w-3xl p-10 shadow-lg border border-gray-200 bg-white print:shadow-none print:border-none print:max-w-none"
-    id="print-section"
-  >
-    <header class="receipt__header flex items-start justify-between gap-4 border-b border-slate-300 pb-4">
-      <div class="receipt__ids text-sm text-slate-600">
-        <p class="receipt__no">編號 NO. <span class="font-semibold">{{ modalData?.receiptNo || '1150001' }}</span></p>
-        <p class="receipt__certificate">立案證書：{{ modalData?.certificateNo || '台內團字第1140023141號' }}</p>
+    class="relative aspect-[210/297] w-full max-w-3xl p-8 shadow-lg border border-gray-200 bg-white print:shadow-none print:border-none print:max-w-none"
+    id="print-section">
+    <!-- Header -->
+    <header class="border-b-2 border-gray-800 pb-3 mb-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="assets/shared/img/logo/mark.png" alt="Mark" class="w-16" />
+        <div>
+          <p class="text-sm text-gray-700">台灣人工智慧檢驗醫學學會</p>
+          <h1 class="text-2xl font-bold">電子收據</h1>
+        </div>
       </div>
-      <div class="receipt__brand text-right">
-        <h1 class="text-2xl font-bold tracking-widest">台灣人工智慧檢驗醫學學會</h1>
-        <p class="text-xl font-semibold mt-2">繳費證明</p>
+      <div class="text-red-600 font-semibold text-right">
+        <p>收據編號：{{ modalData?.receiptNo || '1150001' }}</p>
+        <p>存根聯</p>
       </div>
     </header>
 
-    <section class="receipt__info mt-6 grid grid-cols-2 gap-6 text-sm leading-relaxed">
-      <div class="space-y-1">
-        <p>扣繳單位統一編號：<strong>{{ modalData?.taxId || '00603961' }}</strong></p>
-        <p>繳費人：<strong>{{ modalData?.payerName || '請填入繳費人' }}</strong></p>
-        <p>事由：<strong>{{ modalData?.reason || '課程報名費' }}</strong></p>
-      </div>
-      <div class="space-y-1">
-        <p>民國年 / 次：<strong>{{ modalData?.fiscalYearTerm || '112 / 1' }}</strong></p>
-        <p>繳費方式：<strong>{{ modalData?.paymentMethod || '信用卡付款 / 金融轉帳' }}</strong></p>
-        <p>列印日期：<strong>{{ printDate }}</strong></p>
+    <!-- Receipt Info -->
+    <section class="text-xs text-gray-600 border-b border-gray-400 pb-3 mb-4">
+      <div class="flex justify-between">
+        <div>
+          <p><span class="font-semibold">扣繳單位統一編號：</span>00603961</p>
+          <p><span class="font-semibold">立案證書：</span>{{ modalData?.certificateNo || '台內團字第1140023141號' }}</p>
+        </div>
+        <p><span class="text-right font-semibold">列印日期：</span>{{ printDate }}</p>
       </div>
     </section>
 
-    <section class="receipt__table mt-6">
-      <div class="receipt__row grid grid-cols-[130px_1fr] gap-x-4 border-t border-b border-slate-300 py-3">
-        <div class="font-semibold">應繳金額</div>
-        <div>新台幣 <span class="font-semibold">{{ modalData?.amount || '0' }}</span></div>
-      </div>
-      <div class="receipt__row grid grid-cols-[130px_1fr] gap-x-4 border-b border-slate-300 py-3">
-        <div class="font-semibold">合計</div>
-        <div>新台幣 <span class="font-semibold">{{ modalData?.total || modalData?.amount || '0' }}</span> 元</div>
-      </div>
+    <!-- Details Table -->
+    <section class="text-sm mb-4">
+      <ul class="grid grid-cols-3 gap-4 border-b border-gray-400 pb-3 mb-3">
+        <li>
+          <p class="font-semibold text-xs text-gray-700">繳費人</p>
+          <p class="mt-1">{{ modalData?.payerName || '請填入繳費人' }}</p>
+        </li>
+        <li>
+          <p class="font-semibold text-xs text-gray-700">事由</p>
+          <p class="mt-1">{{ modalData?.reason || '課程報名費' }}</p>
+        </li>
+        <li>
+          <p class="font-semibold text-xs text-gray-700">民國年 / 次</p>
+          <p class="mt-1">{{ modalData?.fiscalYearTerm || '112 / 1' }}</p>
+        </li>
+      </ul>
+
+      <ul class="grid grid-cols-3 gap-4 border-b border-gray-400 pb-3 mb-3">
+        <li>
+          <p class="font-semibold text-xs text-gray-700">繳費方式</p>
+          <p class="mt-1">{{ modalData?.paymentMethod || '信用卡付款 / 金融轉帳' }}</p>
+        </li>
+        <li>
+          <p class="font-semibold text-xs text-gray-700">應繳金額</p>
+          <p class="mt-1">新台幣 <span class="font-bold">{{ modalData?.amount || '0' }}</span></p>
+        </li>
+        <li>
+          <p class="font-semibold text-xs text-gray-700">合計</p>
+          <p class="mt-1 font-bold text-base">新台幣 {{ modalData?.total || modalData?.amount || '0' }} 元</p>
+        </li>
+      </ul>
     </section>
 
-    <section class="receipt__signatures mt-8 grid grid-cols-5 gap-2 text-center text-sm">
-      <div>
-        <div class="font-semibold">理事長</div>
-        <div class="mt-4">{{ modalData?.chairman || '薛博仁' }}</div>
-      </div>
-      <div>
-        <div class="font-semibold">秘書長</div>
-        <div class="mt-4">{{ modalData?.secretary || '蕭瓊子' }}</div>
-      </div>
-      <div>
-        <div class="font-semibold">會計</div>
-        <div class="mt-4">{{ modalData?.accountant || '薛翔中' }}</div>
-      </div>
-      <div class="col-span-2">
-        <div class="font-semibold">經辦人</div>
-        <div class="mt-4">{{ modalData?.handler || '吳慧芸' }}</div>
-      </div>
-    </section>
+    <!-- Signatures -->
+    <ul class="grid grid-cols-6 gap-2">
+      <li>
+        <p class="font-semibold text-xs mb-1">理事長</p>
+        <p class="text-base">{{ modalData?.chairman || '薛博仁' }}</p>
+      </li>
+      <li>
+        <p class="font-semibold text-xs mb-1">秘書長</p>
+        <p class="text-base">{{ modalData?.secretary || '蕭瓊子' }}</p>
+      </li>
+      <li>
+        <p class="font-semibold text-xs mb-1">會計</p>
+        <p class="text-base">{{ modalData?.accountant || '薛翔中' }}</p>
+      </li>
+      <li class="col-span-2">
+        <p class="font-semibold text-xs mb-1">經辦人</p>
+        <p class="text-base">{{ modalData?.handler || '吳慧芸' }}</p>
+      </li>
+      <li>
+        <img src="assets/shared/img/logo/society-stamp-square.png" alt="society-stamp" class="w-[20mm] float-right" />
+      </li>
+    </ul>
 
-    <section class="receipt__notes mt-6 text-xs leading-relaxed text-slate-600">
+    <section class="mt-6 text-xs leading-relaxed text-slate-600">
       <p class="font-semibold">備註說明：</p>
       <ol class="list-decimal list-inside space-y-1">
         <li>本單據供繳費人為繳納費用證明。</li>
         <li>
-          財政部高雄國稅局109年1月15日行政解釋「非以營利為目的之事業、團體、組織，有銷售貨物
-          或勞務時，仍應依前開法條規定課徵營業稅。」「教育、文化、公益、慈善機關或團體之組織
-          型態，應於銷售貨物或勞務時，應就每筆交易每次銷售額，依「營業人開立銷售憑證時限表」
-          規定，於交易或收款時，填寫5聯式「機關團體銷售貨物或勞務申報銷售額與營業稅憑證書」
-          (407繳款書)，將第4、5聯交買受人作為記帳及扣抵憑證，並於結帳之次月15日前，持第1、
-          2、3聯向公庫繳納營業稅，以第3聯代替銷售額之申報。</li>
+          財政部高雄國稅局 109 年 1 月 15
+          日行政解釋「非以營利為目的之事業、團體、組織，有銷售貨物或勞務時，仍應依前開法條規定課徵營業稅。」、「教育、文化、公益、慈善機關或團體之組織型態，應於銷售貨物或勞務時，應就每筆交易每次銷售額，依『營業人開立銷售憑證時限表』規定，於交貨或收款時，填寫
+          5 聯式『機關團體銷售貨物或勞務申報銷售額與營業稅繳款書』( 407 繳款書 )，將第 4、5 聯交買受人作為記帳及扣抵憑證，並於銷售之次月 15 日前，持憑第 1、2、3 聯向公庫繳納營業稅，以第 3
+          聯代替銷售額之申報。」</li>
         <li>
-          本單位將於繳費人繳納款項後，主動向國稅局繳納407營業稅，並郵寄提供繳費人事業單位，
-          (單位於收到407繳款書繳費證明後，可視同收據，於隔年1月不用再對本學會申請扣繳)
+          本單位將於繳費人繳納款項後，主動向國稅局繳納 407 營業稅，並郵寄提供繳費人事業單位，
+          單位於收到 407 繳款書繳費證明後，可視同收據，於隔年 1 月不用再對本學會申請扣繳
         </li>
       </ol>
     </section>
   </div>
 </div>
 
-<div class="print-buttons pt-4 flex justify-end gap-2 print:hidden">
+<div class="print-actions">
   <button mat-button type="button" (click)="doCancel()">
     <span>關閉</span>
   </button>
-  <button mat-flat-button color="primary" type="button" printSectionId="print-section" [printStyle]="printStyle" [useExistingCss]="true" ngxPrint>
-    <i class="material-icons-outlined">print</i>
+  <button mat-flat-button color="primary" type="button" printSectionId="print-section" [printStyle]="printStyle"
+    [useExistingCss]="true" ngxPrint>
+    <i class="material-icons-outlined pr-2">print</i>
     <span>列印</span>
   </button>
 </div>

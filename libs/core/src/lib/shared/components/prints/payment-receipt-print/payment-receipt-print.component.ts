@@ -20,7 +20,7 @@ export class PaymentReceiptPrintComponent extends BBDBaseComponent {
 
   printStyle = {
     '@page': {
-      size: 'A4 portrait',
+      size: 'A5 landscape',
       margin: '10mm'
     },
   };
