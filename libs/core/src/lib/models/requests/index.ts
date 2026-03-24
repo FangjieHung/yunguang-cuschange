@@ -11,6 +11,8 @@ export * from './campaign-req';
 export * from './change-password-req';
 export * from './cust-group-req';
 export * from './cust-member-req';
+export * from './cust-order-dtl-req';
+export * from './cust-order-req';
 export * from './customer-req';
 export * from './forget-password-req';
 export * from './reset-password-req';
