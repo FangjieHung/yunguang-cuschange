@@ -1,0 +1,6 @@
+<div class="h-screen flex flex-col items-center justify-center bg-teal-800 pb-10">
+  <div class="loader"></div>
+  <h2 class="text-white font-medium text-3xl tracking-wider mt-20">切換至付款頁面中</h2>
+  <p class="text-teal-200 tracking-wider text-lg mt-1">敬請耐心等候</p>
+  <div id="scroll" [innerHTML]="(slideHtml || '') | safeHtml"></div>
+</div>

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
 
 // Custom packages
-import { ResultErrorComponent } from './pages';
+import { PaymentRedirectComponent, ResultErrorComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -14,6 +14,14 @@ const routes: Routes = [
       decscription: `404 找不到頁面`,
       url: `${env.siteServer}/result/error`,
       image: `${env.siteServer}/assets/image/og/tslmai.png`
+    }
+  },
+  {
+    path: 'payment-redirect',
+    component: PaymentRedirectComponent,
+    data: {
+      title: `前往付款｜${env.siteName}`,
+      decscription: `前往付款轉導頁面`
     }
   }
 ];
