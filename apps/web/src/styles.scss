@@ -6,8 +6,6 @@
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
 
-
-
 @import "assets/scss/mat-theme";
 @import "assets/scss/typo";
 @import "assets/scss/nav-logo";
@@ -22,7 +20,6 @@
 @import "assets/scss/glass-bg.scss";
 @import "assets/scss/swiper";
 @import "assets/scss/quill-editor";
-@import "assets/scss/loading";
 
 @layer base {
     html,
