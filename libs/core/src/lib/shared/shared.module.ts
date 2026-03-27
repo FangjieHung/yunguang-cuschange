@@ -9,7 +9,8 @@ import { ThirdPartyModule } from './modules/third-party.module';
 import {
   BBDQuillEditorComponent, BBDQuillEditorViewerComponent,
   BBDImageUploadComponent, BBDImgNativeUploadComponent, BBDFileUploadComponent, BBDConfirmDialogComponent, BBDLoadingIndicatorComponent,
-  CampAttendCertPrintComponent, PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent
+  CampAttendCertPrintComponent, PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent,
+  PayTypeSelectComponent
 } from './components';
 import { ZipCodeControlComponent } from './controls';
 import { AntdModule, MaterialModule } from './modules';
@@ -27,7 +28,8 @@ const CUST_COMPONENTS = [
   BBDImageUploadComponent, BBDImgNativeUploadComponent,
   BBDFileUploadComponent, BBDConfirmDialogComponent, BBDLoadingIndicatorComponent,
   CampAttendCertPrintComponent,
-  PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent
+  PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent,
+  PayTypeSelectComponent
 ];
 const CUST_CONTROLS = [ZipCodeControlComponent];
 const CUST_PIPES = [AryFilterPipe, AryFindValuePipe, AryFindPipe, ArySortPipe, CtrlHasRequiredPipe, DateFormatterPipe,

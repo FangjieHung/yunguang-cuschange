@@ -36,14 +36,17 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-
       {
-        path: 'setting',
-        loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule)
+        path: 'order',
+        loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule)
       },
       {
         path: 'permission',
         loadChildren: () => import('./modules/permission/permission.module').then(m => m.PermissionModule)
+      },
+      {
+        path: 'setting',
+        loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule)
       },
     ]
   }

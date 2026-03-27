@@ -10,6 +10,7 @@ export * from './cust-order.api.serv';
 export * from './cust.api.serv';
 export * from './permission.serv';
 export * from './seo.serv';
+export * from './shared-data.api.serv';
 export * from './shared-data.serv';
 export * from './shared-func.serv';
 export * from './store.serv';

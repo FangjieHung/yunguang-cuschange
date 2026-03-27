@@ -2,9 +2,10 @@ import { CustOrderDtlView } from './cust-order-dtl-view';
 
 export interface CustOrderView {
   id: number;
-  orderAt: string;
+  orderAt: Date;
   orderType: number;
   custId: number;
+  custCode: string | null;
   custIdNo: string | null;
   custName: string | null;
   custEmail: string | null;
@@ -22,8 +23,8 @@ export interface CustOrderView {
   payTypeCode: string | null;
   payTypeName: string | null;
   payOrderNo: string | null;
-  payAt: string;
-  cxlAt: string | null;
+  payAt: Date | null;
+  cxlAt: Date | null;
   status: number;
   orderDesc?: string | null;
   content?: string | null;

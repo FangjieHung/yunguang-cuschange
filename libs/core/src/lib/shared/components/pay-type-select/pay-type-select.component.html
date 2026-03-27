@@ -1,0 +1,17 @@
+<div class="p-6 max-w-md mx-auto">
+  <h3 class="text-lg font-semibold text-gray-900 mb-4">請選擇付款方式</h3>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>付款方式</mat-label>
+    <mat-select [(ngModel)]="selectedPayTypeId" [disabled]="isLoading">
+      <mat-option *ngFor="let pt of payTypes" [value]="pt.id">
+        {{ pt.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="flex justify-end space-x-4 mt-4">
+    <button mat-stroked-button (click)="doCancel()">取消</button>
+    <button mat-flat-button color="primary" (click)="doConfirm()" [disabled]="!selectedPayTypeId">確定</button>
+  </div>
+</div>
