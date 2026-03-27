@@ -41,4 +41,12 @@ export class CustOrderApiServ {
   getCustOrderViewsPaging(request: PagingRequest<CustOrderReq>): Observable<PagingResponse<CustOrderView>> {
     return this.http.put<PagingResponse<CustOrderView>>(`${this.baseUrl}/GetCustOrderViewsPaging`, request);
   }
+
+  cancelCustOrder(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CancelCustOrder/${id}`, null);
+  }
+
+  completeCustOrder(request: CustOrderReq): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CompleteCustOrder`, request);
+  }
 }
