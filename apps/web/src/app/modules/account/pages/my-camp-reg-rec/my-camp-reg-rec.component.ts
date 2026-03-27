@@ -1,5 +1,5 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -7,7 +7,7 @@ import {
   PagingRequest, PagingResponse,
   CampRegReq, CampRegView
 } from '@core/models';
-import { CampaignApiServ } from '@core/services';
+import { CampaignApiServ, CommerceApiServ } from '@core/services';
 
 @Component({
   selector: 'app-my-camp-reg-rec',
@@ -15,8 +15,11 @@ import { CampaignApiServ } from '@core/services';
   styleUrls: ['./my-camp-reg-rec.component.scss'],
 })
 export class MyCampRegRecComponent extends BBDBaseComponent implements OnInit {
+  private _commerceApiServ = inject(CommerceApiServ);
+  private _router = inject(Router);
   campaignApiServ = inject(CampaignApiServ);
 
+  nowAt = new Date();
   isLoading = true;
   dataSource: CampRegView[] = [];
   request = new PagingRequest<CampRegReq>();
@@ -46,6 +49,46 @@ export class MyCampRegRecComponent extends BBDBaseComponent implements OnInit {
     if (!this.isBrowser)
       return;
     window.scrollTo({ top: 0 });
+  }
+
+  onGoPayment(custOrderId: number): void {
+    this.spinnerServ.show();
+    this._commerceApiServ.getAioCheckoutFormHtml(custOrderId).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error(`付款失敗，請再重試一次。`);
+          return;
+        }
+        if ((res.postReq || '').isUndefinedOrNullOrEmpty()) {
+          this.bbdNotifyServ.error(`付款失敗，請再重試一次。`);
+          return;
+        }
+
+        this._commerceApiServ.postReq = res.postReq;
+        console.log('go');
+        this._router.navigate(['/result/payment-redirect']);
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    }).add(() => this.spinnerServ.hide());
+  }
+
+  onCancelReg(item: CampRegView): void {
+    this.spinnerServ.show();
+    this.campaignApiServ.cancelCampReg(item.id).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.bbdNotifyServ.error('取消報名失敗，請再重試一次。');
+          return;
+        }
+        this.bbdNotifyServ.success('取消成功。');
+        this.onSearch(this.request.pageIndex);
+      },
+      error: (err) => {
+        this.bbdNotifyServ.error('執行失敗', err);
+      },
+    }).add(() => this.spinnerServ.hide());
   }
 
   onSearch(pageIndex = 1): void {

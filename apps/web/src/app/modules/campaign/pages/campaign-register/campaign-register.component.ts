@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment as env } from '../../../../../environments/environment';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import { CampaignView } from '@core/models';
-import { CampaignApiServ, SEOServ } from '@core/services';
+import { CampaignApiServ, CommerceApiServ, SEOServ } from '@core/services';
 import { CampRegControlComponent } from '../../../../shared/controls';
 
 @Component({
@@ -19,6 +19,7 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
   @ViewChild(CampRegControlComponent) regDataCtrl!: CampRegControlComponent;
 
   private _campaignApiServ = inject(CampaignApiServ);
+  private _commerceApiServ = inject(CommerceApiServ);
   private _fb = inject(FormBuilder);
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
@@ -26,6 +27,7 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
 
   private _campUniqueId = '';
   isCompleted = false;
+  allowPayFlow = false;
   valForm!: UntypedFormGroup;
   response: CampaignView | null = null;
 
@@ -56,6 +58,7 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
           }
 
           this.response = res;
+          this.allowPayFlow = this.isSignin ? this.response.salePrice > 0 : this.response.pricing > 0;
           this.doFormPatchValue();
 
           // SEO tags
@@ -111,6 +114,9 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
   onGoHome(): void {
     this._router.navigate(['/']);
   }
+  onGoPayment(): void {
+    this._router.navigate(['/result/payment-redirect']);
+  }
 
   onSubmit(): void {
     this.canSubmit();
@@ -126,8 +132,16 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
           this.bbdNotifyServ.error(`報名失敗，請再重試一次。`);
           return;
         }
-        this.bbdNotifyServ.success(`報名成功。`);
-        this.isCompleted = true;
+
+        this.allowPayFlow = !((res.postReq || '').isUndefinedOrNullOrEmpty());
+        if (!this.allowPayFlow) {
+          this.bbdNotifyServ.success(`報名成功。`);
+          this.isCompleted = true;
+        } else {
+          this._commerceApiServ.postReq = res.postReq;
+          this.onGoPayment();
+        }
+
       },
       error: (err) => {
         this.bbdNotifyServ.error('執行失敗', err);

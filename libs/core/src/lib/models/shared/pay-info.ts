@@ -1,5 +1,5 @@
 export class PayInfo {
   isPayable = false;
   allowPayFlow = false;
-  postReq = '';
+  postReq: string | null = null;
 }

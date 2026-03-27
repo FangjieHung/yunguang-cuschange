@@ -82,7 +82,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
         return;
       }
       case +this.campaignApiServ.campaignStatuses.截止: {
-        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status <= +this.campaignApiServ.campRegStatuses.已報名) {
           this.currRegStatus = 'registered';
           return;
         }
@@ -90,7 +90,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
         return;
       }
       case +this.campaignApiServ.campaignStatuses.額滿: {
-        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+        if (this.response.regData && this.response.regData.id > 0 && this.response.regData.status <= +this.campaignApiServ.campRegStatuses.已報名) {
           this.currRegStatus = 'registered';
           return;
         }
@@ -106,7 +106,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
           this.currRegStatus = 'registering';
           return;
         }
-        if (this.response.regData.status === +this.campaignApiServ.campRegStatuses.已報名) {
+        if (this.response.regData.status <= +this.campaignApiServ.campRegStatuses.已報名) {
           this.currRegStatus = 'registered';
           return;
         }

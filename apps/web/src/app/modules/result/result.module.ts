@@ -11,13 +11,13 @@ export function playerFact() {
 }
 
 // Custom packages
-import { SharedModule } from '@core/shared';
-import { PaymentRedirectComponent, ResultErrorComponent } from './pages';
+import { SharedModule } from '../../shared/shared.module';
+import { PaymentRedirectComponent, PaymentResultComponent, ResultErrorComponent } from './pages';
 
 // Config settings
 const THIRD_MODULES = [LottieModule.forRoot({ player: playerFact })];
 const CUSTOM_MODULES = [SharedModule];
-const CUSTOM_COMPONENTS = [PaymentRedirectComponent, ResultErrorComponent];
+const CUSTOM_COMPONENTS = [PaymentRedirectComponent, PaymentResultComponent, ResultErrorComponent];
 
 @NgModule({
   declarations: [...CUSTOM_COMPONENTS],
@@ -26,6 +26,6 @@ const CUSTOM_COMPONENTS = [PaymentRedirectComponent, ResultErrorComponent];
     ResultRoutingModule,
     ...THIRD_MODULES,
     ...CUSTOM_MODULES
-  ]
+]
 })
 export class ResultModule { }

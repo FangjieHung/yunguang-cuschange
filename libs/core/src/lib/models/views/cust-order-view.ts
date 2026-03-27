@@ -25,6 +25,7 @@ export interface CustOrderView {
   payAt: string;
   cxlAt: string | null;
   status: number;
+  orderDesc?: string | null;
   content?: string | null;
   details?: CustOrderDtlView[] | null;
 }

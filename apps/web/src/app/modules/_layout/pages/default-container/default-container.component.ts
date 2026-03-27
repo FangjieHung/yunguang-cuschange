@@ -69,6 +69,8 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     if (this.appAuthApiServ.hasAccessToken) {
       this.storeServ.getCurrAuthUserCache();
     }
+    
+    this._seoServ.updateMetaTags();
     this._router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {

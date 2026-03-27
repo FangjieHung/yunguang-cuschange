@@ -25,12 +25,11 @@ export class PaymentRedirectComponent extends BBDBaseComponent implements OnInit
   }
 
   ngAfterViewInit() {
-    console.log('After loading');
-    // if (!this.slideHtml) {
-    //   this.router.navigate(['/']);
-    // }
+    if (!this.slideHtml) {
+      this.router.navigate(['/']);
+    }
 
-    // const form: HTMLFormElement = document.getElementById('postForm') as HTMLFormElement;
-    // form.submit();
+    const form: HTMLFormElement = document.getElementById('postForm') as HTMLFormElement;
+    form.submit();
   }
 }

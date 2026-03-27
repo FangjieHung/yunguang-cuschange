@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
-import { CampaignListComponent, CampaignDetailComponent, CampRegQueryListComponent, CampaignRegisterComponent } from './pages';
+import { CampaignListComponent, CampaignDetailComponent, CampaignRegisterComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -24,10 +24,6 @@ const routes: Routes = [
   {
     path: 'register/:campUniqueId',
     component: CampaignRegisterComponent,
-  },
-  {
-    path: 'complete', // 完成報名結果頁
-    component: CampRegQueryListComponent,
   }
 ];
 

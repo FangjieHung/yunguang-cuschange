@@ -34,6 +34,35 @@ export function app(): express.Express {
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
+  // Support webhook/redirect POST from 金流 callback
+//   server.use(express.urlencoded({ extended: true }));
+//   server.use(express.json());
+
+//   server.post('/result/payment-complete', (req, res) => {
+//     const payload = JSON.stringify(req.body || {});
+//     const safePayload = payload.replace(/</g, '\u003c');
+
+//     return res.send(`<!DOCTYPE html>
+// <html lang="zh-TW">
+//   <head>
+//     <meta charset="utf-8" />
+//     <meta name="viewport" content="width=device-width, initial-scale=1" />
+//     <title>付款完成</title>
+//   </head>
+//   <body>
+//     <p>正在處理付款結果，請稍候…</p>
+//     <script>
+//       try {
+//         localStorage.setItem('paymentCompletePostBody', JSON.stringify(${safePayload}));
+//       } catch (err) {
+//         console.warn('paymentComplete 存取本地資料失敗', err);
+//       }
+//       window.location.href = '/result/payment-complete';
+//     </script>
+//   </body>
+// </html>`);
+//   });
+
   // Serve static files from /browser
   server.get(
     '*.*',

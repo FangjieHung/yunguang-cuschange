@@ -25,7 +25,8 @@
               </div>
             </web-glass-bg>
             <div class="toolbar">
-              <button class="btn-primary btn-lg" (click)="onSubmit()">確認報名</button>
+              <button class="btn-primary btn-lg" (click)="onSubmit()" *ngIf="!allowPayFlow">確認報名</button>
+              <button matStepperNext class="btn-primary btn-lg" *ngIf="allowPayFlow">下一步</button>
             </div>
           </form>
         </mat-step>
@@ -70,19 +71,19 @@
           </div>
         </mat-step>
 
-        <mat-step *ngIf="false">
+        <mat-step *ngIf="allowPayFlow">
           <ng-template matStepLabel>付款資訊</ng-template>
 
           <web-glass-bg>
             <div class="px-5 py-14 max-w-fit mx-auto">
               <div class="pb-3">
                 <p>本會使用</p>
-                <img src="assets/image/icon/ecpay_logo.png" alt="藍新金流" class="mx-auto sm:ml-0">
+                <img src="assets/image/icon/ecpay_logo.png" alt="綠界科技" class="mx-auto sm:ml-0">
               </div>
               <p>提供 <span class="font-bold">信用卡、WebATM、ATM、超商代碼</span> 等繳款多元付款方式。</p>
               <p>按下「前往付款」後將跳轉至金流付款頁面 <span class="opacity-70">(SSL 256 bits 安全加密機制)</span>，請安心付款。</p>
 
-              <button routerLink="/campaign/complete" class="btn-primary btn-lg mt-5">前往付款</button>
+              <button class="btn-primary btn-lg mt-5" (click)="onSubmit()">前往付款</button>
             </div>
           </web-glass-bg>
 

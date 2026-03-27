@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CampaignListComponent, CampaignDetailComponent, CampRegQueryListComponent, CampaignRegisterComponent, CampRegInfoComponent } from './pages';
+import { CampaignListComponent, CampaignDetailComponent, CampaignRegisterComponent, CampRegInfoComponent } from './pages';
 import { CampaignRoutingModule } from './campaign-routing.module';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -12,8 +12,7 @@ const CUSTOM_MODULES = [SharedModule];
     CampaignListComponent,
     CampaignDetailComponent,
     CampRegInfoComponent,
-    CampaignRegisterComponent,
-    CampRegQueryListComponent
+    CampaignRegisterComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ export * from './app-store.api.serv';
 export * from './app-user.api.serv';
 export * from './campaign.api.serv';
 export * from './commerce.api.serv';
+export * from './cust-order.api.serv';
 export * from './cust.api.serv';
 export * from './permission.serv';
 export * from './seo.serv';

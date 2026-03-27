@@ -2,83 +2,98 @@
   <h2 class="headline">繳費紀錄</h2>
   <form action="" class="search-wrap max-w-2xl mb-6">
     <mat-form-field appearance="outline" class="fill-black max-w-40">
-      <mat-select name="srcYear" placeholder="請選擇區間">
-        <mat-option value="1">近 1 年</mat-option>
-        <mat-option value="2">近 2 年</mat-option>
-        <mat-option value="3">近 3 年</mat-option>
+      <mat-select name="srcYear" [(ngModel)]="selectedYears" (selectionChange)="onYearChange($event.value)" placeholder="請選擇區間">
+        <mat-option [value]="1">近 1 年</mat-option>
+        <mat-option [value]="2">近 2 年</mat-option>
+        <mat-option [value]="3">近 3 年</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" class="fill-black">
       <span matPrefix class="material-symbols-rounded">search</span>
-      <input matInput type="text" name="searchValue" placeholder="搜尋">
-      <button matSuffix mat-icon-button aria-label="Clear">
+      <input matInput type="text" [(ngModel)]="request.queryRequest.queryString" name="searchValue" placeholder="搜尋">
+      <button *ngIf="request.queryRequest.queryString" matSuffix mat-icon-button aria-label="Clear"
+        (click)="request.queryRequest.queryString = null; onSearch();">
         <span class="material-symbols-rounded">close</span>
       </button>
     </mat-form-field>
-    <button class="btn-primary btn-lg">
-      <!-- [ngClass]="{'disabled-hide': !request.queryRequest.queryString}" -->
+    <button class="btn-primary btn-lg" [ngClass]="{'disabled-hide': !request.queryRequest.queryString}"
+      [disabled]="!request.queryRequest.queryString" (click)="onSearch()">
       搜尋
     </button>
   </form>
 
-  <bbd-loading-indicator *ngIf="!isLoading" [message]="'活動資料讀取中，請稍候'"></bbd-loading-indicator>
+  <bbd-loading-indicator *ngIf="false" [message]="'繳費資料讀取中，請稍候'"></bbd-loading-indicator>
   <!-- 空資料 -->
-  <web-result-empty *ngIf="isLoading && (dataSource | isEmpty)" [message]="'查無活動資料'"
+  <web-result-empty *ngIf="isLoading && (dataSource | isEmpty)" [message]="'查無繳費資料'"
     class="block mt-5"></web-result-empty>
 
   <!-- 有資料 -->
-  <ng-container *ngIf="!isLoading && (dataSource | isEmpty)">
-    <web-glass-bg>
-      <mat-accordion class="accordion-transparent block p-2">
-        <mat-expansion-panel class="rounded-full" hideToggle *ngFor="let item of payments">
-          <mat-expansion-panel-header class="py-2">
-            <div class="header-wrap">
-              <div class="panel-title-wrap">
-                <div>
-                  <p class="title-label">{{ item.category }} </p>
-                  <p class="title-sub">{{ item.dueDate }}</p>
-                </div>
-                <div>
-                  <p class="panel-title">{{ item.title }}</p>
-                  <p>應繳金額：${{ item.amount | number:'1.0-0' }}</p>
-                </div>
+  <div class="space-y-4">
+    <ng-container>
+      <web-glass-bg class="block" *ngFor="let item of dataSource">
+        <mat-accordion class="accordion-transparent block p-2">
+          <mat-expansion-panel class="rounded-full" hideToggle>
+            <mat-expansion-panel-header class="py-2">
+              <div class="header-wrap">
+                <p class="panel-title">{{ item.orderDesc || '繳費項目' }}</p>
+                <span class="title-sub">訂單日期：{{ $any(item.orderAt) | dateFormatter:'yyyy/MM/dd': '-' }}</span>
+              </div>
+              <!-- 待付款 -->
+              <div class="status-wrap text-amber-600" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['待付款']">
+                <span class="material-symbols-rounded">pending</span>
+                <span class="status-label">待付款</span>
+              </div>
+              <!-- 已付款 -->
+              <div class="status-wrap text-green-600" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['已付款']">
+                <span class="material-symbols-rounded">check_circle</span>
+                <span class="status-label">已付款</span>
+              </div>
+              <!-- 待退款 -->
+              <div class="status-wrap text-pink-500" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['待退款']">
+                <span class="material-symbols-rounded">credit_card_clock</span>
+                <span class="status-label">待退款</span>
+              </div>
+              <!-- 已取消 -->
+              <div class="status-wrap text-red-500" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['已取消']">
+                <span class="material-symbols-rounded">cancel</span>
+                <span class="status-label">已取消</span>
+              </div>
+              <!-- 已逾期 -->
+              <div class="status-wrap text-purple-500" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['已逾期']">
+                <span class="material-symbols-rounded">schedule</span>
+                <span class="status-label">已逾期</span>
+              </div>
+
+            </mat-expansion-panel-header>
+
+            <div class="panel-content">
+              <ul class="list-circle">
+                <li>繳費會員 : {{ item.custName }}</li>
+                <li>行動電話 : {{ item.custMobile }}</li>
+                <li>電子信箱 : {{ item.custEmail }}</li>
+                <li>應繳金額 : ${{ item.total | number:'1.0-0' }}</li>
+                <li>繳費方式 : {{ item.payTypeName || '-' }}</li>
+                <li>金流繳費編號 : {{ item.payOrderNo || '-' }}</li>
+                <li>繳費時間 : {{ $any(item.payAt) | dateFormatter:'yyyy/MM/dd HH:mm': '-' }}</li>
+              </ul>
+              <div class="btns-wrap">
+                <!-- <a class="btn-white"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a> -->
+                <!-- <button type="button" class="btn-white"><span
+                  class="material-symbols-rounded pr-1">print</span>列印證明</button> -->
+                <button type="button" class="btn-primary" *ngIf="item.id && +item.status === +custOrderApiServ.custOrderStatuses['待付款']"
+                  (click)="onGoPayment(item.id)">
+                  <span class="material-symbols-rounded pr-1">payments</span>前往付款
+                </button>
               </div>
             </div>
-            <div class="status-wrap" [ngClass]="statusMeta[item.status].colorClass">
-              <span class="material-symbols-rounded">{{ statusMeta[item.status].icon }}</span>
-              <span class="status-label">{{ statusMeta[item.status].label }}</span>
-            </div>
-          </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </web-glass-bg>
+      <web-paginator
+        [params]="{ length: response?.totalCount || 0, pageSize: response?.pageSize || 0, pageIndex: response?.pageIndex || 0 }"
+        (pageIndexChange)="onSearch($event)">
+      </web-paginator>
+    </ng-container>
+  </div>
 
-          <div class="panel-content">
-            <ul class="list-circle">
-              <li>繳費會員 : {{ item.memberName }}</li>
-              <li>行動電話 : {{ item.mobile }}</li>
-              <li>電子信箱 : {{ item.email }}</li>
-              <li>
-                繳費金額：
-                <ng-container>
-                  ${{ item.paidAmount | number:'1.0-0' }}
-                </ng-container>
-                <ng-template #noPaidAmount>-</ng-template>
-              </li>
-              <li>繳費方式 : {{ item.payMethod || '-' }}</li>
-              <li>金流繳費編號 : {{ item.payId || '-' }}</li>
-              <li>繳費時間 : {{ item.payTime || '-' }}</li>
-            </ul>
-
-            <div class="btns-wrap">
-              <a class="btn-white"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a>
-              <button type="button" class="btn-white"><span
-                  class="material-symbols-rounded pr-1">print</span>列印證明</button>
-              <button type="button" class="btn-primary"><span
-                  class="material-symbols-rounded pr-1">payments</span>前往付款</button>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </web-glass-bg>
-    <mat-paginator [hidePageSize]="true" [pageSize]="10" [pageIndex]="0" [length]="4">
-    </mat-paginator>
-  </ng-container>
 </div>

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
 
 // Custom packages
-import { PaymentRedirectComponent, ResultErrorComponent } from './pages';
+import { PaymentRedirectComponent, PaymentResultComponent, ResultErrorComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -22,6 +22,14 @@ const routes: Routes = [
     data: {
       title: `前往付款｜${env.siteName}`,
       decscription: `前往付款轉導頁面`
+    }
+  },
+  {
+    path: 'payment-result/:orderType/:resultCode/:resultMsg',
+    component: PaymentResultComponent,
+    data: {
+      title: `付款結果｜${env.siteName}`,
+      decscription: `完成付款頁面`
     }
   }
 ];
