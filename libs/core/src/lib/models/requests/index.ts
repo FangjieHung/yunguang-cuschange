@@ -15,6 +15,7 @@ export * from './cust-group-req';
 export * from './cust-member-req';
 export * from './cust-order-dtl-req';
 export * from './cust-order-req';
+export * from './cust-order-refund-req';
 export * from './customer-req';
 export * from './forget-password-req';
 export * from './pay-type-req';

@@ -1,0 +1,115 @@
+<div class="p-2" *ngIf="!isLoading; else loadingTpl">
+  <form [formGroup]="valForm">
+    <!-- 唯讀欄位 -->
+    <div class="grid grid-cols-2 gap-x-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>狀態</mat-label>
+        <input matInput [value]="editDto.status | aryFindValue: custOrderApiServ.getCustOrderRefundStatusInfos(): 'value': 'name'" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>會員編號</mat-label>
+        <input matInput [value]="editDto.custCode || '-'" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>姓名</mat-label>
+        <input matInput [value]="editDto.custName || '-'" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>訂單時間</mat-label>
+        <input matInput [value]="(editDto.custOrderAt | dateFormatter: 'yyyy/MM/dd HH:mm': '-')" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>原因類別</mat-label>
+        <input matInput [value]="editDto.reasonType | aryFindValue: custOrderApiServ.custOrderRefundReasonTypeOpts: 'value': 'name'" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>退費金額</mat-label>
+        <input matInput [value]="editDto.refundAmount | number" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-2">
+        <mat-label>退費原因</mat-label>
+        <input matInput [value]="editDto.reason || '-'" readonly>
+      </mat-form-field>
+    </div>
+
+    <nz-divider class="!my-2"></nz-divider>
+
+    <!-- 可編輯欄位 -->
+    <div class="grid grid-cols-2 gap-x-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>退費日期</mat-label>
+        <input matInput [matDatepicker]="refundAtPicker" formControlName="refundAt">
+        <mat-datepicker-toggle matIconSuffix [for]="refundAtPicker"></mat-datepicker-toggle>
+        <mat-datepicker #refundAtPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>退款方式</mat-label>
+        <mat-select formControlName="payTypeId">
+          <mat-option [value]="0">請選擇</mat-option>
+          <mat-option *ngFor="let pt of payTypes" [value]="pt.id">
+            {{ pt.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-2">
+        <mat-label>經手人</mat-label>
+        <input matInput type="text" formControlName="handlerName">
+      </mat-form-field>
+    </div>
+
+    <!-- 銀行帳戶 -->
+    <p class="text-sm font-medium text-gray-600 mb-2">銀行帳戶</p>
+    <div class="grid grid-cols-2 gap-x-4" formGroupName="bankAccount">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>銀行名稱</mat-label>
+        <input matInput type="text" formControlName="bankName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>分行名稱</mat-label>
+        <input matInput type="text" formControlName="branchName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>帳號</mat-label>
+        <input matInput type="text" formControlName="accountNo">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>戶名</mat-label>
+        <input matInput type="text" formControlName="accountName">
+      </mat-form-field>
+    </div>
+
+    <!-- 備註 -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>備註</mat-label>
+      <textarea matInput formControlName="memo" rows="3"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="flex justify-center items-center py-12">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</ng-template>
+
+<!-- Dialog Footer -->
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="doCancel()">取消</button>
+  <nz-divider nzType="vertical"></nz-divider>
+  <button nz-button nzType="default" (click)="onRevertToPending()">退回待退費</button>
+  <button nz-button nzType="default" (click)="onSaveChanges()">儲存變更</button>
+  <button nz-button nzType="primary" *ngIf="isPending"
+    (click)="onCompleteRefund()"
+    [disabled]="!valForm.get('payTypeId')?.value || !valForm.get('refundAt')?.value">完成退費</button>
+</div>

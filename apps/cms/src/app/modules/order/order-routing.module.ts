@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
-import { CustOrderListComponent } from './pages';
+import { CustOrderListComponent, CustOrderRefundListComponent } from './pages';
 
 const routes: Routes = [
   {
     path: 'list',
     component: CustOrderListComponent,
+  },
+  {
+    path: 'refund/list',
+    component: CustOrderRefundListComponent,
   },
 ];
 

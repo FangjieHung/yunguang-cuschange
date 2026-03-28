@@ -16,5 +16,6 @@ export * from './cust-group-dto';
 export * from './cust-member-dto';
 export * from './cust-order-dtl-dto';
 export * from './cust-order-dto';
+export * from './cust-order-refund-dto';
 export * from './customer-dto';
 export * from './pay-type-dto';

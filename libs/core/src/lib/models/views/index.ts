@@ -14,6 +14,7 @@ export * from './cust-group-view';
 export * from './cust-member-view';
 export * from './cust-order-dtl-view';
 export * from './cust-order-view';
+export * from './cust-order-refund-view';
 export * from './customer-view';
 export * from './pay-type-view';
 export * from './zip-code-view';
