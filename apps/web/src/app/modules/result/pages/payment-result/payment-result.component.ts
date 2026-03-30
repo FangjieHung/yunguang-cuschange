@@ -13,6 +13,7 @@ import { BBDBaseComponent } from '@core/shared';
 export class PaymentResultComponent extends BBDBaseComponent implements OnInit, AfterViewInit {
   orderType = 0;
   message = '';
+  resultCode = 0;
   resultMsg = '';
   // paymentPostBody: Record<string, unknown> | null = null;
 
@@ -25,6 +26,7 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.orderType = parseInt(params.get('orderType') || '0', 0);
+      this.resultCode = parseInt(params.get('resultCode') || '0', 0);
       this.resultMsg = params.get('resultMsg') || '';
       this.setMessage();
     });
