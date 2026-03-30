@@ -1,30 +1,27 @@
-<web-complete [message]="message"></web-complete>
+<div class="max-w-container">
+  <header>
+    <web-complete *ngIf="getStatusClass() === 'success'" class="block w-fit mx-auto pl-4"></web-complete>
+    <web-fail *ngIf="getStatusClass() === 'failed'" class="block w-fit mx-auto pl-4 opacity-80"></web-fail>
+    <web-complete *ngIf="getStatusClass() !== 'success' && getStatusClass() !== 'failed'" class="block w-fit mx-auto pl-4"></web-complete>
+    <h2 class="text-center">
+      <span class="display d-black">Payment Status</span>
+      <p class="headline font-semibold space-x-2">
+        <span>{{ message }}</span>
+        <span class="">{{ resultMsg }}</span>
+      </p>
+    </h2>
+  </header>
 
-<!-- <div *ngIf="paymentPostBody" class="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-  <h3 class="font-semibold">已接收到金流回傳 POST 資料：</h3>
-  <pre class="whitespace-pre-wrap break-words text-xs">{{ paymentPostBody | json }}</pre>
-</div> -->
-
-<div class="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-  <h3 class="font-semibold">{{ resultMsg }}</h3>
-</div>
-
-<!-- 付款提示備註 -->
-<div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-  <div class="flex items-start">
-    <div class="flex-shrink-0">
-      <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-      </svg>
-    </div>
-    <div class="ml-3">
-      <h3 class="text-sm font-medium text-blue-800">付款處理說明</h3>
-      <div class="mt-2 text-sm text-blue-700">
+  <!-- 付款提示備註 -->
+  <web-glass-bg class="w-fit max-w-xl mx-auto my-10 block">
+    <div class="px-8 py-6">
+      <h1 class="title">付款處理說明</h1>
+      <div class="text-base mt-2 mb-6 space-y-2">
         <p>若您選擇非即時金流付款方式（如 ATM 轉帳、超商代碼繳費等），系統可能無法立即確認入帳狀態。</p>
-        <p class="mt-1">請耐心等待 1-3 個工作天，款項入帳後系統將自動更新您的訂單狀態，並發送確認通知。</p>
-        <p class="mt-1 font-medium">如有任何疑問，請聯繫學會秘書處。</p>
+        <p>請耐心等待 1-3 個工作天，款項入帳後系統將自動更新您的訂單狀態，並發送確認通知。</p>
+        <p>如有任何疑問，請聯繫學會秘書處。</p>
       </div>
+      <a routerLink="/" class="btn-primary rounded-full p-4 w-32 mx-auto">回首頁</a>
     </div>
-  </div>
+  </web-glass-bg>
 </div>
-

@@ -1,0 +1,62 @@
+/* Fail */
+svg {
+    @apply w-20 block mr-4 mb-4 xl:w-24 3xl:w-32;
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    &.circle {
+        -webkit-animation: dash 0.9s ease-in-out;
+        animation: dash 0.9s ease-in-out;
+    }
+    &.x-line-1 {
+        stroke-dashoffset: 1000;
+        -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+        animation: dash 0.9s 0.35s ease-in-out forwards;
+    }
+    &.x-line-2 {
+        stroke-dashoffset: 1000;
+        -webkit-animation: dash 0.9s 0.5s ease-in-out forwards;
+        animation: dash 0.9s 0.5s ease-in-out forwards;
+    }
+}
+
+.fail-title {
+    @apply text-7xl tracking-wide mt-1;
+    color: var(--md-sys-color-error);
+}
+
+.fade-in-left {
+    @apply opacity-0 delay-200 -translate-x-10;
+    animation: fadeInLeft 1s ease-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}

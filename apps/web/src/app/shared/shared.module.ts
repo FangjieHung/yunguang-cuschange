@@ -15,6 +15,7 @@ import {
   PaginatorComponent,
   ResultEmptyComponent,
   CompleteComponent,
+  FailComponent,
 } from './components';
 import {
   CampRegControlComponent,
@@ -35,6 +36,7 @@ const CUST_COMPONENTS = [
   PaginatorComponent,
   ResultEmptyComponent,
   CompleteComponent,
+  FailComponent,
 ];
 const CUST_CONTROLS = [
   CampRegControlComponent,
