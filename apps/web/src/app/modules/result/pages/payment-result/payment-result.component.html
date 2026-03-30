@@ -1,18 +1,17 @@
 <div class="max-w-container">
   <header>
-    <web-complete *ngIf="getStatusClass() === 'success'" class="block w-fit mx-auto pl-4"></web-complete>
-    <web-fail *ngIf="getStatusClass() === 'failed'" class="block w-fit mx-auto pl-4 opacity-80"></web-fail>
-    <web-complete *ngIf="getStatusClass() !== 'success' && getStatusClass() !== 'failed'" class="block w-fit mx-auto pl-4"></web-complete>
+    <web-complete *ngIf="isSuccess" class="block w-fit mx-auto pl-4"></web-complete>
+    <web-pending *ngIf="!isSuccess" class="block w-fit mx-auto pl-4"></web-pending>
     <h2 class="text-center">
-      <span class="display d-black">Payment Status</span>
+       <span class="display d-black">Payment Status</span>                               
       <p class="headline font-semibold space-x-2">
         <span>{{ message }}</span>
-        <span class="">{{ resultMsg }}</span>
+        <span [ngClass]="isSuccess ? 'result-success' : 'result-pending'">{{ resultMsg }}</span>
       </p>
     </h2>
   </header>
 
-  <!-- 付款提示備註 -->
+  <!-- 付款失敗或待超商繳款 -->
   <web-glass-bg class="w-fit max-w-xl mx-auto my-10 block">
     <div class="px-8 py-6">
       <h1 class="title">付款處理說明</h1>

@@ -16,6 +16,7 @@ import {
   ResultEmptyComponent,
   CompleteComponent,
   FailComponent,
+  PendingComponent,
 } from './components';
 import {
   CampRegControlComponent,
@@ -37,6 +38,7 @@ const CUST_COMPONENTS = [
   ResultEmptyComponent,
   CompleteComponent,
   FailComponent,
+  PendingComponent,
 ];
 const CUST_CONTROLS = [
   CampRegControlComponent,

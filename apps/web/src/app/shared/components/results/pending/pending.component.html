@@ -1,0 +1,21 @@
+
+<div class="md:flex items-start justify-center">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+        <!-- 外圓 -->
+        <circle class="path" fill="none" stroke="var(--md-sys-color-surface-tint)" stroke-width="10"
+            stroke-miterlimit="10" cx="80" cy="80" r="70" />
+        <!-- 時針 -->
+        <line class="path hour-hand" x1="80" y1="80" x2="80" y2="44"
+            stroke="var(--md-sys-color-surface-tint)" stroke-width="10"
+            stroke-linecap="round" stroke-miterlimit="10" />
+        <!-- 分針 -->
+        <line class="path minute-hand" x1="80" y1="80" x2="110" y2="80"
+            stroke="var(--md-sys-color-surface-tint)" stroke-width="10"
+            stroke-linecap="round" stroke-miterlimit="10" />
+        <!-- 中心點 -->
+        <circle fill="var(--md-sys-color-surface-tint)" cx="80" cy="80" r="6" />
+    </svg>
+    <div class="fade-in-left">
+        <h1 class="pending-title">{{ message }}</h1>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+/* Pending */
+svg {
+    @apply w-20 block mr-4 mb-4 xl:w-24 3xl:w-32;
+}
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    
+    &.hour-hand {
+        transform-origin: 80px 80px;
+        -webkit-animation: dash 0.9s ease-in-out, tick-hour 6s linear infinite;
+        animation: dash 0.9s ease-in-out, tick-hour 6s linear infinite;
+    }
+    &.minute-hand {
+        transform-origin: 80px 80px;
+        -webkit-animation: dash 0.9s ease-in-out, tick-minute 1s linear infinite;
+        animation: dash 0.9s ease-in-out, tick-minute 1s linear infinite;
+    }
+}
+
+.pending-title {
+    @apply text-7xl tracking-wide mt-1;
+    color: var(--md-sys-color-surface-tint);
+}
+
+.fade-in-left {
+    @apply opacity-0 delay-200 -translate-x-10;
+    animation: fadeInLeft 1s ease-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tick-hour {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes tick-minute {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes dash {
+    0%   { stroke-dashoffset: 1000; }
+    100% { stroke-dashoffset: 0; }
+}
+
+@keyframes dash {
+    0%   { stroke-dashoffset: 1000; }
+    100% { stroke-dashoffset: 0; }
+}

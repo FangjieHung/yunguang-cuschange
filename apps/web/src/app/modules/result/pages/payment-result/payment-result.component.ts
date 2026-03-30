@@ -30,7 +30,7 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
       this.resultMsg = params.get('resultMsg') || '';
       this.setMessage();
     });
-
+    
     // this.loadPaymentPostBody();
   }
 
@@ -68,18 +68,22 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
   private setMessage(): void {
     switch (this.orderType) {
       case CustOrderTypes.活動類_報名費:
-        this.message = '活動報名繳費結果';
+        this.message = '活動報名';
         break;
       case CustOrderTypes.會費類_個人入會費:
-        this.message = '入會申請繳費結果';
+        this.message = '入會申請';
         break;
       case CustOrderTypes.會費類_個人常年會費:
-        this.message = '常年會費繳費結果';
+        this.message = '常年會費';
         break;
       default:
         this.message = '繳費結果';
         break;
     }
+  }
+
+  get isSuccess(): boolean {
+    return this.resultCode === 1;
   }
 
   ngAfterViewInit() {
