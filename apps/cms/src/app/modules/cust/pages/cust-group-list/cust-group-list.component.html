@@ -5,6 +5,10 @@
         <span class="material-icons-outlined pr-2 text-lg">library_add</span>
         <span>新增{{actionName}}</span>
       </button>
+      <button mat-raised-button color="accent" (click)="onRenewAll()">
+        <span class="material-icons-outlined pr-2 text-lg">autorenew</span>
+        <span>產生會費繳費單</span>
+      </button>
       <button mat-raised-button (click)="onExport()">
         <span class="material-icons-outlined pr-2 text-lg">file_download</span>
         <span>匯出</span>
@@ -109,6 +113,9 @@
                 <ul nz-menu>
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="doEdit(data.custId)" class="w-full text-left">編輯</button>
+                  </li>
+                  <li nz-menu-item [nzDisabled]="isRenewed(data)">
+                    <button nz-button nzType="text" (click)="onRenewSingle(data)" class="w-full text-left" [disabled]="isRenewed(data)">產生會費繳費單</button>
                   </li>
                 </ul>
               </nz-dropdown-menu>

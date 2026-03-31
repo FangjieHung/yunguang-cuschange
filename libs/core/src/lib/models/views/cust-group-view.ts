@@ -5,6 +5,7 @@ export interface CustGroupView {
   custId: number;
   custStatus?: number | null;
   custStartAt?: Date | null;
+  custExpAt?: Date | null;
   code?: string | null;
   taxId: string;
   name: string;

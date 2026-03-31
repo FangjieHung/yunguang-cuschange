@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustOrderTypes } from '@core/models';
 
@@ -10,7 +10,7 @@ import { BBDBaseComponent } from '@core/shared';
   templateUrl: './payment-result.component.html',
   styleUrls: ['./payment-result.component.scss'],
 })
-export class PaymentResultComponent extends BBDBaseComponent implements OnInit, AfterViewInit {
+export class PaymentResultComponent extends BBDBaseComponent implements OnInit {
   orderType = 0;
   message = '';
   resultCode = 0;
@@ -23,6 +23,10 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
     super(injector);
   }
 
+  get isSuccess(): boolean {
+    return this.resultCode === 1;
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.orderType = parseInt(params.get('orderType') || '0', 0);
@@ -30,7 +34,7 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
       this.resultMsg = params.get('resultMsg') || '';
       this.setMessage();
     });
-    
+
     // this.loadPaymentPostBody();
   }
 
@@ -80,13 +84,5 @@ export class PaymentResultComponent extends BBDBaseComponent implements OnInit, 
         this.message = '繳費結果';
         break;
     }
-  }
-
-  get isSuccess(): boolean {
-    return this.resultCode === 1;
-  }
-
-  ngAfterViewInit() {
-    console.log('After loading');
   }
 }

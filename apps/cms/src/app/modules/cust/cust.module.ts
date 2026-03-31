@@ -5,13 +5,15 @@ import { CustRoutingModule } from './cust-routing.module';
 // Custom packages
 import { SharedModule } from '../../shared/shared.module';
 import {
-  CustEditComponent, CustGroupListComponent, CustMemberListComponent
+  CustContractYearSelectComponent, CustEditComponent, CustGroupListComponent, CustMemberListComponent,
+  CustRenewResultComponent
 } from './pages';
 
 
 const CUSTOM_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
-  CustEditComponent, CustGroupListComponent, CustMemberListComponent,
+  CustContractYearSelectComponent, CustEditComponent, CustGroupListComponent, CustMemberListComponent,
+  CustRenewResultComponent,
 ];
 
 @NgModule({

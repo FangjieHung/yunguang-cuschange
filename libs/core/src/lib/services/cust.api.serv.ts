@@ -8,10 +8,11 @@ import { EnumValues } from 'enum-values';
 
 // Custom packages
 import {
-  PagingRequest, PagingResponse, UploadFormReq, ValueInfo,
+  PagingRequest, PagingResponse, UploadFormReq, ValueInfo, PayInfo,
   CustomerDto, CustomerReq, CustomerStatuses, CustomerTypes, CustomerView,
   CustGroupReq, CustGroupView,
-  CustMemberReq, CustMemberView
+  CustMemberReq, CustMemberView,
+  RenewMembershipReq, RenewMembershipResult
 } from '../models';
 
 @Injectable({
@@ -64,8 +65,11 @@ export class CustApiServ {
   setCustomerDtos(request: CustomerDto[]): Observable<string[]> {
     return this.http.post<string[]>(`${this.baseUrl}/SetCustomerDtos`, request);
   }
-  signupCustomerDto(request: CustomerDto): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/SignupCustomerDto`, request);
+  signupCustomerDto(request: CustomerDto): Observable<PayInfo> {
+    return this.http.post<PayInfo>(`${this.baseUrl}/SignupCustomerDto`, request);
+  }
+  renewMembership(request: RenewMembershipReq): Observable<RenewMembershipResult> {
+    return this.http.post<RenewMembershipResult>(`${this.baseUrl}/RenewMembership`, request);
   }
   uploadCurrCustomerDto(request: UploadFormReq): Observable<CustomerDto> {
     return this.http.post<CustomerDto>(`${this.baseUrl}/UploadCurrCustomerDto`, request);

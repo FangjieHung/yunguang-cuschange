@@ -5,6 +5,7 @@ export interface CustMemberView {
   custId: number;
   custStatus?: number | null;
   custStartAt?: Date | null;
+  custExpAt?: Date | null;
   code?: string | null;
   idNo: string;
   name: string;

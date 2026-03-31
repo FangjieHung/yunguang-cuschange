@@ -8,9 +8,12 @@ import * as XLSX from 'xlsx';
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
 import { CustEditComponent } from '../cust-edit/cust-edit.component';
+import { CustRenewResultComponent } from '../cust-renew-result/cust-renew-result.component';
+import { CustContractYearSelectComponent } from '../cust-contract-year-select/cust-contract-year-select.component';
 import {
   PagingRequest, PagingResponse, ZipCodeView,
-  CustomerDto, CustMemberDto, CustMemberView, CustMemberReq, CustomerTypes
+  CustomerDto, CustMemberDto, CustMemberView, CustMemberReq, CustomerTypes,
+  RenewMembershipReq
 } from '@core/models';
 import { AppUserApiServ, CustApiServ, SharedDataServ, SharedFuncServ } from '@core/services';
 
@@ -27,6 +30,7 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
   custApiServ = inject(CustApiServ);
   sharedDataServ = inject(SharedDataServ);
 
+  private _maxYear = 2999;
   dataLoading = false;
   dataSource: CustMemberView[] = [];
   request = new PagingRequest<CustMemberReq>();
@@ -263,6 +267,82 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
         this.bbdNotifyServ.error('執行失敗', err);
       }
     }).add(() => this.dataLoading = false);
+  }
+
+  onRenewAll(): void {
+    this.modalServ.create({
+      nzTitle: `產生會費繳費單`,
+      nzContent: CustContractYearSelectComponent,
+      nzData: { actionName: this.actionName },
+      nzMaskClosable: false,
+      nzCentered: true,
+      nzFooter: null,
+    }).afterClose.subscribe((contractYear: number | null) => {
+      if (!contractYear) return;
+      const req = new RenewMembershipReq();
+      req.custId = 0;
+      req.contractYear = contractYear;
+      req.custType = +CustomerTypes.個人會員;
+      this.spinnerServ.show();
+      this.custApiServ.renewMembership(req).subscribe({
+        next: (res) => {
+          this.modalServ.create({
+            nzTitle: `${contractYear} 年度繳費單產生結果`,
+            nzContent: CustRenewResultComponent,
+            nzData: res,
+            nzMaskClosable: false,
+            nzCentered: true,
+          }).afterClose.subscribe(() => this.onSearch());
+        },
+        error: (err) => {
+          this.bbdNotifyServ.error('執行失敗', err);
+        }
+      }).add(() => this.spinnerServ.hide());
+    });
+  }
+
+  onRenewSingle(data: CustMemberView): void {
+    this.modalServ.create({
+      nzTitle: `產生會費繳費單`,
+      nzContent: CustContractYearSelectComponent,
+      nzData: { actionName: data.name, custExpAt: data.custExpAt },
+      nzMaskClosable: false,
+      nzCentered: true,
+      nzFooter: null,
+    }).afterClose.subscribe((contractYear: number | null) => {
+      if (!contractYear) return;
+      const req = new RenewMembershipReq();
+      req.custId = data.custId;
+      req.contractYear = contractYear;
+      req.custType = +CustomerTypes.個人會員;
+      this.spinnerServ.show();
+      this.custApiServ.renewMembership(req).subscribe({
+        next: (res) => {
+          if (res && res.success > 0) {
+            this.bbdNotifyServ.success(`${data.name} ${contractYear} 年度繳費單已產生。`);
+          } else {
+            this.bbdNotifyServ.error(`${data.name} 繳費單產生失敗。`);
+          }
+          this.onSearch();
+        },
+        error: (err) => {
+          this.bbdNotifyServ.error('執行失敗', err);
+        }
+      }).add(() => this.spinnerServ.hide());
+    });
+  }
+
+  isRenewed(data: CustMemberView): boolean {
+    if (+(data.custStatus || 0) !== +this.custApiServ.customerStatuses.正式會員)
+      return true;
+    if (!data.custExpAt)
+      return false;
+
+    const expYear = new Date(data.custExpAt).getFullYear();
+    if (expYear === this._maxYear)
+      return false;
+
+    return expYear >= new Date().getFullYear() + 4;
   }
 
 }

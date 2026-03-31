@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 // Custom packages
 import { BBDBaseComponent, Validation } from '@core/shared';
 import { CustGroupDto, CustMemberDto, CustomerDto } from '@core/models';
-import { CustApiServ } from '@core/services';
+import { CustApiServ, CommerceApiServ } from '@core/services';
 import { CustGroupControlComponent, CustMemberControlComponent } from '../../controls/';
 
 @Component({
@@ -18,6 +18,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
   @ViewChild(CustGroupControlComponent) groupCtrl!: CustGroupControlComponent;
   @ViewChild(CustMemberControlComponent) memberCtrl!: CustMemberControlComponent;
 
+  private _commerceApiServ = inject(CommerceApiServ);
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
   custApiServ = inject(CustApiServ);
@@ -168,11 +169,18 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
       this.custApiServ.signupCustomerDto(this.editDto).subscribe({
         next: (res) => {
           if (!res) {
-            this.bbdNotifyServ.error(this.custId ? `修改會員資料失敗，請再重試一次。` : `註冊會員失敗，請再重試一次。`);
+            this.bbdNotifyServ.error(`註冊會員失敗，請再重試一次。`);
             return;
           }
-          this.bbdNotifyServ.success(this.custId ? `修改會員資料成功。` : `註冊會員成功。`);
-          this._router.navigate(['/auth/signup/complete']);
+
+          const allowPayFlow = !((res.postReq || '').isUndefinedOrNullOrEmpty());
+          if (allowPayFlow) {
+            this._commerceApiServ.postReq = res.postReq;
+            this._router.navigate(['/result/payment-redirect']);
+          } else {
+            this.bbdNotifyServ.success(`註冊會員成功。`);
+            this._router.navigate(['/auth/signup/complete']);
+          }
         },
         error: (err) => {
           this.bbdNotifyServ.error('執行失敗', err);

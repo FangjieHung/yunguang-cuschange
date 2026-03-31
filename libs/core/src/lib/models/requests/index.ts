@@ -21,5 +21,6 @@ export * from './forget-password-req';
 export * from './pay-type-req';
 export * from './reset-password-req';
 export * from './signin-req';
+export * from './renew-membership-req';
 export * from './upload-form-req';
 export * from './zip-code-req';
