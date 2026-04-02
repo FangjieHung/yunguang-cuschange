@@ -1,6 +1,7 @@
 // date-fns packages
 import {
   startOfDay,
+  startOfSecond,
   endOfDay,
   isEqual,
   parseISO,
@@ -32,10 +33,7 @@ Date.prototype.getEndOfDay = function(): Date {
     return this;
   }
 
-  const d = endOfDay(this);
-  d.setMilliseconds(0);
-
-  return d;
+  return startOfSecond(endOfDay(this));
 };
 
 Date.prototype.getAppMaxUtcDate = (): Date => {

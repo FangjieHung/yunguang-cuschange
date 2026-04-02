@@ -13,4 +13,5 @@ export * from './seo.serv';
 export * from './shared-data.api.serv';
 export * from './shared-data.serv';
 export * from './shared-func.serv';
+export * from './stat.api.serv';
 export * from './store.serv';

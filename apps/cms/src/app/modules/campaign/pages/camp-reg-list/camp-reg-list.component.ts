@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit, Type } from '@angular/core';
 import { format } from 'date-fns';
 import * as XLSX from 'xlsx';
@@ -34,7 +35,7 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
   }
 
   dispCols = [
-    '狀態', '報名時間', '活動名稱', '會員別', '會員編號', '姓名', '身分證號', '電子信箱', '行動電話', '聯絡地址'
+    '狀態', '報名時間', '活動名稱', '會員別', '會員編號', '姓名', '身分證號', '電子信箱', '行動電話', '聯絡地址', '證書編號'
   ];
 
   constructor(
@@ -206,6 +207,58 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
         this.bbdNotifyServ.error('執行失敗', err);
       }
     }).add(() => this.dataLoading = false);
+  }
+
+  onIssueCert(data: CampRegView): void {
+    this.modalServ.confirm({
+      nzTitle: '確定要核發此出席證明？',
+      nzContent: '核發後將自動取得證書編號。',
+      nzOkText: '確定',
+      nzCancelText: '取消',
+      nzOnOk: () => {
+        this.spinnerServ.show();
+        this.campaignApiServ.issueCampAttendLogCert(data.campAttendLogId).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('核發成功');
+              this.onSearch(this.request.pageIndex);
+            } else {
+              this.bbdNotifyServ.error('核發失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        }).add(() => this.spinnerServ.hide());
+      }
+    });
+  }
+
+  onCancelCert(data: CampRegView): void {
+    this.modalServ.confirm({
+      nzTitle: '確定要取消核發此出席證明？',
+      nzContent: '取消後狀態將回到待審核。',
+      nzOkText: '確定',
+      nzCancelText: '取消',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.spinnerServ.show();
+        this.campaignApiServ.cancelCampAttendLogCert(data.campAttendLogId).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('取消核發成功');
+              this.onSearch(this.request.pageIndex);
+            } else {
+              this.bbdNotifyServ.error('取消核發失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        }).add(() => this.spinnerServ.hide());
+      }
+    });
   }
 
 }

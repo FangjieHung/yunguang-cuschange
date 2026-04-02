@@ -113,11 +113,17 @@ export class CampaignApiServ {
   getSignCampAttendLogViewsByCampIdPaging(request: PagingRequest<CampAttendLogReq>): Observable<PagingResponse<CampAttendLogView>> {
     return this.http.put<PagingResponse<CampAttendLogView>>(`${this.baseUrl}/GetSignCampAttendLogViewsByCampIdPaging`, request);
   }
+  cancelCampAttendLogCert(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/CancelCampAttendLogCert/${id}`, null);
+  }
   cancelSignCampAttendLog(request: CampAttendLogReq): Observable<boolean> {
     return this.http.put<boolean>(`${this.baseUrl}/CancelSignCampAttendLog`, request);
+  }
+  issueCampAttendLogCert(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/IssueCampAttendLogCert/${id}`, null);
   }
   signCampAttendLog(request: CampAttendLogReq): Observable<boolean> {
     return this.http.put<boolean>(`${this.baseUrl}/SignCampAttendLog`, request);
   }
-   //#endregion
+  //#endregion
 }

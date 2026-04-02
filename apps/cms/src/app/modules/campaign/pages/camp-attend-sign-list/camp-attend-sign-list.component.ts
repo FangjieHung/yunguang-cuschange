@@ -36,7 +36,7 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
   combinedCode = '';
   dispCols = [
     '狀態', '報名時間', '活動名稱', '會員名稱', '身份證號',
-    '第一次簽到時間', '第二次簽到時間', '簽退時間'
+    '第一次簽到時間', '第二次簽到時間', '簽退時間', '證書編號'
   ];
 
   @HostListener('document:keypress', ['$event'])
@@ -256,5 +256,57 @@ export class CampAttendSignListComponent extends BBDBaseComponent implements OnI
         this.bbdNotifyServ.error('執行失敗', err);
       },
     }).add(() => this.spinnerServ.hide());
+  }
+
+  onIssueCert(data: CampAttendLogView): void {
+    this.modalServ.confirm({
+      nzTitle: '確定要核發此出席證明？',
+      nzContent: '核發後將自動取得證書編號。',
+      nzOkText: '確定',
+      nzCancelText: '取消',
+      nzOnOk: () => {
+        this.spinnerServ.show();
+        this.campaignApiServ.issueCampAttendLogCert(data.id).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('核發成功');
+              this.onSearch(this.request.pageIndex);
+            } else {
+              this.bbdNotifyServ.error('核發失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        }).add(() => this.spinnerServ.hide());
+      }
+    });
+  }
+
+  onCancelCert(data: CampAttendLogView): void {
+    this.modalServ.confirm({
+      nzTitle: '確定要取消核發此出席證明？',
+      nzContent: '取消後狀態將回到待審核。',
+      nzOkText: '確定',
+      nzCancelText: '取消',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.spinnerServ.show();
+        this.campaignApiServ.cancelCampAttendLogCert(data.id).subscribe({
+          next: (res) => {
+            if (res) {
+              this.bbdNotifyServ.success('取消核發成功');
+              this.onSearch(this.request.pageIndex);
+            } else {
+              this.bbdNotifyServ.error('取消核發失敗');
+            }
+          },
+          error: (err) => {
+            this.bbdNotifyServ.error('執行失敗', err);
+          }
+        }).add(() => this.spinnerServ.hide());
+      }
+    });
   }
 }

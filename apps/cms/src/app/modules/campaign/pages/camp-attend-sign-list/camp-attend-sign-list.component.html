@@ -108,6 +108,13 @@
           <td>{{ data.start1At | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
           <td>{{ data.start2At | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
           <td>{{ data.endAt | dateFormatter: 'yyyy-MM-dd HH:mm': '-' }}</td>
+          <td>
+            {{ data.certNo | emptyFormatter:'-' }}
+            <nz-tag *ngIf="data.certNo" class="ml-1 font-semibold"
+              [nzColor]="(data.certStatus | aryFindValue: campaignApiServ.getCampAttendLogCertStatusInfos(): 'value': 'style') ?? 'default'">
+              {{ data.certStatus | aryFindValue: campaignApiServ.getCampAttendLogCertStatusInfos(): 'value': 'name' }}
+            </nz-tag>
+          </td>
 
           <td nzRight>
             <div class="flex space-x-2">
@@ -159,6 +166,19 @@
                   <button nz-button nzType="text" class="w-full text-left"
                     (click)="onCancelSignCampAttendLog(data, +campaignApiServ.campAttendLogSignTypes['簽退'])">
                     取消簽退
+                  </button>
+                </li>
+                <li nz-menu-divider></li>
+                <li nz-menu-item *ngIf="data.certStatus === +campaignApiServ.campAttendLogCertStatuses['待審核']">
+                  <button nz-button nzType="text" class="w-full text-left"
+                    (click)="onIssueCert(data)">
+                    核發出席證明
+                  </button>
+                </li>
+                <li nz-menu-item *ngIf="data.certStatus === +campaignApiServ.campAttendLogCertStatuses['已核發']">
+                  <button nz-button nzType="text" class="w-full text-left"
+                    (click)="onCancelCert(data)">
+                    取消核發證明
                   </button>
                 </li>
               </ul>

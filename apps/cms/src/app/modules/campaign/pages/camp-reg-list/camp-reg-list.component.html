@@ -72,6 +72,13 @@
                 {{ data.custZipCodeId | aryFindValue: zipCodes: 'id': 'city' }}{{ data.custZipCodeId | aryFindValue: zipCodes: 'id': 'district' }}{{ data.custAddr }}
               </span>
             </td>
+            <td>
+              {{ data.campAttendCertNo | emptyFormatter:'-' }}
+              <nz-tag *ngIf="data.campAttendCertNo" class="ml-1 font-semibold"
+                [nzColor]="(data.campAttendCertStatus | aryFindValue: campaignApiServ.getCampAttendLogCertStatusInfos(): 'value': 'style') ?? 'default'">
+                {{ data.campAttendCertStatus | aryFindValue: campaignApiServ.getCampAttendLogCertStatusInfos(): 'value': 'name' }}
+              </nz-tag>
+            </td>
             <td nzRight>
               <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit"
                 class="w-11 rounded-full px-0">
@@ -95,6 +102,17 @@
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onPrint('407receipt', data)"
                       class="w-full text-left">407 繳費證明</button>
+                  </li>
+                  <li nz-menu-divider></li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onIssueCert(data)"
+                      [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['待審核']"
+                      class="w-full text-left">核發出席證明</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onCancelCert(data)"
+                      [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['已核發']"
+                      class="w-full text-left">取消核發證明</button>
                   </li>
                 </ul>
               </nz-dropdown-menu>

@@ -16,6 +16,7 @@ export class CustOrder extends EntityBase {
   subTotal = 0;
   discount = 0;
   total = 0;
+  txFee = 0;
   startAt = new Date();
   endAt: Date | null = null;
   payTypeId = 0;

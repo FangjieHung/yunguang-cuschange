@@ -1,7 +1,7 @@
 <div class="search-bar-wrap">
   <ng-content select="[slot=start]"></ng-content>
 
-  <mat-form-field appearance="outline" class="text-input">
+  <mat-form-field appearance="outline" class="text-input" *ngIf="!hideTextInput">
     <mat-label>關鍵字查詢</mat-label>
     <input matInput type="search" [(ngModel)]="queryRequest.queryString" (keyup.enter)="onSearch()" />
     <div matSuffix class="w-11">

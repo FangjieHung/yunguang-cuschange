@@ -17,6 +17,7 @@ export interface CustOrderView {
   subTotal: number;
   discount: number;
   total: number;
+  txFee: number;
   startAt: string;
   endAt: string;
   payTypeId: number;

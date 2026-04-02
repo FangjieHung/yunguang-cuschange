@@ -5,6 +5,8 @@ export interface CampAttendLogView {
   campRegStatus: number;
   campId: number;
   campName: string;
+  campStartAt?: Date | null;
+  campEndAt?: Date | null;
   custId: number;
   custIdNo: string;
   custName: string;
