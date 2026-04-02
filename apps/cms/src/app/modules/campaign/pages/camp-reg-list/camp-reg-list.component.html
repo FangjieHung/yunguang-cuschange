@@ -89,21 +89,8 @@
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onCancel(data.id)"
                       [disabled]="+(data?.status || 0) === campaignApiServ.campRegStatuses['已取消']"
-                      class="w-full text-left">取消</button>
+                      class="w-full text-left text-red-600">取消報名</button>
                   </li>
-                  <li nz-menu-item>
-                    <button nz-button nzType="text" (click)="onPrint('cert', data)"
-                      class="w-full text-left">參加證明</button>
-                  </li>
-                  <li nz-menu-item>
-                    <button nz-button nzType="text" (click)="onPrint('receipt', data)"
-                      class="w-full text-left">電子收據</button>
-                  </li>
-                  <li nz-menu-item>
-                    <button nz-button nzType="text" (click)="onPrint('407receipt', data)"
-                      class="w-full text-left">407 繳費證明</button>
-                  </li>
-                  <li nz-menu-divider></li>
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onIssueCert(data)"
                       [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['待審核']"
@@ -113,6 +100,20 @@
                     <button nz-button nzType="text" (click)="onCancelCert(data)"
                       [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['已核發']"
                       class="w-full text-left">取消核發證明</button>
+                  </li>
+                  <li nz-menu-divider></li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('receipt', data)"
+                      class="w-full text-left">電子收據證明</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('407receipt', data)"
+                      class="w-full text-left">407 繳費證明</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('cert', data)"
+                      [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['已核發']"
+                      class="w-full text-left">參加證明</button>
                   </li>
                 </ul>
               </nz-dropdown-menu>

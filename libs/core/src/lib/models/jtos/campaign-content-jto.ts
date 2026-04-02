@@ -3,4 +3,6 @@ export class CampaignContentJto {
   speakers? = '';
   hasMeal = false;
   desc? = '';
+  organizers?: string[] = [];
+  coOrganizers?: string[] = [];
 }

@@ -11,6 +11,7 @@ export class Campaign extends EntityBase {
   stickyAt: Date | null = null;
   pricing = 0;
   salePrice = 0;
+  totalHours = 0;
   isOpenReg = false;
   maxRegNum = 0;
   maxWaitNum = 0;

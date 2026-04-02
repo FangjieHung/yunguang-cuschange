@@ -35,6 +35,44 @@
         </ng-container>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" class="w-full col-span-full">
+        <mat-label>主辦單位</mat-label>
+        <ng-container formGroupName="contentJto">
+          <mat-chip-grid #organizerChipGrid>
+            <mat-chip-row *ngFor="let item of f['contentJto'].get('organizers')?.value" (removed)="removeChip(item, 'organizers')">
+              {{ item }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+          <input matInput placeholder="輸入後按 Enter 新增..."
+            [matChipInputFor]="organizerChipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addChip($event, 'organizers')">
+        </ng-container>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-full">
+        <mat-label>協辦單位</mat-label>
+        <ng-container formGroupName="contentJto">
+          <mat-chip-grid #coOrganizerChipGrid>
+            <mat-chip-row *ngFor="let item of f['contentJto'].get('coOrganizers')?.value" (removed)="removeChip(item, 'coOrganizers')">
+              {{ item }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+          <input matInput placeholder="輸入後按 Enter 新增..."
+            [matChipInputFor]="coOrganizerChipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addChip($event, 'coOrganizers')">
+        </ng-container>
+      </mat-form-field>
+
       <mat-form-field appearance="outline" class="w-full col-span-4">
         <mat-label>活動開始時間</mat-label>
         <input matInput [matDatepicker]="startAtDatepicker" formControlName="startAt"
@@ -151,6 +189,14 @@
         <mat-error class="text-xs" *ngIf="f['maxRegNum'].errors">
           <div *ngFor="let msg of formHelper.errorMsgs(f['maxRegNum'].errors, '最大報名人數')">{{ msg }}
           </div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-4">
+        <mat-label>活動總時數</mat-label>
+        <input matInput type="number" formControlName="totalHours" [step]="0.5"
+          [required]="f['totalHours'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['totalHours'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['totalHours'].errors, '活動總時數')">{{ msg }}</div>
         </mat-error>
       </mat-form-field>
 

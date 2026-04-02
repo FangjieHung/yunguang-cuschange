@@ -82,6 +82,9 @@ export class CampaignApiServ {
 
     return infos;
   }
+  getCampRegView(request: CampRegReq): Observable<CampRegView> {
+    return this.http.put<CampRegView>(`${this.baseUrl}/GetCampRegView`, request);
+  }
   getCampRegViews(request: CampRegReq): Observable<CampRegView[]> {
     return this.http.put<CampRegView[]>(`${this.baseUrl}/GetCampRegViews`, request);
   }

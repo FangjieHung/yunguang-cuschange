@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 // Third party packages
 import { NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
@@ -19,6 +20,7 @@ import { CampaignApiServ } from '@core/services';
 
 export class CampaignEditComponent extends BBDBaseComponent implements OnInit {
   readonly modalData: { id: number, actionName?: string } = inject(NZ_MODAL_DATA);
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   private _fb = inject(FormBuilder);
   private _modal = inject(NzModalRef);
@@ -60,13 +62,16 @@ export class CampaignEditComponent extends BBDBaseComponent implements OnInit {
       salePrice: [null, [Validators.required]],
       isOpenReg: [false, [Validators.required]],
       maxRegNum: [null, [Validators.required]],
+      totalHours: [null, [Validators.required, Validators.min(0.5)]],
       regNum: [null],
       status: [null, [Validators.required]],
       contentJto: this._fb.group({
         speakers: [null],
         location: [null],
         hasMeal: [false, [Validators.required]],
-        desc: [null]
+        desc: [null],
+        organizers: [[]],
+        coOrganizers: [[]]
       })
     });
 
@@ -137,6 +142,27 @@ export class CampaignEditComponent extends BBDBaseComponent implements OnInit {
 
   doCancel(): void {
     this._modal.destroy();
+  }
+
+  addChip(event: MatChipInputEvent, controlName: string): void {
+    const value = (event.value || '').trim();
+    if (value) {
+      const ctrl = (this.valForm.get('contentJto') as UntypedFormGroup).get(controlName);
+      const list: string[] = [...(ctrl?.value || [])];
+      list.push(value);
+      ctrl?.setValue(list);
+    }
+    event.chipInput?.clear();
+  }
+
+  removeChip(item: string, controlName: string): void {
+    const ctrl = (this.valForm.get('contentJto') as UntypedFormGroup).get(controlName);
+    const list: string[] = [...(ctrl?.value || [])];
+    const idx = list.indexOf(item);
+    if (idx >= 0) {
+      list.splice(idx, 1);
+      ctrl?.setValue(list);
+    }
   }
 
   canSubmit() {

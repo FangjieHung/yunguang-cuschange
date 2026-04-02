@@ -11,6 +11,7 @@ export interface CampaignView {
   stickyAt: Date | null;
   pricing: number;
   salePrice: number;
+  totalHours: number;
   isOpenReg: boolean;
   maxRegNum: number;
   maxWaitNum: number;

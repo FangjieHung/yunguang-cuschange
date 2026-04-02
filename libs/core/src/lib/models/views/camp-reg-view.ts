@@ -6,6 +6,8 @@ export interface CampRegView {
   campUniqueId?: string | null;
   campStartAt?: Date | null;
   campEndAt?: Date | null;
+  campTotalHours?: number | null;
+  campContent?: string | null;
   custId: number;
   custCode: string | null;
   custIdNo: string;

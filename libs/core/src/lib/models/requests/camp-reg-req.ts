@@ -7,6 +7,7 @@ export class CampRegReq extends QueryRequestBase {
   custIdNo: string | null = null;
   custName: string | null = null;
   custOrderId = 0;
+  isShowCampContent = false;
 
   constructor() {
     super();
