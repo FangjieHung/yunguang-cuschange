@@ -142,14 +142,7 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
         component = CampAttendCertPrintComponent;
         title = '參加證明';
         componentParams = {
-          modalData: {
-            user: {
-              name: data?.custName,
-            },
-            campaign: {
-              name: data?.campName,
-            }
-          }
+          campRegId: data?.id
         };
         break;
       case 'receipt':

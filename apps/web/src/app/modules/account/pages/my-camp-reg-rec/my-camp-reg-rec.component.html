@@ -69,8 +69,11 @@
               <div class="btns-wrap">
                 <a class="btn-white" [routerLink]="['/campaign/detail/', item.campUniqueId]"><span
                   class="material-symbols-rounded pr-1">info</span>活動資訊</a>
-                <!-- <button type="button" class="btn-white"><span
-                  class="material-symbols-rounded pr-1">print</span>列印證明</button> -->
+                <button type="button" class="btn-white"
+                  *ngIf="+item.status < +campaignApiServ.campRegStatuses['待退款'] && item.campAttendCertStatus === +campaignApiServ.campAttendLogCertStatuses['已核發']"
+                  (click)="onPrintCert(item)">
+                  <span class="material-symbols-rounded pr-1">print</span>列印證明
+                </button>
                 <button type="button" class="btn-primary" *ngIf="item.custOrderId && item.status === campaignApiServ.campRegStatuses['待付款']"
                   (click)="onGoPayment(item.custOrderId)">
                   <span class="material-symbols-rounded pr-1">payments</span>前往付款

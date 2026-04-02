@@ -112,7 +112,7 @@
                   </li>
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onPrint('cert', data)"
-                      [disabled]="data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['已核發']"
+                      [disabled]="+(data?.status || 0) >= +campaignApiServ.campRegStatuses['待退款'] || data.campAttendCertStatus !== +campaignApiServ.campAttendLogCertStatuses['已核發']"
                       class="w-full text-left">參加證明</button>
                   </li>
                 </ul>

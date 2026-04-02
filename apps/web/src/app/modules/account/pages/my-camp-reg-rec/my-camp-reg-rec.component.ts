@@ -8,6 +8,7 @@ import {
   CampRegReq, CampRegView
 } from '@core/models';
 import { CampaignApiServ, CommerceApiServ } from '@core/services';
+import { CampAttendCertPrintComponent } from '@core/shared';
 
 @Component({
   selector: 'app-my-camp-reg-rec',
@@ -72,6 +73,17 @@ export class MyCampRegRecComponent extends BBDBaseComponent implements OnInit {
         this.bbdNotifyServ.error('執行失敗', err);
       },
     }).add(() => this.spinnerServ.hide());
+  }
+
+  onPrintCert(item: CampRegView): void {
+    this.modalServ.create({
+      nzTitle: '參加證明',
+      nzContent: CampAttendCertPrintComponent,
+      nzData: { campRegId: item.id },
+      nzWidth: '80%',
+      nzFooter: null,
+      nzMaskClosable: true
+    });
   }
 
   onCancelReg(item: CampRegView): void {
