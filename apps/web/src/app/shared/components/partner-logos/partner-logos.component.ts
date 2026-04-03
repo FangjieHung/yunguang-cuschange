@@ -1,31 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Injector, inject } from '@angular/core';
+import { forkJoin } from 'rxjs';
+
+// Third party packages
 import { SwiperOptions } from 'swiper';
 
-interface Partner {
-  logo: string;
-  name: string;
-  description: string;
-}
+// Custom packages
+import { BBDBaseComponent } from '@core/shared';
+import { SponsorView } from '@core/models';
+import { AppMsgApiServ } from '@core/services';
 
 @Component({
   selector: 'app-partner-logos',
   templateUrl: './partner-logos.component.html',
   styleUrls: ['./partner-logos.component.scss']
 })
-export class PartnerLogosComponent {
-  partners: Partner[] = [
-    {
-      logo: 'assets/shared/img/sponsor/bc-logo.png',
-      name: 'Beckman Coulter',
-      description: 'Beckman Coulter（貝克曼庫爾特）致力於研發、製造與行銷能夠簡化、自動化並創新複雜生物醫學檢測流程的產品。我們的體外診斷系統廣泛應用於全球各地的醫院與關鍵醫療照護場域，所產出的檢測資訊協助醫師進行疾病診斷、治療決策，以及病患健康狀況的持續監測。'
-    }
-  ];
+export class PartnerLogosComponent extends BBDBaseComponent implements OnInit {
+  private _appMsgApiServ = inject(AppMsgApiServ);
 
+  sponsors: SponsorView[] = [];
   swiperConfig: SwiperOptions = {
     slidesPerView: 5,
     spaceBetween: 30,
     centeredSlides: true,
-    
+
     autoplay: {
       delay: 2500,
       disableOnInteraction: false,
@@ -37,4 +34,21 @@ export class PartnerLogosComponent {
       1024: { slidesPerView: 4, spaceBetween: 50 },
     }
   };
+
+  constructor(
+    protected override injector: Injector) {
+    super(injector);
+  }
+
+  ngOnInit(): void {
+    this.getCaches();
+  }
+
+  getCaches(): void {
+      forkJoin([
+        this._appMsgApiServ.getSponsorViews(),
+      ]).subscribe(([sponsors]) => {
+        this.sponsors = sponsors;
+      })
+    }
 }

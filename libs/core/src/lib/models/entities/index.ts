@@ -19,3 +19,4 @@ export * from './cust-order';
 export * from './cust-order-refund';
 export * from './customer';
 export * from './pay-type';
+export * from './sponsor';

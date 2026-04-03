@@ -10,7 +10,7 @@ export const environment = {
   siteName: '台灣人工智慧檢驗醫學學會',
   siteServer: 'http://localhost:4200',
   apiServer: 'http://localhost:5038/Portal',
-  cdnServer: 'http://localhost:5038/',
+  cdnServer: 'http://localhost:5038',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'
 };
 

@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Custom packages
 import {
-  AppNewsMsgCatListComponent, AppNewsMsgListComponent, BannerAdListComponent
+  AppNewsMsgCatListComponent, AppNewsMsgListComponent, BannerAdListComponent,
+  SponsorListComponent
 } from './pages';
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'news/cat/list',
     component: AppNewsMsgCatListComponent
+  },
+  {
+    path: 'sponsor/list',
+    component: SponsorListComponent
   }
 ];
 

@@ -10,14 +10,16 @@ import { SharedModule } from '../../shared/shared.module';
 import {
   AppNewsMsgCatEditComponent, AppNewsMsgCatListComponent,
   AppNewsMsgEditComponent, AppNewsMsgListComponent,
-  BannerAdEditComponent, BannerAdListComponent
+  BannerAdEditComponent, BannerAdListComponent,
+  SponsorEditComponent, SponsorListComponent
 } from './pages';
 
 const CUST_MODULES = [SharedModule];
 const CUST_COMPONENTS = [
   AppNewsMsgCatEditComponent, AppNewsMsgCatListComponent,
   AppNewsMsgEditComponent, AppNewsMsgListComponent,
-  BannerAdEditComponent, BannerAdListComponent
+  BannerAdEditComponent, BannerAdListComponent,
+  SponsorEditComponent, SponsorListComponent
 ];
 
 @NgModule({

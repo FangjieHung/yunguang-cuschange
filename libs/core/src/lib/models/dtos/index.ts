@@ -19,3 +19,4 @@ export * from './cust-order-dto';
 export * from './cust-order-refund-dto';
 export * from './customer-dto';
 export * from './pay-type-dto';
+export * from './sponsor-dto';

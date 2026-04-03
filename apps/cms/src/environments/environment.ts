@@ -10,7 +10,7 @@ export const environment = {
   siteName: '內容管理平台',
   siteServer: 'http://localhost:4200',
   apiServer: 'http://localhost:5038/Portal',
-  cdnServer: 'http://localhost:5038/',
+  cdnServer: 'http://localhost:5038',
   // apiServer: 'https://stageapiv1.tslmai.starxfuture.com/Portal',
   // cdnServer: 'https://stageapiv1.tslmai.starxfuture.com',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'

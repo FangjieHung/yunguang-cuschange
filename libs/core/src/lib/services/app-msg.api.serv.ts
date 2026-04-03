@@ -11,7 +11,8 @@ import {
   PagingRequest, PagingResponse, UploadFormReq, ValueInfo,
   AppNewsMsgCatDto, AppNewsMsgCatReq, AppNewsMsgCatStatuses, AppNewsMsgCatView,
   AppNewsMsgDto, AppNewsMsgReq, AppNewsMsgStatuses, AppNewsMsgView,
-  BannerAdDto, BannerAdReq, BannerAdStatuses, BannerAdView
+  BannerAdDto, BannerAdReq, BannerAdStatuses, BannerAdView,
+  SponsorDto, SponsorReq, SponsorStatuses, SponsorView
 } from '../models';
 
 @Injectable({
@@ -25,6 +26,8 @@ export class AppMsgApiServ {
   appNewsMsgStatusOpts = EnumValues.getNamesAndValues(AppNewsMsgStatuses);
   bannerAdStatuses = BannerAdStatuses;
   bannerAdStatusOpts = EnumValues.getNamesAndValues(BannerAdStatuses);
+  sponsorStatuses = SponsorStatuses;
+  sponsorStatusOpts = EnumValues.getNamesAndValues(SponsorStatuses);
 
   constructor(private http: HttpClient) { }
 
@@ -124,6 +127,37 @@ export class AppMsgApiServ {
   }
   uploadBannerAdDto(request: UploadFormReq): Observable<BannerAdDto> {
     return this.http.post<BannerAdDto>(`${this.baseUrl}/UploadBannerAdDto`, request);
+  }
+  //#endregion
+
+  //#region Sponsor
+  getSponsorStatusInfos(): ValueInfo[] {
+    // 樣式遵循 ant nzColor 標準
+    return [
+      { name: '啟用', value: SponsorStatuses.啟用, style: 'success' },
+      { name: '停用', value: SponsorStatuses.停用, style: 'error' }
+    ];
+  }
+  getSponsorDtoById(id: number): Observable<SponsorDto> {
+    return this.http.get<SponsorDto>(`${this.baseUrl}/GetSponsorDtoById/${id}`);
+  }
+  getSponsorViewById(id: number): Observable<SponsorView> {
+    return this.http.get<SponsorView>(`${this.baseUrl}/GetSponsorViewById/${id}`);
+  }
+  getSponsorViews(request: SponsorReq = new SponsorReq()): Observable<SponsorView[]> {
+    return this.http.put<SponsorView[]>(`${this.baseUrl}/GetSponsorViews`, request);
+  }
+  getSponsorViewsPaging(request: PagingRequest<SponsorReq>): Observable<PagingResponse<SponsorView>> {
+    return this.http.put<PagingResponse<SponsorView>>(`${this.baseUrl}/GetSponsorViewsPaging`, request);
+  }
+  disableSponsor(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/DisableSponsor/${id}`, null);
+  }
+  enableSponsor(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/EnableSponsor/${id}`, null);
+  }
+  uploadSponsorDto(request: UploadFormReq): Observable<SponsorDto> {
+    return this.http.post<SponsorDto>(`${this.baseUrl}/UploadSponsorDto`, request);
   }
   //#endregion
 
