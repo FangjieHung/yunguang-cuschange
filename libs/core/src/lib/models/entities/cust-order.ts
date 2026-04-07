@@ -25,6 +25,8 @@ export class CustOrder extends EntityBase {
   payOrderNo: string | null = null;
   payAt: Date | null = null;
   cxlAt: Date | null = null;
+  receiptNo: string | null = null;
+  receipt407No: string | null = null;
   status: number = +CustOrderStatuses.待付款;
   content: string | null = null;
 

@@ -26,6 +26,8 @@ export interface CustOrderView {
   payOrderNo: string | null;
   payAt: Date | null;
   cxlAt: Date | null;
+  receiptNo: string | null;
+  receipt407No: string | null;
   status: number;
   orderDesc?: string | null;
   content?: string | null;

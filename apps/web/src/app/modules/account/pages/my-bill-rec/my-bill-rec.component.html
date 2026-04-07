@@ -77,9 +77,10 @@
                 <li>繳費時間 : {{ $any(item.payAt) | dateFormatter:'yyyy/MM/dd HH:mm': '-' }}</li>
               </ul>
               <div class="btns-wrap">
-                <!-- <a class="btn-white"><span class="material-symbols-rounded pr-1">info</span>活動資訊</a> -->
-                <!-- <button type="button" class="btn-white"><span
-                  class="material-symbols-rounded pr-1">print</span>列印證明</button> -->
+                <button type="button" class="btn-white" *ngIf="+item.status === +custOrderApiServ.custOrderStatuses['已付款']"
+                  (click)="onPrint(item)">
+                  <span class="material-symbols-rounded pr-1">print</span>列印證明
+                </button>
                 <button type="button" class="btn-primary" *ngIf="item.id && +item.status === +custOrderApiServ.custOrderStatuses['待付款']"
                   (click)="onGoPayment(item.id)">
                   <span class="material-symbols-rounded pr-1">payments</span>前往付款

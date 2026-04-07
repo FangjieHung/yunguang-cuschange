@@ -147,25 +147,16 @@ export class CampRegListComponent extends BBDBaseComponent implements OnInit {
         break;
       case 'receipt':
         component = PaymentReceiptPrintComponent;
-        title = '繳費收據';
+        title = '電子收據證明';
         componentParams = {
-          modalData: {
-            payerName: data?.custName,
-            reason: data?.campName,
-            receiptNo: data?.id?.toString(),
-          }
+          custOrderId: data?.custOrderId
         };
         break;
       case '407receipt':
         component = Payment407ReceiptPrintComponent;
         title = '407 繳費證明';
         componentParams = {
-          modalData: {
-            payerName: data?.custName,
-            reason: data?.campName,
-            receiptNo: data?.id?.toString(),
-            amount: data?.content || '0'
-          }
+          custOrderId: data?.custOrderId
         };
         break;
       default:

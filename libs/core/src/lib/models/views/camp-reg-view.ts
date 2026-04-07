@@ -17,6 +17,8 @@ export interface CampRegView {
   custZipCodeId: number;
   custAddr: string;
   custOrderId: number;
+  buyerName?: string | null;
+  buyerCode?: string | null;
   campAttendLogId: number;
   campAttendCertNo: string | null;
   campAttendCertStatus: number;

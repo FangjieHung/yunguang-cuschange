@@ -1,7 +1,7 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { subYears, startOfDay, endOfDay } from 'date-fns';
-import { BBDBaseComponent } from '@core/shared';
+import { BBDBaseComponent, PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent } from '@core/shared';
 import {
   PagingRequest, PagingResponse,
   CustOrderReq, CustOrderView
@@ -96,5 +96,28 @@ export class MyBillRecComponent extends BBDBaseComponent implements OnInit {
         this.bbdNotifyServ.error('執行失敗', err);
       }
     }).add(() => this.spinnerServ.hide());
+  }
+
+  onPrint(item: CustOrderView): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let component: Type<any>;
+    let title: string;
+
+    if (item.buyerCode) {
+      component = Payment407ReceiptPrintComponent;
+      title = '407 繳費證明';
+    } else {
+      component = PaymentReceiptPrintComponent;
+      title = '電子收據證明';
+    }
+
+    this.modalServ.create({
+      nzTitle: title,
+      nzContent: component,
+      nzData: { custOrderId: item.id },
+      nzWidth: '80%',
+      nzFooter: null,
+      nzMaskClosable: true
+    });
   }
 }

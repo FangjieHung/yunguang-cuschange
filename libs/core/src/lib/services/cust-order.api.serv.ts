@@ -38,6 +38,9 @@ export class CustOrderApiServ {
 
     return infos;
   }
+  getCustOrderViewById(id: number): Observable<CustOrderView> {
+    return this.http.get<CustOrderView>(`${this.baseUrl}/GetCustOrderViewById/${id}`);
+  }
 
   getCustOrderViews(request: CustOrderReq = new CustOrderReq()): Observable<CustOrderView[]> {
     return this.http.put<CustOrderView[]>(`${this.baseUrl}/GetCustOrderViews`, request);

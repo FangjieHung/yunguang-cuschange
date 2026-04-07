@@ -76,4 +76,29 @@
       </li>
     </ul>
   </section>
+
+  <section class="form-section">
+    <h3 class="title">收據資訊</h3>
+    <ul class="input-group lg:grid-cols-3">
+      <li class="lg:col-span-1">
+        <div class="form-label">統一編號 <span class="required-mark" *ngIf="f['buyerCode'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="buyerCode" [required]="f['buyerCode'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['buyerCode'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['buyerCode'].errors, '統一編號')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+
+      <li class="lg:col-span-2">
+        <div class="form-label">買受人名稱 <span class="required-mark" *ngIf="f['buyerName'] | ctrlHasRequired">*</span></div>
+        <mat-form-field appearance="outline" class="w-full fill-black">
+          <input matInput type="text" formControlName="buyerName" [required]="f['buyerName'] | ctrlHasRequired">
+          <mat-error class="text-xs" *ngIf="f['buyerName'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['buyerName'].errors, '買受人名稱')">{{ msg }}</div>
+          </mat-error>
+        </mat-form-field>
+      </li>
+    </ul>
+  </section>
 </form>

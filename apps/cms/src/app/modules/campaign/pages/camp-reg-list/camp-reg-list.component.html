@@ -104,10 +104,12 @@
                   <li nz-menu-divider></li>
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onPrint('receipt', data)"
+                      [disabled]="+(data?.status || 0) !== +campaignApiServ.campRegStatuses['已報名'] || !(data.custOrderId > 0) || !!data.buyerCode"
                       class="w-full text-left">電子收據證明</button>
                   </li>
                   <li nz-menu-item>
                     <button nz-button nzType="text" (click)="onPrint('407receipt', data)"
+                      [disabled]="+(data?.status || 0) !== +campaignApiServ.campRegStatuses['已報名'] || !(data.custOrderId > 0) || !data.buyerCode"
                       class="w-full text-left">407 繳費證明</button>
                   </li>
                   <li nz-menu-item>

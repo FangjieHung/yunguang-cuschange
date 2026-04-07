@@ -108,6 +108,8 @@ export class CampRegControlComponent extends BBDBaseComponent implements Control
       custAddr: [null, [Validators.required, Validators.maxLength(100)]],
       custOrderId: [0],
       cxlAt: [null],
+      buyerCode: [null],
+      buyerName: [null],
       status: [0],
       crtBy: [null],
       crtAt: [null],

@@ -1,7 +1,7 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit, Type } from '@angular/core';
 
 // Custom packages
-import { BBDBaseComponent, PayTypeSelectComponent } from '@core/shared';
+import { BBDBaseComponent, PayTypeSelectComponent, PaymentReceiptPrintComponent, Payment407ReceiptPrintComponent } from '@core/shared';
 import {
   PagingRequest, PagingResponse,
   CustOrderReq, CustOrderView
@@ -123,5 +123,33 @@ export class CustOrderListComponent extends BBDBaseComponent implements OnInit {
         this.bbdNotifyServ.error('執行失敗', err);
       }
     }).add(() => this.dataLoading = false);
+  }
+
+  onPrint(printName: 'receipt' | '407receipt', data: CustOrderView): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let component: Type<any>;
+    let title: string;
+
+    switch (printName) {
+      case 'receipt':
+        component = PaymentReceiptPrintComponent;
+        title = '電子收據證明';
+        break;
+      case '407receipt':
+        component = Payment407ReceiptPrintComponent;
+        title = '407 繳費證明';
+        break;
+      default:
+        return;
+    }
+
+    this.modalServ.create({
+      nzTitle: title,
+      nzContent: component,
+      nzData: { custOrderId: data.id },
+      nzWidth: '80%',
+      nzFooter: null,
+      nzMaskClosable: true
+    });
   }
 }

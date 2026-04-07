@@ -73,6 +73,17 @@
                         || +(data?.status || 0) >= custOrderApiServ.custOrderStatuses['待退款']"
                       class="w-full text-left">取消繳費</button>
                   </li>
+                  <li nz-menu-divider></li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('receipt', data)"
+                      [disabled]="+(data?.status || 0) !== custOrderApiServ.custOrderStatuses['已付款'] || !(data.id > 0) || !!data.buyerCode"
+                      class="w-full text-left">電子收據證明</button>
+                  </li>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="onPrint('407receipt', data)"
+                      [disabled]="+(data?.status || 0) !== custOrderApiServ.custOrderStatuses['已付款'] || !(data.id > 0) || !data.buyerCode"
+                      class="w-full text-left">407 繳費證明</button>
+                  </li>
                 </ul>
               </nz-dropdown-menu>
             </td>
