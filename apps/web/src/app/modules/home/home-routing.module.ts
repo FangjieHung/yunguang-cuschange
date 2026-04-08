@@ -11,7 +11,7 @@ const routes: Routes = [
     component: DefaultComponent,
     data: {
       title: `${env.siteName}`,
-      decscription: `${env.siteName}`,
+      description: `${env.siteName}`,
       url: `${env.siteServer}`,
       image: `${env.siteServer}/assets/image/og/tslmai.png`
     }

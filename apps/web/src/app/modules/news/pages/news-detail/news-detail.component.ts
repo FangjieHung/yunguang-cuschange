@@ -51,6 +51,27 @@ export class NewsDetailComponent extends BBDBaseComponent implements OnInit {
             `${env.siteServer}/news/detail/${this._uniqueId}`,
             seoData['image'],
             this.response.title);
+
+          // JSON-LD: NewsArticle (AEO 信號)
+          this._seoServ.injectStructuredData('page-ld', {
+            '@context': 'https://schema.org',
+            '@type': 'NewsArticle',
+            'headline': this.response.title,
+            'url': `${env.siteServer}/news/detail/${this._uniqueId}`,
+            'datePublished': new Date(this.response.startAt).toISOString(),
+            'dateModified': new Date(this.response.endAt).toISOString(),
+            'image': seoData['image'],
+            'description': this.response.title,
+            'publisher': {
+              '@type': 'Organization',
+              '@id': 'https://tslmai.org.tw/#organization',
+              'name': env.siteName,
+              'logo': {
+                '@type': 'ImageObject',
+                'url': `${env.siteServer}/assets/image/og/tslmai.png`
+              }
+            }
+          });
         },
         error: (err) => {
           this.bbdNotifyServ.error(`截入失敗: 錯誤訊息：「${err?.errorMessage}」`);

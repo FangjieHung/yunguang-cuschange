@@ -61,6 +61,26 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
             `${env.siteServer}/campaign/detail/${this._uniqueId}`,
             seoData['image'],
             this.response.name);
+
+          // JSON-LD: Event (AEO 信號)
+          this._seoServ.injectStructuredData('page-ld', {
+            '@context': 'https://schema.org',
+            '@type': 'Event',
+            'name': this.response.name,
+            'url': `${env.siteServer}/campaign/detail/${this._uniqueId}`,
+            'startDate': new Date(this.response.startAt).toISOString(),
+            'endDate': new Date(this.response.endAt).toISOString(),
+            'description': this.response.name,
+            'image': seoData['image'],
+            'eventStatus': 'https://schema.org/EventScheduled',
+            'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+            'organizer': {
+              '@type': 'Organization',
+              '@id': 'https://tslmai.org.tw/#organization',
+              'name': env.siteName,
+              'url': env.siteServer
+            }
+          });
         },
         error: (err) => {
           this.bbdNotifyServ.error(`截入失敗: 錯誤訊息：「${err?.errorMessage}」`);

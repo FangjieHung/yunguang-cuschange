@@ -69,8 +69,9 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     if (this.appAuthApiServ.hasAccessToken) {
       this.storeServ.getCurrAuthUserCache();
     }
-    
+
     this._seoServ.updateMetaTags();
+    this._seoServ.updateCanonical();
     this._router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
@@ -78,9 +79,12 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
         const seoData = currRoute.snapshot.data;
         if (seoData) {
           this._seoServ.updateMetaTags(seoData['title'], seoData['url'], seoData['image'], seoData['description']);
+          this._seoServ.updateCanonical(seoData['url']);
         } else {
           this._seoServ.updateMetaTags();
+          this._seoServ.updateCanonical();
         }
+        this._seoServ.injectStructuredData('breadcrumb-ld', this.buildBreadcrumbSchema(this._router.url));
       });
 
   }
@@ -91,6 +95,42 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
       r = r.firstChild;
     }
     return r;
+  }
+
+  private buildBreadcrumbSchema(url: string): object {
+    const base = this.appEnv.siteServer;
+    const segments = url.split('?')[0].split('/').filter(Boolean);
+
+    const labelMap: Record<string, string> = {
+      'about': '關於本會',
+      'charter': '組織章程',
+      'supervisor': '理監事成員',
+      'committee': '委員會組織',
+      'privacy': '隱私權政策',
+      'terms': '服務條款',
+      'news': '最新消息',
+      'list': '列表',
+      'detail': '詳情',
+      'campaign': '學術活動',
+    };
+
+    const items: object[] = [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: base }
+    ];
+
+    let accPath = base;
+    segments.forEach((seg, i) => {
+      if (/^[0-9a-f-]{8,}$/i.test(seg)) return; // 跳過 uniqueId 動態參數
+      accPath += `/${seg}`;
+      const label = labelMap[seg] ?? seg;
+      items.push({ '@type': 'ListItem', position: i + 2, name: label, item: accPath });
+    });
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': items
+    };
   }
 
   doDataInit(): void {

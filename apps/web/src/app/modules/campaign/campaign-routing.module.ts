@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CampaignListComponent,
     data: {
       title: `學術活動｜${env.siteName}`,
-      decscription: '學術活動',
+      description: '學術活動',
       url: `${env.siteServer}/campaign/list`,
       image: `${env.siteServer}/assets/image/og/tslmai.png`
     }

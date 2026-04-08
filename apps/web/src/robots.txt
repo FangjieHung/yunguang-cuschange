@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# 禁止爬取需要登入或無 SEO 價值的頁面
+Disallow: /auth/
+Disallow: /account/
+Disallow: /result/
+
+Sitemap: https://tslmai.org.tw/sitemap.xml

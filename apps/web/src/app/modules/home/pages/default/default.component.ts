@@ -77,6 +77,9 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
 
   ngAfterViewInit(): void {
     this.updateLogoScale();
+    if (!this.isBrowser)
+      return;
+    
     const video = this.heroVideo.nativeElement;
     video.muted = true; // 確保靜音
     video.play().catch(err => {
