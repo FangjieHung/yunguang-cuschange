@@ -7,6 +7,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "assets/scss/mat-theme";
+@import "assets/scss/dialog";
 @import "assets/scss/typo";
 @import "assets/scss/nav-logo";
 @import "assets/scss/button";
@@ -22,18 +23,19 @@
 @import "assets/scss/quill-editor";
 
 @layer base {
-    html,
-    body {
-        height: 100%;
-    }
-
-    html {
-        @apply text-base text-pretty;
-        margin: 0;
-        font-family: "Noto Sans TC", sans-serif;
-        font-optical-sizing: auto;
-        font-style: normal;
-    }
+  html,
+  body {
+      height: 100%;
+      font-size: 16px;
+  }
+  
+  html {
+      @apply text-base text-pretty;
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
+  }
 }
 
 web-default-container {
