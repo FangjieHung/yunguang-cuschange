@@ -1,0 +1,13 @@
+
+/* Print Modal */
+.ant-modal-body:has(.print-mock) {
+  @apply p-0;
+}
+
+.print-mock {
+  @apply bg-gray-200 p-8 flex justify-center items-center print:hidden;
+}
+
+.print-actions {
+  @apply p-4 flex justify-end gap-2 print:hidden;
+}

@@ -4,7 +4,7 @@
 @include mat.core();
 
 // Define a custom color palette
-$primary: mat.define-palette(mat.$light-blue-palette, 500);
+$primary: mat.define-palette(mat.$light-blue-palette, 700);
 $accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
 // Create a light theme
@@ -13,7 +13,11 @@ $light-theme: mat.define-light-theme(
     color: (
       primary: $primary,
       accent: $accent
-    )
+    ),
+    typography: mat.define-typography-config(),
+    // 保持預設字體
+    density: 0,
+    // 0 = normal density
   )
 );
 
@@ -75,10 +79,13 @@ $light-theme: mat.define-light-theme(
   --mat-standard-button-toggle-selected-state-background-color: rgba(47, 127, 207, 0.251);
   --mat-standard-button-toggle-divider-color: rgba(52, 97, 141, 0.604);
 
+  --mdc-typography-button-font-size: 16px;
   --mat-standard-button-toggle-shape: 99rem;
 
-  // --nav-logo-height-xs: 8rem;
-  // --nav-logo-height-lg: 15rem;
   --footer-desktop-h: 20.5rem;
 }
 
+/* Button */
+.mdc-button__label {
+  @apply flex items-center;
+}
