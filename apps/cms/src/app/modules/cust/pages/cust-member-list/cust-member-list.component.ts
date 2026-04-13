@@ -333,7 +333,7 @@ export class CustMemberListComponent extends BBDBaseComponent implements OnInit 
   }
 
   isRenewed(data: CustMemberView): boolean {
-    if (+(data.custStatus || 0) !== +this.custApiServ.customerStatuses.正式會員)
+    if (+(data.custStatus || 100) >= +this.custApiServ.customerStatuses.否決申請)
       return true;
     if (!data.custExpAt)
       return false;

@@ -269,11 +269,11 @@ export class CustGroupListComponent extends BBDBaseComponent implements OnInit {
   }
 
   isRenewed(data: CustGroupView): boolean {
-    if (+(data.custStatus || 0) !== +this.custApiServ.customerStatuses.正式會員)
+    if (+(data.custStatus || 100) >= +this.custApiServ.customerStatuses.否決申請)
       return true;
     if (!data.custExpAt)
       return false;
-    
+
     const expYear = new Date(data.custExpAt).getFullYear();
     if (expYear === this._maxYear)
       return false;
