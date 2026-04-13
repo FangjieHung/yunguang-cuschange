@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, Injector, forwardRef, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
@@ -33,6 +34,8 @@ export class CustMemberControlComponent extends BBDBaseComponent implements Cont
   sharedDataServ = inject(SharedDataServ);
 
   valForm!: UntypedFormGroup;
+  isSameAsAbove = false;
+  private _sameAsAboveSubs: Subscription[] = [];
 
   // IOs & Gets & Sets
   get f(): { [key: string]: AbstractControl } {
@@ -54,6 +57,8 @@ export class CustMemberControlComponent extends BBDBaseComponent implements Cont
     if (!value)
       return;
 
+    this.isSameAsAbove = false;
+    this._clearSameAsAboveSubs();
     value.contentJto = (value.content || '').isUndefinedOrNullOrEmpty() ? new CustMemberContentJto() : JSON.parse(value.content || '{}');
     this.valForm.patchValue(value);
   }
@@ -123,6 +128,33 @@ export class CustMemberControlComponent extends BBDBaseComponent implements Cont
       if (upperStr.isUndefinedOrNullOrEmpty() == false && upperStr !== res)
         this.f['idNo'].setValue(upperStr, { emitEvent: false });
     });
+  }
+
+  onSameAsAboveChange(checked: boolean): void {
+    this.isSameAsAbove = checked;
+
+    if (checked) {
+      // 立即複製戶籍地址到聯絡地址
+      this.f['currZipCodeId'].setValue(this.f['resiZipCodeId'].value);
+      this.f['currAddr'].setValue(this.f['resiAddr'].value);
+
+      // 訂閱戶籍地址變更，即時同步
+      this._sameAsAboveSubs.push(
+        this.f['resiZipCodeId'].valueChanges.subscribe((val) => {
+          this.f['currZipCodeId'].setValue(val);
+        }),
+        this.f['resiAddr'].valueChanges.subscribe((val) => {
+          this.f['currAddr'].setValue(val);
+        })
+      );
+    } else {
+      this._clearSameAsAboveSubs();
+    }
+  }
+
+  private _clearSameAsAboveSubs(): void {
+    this._sameAsAboveSubs.forEach((s) => s.unsubscribe());
+    this._sameAsAboveSubs = [];
   }
 
 }

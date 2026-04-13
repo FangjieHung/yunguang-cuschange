@@ -119,13 +119,13 @@
 
       <li class="col-span-full">
         <div class="form-label">聯絡地址 <span class="required-mark" *ngIf="f['currAddr'] | ctrlHasRequired">*</span></div>
-        <mat-checkbox color="primary" class="-ml-2"><span class="text-base pb-0.5 min-w-11 block -ml-2">同上</span></mat-checkbox>
+        <mat-checkbox color="primary" class="-ml-2" [checked]="isSameAsAbove" (change)="onSameAsAboveChange($event.checked)"><span class="text-base pb-0.5 min-w-11 block -ml-2">同上</span></mat-checkbox>
         <div class="multi-inputs md:grid-cols-3">
           <web-zip-code-control #currZipCode class="w-full" formControlName="currZipCodeId"
-            [required]="f['currZipCodeId'] | ctrlHasRequired">
+            [required]="f['currZipCodeId'] | ctrlHasRequired" [disabled]="isSameAsAbove">
           </web-zip-code-control>
           <mat-form-field appearance="outline" class="w-full fill-black md:col-span-2">
-            <input matInput type="text" formControlName="currAddr" [required]="f['currAddr'] | ctrlHasRequired">
+            <input matInput type="text" formControlName="currAddr" [required]="f['currAddr'] | ctrlHasRequired" [readonly]="isSameAsAbove">
             <mat-error class="text-xs" *ngIf="f['currAddr'].errors">
               <div *ngFor="let msg of formHelper.errorMsgs(f['currAddr'].errors, '聯絡地址')">{{ msg }}</div>
             </mat-error>

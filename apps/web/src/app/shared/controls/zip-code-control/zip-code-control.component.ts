@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Injector, Input, forwardRef } from '@angular/core';
+import { Component, Injector, Input, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, NG_VALIDATORS, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 // Custom packages
@@ -25,11 +25,12 @@ import { ZipCodeView } from '@core/models';
     }
   ]
 })
-export class ZipCodeControlComponent extends BBDBaseComponent implements ControlValueAccessor {
+export class ZipCodeControlComponent extends BBDBaseComponent implements ControlValueAccessor, OnChanges {
   valForm!: UntypedFormGroup;
   cities: any[] = [];
   districts: any[] = [];
   @Input() required: string | boolean = false;
+  @Input() disabled = false;
   get f(): { [key: string]: AbstractControl } {
     return this.valForm.controls;
   }
@@ -44,6 +45,12 @@ export class ZipCodeControlComponent extends BBDBaseComponent implements Control
 
   // ngOnInit(): void { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled'] && this.valForm) {
+      this._applyDisabledState();
+    }
+  }
+
   writeValue(value: any) {
     this.valForm = this.fb.group({
       id: [value],
@@ -51,6 +58,7 @@ export class ZipCodeControlComponent extends BBDBaseComponent implements Control
       district: [null,],
     });
     this.doSetValidators();
+    this._applyDisabledState();
 
     if (this.districts.length) {
       this.doReverseZipCodeId(value);
@@ -137,5 +145,18 @@ export class ZipCodeControlComponent extends BBDBaseComponent implements Control
       return;
     }
     targetCtrl.setValue(dist.id);
+  }
+
+  private _applyDisabledState(): void {
+    if (!this.valForm) return;
+    const opts = { emitEvent: false };
+    if (this.disabled) {
+      this.f['city'].disable(opts);
+      this.f['district'].disable(opts);
+    } else {
+      this.f['city'].enable(opts);
+      this.f['district'].enable(opts);
+      this.doSetValidators();
+    }
   }
 }

@@ -72,6 +72,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
 
     this._seoServ.updateMetaTags();
     this._seoServ.updateCanonical();
+    this.storeServ.getZipCodesCache().subscribe();
     this._router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
