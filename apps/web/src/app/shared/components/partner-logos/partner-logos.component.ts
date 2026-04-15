@@ -28,10 +28,9 @@ export class PartnerLogosComponent extends BBDBaseComponent implements OnInit {
       disableOnInteraction: false,
     },
     breakpoints: {
-      320: { slidesPerView: 1, spaceBetween: 20 },
-      480: { slidesPerView: 2, spaceBetween: 30 },
-      640: { slidesPerView: 3, spaceBetween: 40 },
-      1024: { slidesPerView: 4, spaceBetween: 50 },
+      320: { slidesPerView: 1, spaceBetween: 16 },
+      480: { slidesPerView: 1.3 },
+      1024: { slidesPerView: 2.5, spaceBetween: 24 },
     }
   };
 

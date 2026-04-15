@@ -1,8 +1,9 @@
 <swiper [config]="swiperConfig">
   <ng-template swiperSlide *ngFor="let sponsor of sponsors">
-    <div class="">
-      <img [src]="combineCdnUrl(sponsor.logoFullPath || '')" [alt]="sponsor.name" class="w-full max-w-72 aspect-video object-contain mx-auto">
-      <p>{{ sponsor.desc }}</p>
+    <div class="mx-auto w-4/5 max-w-md">
+      <img [src]="combineCdnUrl(sponsor.logoFullPath || '')" [alt]="sponsor.name"
+        class="w-2/3 mx-auto aspect-video object-contain">
+      <p class="text-base text-justify px-4">{{ sponsor.desc }}</p>
     </div>
   </ng-template>
 </swiper>
