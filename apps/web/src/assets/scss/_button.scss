@@ -1,133 +1,84 @@
-.mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
-  --mat-standard-button-toggle-shape: 99rem;
-}
+/* ============================================
+   按鈕系統 .btn
+   ============================================ */
 
-.link-underline {
-  @apply flex items-center relative w-fit cursor-pointer;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.05s ease;
 
-  &::before,
-  &::after {
-    @apply absolute w-full h-px bg-current top-full left-0;
-    content: "";
+  &:active {
+    transform: translateY(1px);
   }
 
-  &::before {
-    transform-origin: 0% 50%;
-    transform: scale3d(0, 1, 1);
-    transition: transform 0.3s;
+  &:focus-visible {
+    outline: 2px solid var(--seafoam);
+    outline-offset: 2px;
   }
 
-  &::after {
-    top: calc(100% + 4px);
-    transition: transform 0.3s;
-    transform-origin: 100% 50%;
+  /* Variants */
+  &-primary {
+    background: var(--seafoam);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(103, 205, 201, 0.3);
+
+    &:hover {
+      background: var(--seafoam-dark);
+      box-shadow: var(--shadow-elevated);
+    }
   }
 
-  &:hover::before {
-    transform: scale3d(1, 1, 1);
+  &-outline {
+    background: transparent;
+    border: 1.5px solid var(--seafoam);
+    color: var(--seafoam-dark);
+
+    &:hover {
+      background: rgba(103, 205, 201, 0.1);
+    }
   }
 
-  &:hover::after {
-    transform: scale3d(0, 1, 1);
+  &-ghost {
+    background: transparent;
+    color: var(--text-primary);
+
+    &:hover {
+      background: rgba(103, 205, 201, 0.1);
+    }
   }
 
-  // icon 在左
-  span ~ .material-symbols-rounded {
-    @apply pl-2 -mr-0.5;
+  /* Sizes */
+  &-sm {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
   }
 
-  // icon 在右
-  .material-symbols-rounded ~ span  {
-    @apply pr-1 -ml-0.5;
-  }
-}
-
-.btn-primary {
-  @apply border-2 border-sky-200 text-white bg-sky-500/60 shadow-lg hover:shadow-none hover:bg-sky-500/80;
-}
-
-.btn-lg {
-  @apply w-full rounded-full px-4 py-2 min-h-14;
-}
-
-.btn-white {
-  @apply cursor-pointer border-2 border-white/20 text-sky-500 font-medium bg-white/30 hover:bg-sky-200/50 hover:border-sky-400;
-}
-
-[class*="btn-"] {
-  @apply opacity-100 transition-all ease-in-out duration-500;
-  
-  &.disabled {
-    @apply shadow-none grayscale opacity-60;
+  &-lg {
+    height: 52px;
+    padding: 0 32px;
+    font-size: 16px;
   }
 
-  &.disabled-hide {
-    @apply w-0 p-0 border-none overflow-hidden opacity-0;
-  }
-}
-
-/* reset Globel */
-a.mdc-button,
-a.mdc-icon-button,
-a.mdc-stroked-button,
-a.mdc-flat-button,
-a.mdc-menu-trigger,
-button.mdc-button,
-button.mdc-icon-button,
-button.mdc-stroked-button,
-button.mdc-flat-button,
-button.mdc-menu-trigger,
-button[class^="btn-"],
-a[class^="btn-"],
-button, a {
-  @apply transition-all ease-in-out duration-300 flex items-center justify-center;
-  --mdc-text-button-container-shape: 10rem; // border-radius
-}
-
-.menu-wrap {
-  @apply relative;
-
-  .menu-list {
-    @apply hidden absolute top-0 right-0 pt-16 min-w-max;
-  }
-
-  &:hover .menu-list,
-  .menu-list.show {
-    @apply block;
-  }
-
-  .menu-list a,
-  .menu-list button {
-    @apply flex items-center;
-  }
-}
-
-.mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
-  --mdc-checkbox-selected-checkmark-color: white;
-}
-
-/* Component */
-
-.upload-img-label {
-  @apply w-full block ease-in-out cursor-pointer;
-
-  .dash-hint {
-    @apply flex items-center flex-col justify-center w-full h-full border-2 border-dashed border-gray-300 py-6 text-sky-900/50 hover:bg-stone-100 rounded-lg;
-  }
-
-  p {
-    @apply font-medium text-base;
-  }
-
-  .uploaded-img {
-    @apply relative rounded-lg overflow-hidden;
-  }
-
-  .uploaded-img img {
-    @apply object-cover w-full h-full;
-  }
-
-  .uploaded-img .btn-ghost {
-    @apply absolute bottom-0 right-0 rounded-tl;
+  /* Disabled */
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }
