@@ -10,7 +10,7 @@
         color: var(--md-sys-color-inverse-primary, rgb(159 202 252));
         opacity: .3;
     }
-}       
+}
 
 .headline {
     @apply text-gray-900 text-2xl text-pretty leading-relaxed tracking-widest 4xl:text-4xl;
@@ -32,4 +32,62 @@ figcaption {
 	   -moz-hyphens: auto;
 	    -ms-hyphens: auto;
 	        hyphens: auto;
+}
+
+/* ============================================
+   公開區 typography utilities
+   ============================================ */
+.display-1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.display-2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--seafoam-dark);
+}
+
+.body-lg {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(103, 205, 201, 0.15);
+  color: var(--seafoam-dark);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.chip--solid {
+  background: var(--seafoam);
+  color: #fff;
+}
+
+.chip--outline {
+  background: transparent;
+  border: 1px solid var(--seafoam);
+  color: var(--seafoam-dark);
 }
