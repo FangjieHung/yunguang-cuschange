@@ -1,91 +1,227 @@
+// ============================================================
+//  _theme.scss — Intellecta Dashboard · Seafoam M3 Theme
+//  產出來源：dev/visual-reverse-engineer/index.html
+//
+//  Primary   #67CDC9 → mat.$teal-palette   tone 400
+//  Secondary #4db8b4 → mat.$cyan-palette   tone 400
+//  Font      Inter（Google Fonts）
+//  Density   0（預設）
+// ============================================================
+
 @use "@angular/material" as mat;
 
-// Include the base styles for Angular Material components
+// ── Base ──
 @include mat.core();
 
-// Define a custom color palette
-$primary: mat.define-palette(mat.$light-blue-palette, 700);
-$accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
+// ── Primary Palette：Teal（最接近 #67CDC9 Seafoam Green）──
+// mat.$teal-palette tone 400 = #26a69a，偏深；
+// 若需精確色值請透過 mat.define-palette 自訂 map 覆蓋 default。
+$primary-palette: mat.define-palette(
+  mat.$teal-palette,
+  400  /* default */ ,
+  200  /* lighter  */,
+  700  /* darker   */
+);
 
-// Create a light theme
-$light-theme: mat.define-light-theme(
+// ── Accent Palette：Cyan（搭配 Seafoam 的清爽輔色）──
+$accent-palette: mat.define-palette(
+  mat.$cyan-palette,
+  400  /* default */,
+  100  /* lighter */,
+  600  /* darker  */
+);
+
+// ── Theme Definition ──
+$project-light-theme: mat.define-light-theme(
   (
     color: (
-      primary: $primary,
-      accent: $accent
+      primary: $primary-palette,
+      accent:  $accent-palette,
     ),
-    typography: mat.define-typography-config(),
-    // 保持預設字體
-    density: 0,
-    // 0 = normal density
+    typography: mat.define-typography-config(
+      $font-family: "'Inter', sans-serif"
+    ),
+    density: 0
   )
 );
 
-// Apply the theme to all components
-@include mat.all-component-themes($light-theme);
+// ── Apply ──
+@include mat.all-component-themes($project-light-theme);
 
+/* ============================================================
+   _tokens.css — Intellecta Dashboard · Seafoam M3 Token
+   產出來源：dev/visual-reverse-engineer/index.html
+   架構：Layer 1 原始值 → Layer 2 元件別名 → Layer 3 MD3 語意色彩
+   ============================================================ */
+
+/* ── Layer 1：原始 Token（直接持有數值）── */
 :root {
-  --md-sys-color-primary: #34618d;
-  --md-sys-color-surface-tint: rgb(79, 131, 183);
-  --md-sys-color-on-primary: rgb(255 255 255);
-  --md-sys-color-sky-container: rgb(208 228 255);
-  --md-sys-color-on-sky-container: rgb(22 73 116);
-  --md-sys-color-secondary: rgb(82 95 112);
-  --md-sys-color-on-secondary: rgb(255 255 255);
-  --md-sys-color-secondary-container: rgb(214 228 247);
-  --md-sys-color-on-secondary-container: rgb(59 72 87);
-  --md-sys-color-tertiary: rgb(106 87 121);
-  --md-sys-color-on-tertiary: rgb(255 255 255);
-  --md-sys-color-tertiary-container: rgb(241 218 255);
-  --md-sys-color-on-tertiary-container: rgb(81 64 96);
-  --md-sys-color-error: rgb(186 26 26);
-  --md-sys-color-on-error: rgb(255 255 255);
-  --md-sys-color-error-container: rgb(255 218 214);
-  --md-sys-color-on-error-container: rgb(147 0 10);
-  --md-sys-color-background: rgb(248 249 255);
-  --md-sys-color-on-background: rgb(25 28 32);
-  --md-sys-color-surface: rgb(248 249 255);
-  --md-sys-color-on-surface: rgb(25 28 32);
-  --md-sys-color-surface-variant: rgb(223 227 235);
-  --md-sys-color-on-surface-variant: rgb(66 71 78);
-  --md-sys-color-outline: rgb(115 119 127);
-  --md-sys-color-outline-variant: rgb(194 199 207);
-  --md-sys-color-shadow: rgb(0 0 0);
-  --md-sys-color-scrim: rgb(0 0 0);
-  --md-sys-color-inverse-surface: rgb(45 49 53);
-  --md-sys-color-inverse-on-surface: rgb(239 240 247);
-  --md-sys-color-inverse-primary: rgb(159 202 252);
-  --md-sys-color-sky-fixed: rgb(208 228 255);
-  --md-sys-color-on-sky-fixed: rgb(0 29 53);
-  --md-sys-color-sky-fixed-dim: rgb(159 202 252);
-  --md-sys-color-on-sky-fixed-variant: rgb(6, 39, 65);
-  --md-sys-color-secondary-fixed: rgb(214 228 247);
-  --md-sys-color-on-secondary-fixed: rgb(15 28 42);
-  --md-sys-color-secondary-fixed-dim: rgb(186 200 219);
-  --md-sys-color-on-secondary-fixed-variant: rgb(59 72 87);
-  --md-sys-color-tertiary-fixed: rgb(241 218 255);
-  --md-sys-color-on-tertiary-fixed: rgb(36 20 50);
-  --md-sys-color-tertiary-fixed-dim: rgb(213 190 229);
-  --md-sys-color-on-tertiary-fixed-variant: rgb(81 64 96);
-  --md-sys-color-surface-dim: rgb(216 218 224);
-  --md-sys-color-surface-bright: rgb(248 249 255);
-  --md-sys-color-surface-container-lowest: rgb(255 255 255);
-  --md-sys-color-surface-container-low: rgb(242 243 249);
-  --md-sys-color-surface-container: rgb(236 238 244);
-  --md-sys-color-surface-container-high: rgb(230 232 238);
-  --md-sys-color-surface-container-highest: rgb(225 226 232);
+  /* Primary — Seafoam Green */
+  --token-primary:                   #67CDC9;
+  --token-on-primary:                #f0fffd;
+  --token-primary-container:         #DAF7F2;
+  --token-on-primary-container:      #1a3533;
 
-  --mat-standard-button-toggle-background-color: rgba(255, 255, 255, 0);
-  --mat-standard-button-toggle-selected-state-background-color: rgba(47, 127, 207, 0.251);
-  --mat-standard-button-toggle-divider-color: rgba(52, 97, 141, 0.604);
+  /* Secondary — Seafoam Dark */
+  --token-secondary:                 #4db8b4;
+  --token-on-secondary:              #f0fffd;
+  --token-secondary-container:       #D0F0E0;
+  --token-on-secondary-container:    #1a3533;
 
-  --mdc-typography-button-font-size: 16px;
-  --mat-standard-button-toggle-shape: 99rem;
+  /* Tertiary — Mint Ice */
+  --token-tertiary:                  #b2f0c8;
+  --token-on-tertiary:               #1a3f28;
+  --token-tertiary-container:        #E6FFE6;
+  --token-on-tertiary-container:     #1a3f28;
 
-  --footer-desktop-h: 20.5rem;
+  /* Error — MD3 標準 */
+  --token-error:                     #ba1a1a;
+  --token-on-error:                  #f5eded;
+  --token-error-container:           #ffdad6;
+  --token-on-error-container:        #410002;
+
+  /* Surface & Background */
+  --token-background:                #cdf5ef;
+  --token-on-background:             #1a3533;
+  --token-surface:                   rgba(255, 255, 255, .55);
+  --token-on-surface:                #1a3533;
+  --token-surface-variant:           rgba(240, 253, 252, .50);
+  --token-on-surface-variant:        #5a8480;
+
+  /* Outline */
+  --token-outline:                   #9bbfbb;
+  --token-outline-variant:           rgba(155, 191, 187, .30);
+
+  /* Shadow & Scrim */
+  --token-shadow:                    rgba(103, 205, 201, .10);
+  --token-scrim:                     rgba(26,  53,  51,  .40);
+
+  /* Inverse */
+  --token-inverse-surface:           #1a3533;
+  --token-inverse-on-surface:        #DAF7F2;
+  --token-inverse-primary:           #b2ece8;
+
+  /* Surface Containers（由淺至深） */
+  --token-surface-dim:               #cdf5ef;
+  --token-surface-bright:            #f0fffd;
+  --token-surface-container-lowest:  rgba(255, 255, 255, .30);
+  --token-surface-container-low:     rgba(255, 255, 255, .42);
+  --token-surface-container:         rgba(255, 255, 255, .55);
+  --token-surface-container-high:    rgba(255, 255, 255, .65);
+  --token-surface-container-highest: rgba(255, 255, 255, .75);
+
+  /* Overlay & Divider */
+  --token-primary-overlay:           rgba(103, 205, 201, .10);
+  --token-primary-divider:           rgba(103, 205, 201, .20);
+
+  /* Shape */
+  --token-radius-pill:               9999px;
+
+  /* Typography */
+  --token-font-size-md:              12px;
+
+  /* Layout */
+  --token-footer-height-desktop:     52px;
+
+  /* Utility */
+  --token-transparent:               transparent;
 }
 
-/* Button */
-.mdc-button__label {
-  @apply flex items-center;
+/* ── Layer 2：元件 Token（語意別名，引用 Layer 1）── */
+:root {
+  /* ===== Button Toggle ===== */
+  --button-toggle-bg:                var(--token-transparent);
+  --button-toggle-selected-bg:       var(--token-primary-overlay);
+  --button-toggle-divider:           var(--token-primary-divider);
+
+  /* ===== Shape ===== */
+  --shape-pill:                      var(--token-radius-pill);
+
+  /* ===== Typography ===== */
+  --font-size-button:                var(--token-font-size-md);
+
+  /* ===== Layout ===== */
+  --footer-height-desktop:           var(--token-footer-height-desktop);
 }
+
+/* ── Layer 3：MD3 語意色彩系統（引用 Layer 1）── */
+:root {
+  /* ===== Core Brand Colors ===== */
+  --color-primary:                   var(--token-primary);
+  --color-on-primary:                var(--token-on-primary);
+  --color-primary-container:         var(--token-primary-container);
+  --color-on-primary-container:      var(--token-on-primary-container);
+  --color-secondary:                 var(--token-secondary);
+  --color-on-secondary:              var(--token-on-secondary);
+  --color-secondary-container:       var(--token-secondary-container);
+  --color-on-secondary-container:    var(--token-on-secondary-container);
+  --color-tertiary:                  var(--token-tertiary);
+  --color-on-tertiary:               var(--token-on-tertiary);
+  --color-tertiary-container:        var(--token-tertiary-container);
+  --color-on-tertiary-container:     var(--token-on-tertiary-container);
+
+  /* ===== Semantic States ===== */
+  --color-error:                     var(--token-error);
+  --color-on-error:                  var(--token-on-error);
+  --color-error-container:           var(--token-error-container);
+  --color-on-error-container:        var(--token-on-error-container);
+
+  /* ===== Surface System ===== */
+  --color-background:                var(--token-background);
+  --color-on-background:             var(--token-on-background);
+  --color-surface:                   var(--token-surface);
+  --color-on-surface:                var(--token-on-surface);
+  --color-surface-variant:           var(--token-surface-variant);
+  --color-on-surface-variant:        var(--token-on-surface-variant);
+  --color-outline:                   var(--token-outline);
+  --color-outline-variant:           var(--token-outline-variant);
+  --color-shadow:                    var(--token-shadow);
+  --color-scrim:                     var(--token-scrim);
+
+  /* ===== Inverse ===== */
+  --color-inverse-surface:           var(--token-inverse-surface);
+  --color-inverse-on-surface:        var(--token-inverse-on-surface);
+  --color-inverse-primary:           var(--token-inverse-primary);
+
+  /* ===== Surface Containers ===== */
+  --surface-dim:                     var(--token-surface-dim);
+  --surface-bright:                  var(--token-surface-bright);
+  --surface-container-lowest:        var(--token-surface-container-lowest);
+  --surface-container-low:           var(--token-surface-container-low);
+  --surface-container:               var(--token-surface-container);
+  --surface-container-high:          var(--token-surface-container-high);
+  --surface-container-highest:       var(--token-surface-container-highest);
+}
+
+  /* ── Design Tokens ── */
+  :root {
+    --seafoam:       #67CDC9;
+    --seafoam-dark:  #4db8b4;
+    --pale-seafoam:  #DAF7F2;
+    --mint-ice:      #E6FFE6;
+    --seafoam-mist:  #D0F0E0;
+    --aqua-haze:     #E0FFFF;
+
+    --text-primary:  #1a3533;
+    --text-secondary:#5a8480;
+    --text-muted:    #9bbfbb;
+    --border:        rgba(103,205,201,.20);
+
+    /* glass surfaces */
+    --glass-nav:     rgba(255,255,255,.45);
+    --glass-card:    rgba(255,255,255,.55);
+    --glass-card-dim:rgba(240,253,252,.50);
+    --blur:          blur(16px);
+
+    --radius-sm:     10px;
+    --radius-md:     16px;
+    --radius-lg:     20px;
+    --shadow-card:   0 4px 24px rgba(103,205,201,.10);
+
+    /* ── S1+S2 公開區補充 token ── */
+    --shadow-elevated: 0 10px 36px rgba(103,205,201,.18);
+    --shadow-soft:     0 2px 12px rgba(103,205,201,.06);
+    --max-content:     1200px;
+    --topbar-h:        64px;
+    --section-gap:     clamp(48px, 6vw, 80px);
+  }
