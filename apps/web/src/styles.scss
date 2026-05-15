@@ -1,54 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* You can add global styles to this file, and also import other style files */
 
+/* ── 基底 ── */
 @import "assets/scss/mat-theme";
 @import "assets/scss/dialog";
 @import "assets/scss/typo";
-@import "assets/scss/nav-logo";
-@import "assets/scss/button";
-@import "assets/scss/form";
 
-@import "swiper/scss";
-@import "swiper/scss/navigation";
-
-@import "assets/scss/layout";
+/* ── S1+S2 公開區基底 ── */
 @import "assets/scss/section";
-@import "assets/scss/glass-bg.scss";
-@import "assets/scss/swiper";
-@import "assets/scss/quill-editor";
+@import "assets/scss/button";
+
+/* ── 共用元件 ── */
+@import "assets/scss/component/common";
+@import "assets/scss/component/card";
+
+/* ── S1+S2 公開區元件 ── */
+@import "assets/scss/component/topbar-public";
+@import "assets/scss/component/hero";
+@import "assets/scss/component/principles";
+@import "assets/scss/component/process-timeline";
+@import "assets/scss/component/faq";
+@import "assets/scss/component/price-table";
+@import "assets/scss/component/equipment-table";
+@import "assets/scss/component/vr-entry";
+@import "assets/scss/component/anchor-nav";
+
+/*
+  保留供 S3+（buyer/admin shells）使用，目前不引用：
+
+  Dashboard layout pattern：
+  @import "assets/scss/component/topbar";
+  @import "assets/scss/component/sidebar";
+  @import "assets/scss/component/main";
+  @import "assets/scss/component/header-row";
+  @import "assets/scss/component/middle-row";
+  @import "assets/scss/component/bottom-row";
+
+  Dashboard 元件（chat/activity/timeline/todo/summary）：
+  @import "assets/scss/component/chat-card";
+  @import "assets/scss/component/activity-card";
+  @import "assets/scss/component/timeline";
+  @import "assets/scss/component/todo-card";
+  @import "assets/scss/component/summary-card";
+
+  其他：
+  @import "assets/scss/form";
+  @import "assets/scss/layout";
+  @import "assets/scss/glass-bg.scss";
+  @import "assets/scss/swiper";
+  @import "assets/scss/quill-editor";
+*/
 
 @layer base {
   html,
   body {
-      height: 100%;
-      font-size: 16px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
   }
-  
+
   html {
-      @apply text-base text-pretty;
-      margin: 0;
-      font-family: "Noto Sans TC", sans-serif;
-      font-optical-sizing: auto;
-      font-style: normal;
+    @apply text-base text-pretty;
+    margin: 0;
+    font-family: "Noto Sans TC", "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+  body {
+    font-family: "Noto Sans TC", "Inter", sans-serif;
+    color: var(--text-primary);
+    /* multi-stop gradient matching the seafoam palette */
+    background:
+      radial-gradient(ellipse at 0% 0%, #b2ece8 0%, transparent 55%),
+      radial-gradient(ellipse at 100% 0%, #daf7f2 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, #d0f0e0 0%, transparent 55%),
+      radial-gradient(ellipse at 0% 100%, #e0ffff 0%, transparent 50%),
+      linear-gradient(135deg, #cdf5ef 0%, #e8fdf8 50%, #daf7f2 100%);
+    background-attachment: fixed;
   }
 }
 
 web-default-container {
-    @apply w-full overflow-x-hidden;
+  @apply w-full overflow-x-hidden;
+  display: block;
+  min-height: 100vh;
 }
 
-// Scrollbar
-/* width */
+/* Scrollbar */
 ::-webkit-scrollbar {
   @apply h-1 w-1;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background-color: #00000000;
 
@@ -56,8 +103,7 @@ web-default-container {
     background-color: #0000001b;
   }
 }
- 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
   background-color: #00000010;
   border-radius: 100px;
