@@ -123,3 +123,107 @@ export const PRINCIPLES: PrincipleCategory[] = [
     examples: ['PA-01'],
   },
 ];
+
+// ─── 客變流程 ───────────────────────────────────────────
+export interface ProcessStep {
+  phase:
+    | 'sign'
+    | 'wait'
+    | 'open'
+    | 'apply'
+    | 'review'
+    | 'reconfirm'
+    | 'build';
+  stepNumber: number;
+  label: string;
+  durationHint?: string;
+  description: string;
+  buyerActions: string[];
+}
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    phase: 'sign',
+    stepNumber: 1,
+    label: '簽約完成',
+    durationHint: 'Day 0',
+    description: '完成購屋簽約後，建案會發送客變系統開通通知（QR Code / 連結 / 簡訊）。',
+    buyerActions: [
+      '完成簽約程序',
+      '收到客變系統開通通知',
+      '掃描 QR Code 或點擊連結進入',
+    ],
+  },
+  {
+    phase: 'wait',
+    stepNumber: 2,
+    label: '等待開放期',
+    durationHint: '約 60-180 天',
+    description: '此階段可瀏覽公開資訊與虛擬樣品屋，預先構思客變需求，必要時可委託設計師。',
+    buyerActions: [
+      '瀏覽客變原則與費用表',
+      '參觀虛擬樣品屋',
+      '可選：委託設計師（需透過系統授權）',
+    ],
+  },
+  {
+    phase: 'open',
+    stepNumber: 3,
+    label: '客變開放',
+    durationHint: '依工程進度',
+    description: '建案宣布客變正式開放，買家可登入系統並完成首次戶型核對。',
+    buyerActions: [
+      '收到開放通知（LINE / Email）',
+      '登入系統並核對戶型資訊',
+      '確認所有權人資訊正確',
+    ],
+  },
+  {
+    phase: 'apply',
+    stepNumber: 4,
+    label: '提出申請',
+    durationHint: '約 30 天',
+    description: '透過 Room Navigator 逐空間規劃需求，系統自動彙整為工程類別清單與費用試算。',
+    buyerActions: [
+      '在 Room Navigator 標注各空間需求',
+      '上傳必要施工圖（衛浴改裝、迴路新增）',
+      '確認費用試算後送出申請',
+    ],
+  },
+  {
+    phase: 'review',
+    stepNumber: 5,
+    label: '審核回覆',
+    durationHint: '約 7-14 天',
+    description: '各工程類別由對應的承包商審核員獨立審核，全部通過後申請成立。',
+    buyerActions: [
+      '收到審核結果通知',
+      '若有退件，依說明補件後重新送出',
+      '與業務或設計師確認細節',
+    ],
+  },
+  {
+    phase: 'reconfirm',
+    stepNumber: 6,
+    label: '施工前複確認',
+    durationHint: '施工前 7 天',
+    description: '建案發起最終確認，買家簽署電子確認單後申請鎖定，不可再修改。',
+    buyerActions: [
+      '收到複確認通知',
+      '檢視最終客變項目與費用合計',
+      '電子簽名確認，文件加蓋時間戳',
+    ],
+  },
+  {
+    phase: 'build',
+    stepNumber: 7,
+    label: '施工執行',
+    durationHint: '依工程進度',
+    description: '工務依確認後的客變內容施作，期間客變內容鎖定不可變動。',
+    buyerActions: [
+      '工務團隊依確認內容施工',
+      '可透過系統查詢施工進度節點',
+      '完工驗收',
+    ],
+  },
+];
