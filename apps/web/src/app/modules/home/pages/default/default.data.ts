@@ -394,3 +394,140 @@ export const PRICE_ITEMS: PriceItem[] = [
   { category: '預埋設備', code: 'PR-01', name: '衛浴電熱毛巾架預埋', unit: '組', priceRange: 'NT$ 2,500' },
   { category: '預埋設備', code: 'PR-02', name: '除霧鏡預埋插座', unit: '組', priceRange: 'NT$ 1,500' },
 ];
+
+// ─── 標準設備表 ──────────────────────────────────────────
+export interface EquipmentItem {
+  category: string;
+  icon: string;
+  name: string;
+  brand: string;
+  model?: string;
+  spec: string;
+}
+
+export const EQUIPMENT_ITEMS: EquipmentItem[] = [
+  // 廚具
+  {
+    category: '廚具',
+    icon: 'kitchen',
+    name: '廚具系統',
+    brand: '櫻花',
+    model: 'KE-S330L',
+    spec: '系統櫃廚具 L 型 2.4m，含人造石檯面、緩衝門板五金',
+  },
+  {
+    category: '廚具',
+    icon: 'air',
+    name: '抽油煙機',
+    brand: '櫻花',
+    model: 'R-3500',
+    spec: '近吸式排油煙機，風量 1100 CMH，三段火焰偵測',
+  },
+  {
+    category: '廚具',
+    icon: 'soup_kitchen',
+    name: '電陶爐',
+    brand: '櫻花',
+    model: 'G-2901S',
+    spec: '雙口電陶爐，輸出功率 3.6kW，9 段火力',
+  },
+
+  // 衛浴
+  {
+    category: '衛浴',
+    icon: 'shower',
+    name: '馬桶',
+    brand: 'TOTO',
+    model: 'CW988GR',
+    spec: '單體式 ECO 馬桶，省水 4.8L / 3.0L 雙段沖水',
+  },
+  {
+    category: '衛浴',
+    icon: 'bathtub',
+    name: '面盆組',
+    brand: 'TOTO',
+    model: 'L546GU',
+    spec: '檯面式面盆 600mm，含 TLS01304 龍頭、排水組',
+  },
+  {
+    category: '衛浴',
+    icon: 'shower',
+    name: '淋浴龍頭',
+    brand: 'TOTO',
+    model: 'TBS04302',
+    spec: '冷熱混合恆溫龍頭，含手持蓮蓬頭與滑桿組',
+  },
+
+  // 門窗
+  {
+    category: '門窗',
+    icon: 'door_front',
+    name: '玄關大門',
+    brand: '永記',
+    model: 'EG-T2',
+    spec: '硫化銅鑄鋼門，含三段式鎖具與電子鎖預留',
+  },
+  {
+    category: '門窗',
+    icon: 'door_sliding',
+    name: '室內房門',
+    brand: '永堉',
+    spec: '實木貼皮房門，含五金與門擋',
+  },
+  {
+    category: '門窗',
+    icon: 'window',
+    name: '對外窗',
+    brand: '正新',
+    spec: '隔熱複層玻璃，5+9A+5mm，採鋁合金窗框',
+  },
+
+  // 電器
+  {
+    category: '電器',
+    icon: 'ac_unit',
+    name: '冷氣',
+    brand: '日立',
+    spec: '分離式變頻冷暖空調，主臥 1.0 噸、客廳 1.5 噸',
+  },
+  {
+    category: '電器',
+    icon: 'thermostat',
+    name: '熱水器',
+    brand: '林內',
+    model: 'RUA-C1620WF',
+    spec: '強制排氣 16L 數位恆溫熱水器',
+  },
+  {
+    category: '電器',
+    icon: 'electrical_services',
+    name: '對講機',
+    brand: 'Aiphone',
+    spec: '彩色影音對講機，含大門口機與電鎖控制',
+  },
+
+  // 五金
+  {
+    category: '五金',
+    icon: 'lock',
+    name: '電子鎖',
+    brand: 'GATEMAN',
+    model: 'Z-Bio',
+    spec: '指紋 + 密碼雙模式電子鎖，含 RFID 卡片',
+  },
+  {
+    category: '五金',
+    icon: 'light',
+    name: '燈具',
+    brand: 'Panasonic',
+    spec: 'LED 嵌燈與吸頂燈組合，色溫 3000K / 5000K 可切換',
+  },
+  {
+    category: '五金',
+    icon: 'water_drop',
+    name: '淨水設備',
+    brand: '3M',
+    model: 'DWS6000ST',
+    spec: '中央淨水器，含前置濾芯，廚房預留接口',
+  },
+];
