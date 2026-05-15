@@ -1,28 +1,13 @@
-header.hero {
-    @apply relative;
-
-    video {
-        @apply w-full h-[99svh] object-cover opacity-80 lg:opacity-100;
-        filter: hue-rotate(340deg) saturate(1.6);
-    }
-
-    .content {
-        @apply text-base absolute inset-0 h-fit my-auto pt-20;
-    }
-
-    .headline {
-        @apply my-10;
-    }
+:host {
+  display: block;
 }
 
-.default-container {
-    @apply relative overflow-x-hidden;
-}
+// 區塊間最小間距，由 _section.scss 控制 padding，這裡只處理元件局部
+.hero {
+  // 與 topbar 接續處的視覺呼吸
+  padding-top: 32px;
 
-.news-list {
-    @apply min-w-0 flex-auto w-full my-6 xl:w-auto xl:mr-20;
-}
-
-h2.display {
-    @apply text-pretty;
+  @media (min-width: 768px) {
+    padding-top: 48px;
+  }
 }
