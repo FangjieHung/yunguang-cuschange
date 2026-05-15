@@ -1,105 +1,21 @@
-.nav-bar {
-    @apply flex items-start justify-between p-4 w-full fixed z-10;
+.layout-shell {
+  min-height: 100vh;
+  background: transparent;
+
+  // Material sidenav container 與 body 漸層搭配
+  ::ng-deep .mat-drawer-container,
+  ::ng-deep .mat-sidenav-container {
+    background: transparent;
+  }
+
+  &__main {
+    display: block;
+    min-height: calc(100vh - var(--topbar-h));
+  }
 }
 
-.nav-link {
-    @apply flex items-center px-4 py-2 rounded-full;
-
-    .material-symbols-rounded {
-        @apply text-xl;
-    }
-}
-
-.avatar-btn {
-    @apply flex items-center min-w-fit cursor-pointer;
-
-    .user {
-        @apply rounded-full min-w-8 w-9 h-9 bg-sky-200 text-sky-600 flex items-center justify-center font-bold;
-        font-size: 0.875rem;
-    }
-}
-
-.main-container {
-    @apply pt-32 pb-5 relative;
-
-    @media screen and (min-width: 1024px) {
-        min-height: calc(100svh - 20.8rem);
-    }
-
-    &:has(.hero) {
-        @apply pt-0;
-    }
-}
-
-.mat-sidenav {
-    @apply bg-stone-50;
-    min-width: 15rem;
-}
-
-.mat-drawer:not(.mat-drawer-side) {
-    @apply shadow-none;
-}
-
-.menu-button .material-symbols-rounded {
-    @apply opacity-100 w-6;
-    transition: all 0.3s ease;
-
-    &.hide {
-        @apply opacity-0 w-0;
-    }
-}
-
-mat-sidenav-container {
-    @apply flex-auto;
-
-    &:has(.mat-drawer-opened) {
-        height: 100svh;
-        overflow: auto;
-    }
-}
-
-.sidemenu-inner {
-    @apply mt-32 divide-y divide-black/30 xs:mt-40;
-
-    .btn-stroke-white {
-        @apply w-full max-w-sm mr-auto;
-    }
-}
-
-.menu-button .material-symbols-rounded {
-    @apply opacity-100 w-6;
-    transition: all 0.3s ease;
-
-    &.hide {
-        @apply opacity-0 w-0;
-    }
-}
-
-.sidenav-container {
-    @apply bg-sky-50/30 backdrop-blur-xl w-full px-8 py-4;
-}
-
-.social-icon-wrap {
-    @apply flex items-center justify-start space-x-2 mt-5 w-full md:max-w-96;
-
-    .divider {
-        @apply border-t border-white/50 flex-auto;
-    }
-
-    > a {
-        @apply w-11 h-11 p-2 flex items-center;
-    }
-}
-
-.sidenav-list {
-    @apply py-3;
-
-    a,
-    button {
-        @apply text-base px-1 py-3 block;
-    }
-}
-
-.web-map {
-    @apply mt-5 space-y-3;
+// 漢堡 drawer 內部容器（mat-sidenav）外觀
+::ng-deep .topbar-drawer.mat-drawer {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--blur);
 }
