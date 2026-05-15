@@ -1,143 +1,267 @@
-<div class="default-container">
-  <header class="hero">
-    <video autoplay muted playsinline loop class="hero-video" #heroVideo>
-      <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/webm">
-      <source src="/assets/video/hero-landscape-720.mp4" media="(min-width: 1024px)" type="video/mp4">
-      <source src="/assets/video/hero-portrait.webm" type="video/webm">
-      <source src="/assets/video/hero-portrait-720.mp4" type="video/mp4">
-    </video>
-
-    <div class="content max-w-container">
-      <h1 class="display d-white">
-        Innovating for Smarter Diagnostics
-      </h1>
-      <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
-      <p class="text-xl tracking-wide">歡迎加入智慧檢驗醫學學會，共同推動檢驗醫學的創新與發展。</p>
+<!-- ─── Hero ─── -->
+<section id="hero" class="hero section">
+  <div class="hero__inner">
+    <div class="hero__content">
+      <span class="hero__eyebrow">富華澐光 · 客變線上服務</span>
+      <h1 class="hero__title">從簽約到交屋，<br />您的家由您決定。</h1>
+      <p class="hero__subtitle">
+        線上瀏覽客變原則、規劃需求、追蹤進度。從格局、水電到建材選配，一站式完成。
+      </p>
+      <div class="hero__cta-row">
+        <a routerLink="/auth/login" class="btn btn-primary btn-lg">
+          登入客變系統
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+        <a href="#principles" class="btn btn-outline btn-lg">
+          了解客變原則
+        </a>
+      </div>
     </div>
-  </header>
 
-  <div class="space-y-20 py-20 xl:space-y-32 xl:py-32">
-    <section class="max-w-container">
-      <div class="px-5">
-        <h2 class="display d-black">Knowledge Exchange</h2>
-        <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
-          <swiper [config]="bannerSwipe" class="relative w-full mt-8 slide-1-fade">
-            <ng-template swiperSlide *ngFor="let item of ads">
-              <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
-                <!-- src="/assets/image/demo/002.jpg" -->
-                <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.title"
-                  class="rounded-lg aspect-video object-cover w-full lg:w-2/3 lg:mt-4">
-                <div class="w-full mt-5 lg:w-1/3 lg:mt-0">
-                  <h3 class="headline font-bold">{{ item.title }}</h3>
-                  <p class="text-xl"> {{ item.desc }}</p>
-                </div>
-              </div>
-            </ng-template>
-          </swiper>
-          <div class="swipe-btn-wrap-b">
-            <button class="btn-primary swiper-btn-banner prev"><span class="material-symbols-rounded">
-                arrow_back_ios
-              </span></button>
-            <button class="btn-primary swiper-btn-banner next"><span class="material-symbols-rounded">
-                arrow_forward_ios
-              </span></button>
+    <div class="hero__visual">
+      <span class="hero__visual-label">虛擬樣品屋預覽</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 客變原則 ─── -->
+<section id="principles" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Customization Principles</span>
+      <h2 class="section__title">客變原則</h2>
+      <p class="section__lead">
+        各類別的變更範圍與限制總覽。實際可變項目依您的戶型樓層而定，登入後系統會自動篩選顯示。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="principles-grid">
+        <article
+          *ngFor="let p of principles"
+          class="principle-card"
+        >
+          <div class="principle-card__icon">
+            <mat-icon>{{ p.icon }}</mat-icon>
+          </div>
+          <h3 class="principle-card__title">{{ p.title }}</h3>
+          <p class="principle-card__scope">{{ p.scope }}</p>
+
+          <ul class="principle-card__rules">
+            <li *ngFor="let rule of p.rules" class="principle-card__rule">
+              {{ rule }}
+            </li>
+          </ul>
+
+          <div class="principle-card__examples">
+            <span *ngFor="let ex of p.examples" class="chip chip--outline">
+              {{ ex }}
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 客變流程 ─── -->
+<section id="process" class="section section--alt">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Customization Flow</span>
+      <h2 class="section__title">客變流程</h2>
+      <p class="section__lead">
+        從簽約到交屋的完整時間軸，每個階段的關鍵動作與時程。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="process-timeline">
+        <div *ngFor="let step of processSteps" class="process-step">
+          <div class="process-step__node">{{ step.stepNumber }}</div>
+
+          <div class="process-step__content">
+            <span class="process-step__phase">Step {{ step.stepNumber }}</span>
+            <h3 class="process-step__label">{{ step.label }}</h3>
+
+            <span *ngIf="step.durationHint" class="process-step__duration">
+              {{ step.durationHint }}
+            </span>
+
+            <p class="process-step__description">{{ step.description }}</p>
+
+            <ul class="process-step__actions">
+              <li
+                *ngFor="let action of step.buyerActions"
+                class="process-step__action"
+              >
+                {{ action }}
+              </li>
+            </ul>
           </div>
         </div>
-        <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="max-w-container flex flex-col">
-      <h2 class="text-center">
-        <span class="display d-black">Academic Activities</span>
-        <p class="headline font-bold">學術活動</p>
-      </h2>
-      <div class="relative" *ngIf="!(campaigns | isEmpty)">
-        <swiper [config]="campaignSwipe" class="w-full my-10">
-          <ng-template swiperSlide *ngFor="let item of campaigns" class="mb-5 pl-5">
-            <web-glass-bg class="container-hover">
-              <a class="block p-2" [routerLink]="['/campaign/detail', item.uniqueId]">
-                <div class="p-3">
-                  <ol class="date-duration">
-                    <!-- 開始日 -->
-                    <li>
-                      <div class="month-wrap">
-                        <p>{{ item.startAt | date: 'MM' }} &#8725;</p>
-                        <p>{{ item.startAt | date: 'E' }}.</p>
-                      </div>
-                      <p class="date">{{ item.startAt | date: 'dd' }}</p>
-                    </li>
-                    <!-- 結束日 -->
-                    <ng-container *ngIf="!(item.endAt | isSameDate: item.startAt)">
-                      <li class="line"></li>
-                      <li>
-                        <div class="month-wrap">
-                          <p>{{ item.endAt | date: 'MM' }} &#8725;</p>
-                          <p>{{ item.endAt | date: 'E' }}.</p>
-                        </div>
-                        <p class="date">{{ item.endAt | date: 'dd' }}</p>
-                      </li>
-                    </ng-container>
-                  </ol>
-                  <h3 class="title-sm"> {{
-                    item.name
-                    }}</h3>
-                  <ul class="describe-list">
-                    <li>報名時間<span>&#8739;</span>{{ item.regStartAt | dateFormatter: 'yyyy.MM.dd': '-' }} ~ {{
-                      item.regEndAt | dateFormatter: 'yyyy.MM.dd': '-' }}</li>
-                    <!-- <li>剩餘名額<span>&#8739;</span></li> -->
-                  </ul>
-                  <mat-progress-bar mode="determinate" color="primary" class="mb-10"
-                    [value]="item.maxRegNum ? (item.regNum || 0) / (item.maxRegNum || 1) * 100 : 0"></mat-progress-bar>
-                </div>
-                <button class="btn-white w-full rounded-full h-12">詳細資訊</button>
-              </a>
-            </web-glass-bg>
-          </ng-template>
-        </swiper>
-        <button class="btn-primary swiper-btn-between swiper-btn-campaign prev"><span class="material-symbols-rounded">
-            arrow_back_ios
-          </span></button>
-        <button class="btn-primary swiper-btn-between swiper-btn-campaign next"><span class="material-symbols-rounded">
-            arrow_forward_ios
-          </span></button>
+<!-- ─── 常見問題 FAQ ─── -->
+<section id="faq" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">FAQ</span>
+      <h2 class="section__title">常見問題</h2>
+      <p class="section__lead">
+        針對客變流程、費用、時程、設計師委託等常見疑問的回答。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="faq">
+        <div *ngFor="let group of faqGroups" class="faq__group">
+          <h3 class="faq__group-title">{{ group.groupTitle }}</h3>
+
+          <mat-accordion multi>
+            <mat-expansion-panel
+              *ngFor="let item of group.items"
+              class="faq__panel"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{ item.q }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>{{ item.a }}</p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
       </div>
-      <web-result-empty *ngIf="(campaigns | isEmpty)" class="block my-5"></web-result-empty>
-      <a class="link-underline mt-auto ml-auto mr-5" target="_blank" routerLink="/campaign/list">
-        <span>看更多活動</span><span class="material-symbols-rounded">arrow_right_alt</span>
-      </a>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="max-w-container">
-      <div class="flex items-start flex-col lg:flex-row-reverse">
-        <h2 class="lg:text-right min-w-fit">
-          <span class="display d-black">Latest News</span>
-          <p class="headline">最新消息</p>
-        </h2>
+<!-- ─── 費用表 ─── -->
+<section id="fees" class="section section--alt">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Price Reference</span>
+      <h2 class="section__title">常見費用表</h2>
+      <p class="section__lead">
+        各類客變項目的參考費用範圍。實際金額以後台審核結果為準，登入後系統會即時試算您的客變總價。
+      </p>
+    </div>
 
-        <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
-          <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
-            <div class="info-wrap">
-              <p class="pin" *ngIf="item.stickyAt"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
-              <p>{{ '學會公告' }} &#8739;</p>
-              <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
+    <div class="section__body">
+      <div class="price-table">
+        <table>
+          <thead>
+            <tr>
+              <th>代號</th>
+              <th>項目</th>
+              <th>單位</th>
+              <th>費用範圍</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let group of priceByCategory">
+              <tr class="price-table__category-header">
+                <td colspan="4">{{ group.category }}</td>
+              </tr>
+              <tr *ngFor="let item of group.items">
+                <td data-label="代號">
+                  <span class="price-table__code">{{ item.code }}</span>
+                </td>
+                <td data-label="項目">
+                  {{ item.name }}
+                  <div *ngIf="item.note" class="price-table__note">
+                    {{ item.note }}
+                  </div>
+                </td>
+                <td data-label="單位">{{ item.unit }}</td>
+                <td data-label="費用">
+                  <span class="price-table__price">{{ item.priceRange }}</span>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 設備表 ─── -->
+<section id="equipment" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Standard Equipment</span>
+      <h2 class="section__title">標準交屋設備</h2>
+      <p class="section__lead">
+        本建案標準交屋包含的主要建材與設備規格。如有升級需求，請於客變期間透過系統申請。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="equipment-table">
+        <div
+          *ngFor="let group of equipmentByCategory"
+          class="equipment-group"
+        >
+          <h3 class="equipment-group__title">{{ group.category }}</h3>
+
+          <div
+            *ngFor="let item of group.items"
+            class="equipment-row"
+          >
+            <div class="equipment-row__thumb">
+              <mat-icon>{{ item.icon }}</mat-icon>
             </div>
-            <h3> {{ item.title }}</h3>
+
+            <div class="equipment-row__info">
+              <h4 class="equipment-row__name">
+                {{ item.name }}
+                <span *ngIf="item.model" class="equipment-row__model">
+                  · {{ item.model }}
+                </span>
+              </h4>
+              <p class="equipment-row__spec">{{ item.spec }}</p>
+            </div>
+
+            <span class="equipment-row__brand">{{ item.brand }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 虛擬樣品屋入口 ─── -->
+<section id="vr-tour" class="section">
+  <div class="section__inner">
+    <div class="vr-entry">
+      <div class="vr-entry__content">
+        <span class="vr-entry__badge">Phase 1 即將提供</span>
+        <h2 class="vr-entry__title">走進您的未來家</h2>
+        <p class="vr-entry__lead">
+          虛擬樣品屋讓您在簽約後、開工前就能 360° 預覽不同戶型與選配組合，幫助您構思客變需求。
+        </p>
+
+        <ul class="vr-entry__features">
+          <li class="vr-entry__feature">主力戶型 A1 / B10 / B9 先行上線</li>
+          <li class="vr-entry__feature">三種風格：北歐 / 現代 / 新古典</li>
+          <li class="vr-entry__feature">系統櫃色系、地板材質差異即時比較</li>
+        </ul>
+
+        <div class="vr-entry__cta-row">
+          <a href="/#vr-coming-soon" class="btn btn-primary btn-lg">
+            進入虛擬樣品屋
+            <mat-icon>360</mat-icon>
           </a>
         </div>
-
-        <web-result-empty *ngIf="newsMsgs | isEmpty" class="flex-auto w-full my-5"></web-result-empty>
       </div>
-      <a class="link-underline ml-auto lg:mt-5" target="_blank" routerLink="/news/list">
-        <span>看更多消息</span><span class="material-symbols-rounded">arrow_right_alt</span>
-      </a>
-    </section>
 
-    <section class="flex flex-col">
-      <h2 class="text-center">
-        <span class="display d-black">Corporate Sponsors</span>
-      </h2>
-      <app-partner-logos></app-partner-logos>
-    </section>
+      <div class="vr-entry__visual">
+        <mat-icon>view_in_ar</mat-icon>
+        <span class="vr-entry__visual-label">360° 預覽 · 即將提供</span>
+      </div>
+    </div>
   </div>
-</div>
+</section>
