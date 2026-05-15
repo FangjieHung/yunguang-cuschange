@@ -344,3 +344,53 @@ export const FAQ_GROUPS: FaqGroup[] = [
     ],
   },
 ];
+
+// ─── 費用表 ─────────────────────────────────────────────
+export interface PriceItem {
+  category: string;
+  code: string;
+  name: string;
+  unit: string;
+  priceRange: string;
+  note?: string;
+}
+
+export const PRICE_ITEMS: PriceItem[] = [
+  // 輕隔間
+  { category: '輕隔間', code: 'G-01', name: '客廳輕隔間牆拆除', unit: '式', priceRange: 'NT$ 12,000 起（退料不退工）', note: '依坪數差異' },
+  { category: '輕隔間', code: 'G-03', name: '門位置移動', unit: '式', priceRange: 'NT$ 8,500', note: '同一空間內' },
+  { category: '輕隔間', code: 'G-05', name: '廚房隔間變更', unit: '式', priceRange: 'NT$ 18,000 起', note: '15F 以下適用' },
+
+  // 水電
+  { category: '水電', code: 'E-02', name: '新增插座點位', unit: '點', priceRange: 'NT$ 1,500 / 點' },
+  { category: '水電', code: 'E-03', name: '插座位置移動', unit: '點', priceRange: 'NT$ 1,200 / 點' },
+  { category: '水電', code: 'E-05', name: '新增專用電路迴路', unit: '迴', priceRange: 'NT$ 6,500 起', note: '須配電箱備用迴路' },
+  { category: '水電', code: 'W-02', name: '新增網路插座', unit: '點', priceRange: 'NT$ 1,200 / 點' },
+  { category: '水電', code: 'P-03', name: '排水孔位移（30cm 內）', unit: '處', priceRange: 'NT$ 3,800' },
+  { category: '水電', code: 'P-04', name: '排水孔位移（超過 30cm）', unit: '處', priceRange: 'NT$ 25,000 起', note: '須打樓板' },
+
+  // 廚具
+  { category: '廚具', code: 'K-01', name: '廚具升級至高階款', unit: '式', priceRange: 'NT$ 35,000 起', note: '依品牌與長度' },
+  { category: '廚具', code: 'K-02', name: '檯面升級石英石', unit: 'm²', priceRange: 'NT$ 8,000 / m²' },
+  { category: '廚具', code: 'K-03', name: '抽油煙機升級', unit: '台', priceRange: 'NT$ 6,500 起' },
+
+  // 空調
+  { category: '空調', code: 'AC-01', name: '冷氣管路位移', unit: '處', priceRange: 'NT$ 2,800 / 處' },
+  { category: '空調', code: 'AC-02', name: '吊隱式安裝預埋', unit: '台', priceRange: 'NT$ 4,500 起' },
+
+  // 磁磚
+  { category: '磁磚', code: 'T-01', name: '客廳地坪升級木地板', unit: 'm²', priceRange: 'NT$ 3,500 / m²', note: '退原磚差額另計' },
+  { category: '磁磚', code: 'T-02', name: '衛浴壁磚換色', unit: '間', priceRange: 'NT$ 5,000 / 間' },
+
+  // 泥作
+  { category: '泥作', code: 'M-01', name: '淋浴區防水拉滿（至頂）', unit: '間', priceRange: 'NT$ 7,500 / 間' },
+  { category: '泥作', code: 'M-02', name: '浴缸改淋浴', unit: '間', priceRange: 'NT$ 12,000 起', note: '須重做排水坡度' },
+
+  // 油漆
+  { category: '油漆', code: 'PA-01', name: '主牆面換色（建商指定色系）', unit: '面', priceRange: 'NT$ 1,800 / 面' },
+  { category: '油漆', code: 'PA-02', name: '黑板漆 / 磁性漆', unit: 'm²', priceRange: 'NT$ 2,200 / m²' },
+
+  // 預埋設備
+  { category: '預埋設備', code: 'PR-01', name: '衛浴電熱毛巾架預埋', unit: '組', priceRange: 'NT$ 2,500' },
+  { category: '預埋設備', code: 'PR-02', name: '除霧鏡預埋插座', unit: '組', priceRange: 'NT$ 1,500' },
+];
