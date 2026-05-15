@@ -1,127 +1,65 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit, Injector, AfterViewInit, HostListener, OnDestroy, inject, ViewChild, ElementRef } from '@angular/core';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { forkJoin } from 'rxjs';
-import { LogoStateService } from '../../../../shared/services/logo-state.service';
-
-// Third party packages
-import SwiperCore, { Autoplay, Navigation } from 'swiper';
-SwiperCore.use([Autoplay, Navigation]);
-
-// Custom packages
+import { Component, Injector, OnInit } from '@angular/core';
 import { BBDBaseComponent } from '@core/shared';
+
 import {
-  AppNewsMsgView, BannerAdView, CampaignReq, CampaignView
-} from '@core/models';
-import { AppMsgApiServ, CampaignApiServ } from '@core/services';
+  PRINCIPLES,
+  PROCESS_STEPS,
+  FAQ_GROUPS,
+  PRICE_ITEMS,
+  EQUIPMENT_ITEMS,
+  PrincipleCategory,
+  ProcessStep,
+  FaqGroup,
+  PriceItem,
+  EquipmentItem,
+} from './default.data';
 
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.scss'],
 })
-export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
-  private _appMsgApiServ = inject(AppMsgApiServ);
-  campaignApiServ = inject(CampaignApiServ);
+export class DefaultComponent extends BBDBaseComponent implements OnInit {
+  principles: PrincipleCategory[] = PRINCIPLES;
+  processSteps: ProcessStep[] = PROCESS_STEPS;
+  faqGroups: FaqGroup[] = FAQ_GROUPS;
+  equipmentItems: EquipmentItem[] = EQUIPMENT_ITEMS;
 
-  campaigns: CampaignView[] = [];
-  ads: BannerAdView[] = [];
-  newsMsgs: AppNewsMsgView[] = [];
+  /** 費用表依 category 分組 */
+  priceByCategory: { category: string; items: PriceItem[] }[] = [];
 
-  campaignSwipe = {
-    centeredSlides: true,
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-btn-campaign.next',
-      prevEl: '.swiper-btn-campaign.prev',
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1.2,
-      },
-      768: {
-        slidesPerView: 2.2,
-      },
-      1280: {
-        slidesPerView: 3.2,
-      },
-      1600: {
-        slidesPerView: 3,
-      },
-    },
-  };
+  /** 設備表依 category 分組 */
+  equipmentByCategory: { category: string; items: EquipmentItem[] }[] = [];
 
-  bannerSwipe = {
-    slidesPerView: 1,
-    spaceBetween: 32,
-    navigation: {
-      nextEl: '.swiper-btn-banner.next',
-      prevEl: '.swiper-btn-banner.prev',
-    },
-  };
-
-  constructor(
-    private logoStateService: LogoStateService,
-    protected override injector: Injector) {
+  constructor(protected override injector: Injector) {
     super(injector);
-    if (this.isBrowser)
-      gsap.registerPlugin(ScrollTrigger);
   }
 
   ngOnInit(): void {
-    this.updateLogoScale();
-    this.getCaches();
+    this.priceByCategory = this._groupByCategory(PRICE_ITEMS);
+    this.equipmentByCategory = this._groupEquipmentByCategory(EQUIPMENT_ITEMS);
   }
 
-  ngAfterViewInit(): void {
-    this.updateLogoScale();
-    if (!this.isBrowser)
-      return;
-    
-    const video = this.heroVideo.nativeElement;
-    video.muted = true; // 確保靜音
-    video.play().catch(err => {
-      console.warn('Autoplay failed:', err);
+  private _groupByCategory(items: PriceItem[]): { category: string; items: PriceItem[] }[] {
+    const map = new Map<string, PriceItem[]>();
+    items.forEach((item) => {
+      const arr = map.get(item.category) ?? [];
+      arr.push(item);
+      map.set(item.category, arr);
     });
+    return Array.from(map, ([category, items]) => ({ category, items }));
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    this.updateLogoScale();
-  }
-
-  private updateLogoScale(): void {
-    if (!this.isBrowser)
-      return;
-
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const threshold = window.innerHeight * 0.2; // 20vh
-
-    const isLarge = scrollY <= threshold;
-    this.logoStateService.setLogoScale(isLarge);
-  }
-
-  ngOnDestroy(): void {
-    // 離開 Home 頁面時，將 Logo 狀態重置
-    this.logoStateService.setLogoScale(false);
-  }
-
-  getCaches(): void {
-    const campReq = new CampaignReq();
-    campReq.regActiveAt = new Date();
-    campReq.takeCount = 10;
-
-    this.spinnerServ.show();
-    forkJoin([
-      this._appMsgApiServ.getAppNewsMsgViews(),
-      this._appMsgApiServ.getBannerAdViews(),
-      this.campaignApiServ.getCampaignViews(campReq)
-    ]).subscribe(([news, ads, camps]) => {
-      this.newsMsgs = news;
-      this.ads = ads;
-      this.campaigns = camps;
-    }).add(() => this.spinnerServ.hide());
+  private _groupEquipmentByCategory(
+    items: EquipmentItem[]
+  ): { category: string; items: EquipmentItem[] }[] {
+    const map = new Map<string, EquipmentItem[]>();
+    items.forEach((item) => {
+      const arr = map.get(item.category) ?? [];
+      arr.push(item);
+      map.set(item.category, arr);
+    });
+    return Array.from(map, ([category, items]) => ({ category, items }));
   }
 }
