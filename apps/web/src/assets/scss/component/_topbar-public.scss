@@ -1,0 +1,174 @@
+/* ============================================
+   公開區頂欄（sticky glass topbar）
+   ============================================ */
+
+.topbar-public {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--topbar-h);
+  padding: 0 clamp(16px, 4vw, 32px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  background: var(--glass-nav);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--border);
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+
+    &-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--seafoam), var(--seafoam-dark));
+      box-shadow: 0 2px 8px rgba(103, 205, 201, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    &-text {
+      letter-spacing: 0.02em;
+    }
+  }
+
+  &__nav {
+    display: none;
+    flex: 1;
+    justify-content: center;
+    gap: 4px;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  &__nav-link {
+    position: relative;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background-color 0.15s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-primary);
+      background: rgba(103, 205, 201, 0.08);
+    }
+
+    &[data-active='true'] {
+      color: var(--seafoam-dark);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: var(--seafoam);
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+
+  &__cta {
+    @media (max-width: 480px) {
+      display: none; // 超小手機收進漢堡選單
+    }
+  }
+
+  &__hamburger {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(103, 205, 201, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+/* ── Drawer（手機選單，使用 Material mat-sidenav） ── */
+.topbar-drawer {
+  width: min(320px, 85vw);
+  padding: 24px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--blur);
+
+  &__close {
+    align-self: flex-end;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+
+    &:hover { background: rgba(103, 205, 201, 0.1); }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+
+  &__nav-link {
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+
+    &:hover { background: rgba(103, 205, 201, 0.1); }
+
+    &[data-active='true'] {
+      background: var(--seafoam-mist);
+      color: var(--seafoam-dark);
+    }
+  }
+
+  &__cta {
+    width: 100%;
+  }
+}
