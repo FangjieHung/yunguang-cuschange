@@ -1,0 +1,44 @@
+<header class="buyer-topbar">
+  <a routerLink="/customization" class="buyer-topbar__logo">
+    <span class="buyer-topbar__logo-mark">澐</span>
+    <span class="buyer-topbar__logo-text">
+      <strong>{{ buyer.project }}</strong>
+      <small>{{ buyer.unit }} ｜ {{ buyer.ownerName }}</small>
+    </span>
+  </a>
+
+  <div class="buyer-topbar__center">
+    <span class="chip buyer-topbar__status" [attr.data-status]="status.status">
+      <mat-icon>edit_note</mat-icon>
+      {{ status.statusLabel }}
+    </span>
+    <span class="chip buyer-topbar__deadline">
+      <mat-icon>schedule</mat-icon>
+      距截止 {{ status.daysLeft }} 天
+    </span>
+  </div>
+
+  <div class="buyer-topbar__right">
+    <button type="button" class="buyer-topbar__icon-btn" aria-label="通知">
+      <mat-icon>notifications</mat-icon>
+      <span class="buyer-topbar__badge">3</span>
+    </button>
+
+    <div class="buyer-topbar__user" (click)="toggleUserMenu()">
+      <span class="buyer-topbar__avatar">{{ buyer.ownerName.charAt(0) }}</span>
+      <mat-icon class="buyer-topbar__caret">arrow_drop_down</mat-icon>
+
+      <div class="buyer-topbar__menu" *ngIf="userMenuOpen">
+        <a class="buyer-topbar__menu-item" href="javascript:void(0)">
+          <mat-icon>person</mat-icon>我的帳號
+        </a>
+        <a class="buyer-topbar__menu-item" href="javascript:void(0)">
+          <mat-icon>group</mat-icon>委託方管理
+        </a>
+        <a routerLink="/" class="buyer-topbar__menu-item">
+          <mat-icon>logout</mat-icon>登出
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

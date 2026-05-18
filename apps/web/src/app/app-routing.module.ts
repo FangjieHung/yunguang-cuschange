@@ -11,6 +11,13 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'customization',
+        loadChildren: () =>
+          import('./modules/customization/customization.module').then(
+            (m) => m.CustomizationModule
+          ),
+      },
+      {
         path: '',
         component: DefaultContainerComponent,
         children: [

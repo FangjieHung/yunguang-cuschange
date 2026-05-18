@@ -4,10 +4,20 @@ import { environment as env } from '../../../environments/environment';
 
 // Custom packages
 import {
-  ForgetResetPasswordComponent, SigninComponent, SignupComponent, SignupCompletedComponent
+  ForgetResetPasswordComponent, LoginComponent, SigninComponent, SignupComponent, SignupCompletedComponent
 } from './pages';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: `登入客變系統｜${env.siteName}`,
+      decscription: '登入客變系統',
+      url: `${env.siteServer}/auth/login`,
+      image: `${env.siteServer}/assets/image/og/tslmai.png`
+    }
+  },
   {
     path: 'forget-password',
     component: ForgetResetPasswordComponent,

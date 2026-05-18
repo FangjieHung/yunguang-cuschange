@@ -1,0 +1,106 @@
+<section class="otp-form-section">
+  <div class="otp-form card">
+    <header class="otp-form__head">
+      <h1 class="otp-form__title">登入客變系統</h1>
+      <p class="otp-form__lead">富華澐光 線上客變</p>
+    </header>
+
+    <!-- Step 1: 輸入身分資訊 -->
+    <form *ngIf="step === 'request'" [formGroup]="form" (ngSubmit)="requestOtp()" class="otp-form__body">
+      <div class="otp-form__field">
+        <label class="otp-form__label">身分證末四碼</label>
+        <input
+          type="text"
+          inputmode="numeric"
+          maxlength="4"
+          formControlName="idLast4"
+          class="otp-form__input"
+          placeholder="例：1234"
+        />
+        <p
+          *ngIf="form.get('idLast4')?.touched && form.get('idLast4')?.invalid"
+          class="otp-form__error"
+        >
+          請輸入身分證末 4 碼數字
+        </p>
+      </div>
+
+      <div class="otp-form__field">
+        <label class="otp-form__label">手機號碼</label>
+        <input
+          type="tel"
+          inputmode="numeric"
+          maxlength="10"
+          formControlName="phone"
+          class="otp-form__input"
+          placeholder="09XX-XXX-XXX"
+        />
+        <p
+          *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid"
+          class="otp-form__error"
+        >
+          請輸入有效的手機號碼
+        </p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg otp-form__submit">
+        取得驗證碼
+      </button>
+
+      <p class="otp-form__hint">
+        首次登入？請掃描合約上的 QR Code，或聯絡業務取得專屬連結。
+      </p>
+    </form>
+
+    <!-- Step 2: 輸入 OTP -->
+    <div *ngIf="step === 'verify'" class="otp-form__body">
+      <p class="otp-form__verify-hint">
+        已將驗證碼發送至 {{ form.get('phone')?.value }}
+      </p>
+
+      <div class="otp-form__digits">
+        <input
+          *ngFor="let _ of otpDigits; let i = index"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="otp-form__digit"
+          [value]="otpDigits[i]"
+          (input)="onOtpInput(i, $event)"
+          (keydown)="onOtpKey(i, $event)"
+        />
+      </div>
+
+      <button
+        type="button"
+        class="otp-form__resend"
+        [disabled]="countdown > 0"
+        (click)="resendOtp()"
+      >
+        <span *ngIf="countdown > 0">重新發送 ({{ countdown }})</span>
+        <span *ngIf="countdown === 0">重新發送驗證碼</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary btn-lg otp-form__submit"
+        [disabled]="!otpComplete"
+        (click)="submitOtp()"
+      >
+        登入
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-ghost btn-sm otp-form__back"
+        (click)="backToRequest()"
+      >
+        返回修改手機號碼
+      </button>
+    </div>
+
+    <footer class="otp-form__foot">
+      <p>若需協助，請聯絡客服：<a href="tel:0800-000-000">0800-000-000</a></p>
+    </footer>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<section class="form-layer1-page">
+  <a routerLink="/customization/whole-house" class="form-layer1-page__back">
+    <mat-icon>arrow_back</mat-icon> 返回全室設定
+  </a>
+
+  <header class="form-layer1-page__head">
+    <span class="eyebrow">Layer 1 · 純選擇類</span>
+    <h1 class="display-2">{{ item?.title || '地板材質' }}</h1>
+    <p class="body-lg">
+      {{ item?.description || '選擇您偏好的材質。本項目為純選擇類，無需位置或數量設定。' }}
+    </p>
+  </header>
+
+  <div class="option-card-grid">
+    <button
+      *ngFor="let opt of options"
+      type="button"
+      class="option-card"
+      [class.option-card--selected]="selectedId === opt.id"
+      (click)="select(opt.id)"
+    >
+      <div class="option-card__swatch" [style.background]="opt.swatchBg">
+        <mat-icon class="option-card__check" *ngIf="selectedId === opt.id">check_circle</mat-icon>
+      </div>
+      <div class="option-card__body">
+        <h4 class="option-card__name">{{ opt.name }}</h4>
+        <small class="option-card__series">{{ opt.series }}</small>
+        <span class="option-card__price">
+          <ng-container *ngIf="opt.isStandard">標配</ng-container>
+          <ng-container *ngIf="!opt.isStandard">+NT$ {{ opt.priceDelta | number }}</ng-container>
+        </span>
+      </div>
+    </button>
+  </div>
+
+  <footer class="form-layer1-page__actions card">
+    <div class="form-layer1-page__selected">
+      <span>已選：</span>
+      <strong *ngIf="selectedId">
+        {{ (options | slice:0)[0].name === (options | slice:0)[0].name ? '' : '' }}
+        <ng-container *ngFor="let opt of options">
+          <ng-container *ngIf="opt.id === selectedId">
+            {{ opt.name }}
+            <span class="chip">{{ opt.isStandard ? '標配' : '+NT$ ' + (opt.priceDelta | number) }}</span>
+          </ng-container>
+        </ng-container>
+      </strong>
+      <em *ngIf="!selectedId">尚未選擇</em>
+    </div>
+    <div class="form-layer1-page__cta">
+      <button type="button" class="btn btn-ghost" (click)="cancel()">取消</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!selectedId"
+        (click)="addToList()"
+      >
+        加入清單 <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </footer>
+</section>

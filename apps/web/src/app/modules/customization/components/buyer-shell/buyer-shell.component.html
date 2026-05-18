@@ -1,0 +1,38 @@
+<div class="buyer-shell">
+  <buyer-topbar></buyer-topbar>
+
+  <div class="buyer-shell__body">
+    <!-- Desktop sidebar -->
+    <aside class="buyer-shell__sidebar" aria-label="主要功能">
+      <a
+        *ngFor="let item of nav"
+        [routerLink]="item.path"
+        [routerLinkActive]="'buyer-shell__sidebar-item--active'"
+        [routerLinkActiveOptions]="{ exact: item.exact || false }"
+        class="buyer-shell__sidebar-item"
+        [matTooltip]="item.label"
+        matTooltipPosition="right"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </a>
+    </aside>
+
+    <main class="buyer-shell__main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="buyer-shell__bottom-nav" aria-label="行動主要功能">
+    <a
+      *ngFor="let item of nav"
+      [routerLink]="item.path"
+      [routerLinkActive]="'buyer-shell__bottom-item--active'"
+      [routerLinkActiveOptions]="{ exact: item.exact || false }"
+      class="buyer-shell__bottom-item"
+    >
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+</div>

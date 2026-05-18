@@ -1,0 +1,69 @@
+<section class="dashboard-page">
+  <header class="dashboard-page__head">
+    <h1 class="display-2">您好，{{ buyer.ownerName }}</h1>
+    <p class="body-lg">歡迎回到 {{ buyer.project }} 客變系統。<br />申請開放至 {{ status.applyEndDate }}。</p>
+  </header>
+
+  <div class="dashboard-grid">
+    <!-- 進度卡 -->
+    <div class="card dashboard-progress">
+      <div class="dashboard-progress__head">
+        <span class="eyebrow">申請進度</span>
+        <span class="chip" [attr.data-status]="status.status">{{ status.statusLabel }}</span>
+      </div>
+      <div class="dashboard-progress__percent">{{ status.progressPercent }}%</div>
+      <div class="dashboard-progress__bar">
+        <span class="dashboard-progress__bar-fill" [style.width.%]="status.progressPercent"></span>
+      </div>
+      <p class="dashboard-progress__hint">距截止還有 {{ status.daysLeft }} 天，請儘早完成申請。</p>
+    </div>
+
+    <!-- 快速入口 -->
+    <div class="card dashboard-entries">
+      <span class="eyebrow">快速入口</span>
+      <div class="dashboard-entries__grid">
+        <a
+          *ngFor="let entry of quickEntries"
+          [routerLink]="entry.route"
+          class="dashboard-entries__card"
+        >
+          <mat-icon class="dashboard-entries__icon">{{ entry.icon }}</mat-icon>
+          <span class="dashboard-entries__label">{{ entry.label }}</span>
+          <small class="dashboard-entries__sub">{{ entry.sub }}</small>
+        </a>
+      </div>
+    </div>
+
+    <!-- 即將到期 -->
+    <div class="card dashboard-alerts">
+      <span class="eyebrow">即將到期</span>
+      <ul class="dashboard-alerts__list">
+        <li class="dashboard-alerts__row" *ngFor="let alert of alerts">
+          <mat-icon class="dashboard-alerts__icon">warning_amber</mat-icon>
+          <div class="dashboard-alerts__body">
+            <strong>{{ alert.category }}</strong>
+            <small>{{ alert.code }}</small>
+          </div>
+          <span class="chip">{{ alert.deadline }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 通知列表 -->
+    <div class="card dashboard-notifications">
+      <span class="eyebrow">最新通知</span>
+      <ul class="dashboard-notifications__list">
+        <li class="dashboard-notifications__item" *ngFor="let n of notifications">
+          <mat-icon class="dashboard-notifications__icon" [attr.data-source]="n.source">
+            {{ n.icon }}
+          </mat-icon>
+          <div class="dashboard-notifications__content">
+            <h4>{{ n.title }}</h4>
+            <p>{{ n.body }}</p>
+            <small>{{ n.timeAgo }}</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

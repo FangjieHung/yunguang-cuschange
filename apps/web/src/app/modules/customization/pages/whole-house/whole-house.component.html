@@ -1,0 +1,34 @@
+<section class="whole-house-page">
+  <header class="whole-house-page__head">
+    <span class="eyebrow">客變設定 · 全室</span>
+    <h1 class="display-2">全室設定</h1>
+    <p class="body-lg">適用於跨越多個空間、不屬於單一房間的客變項目。請逐項選擇您的偏好。</p>
+  </header>
+
+  <div class="whole-house-grid">
+    <button
+      *ngFor="let item of items"
+      type="button"
+      class="whole-house-card card"
+      (click)="open(item.id)"
+    >
+      <span class="whole-house-card__icon">
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </span>
+      <span class="whole-house-card__layer chip">Layer {{ item.layer }}</span>
+      <h3 class="whole-house-card__title">{{ item.title }}</h3>
+      <p class="whole-house-card__desc">{{ item.description }}</p>
+      <span class="whole-house-card__cta">
+        進入設定 <mat-icon>arrow_forward</mat-icon>
+      </span>
+    </button>
+  </div>
+
+  <div class="whole-house-page__hint card">
+    <mat-icon>tips_and_updates</mat-icon>
+    <div>
+      <strong>提醒</strong>
+      <p>單一空間（書房、主臥...）的個別設定，請至 Room Navigator 進入對應空間操作。</p>
+    </div>
+  </div>
+</section>

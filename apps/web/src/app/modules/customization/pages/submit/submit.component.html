@@ -1,0 +1,60 @@
+<section class="submit-page">
+  <header class="submit-page__head">
+    <span class="eyebrow">送出申請</span>
+    <h1 class="display-2">最終確認</h1>
+    <p class="body-lg">請最後確認您的客變申請內容。送出後將進入審核流程。</p>
+  </header>
+
+  <div class="submit-confirm card">
+    <div class="submit-confirm__meta">
+      <info-tile label="戶號" [value]="buyer.unit"></info-tile>
+      <info-tile label="所有權人" [value]="buyer.ownerName"></info-tile>
+      <info-tile label="申請版本" value="v1（草稿）"></info-tile>
+    </div>
+
+    <div class="submit-confirm__section" *ngFor="let cat of list">
+      <h3 class="submit-confirm__category">{{ cat.category }}</h3>
+      <ul class="submit-confirm__items">
+        <li class="submit-confirm__item" *ngFor="let item of cat.items">
+          <mat-icon class="submit-confirm__check">check_circle</mat-icon>
+          <span class="chip">{{ item.code }}</span>
+          <span class="submit-confirm__name">{{ item.name }}</span>
+          <span class="submit-confirm__location">{{ item.location }}</span>
+          <span class="submit-confirm__fee"
+            [class.submit-confirm__fee--add]="item.fee > 0"
+            [class.submit-confirm__fee--refund]="item.fee < 0">
+            <ng-container *ngIf="item.fee > 0">+NT$ {{ item.fee | number }}</ng-container>
+            <ng-container *ngIf="item.fee < 0">-NT$ {{ -item.fee | number }}</ng-container>
+            <ng-container *ngIf="item.fee === 0">標配</ng-container>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <fee-summary
+      [addOn]="summary.addOn"
+      [refund]="summary.refund"
+      class="submit-confirm__summary"
+    ></fee-summary>
+
+    <div class="submit-confirm__agreement">
+      <mat-checkbox [(ngModel)]="agreed" color="primary">
+        我已閱讀並同意客變規則、費用條款與施工條件。
+      </mat-checkbox>
+    </div>
+
+    <footer class="submit-confirm__actions">
+      <button type="button" class="btn btn-ghost" (click)="back()">
+        <mat-icon>arrow_back</mat-icon>返回修改
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-lg"
+        [disabled]="!agreed"
+        (click)="submit()"
+      >
+        <mat-icon>send</mat-icon>送出申請
+      </button>
+    </footer>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<section class="my-list-page">
+  <header class="my-list-page__head">
+    <span class="eyebrow">我的清單</span>
+    <h1 class="display-2">已申請項目</h1>
+    <p class="body-lg">依工程類別自動彙整，共 {{ totalItems }} 項。</p>
+  </header>
+
+  <empty-state
+    *ngIf="totalItems === 0"
+    icon="inbox"
+    title="您還沒有任何客變項目"
+    message="從全室設定開始規劃，或進入空間 Room Navigator 標注位置。"
+    ctaLabel="開始規劃"
+    ctaRoute="/customization/whole-house"
+  ></empty-state>
+
+  <ng-container *ngIf="totalItems > 0">
+    <div class="list-summary" *ngFor="let cat of list">
+      <h3 class="list-summary__category">
+        <mat-icon>label</mat-icon>{{ cat.category }}
+        <small>共 {{ cat.items.length }} 項</small>
+      </h3>
+      <div class="card list-summary__items">
+        <item-row
+          *ngFor="let item of cat.items"
+          [item]="item"
+          (edit)="editItem($event)"
+          (remove)="removeItem($event, cat)"
+        ></item-row>
+      </div>
+    </div>
+
+    <div class="my-list-page__footer">
+      <fee-summary [addOn]="summary.addOn" [refund]="summary.refund" class="card"></fee-summary>
+
+      <div class="my-list-page__cta card">
+        <button type="button" class="btn btn-outline" (click)="saveDraft()">
+          <mat-icon>save</mat-icon>儲存草稿
+        </button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="goSubmit()">
+          前往送出確認 <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</section>

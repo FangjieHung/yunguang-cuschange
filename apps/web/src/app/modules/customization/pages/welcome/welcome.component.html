@@ -1,0 +1,46 @@
+<section class="welcome-page">
+  <div class="welcome-card card">
+    <header class="welcome-card__head">
+      <span class="eyebrow">首次登入核對</span>
+      <h1 class="welcome-card__title">請確認您的購屋資訊</h1>
+      <p class="welcome-card__lead">確認資訊無誤後，將進入客變系統。</p>
+    </header>
+
+    <dl class="welcome-card__info">
+      <info-tile label="建案名稱" [value]="buyer.project"></info-tile>
+      <info-tile label="戶號" [value]="buyer.unit"></info-tile>
+      <info-tile label="坪數" [value]="buyer.size + ' 坪'"></info-tile>
+      <info-tile label="格局" [value]="buyer.layout"></info-tile>
+      <info-tile label="朝向" [value]="buyer.facing"></info-tile>
+      <info-tile label="所有權人" [value]="buyer.ownerName"></info-tile>
+    </dl>
+
+    <button type="button" class="btn btn-ghost welcome-card__expand" (click)="toggleFloorplan()">
+      <mat-icon>{{ showFloorplan ? 'expand_less' : 'expand_more' }}</mat-icon>
+      預覽戶型平面圖
+    </button>
+
+    <div class="welcome-card__floorplan" *ngIf="showFloorplan">
+      <div class="floorplan floorplan--placeholder">
+        <div class="floorplan__room floorplan__room--living">客廳</div>
+        <div class="floorplan__room floorplan__room--master">主臥</div>
+        <div class="floorplan__room floorplan__room--study">書房</div>
+        <div class="floorplan__room floorplan__room--kitchen">廚房</div>
+        <div class="floorplan__room floorplan__room--bath1">主衛</div>
+        <div class="floorplan__room floorplan__room--bath2">次衛</div>
+      </div>
+      <p class="welcome-card__floorplan-hint">＊本平面圖為示意，實際以契約附件為準。</p>
+    </div>
+
+    <footer class="welcome-card__actions">
+      <button type="button" class="btn btn-primary btn-lg" (click)="confirmCorrect()">
+        <mat-icon>check_circle</mat-icon>
+        資訊正確，進入客變系統
+      </button>
+      <button type="button" class="btn btn-outline" (click)="reportIssue()">
+        <mat-icon>error_outline</mat-icon>
+        資訊有誤，聯絡業務
+      </button>
+    </footer>
+  </div>
+</section>

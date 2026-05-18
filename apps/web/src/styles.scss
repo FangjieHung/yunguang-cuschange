@@ -29,6 +29,22 @@
 @import "assets/scss/component/vr-entry";
 @import "assets/scss/component/anchor-nav";
 
+/* ── S4 買家端核心 UI ── */
+@import "assets/scss/component/otp-form";
+@import "assets/scss/component/welcome-card";
+@import "assets/scss/component/buyer-topbar";
+@import "assets/scss/component/buyer-shell";
+@import "assets/scss/component/unit-info-card";
+@import "assets/scss/component/floorplan";
+@import "assets/scss/component/whole-house-grid";
+@import "assets/scss/component/option-card-grid";
+@import "assets/scss/component/list-summary";
+@import "assets/scss/component/fee-summary";
+@import "assets/scss/component/pack-download";
+@import "assets/scss/component/submit-confirm";
+@import "assets/scss/component/checklist";
+@import "assets/scss/component/empty-state";
+
 /*
   保留供 S3+（buyer/admin shells）使用，目前不引用：
 

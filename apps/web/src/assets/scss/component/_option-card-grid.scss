@@ -1,0 +1,130 @@
+/* Layer 1 圖卡選擇器 */
+.form-layer1-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    align-self: flex-start;
+
+    &:hover { color: var(--seafoam-dark); }
+    mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  }
+
+  &__head { text-align: left; }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    flex-wrap: wrap;
+  }
+
+  &__selected {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+
+    strong { color: var(--text-primary); font-weight: 700; }
+    em { color: var(--text-muted); font-style: italic; }
+  }
+
+  &__cta {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+.option-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.option-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: var(--glass-card);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  &--selected {
+    border-color: var(--seafoam);
+    box-shadow: 0 0 0 3px rgba(103, 205, 201, .2), var(--shadow-elevated);
+  }
+
+  &__swatch {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+
+  &__check {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #fff;
+    background: var(--seafoam);
+    border-radius: 50%;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+  }
+
+  &__body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  &__series {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  &__price {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--seafoam-dark);
+  }
+}
+
+@media (max-width: 480px) {
+  .form-layer1-page__actions { flex-direction: column; align-items: stretch; }
+  .form-layer1-page__cta { justify-content: flex-end; }
+}

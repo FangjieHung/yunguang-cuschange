@@ -7,12 +7,14 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import {
   ForgetResetPasswordComponent,
+  LoginComponent,
   SigninComponent, SignupComponent, SignupCompletedComponent
 } from './pages';
 
 const CUSTOM_MODULES = [SharedModule];
 const CUSTOM_COMPONENTS = [
   ForgetResetPasswordComponent,
+  LoginComponent,
   SigninComponent, SignupComponent, SignupCompletedComponent
 ];
 

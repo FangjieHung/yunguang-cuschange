@@ -1,0 +1,45 @@
+<section class="designer-pack-page">
+  <header class="designer-pack-page__head">
+    <span class="eyebrow">設計師圖面包</span>
+    <h1 class="display-2">下載圖面包</h1>
+    <p class="body-lg">如您委託設計師代為規劃，可下載圖面包供其標注後上傳。</p>
+  </header>
+
+  <ul class="pack-download card">
+    <li class="pack-download__row" *ngFor="let file of files">
+      <span class="pack-download__icon">
+        <mat-icon>picture_as_pdf</mat-icon>
+      </span>
+      <div class="pack-download__body">
+        <h4>{{ file.name }}</h4>
+        <p>{{ file.description }}</p>
+        <small>{{ file.format }} · {{ file.size }}</small>
+      </div>
+      <button type="button" class="btn btn-outline" (click)="download(file.name)">
+        <mat-icon>download</mat-icon>下載
+      </button>
+    </li>
+  </ul>
+
+  <div class="pack-download pack-download--zip card">
+    <span class="pack-download__icon pack-download__icon--zip">
+      <mat-icon>folder_zip</mat-icon>
+    </span>
+    <div class="pack-download__body">
+      <h4>{{ zip.name }}</h4>
+      <p>{{ zip.description }}</p>
+      <small>{{ zip.format }} · {{ zip.size }}</small>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg" (click)="download(zip.name)">
+      <mat-icon>download</mat-icon>下載全部
+    </button>
+  </div>
+
+  <div class="card designer-pack-page__upload-back">
+    <mat-icon>upload_file</mat-icon>
+    <div>
+      <strong>標注完成後</strong>
+      <p>請至 Layer 4 表單上傳設計師標注後的施工圖。本階段尚未開放上傳。</p>
+    </div>
+  </div>
+</section>
