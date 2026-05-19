@@ -53,8 +53,6 @@
     padding: clamp(24px, 4vw, 48px) clamp(16px, 5vw, 56px);
     overflow: auto;
     max-width: 100%;
-
-    > * { max-width: var(--max-content); margin: 0 auto; }
   }
 
   &__bottom-nav {

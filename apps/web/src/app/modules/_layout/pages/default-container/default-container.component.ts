@@ -8,6 +8,7 @@ import {
   OnDestroy,
   HostListener,
   AfterViewInit,
+  signal,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -32,6 +33,7 @@ export class DefaultContainerComponent
   navSections: NavSection[] = NAV_SECTIONS;
   currentSection = '';
   isDrawerOpen = false;
+  showNav = signal(false);
 
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
@@ -131,6 +133,12 @@ export class DefaultContainerComponent
   closeDrawer(): void {
     this.drawer?.close();
     this.isDrawerOpen = false;
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    const scrollThreshold = window.innerHeight * 0.9;
+    this.showNav.set(window.scrollY > scrollThreshold);
   }
 
   @HostListener('window:keydown.escape')

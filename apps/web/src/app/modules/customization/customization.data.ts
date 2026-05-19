@@ -74,7 +74,7 @@ export interface DeadlineAlert {
 // ========== Buyer ==========
 export const MOCK_BUYER: BuyerInfo = {
   unit: '12F-A1',
-  ownerName: '王○○',
+  ownerName: '李亮怡',
   size: 35.7,
   layout: '3房2廳2衛',
   facing: '東南',
@@ -140,6 +140,7 @@ export const MOCK_WHOLE_HOUSE_ITEMS: WholeHouseItem[] = [
     description: '是否申請平釘天花、高度設定',
     layer: 1,
   },
+  /* 
   {
     id: 'wh-electrical',
     icon: 'electrical_services',
@@ -147,6 +148,7 @@ export const MOCK_WHOLE_HOUSE_ITEMS: WholeHouseItem[] = [
     description: '面板顏色、插座規格（國際型／一般型）',
     layer: 2,
   },
+  */
   {
     id: 'wh-door',
     icon: 'door_front',
@@ -258,7 +260,6 @@ export interface BuyerNavItem {
 
 export const BUYER_NAV: BuyerNavItem[] = [
   { path: '/customization', icon: 'dashboard', label: '儀表板', exact: true },
-  { path: '/customization/my-unit', icon: 'home_work', label: '我的戶型' },
   { path: '/customization/whole-house', icon: 'chair', label: '客變設定' },
   { path: '/customization/my-list', icon: 'fact_check', label: '我的清單' },
 ];

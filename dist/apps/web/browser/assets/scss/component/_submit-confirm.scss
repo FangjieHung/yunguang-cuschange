@@ -1,0 +1,104 @@
+/* 送出確認頁 */
+.submit-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 880px !important;
+  margin: 0 auto !important;
+
+  &__head { text-align: center; }
+}
+
+.submit-confirm {
+  padding: clamp(24px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  &__section { display: flex; flex-direction: column; gap: 8px; }
+
+  &__category {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--seafoam-dark);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  &__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 24px auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, .35);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+  }
+
+  &__check {
+    color: #2e7d32;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__name { color: var(--text-primary); font-weight: 600; }
+  &__location { color: var(--text-muted); font-size: 12px; }
+
+  &__fee {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    &--add { color: #2e7d32; }
+    &--refund { color: #c87b00; }
+  }
+
+  &__summary {
+    margin-top: 8px;
+    background: rgba(218, 247, 242, .4);
+    border-radius: var(--radius-md);
+  }
+
+  &__agreement {
+    padding: 16px;
+    background: rgba(255, 193, 7, .08);
+    border: 1px solid rgba(255, 193, 7, .25);
+    border-radius: var(--radius-md);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .submit-confirm__meta { grid-template-columns: 1fr; }
+  .submit-confirm__item {
+    grid-template-columns: 20px auto 1fr;
+    grid-template-rows: auto auto;
+  }
+  .submit-confirm__location, .submit-confirm__fee { grid-column: 2 / -1; }
+  .submit-confirm__actions { flex-direction: column-reverse; }
+  .submit-confirm__actions .btn { width: 100%; justify-content: center; }
+}

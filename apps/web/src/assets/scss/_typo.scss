@@ -21,7 +21,7 @@
 }
 
 .label {
-    @apply text-sm;
+    @apply text-base;
 }
 
 p,
@@ -55,7 +55,7 @@ figcaption {
 
 .eyebrow {
   display: inline-block;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -63,7 +63,7 @@ figcaption {
 }
 
 .body-lg {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.7;
   color: var(--text-secondary);
 }
@@ -75,7 +75,7 @@ figcaption {
   border-radius: var(--radius-sm);
   background: rgba(103, 205, 201, 0.15);
   color: var(--seafoam-dark);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;

@@ -3,7 +3,7 @@ export const environment = {
   appPfm: 'WEB',
   storageTokenName: 'tslmaiWebStageToken',
   storageAuthUserName: 'tslmaiWebStageAuthUser',
-  siteName: '台灣人工智慧檢驗醫學學會',
+  siteName: '澐光客變系統',
   siteServer: 'https://tslmai.bonbondi.com',
   apiServer: 'https://stageapiv1.tslmai.starxfuture.com/Portal',
   cdnServer: 'https://stageapiv1.tslmai.starxfuture.com',

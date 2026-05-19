@@ -3236,7 +3236,7 @@ git commit -m "feat(home): append fees table + equipment table sections"
   <div class="section__inner">
     <div class="vr-entry">
       <div class="vr-entry__content">
-        <span class="vr-entry__badge">Phase 1 即將提供</span>
+        <span class="vr-entry__badge">Phase 2 即將提供</span>
         <h2 class="vr-entry__title">走進您的未來家</h2>
         <p class="vr-entry__lead">
           虛擬樣品屋讓您在簽約後、開工前就能 360° 預覽不同戶型與選配組合，幫助您構思客變需求。

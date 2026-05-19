@@ -1,9 +1,9 @@
 // ============================================================
-//  _theme.scss — Intellecta Dashboard · Seafoam M3 Theme
-//  產出來源：dev/visual-reverse-engineer/index.html
+//  _theme.scss — Intellecta Dashboard · Teal M3 Theme
+//  產出來源：重新調整
 //
-//  Primary   #67CDC9 → mat.$teal-palette   tone 400
-//  Secondary #4db8b4 → mat.$cyan-palette   tone 400
+//  Primary   #38acb5 → Custom Teal
+//  Accent    #158ea3 → Custom Blue-Teal
 //  Font      Inter（Google Fonts）
 //  Density   0（預設）
 // ============================================================
@@ -13,22 +13,20 @@
 // ── Base ──
 @include mat.core();
 
-// ── Primary Palette：Teal（最接近 #67CDC9 Seafoam Green）──
-// mat.$teal-palette tone 400 = #26a69a，偏深；
-// 若需精確色值請透過 mat.define-palette 自訂 map 覆蓋 default。
+// ── Primary Palette：Custom Teal #38acb5 ──
 $primary-palette: mat.define-palette(
-  mat.$teal-palette,
-  400  /* default */ ,
-  200  /* lighter  */,
-  700  /* darker   */
+  mat.$cyan-palette,
+  500  /* default */,
+  100  /* lighter */,
+  800  /* darker  */
 );
 
-// ── Accent Palette：Cyan（搭配 Seafoam 的清爽輔色）──
+// ── Accent Palette：Custom Blue-Teal #158ea3 ──
 $accent-palette: mat.define-palette(
-  mat.$cyan-palette,
-  400  /* default */,
-  100  /* lighter */,
-  600  /* darker  */
+  mat.$blue-palette,
+  700  /* default */,
+  300  /* lighter */,
+  900  /* darker  */
 );
 
 // ── Theme Definition ──
@@ -56,63 +54,63 @@ $project-light-theme: mat.define-light-theme(
 
 /* ── Layer 1：原始 Token（直接持有數值）── */
 :root {
-  /* Primary — Seafoam Green */
-  --token-primary:                   #67CDC9;
-  --token-on-primary:                #f0fffd;
-  --token-primary-container:         #DAF7F2;
-  --token-on-primary-container:      #1a3533;
+  /* Primary — Custom Teal */
+  --token-primary:                   #38acb5;
+  --token-on-primary:                #ffffff;
+  --token-primary-container:         #c1f0f7;
+  --token-on-primary-container:      #001f23;
 
-  /* Secondary — Seafoam Dark */
-  --token-secondary:                 #4db8b4;
-  --token-on-secondary:              #f0fffd;
-  --token-secondary-container:       #D0F0E0;
-  --token-on-secondary-container:    #1a3533;
+  /* Secondary — Custom Blue-Teal */
+  --token-secondary:                 #158ea3;
+  --token-on-secondary:              #ffffff;
+  --token-secondary-container:       #b3dce8;
+  --token-on-secondary-container:    #001426;
 
-  /* Tertiary — Mint Ice */
-  --token-tertiary:                  #b2f0c8;
-  --token-on-tertiary:               #1a3f28;
-  --token-tertiary-container:        #E6FFE6;
-  --token-on-tertiary-container:     #1a3f28;
+  /* Tertiary — Complementary Mint */
+  --token-tertiary:                  #4db8b4;
+  --token-on-tertiary:               #ffffff;
+  --token-tertiary-container:        #d0f0e0;
+  --token-on-tertiary-container:     #1a3533;
 
   /* Error — MD3 標準 */
   --token-error:                     #ba1a1a;
-  --token-on-error:                  #f5eded;
+  --token-on-error:                  #ffffff;
   --token-error-container:           #ffdad6;
   --token-on-error-container:        #410002;
 
   /* Surface & Background */
-  --token-background:                #cdf5ef;
-  --token-on-background:             #1a3533;
-  --token-surface:                   rgba(255, 255, 255, .55);
-  --token-on-surface:                #1a3533;
-  --token-surface-variant:           rgba(240, 253, 252, .50);
-  --token-on-surface-variant:        #5a8480;
+  --token-background:                #f7f9fb;
+  --token-on-background:             #001426;
+  --token-surface:                   rgba(255, 255, 255, .95);
+  --token-on-surface:                #001f23;
+  --token-surface-variant:           rgba(56, 172, 181, .08);
+  --token-on-surface-variant:        #3a7a83;
 
   /* Outline */
-  --token-outline:                   #9bbfbb;
-  --token-outline-variant:           rgba(155, 191, 187, .30);
+  --token-outline:                   #6ba3ac;
+  --token-outline-variant:           rgba(56, 172, 181, .20);
 
   /* Shadow & Scrim */
-  --token-shadow:                    rgba(103, 205, 201, .10);
-  --token-scrim:                     rgba(26,  53,  51,  .40);
+  --token-shadow:                    rgba(56, 172, 181, .12);
+  --token-scrim:                     rgba(0,  20,  38,  .40);
 
   /* Inverse */
-  --token-inverse-surface:           #1a3533;
-  --token-inverse-on-surface:        #DAF7F2;
-  --token-inverse-primary:           #b2ece8;
+  --token-inverse-surface:           #001f23;
+  --token-inverse-on-surface:        #c1f0f7;
+  --token-inverse-primary:           #5dd5e2;
 
   /* Surface Containers（由淺至深） */
-  --token-surface-dim:               #cdf5ef;
-  --token-surface-bright:            #f0fffd;
+  --token-surface-dim:               #dfe8eb;
+  --token-surface-bright:            #f7f9fb;
   --token-surface-container-lowest:  rgba(255, 255, 255, .30);
-  --token-surface-container-low:     rgba(255, 255, 255, .42);
-  --token-surface-container:         rgba(255, 255, 255, .55);
-  --token-surface-container-high:    rgba(255, 255, 255, .65);
-  --token-surface-container-highest: rgba(255, 255, 255, .75);
+  --token-surface-container-low:     rgba(193, 240, 247, .40);
+  --token-surface-container:         rgba(193, 240, 247, .55);
+  --token-surface-container-high:    rgba(193, 240, 247, .65);
+  --token-surface-container-highest: rgba(193, 240, 247, .75);
 
   /* Overlay & Divider */
-  --token-primary-overlay:           rgba(103, 205, 201, .10);
-  --token-primary-divider:           rgba(103, 205, 201, .20);
+  --token-primary-overlay:           rgba(56, 172, 181, .10);
+  --token-primary-divider:           rgba(56, 172, 181, .20);
 
   /* Shape */
   --token-radius-pill:               9999px;
@@ -195,8 +193,8 @@ $project-light-theme: mat.define-light-theme(
 
   /* ── Design Tokens ── */
   :root {
-    --seafoam:       #67CDC9;
-    --seafoam-dark:  #4db8b4;
+    --seafoam:       #38acb5;
+    --seafoam-dark:  #158ea3;
     --pale-seafoam:  #DAF7F2;
     --mint-ice:      #E6FFE6;
     --seafoam-mist:  #D0F0E0;

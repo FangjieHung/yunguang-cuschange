@@ -1,0 +1,65 @@
+/* ============================================
+   FAQ — 手風琴
+   ============================================ */
+
+.faq {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.faq__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq__group-title {
+  @extend .eyebrow;
+  margin-bottom: 4px;
+}
+
+/* 套用至 Angular Material mat-expansion-panel */
+.faq__panel.mat-expansion-panel {
+  background: var(--glass-card);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-soft) !important;
+  margin-bottom: 12px;
+
+  &.mat-expanded {
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  .mat-expansion-panel-header {
+    height: auto;
+    min-height: 64px;
+    padding: 16px 20px;
+
+    &.mat-expanded {
+      height: auto;
+    }
+  }
+
+  .mat-expansion-panel-header-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .mat-expansion-indicator::after {
+    color: var(--seafoam-dark);
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 20px 20px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+}

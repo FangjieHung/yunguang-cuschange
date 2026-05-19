@@ -30,9 +30,8 @@
   <mat-sidenav-content>
     <!-- Public topbar -->
     <header class="topbar-public">
-      <a routerLink="/" class="topbar-public__logo">
-        <span class="topbar-public__logo-mark">澐</span>
-        <span class="topbar-public__logo-text">富華澐光</span>
+      <a routerLink="/" class="block">
+        <img src="assets/image/logo/logo.webp" alt="富華澐光" class="topbar-public__logo">
       </a>
 
       <nav class="topbar-public__nav">
@@ -67,7 +66,7 @@
     </header>
 
     <!-- 浮動錨點導覽（桌機） -->
-    <nav class="anchor-nav" aria-label="區塊快速導覽">
+    <nav class="anchor-nav" *ngIf="showNav()" aria-label="區塊快速導覽">
       <button
         *ngFor="let section of navSections"
         type="button"
@@ -76,7 +75,7 @@
         (click)="scrollToSection(section.id)"
         [attr.aria-label]="'跳至 ' + section.label"
       >
-        <span class="anchor-nav__tooltip">{{ section.label }}</span>
+        <span class="anchor-nav__label">{{ section.label }}</span>
       </button>
     </nav>
 

@@ -14,6 +14,16 @@
   }
 }
 
+// 淡入淡出動畫
+.fade-transition {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  &.fade-in {
+    opacity: 1;
+  }
+}
+
 // 漢堡 drawer 內部容器（mat-sidenav）外觀
 ::ng-deep .topbar-drawer.mat-drawer {
   background: rgba(255, 255, 255, 0.92);

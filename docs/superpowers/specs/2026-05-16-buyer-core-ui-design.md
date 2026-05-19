@@ -233,7 +233,7 @@ src/assets/scss/component/
 ║  戶    號   12F-A1                    ║
 ║  坪    數   35.7 坪                   ║
 ║  格    局   3 房 2 廳 2 衛             ║
-║  所有權人   王○○（末三碼隱碼）        ║
+║  所有權人   李亮怡（末三碼隱碼）        ║
 ║                                       ║
 ║  [📐 預覽戶型平面圖] ▾                ║ ← 可展開顯示 placeholder 圖
 ╠═══════════════════════════════════════╣
@@ -493,7 +493,7 @@ src/assets/scss/component/
 ```ts
 export const MOCK_BUYER = {
   unit: '12F-A1',
-  ownerName: '王○○',
+  ownerName: '李亮怡',
   size: 35.7,
   layout: '3房2廳2衛',
   facing: '東南',

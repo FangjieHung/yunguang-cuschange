@@ -1,10 +1,83 @@
 <section class="dashboard-page">
   <header class="dashboard-page__head">
     <h1 class="display-2">您好，{{ buyer.ownerName }}</h1>
-    <p class="body-lg">歡迎回到 {{ buyer.project }} 客變系統。<br />申請開放至 {{ status.applyEndDate }}。</p>
+    <p class="body-lg">
+      歡迎回到 {{ buyer.project }} 客變系統。<br />申請開放至 {{ status.applyEndDate }}。</p>
   </header>
 
   <div class="dashboard-grid">
+
+    <!-- 我的戶型 -->
+    <div class="card unit-info-card">
+      <div class="unit-info-card__header">
+        <span class="eyebrow">我的戶型</span>
+        <h2 class="headline-md">{{ buyer.unit }}</h2>
+        <p class="body-md">查看戶型格局、可申請範圍與限制。</p>
+      </div>
+
+      <div class="unit-info-card__content">
+        <div class="unit-info-card__floorplan">
+          <div class="floorplan">
+            <div class="floorplan__room floorplan__room--living">客廳</div>
+            <div class="floorplan__room floorplan__room--master">主臥</div>
+            <div class="floorplan__room floorplan__room--study">書房</div>
+            <div class="floorplan__room floorplan__room--kitchen">廚房</div>
+            <div class="floorplan__room floorplan__room--bath1">主衛</div>
+            <div class="floorplan__room floorplan__room--bath2">次衛</div>
+            <div class="floorplan__room floorplan__room--balcony">陽台</div>
+            <div class="floorplan__room floorplan__room--entry">玄關</div>
+          </div>
+          <small class="unit-info-card__floorplan-hint">＊本平面圖為示意。下載完整圖請按下方按鈕。</small>
+        </div>
+
+        <aside class="unit-info-card__side">
+          <h3 class="unit-info-card__title">基本資訊</h3>
+          <dl class="unit-info-card__list">
+            <info-tile label="戶型" [value]="'A1'"></info-tile>
+            <info-tile label="坪數" [value]="buyer.size + ' 坪'"></info-tile>
+            <info-tile label="格局" [value]="buyer.layout"></info-tile>
+            <info-tile label="朝向" [value]="buyer.facing"></info-tile>
+            <info-tile label="樓層" [value]="buyer.floor + ' F'"></info-tile>
+            <info-tile label="已申請" [value]="'5 項'"></info-tile>
+          </dl>
+
+          <div class="unit-info-card__downloads">
+            <button class="btn btn-outline" (click)="download('A1 平面圖.pdf')">
+              <mat-icon>picture_as_pdf</mat-icon>下載格局圖 PDF
+            </button>
+            <a routerLink="/customization/designer-pack" class="btn btn-ghost">
+              <mat-icon>folder_zip</mat-icon>下載設計師圖面包
+            </a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- 樓層限制提示 -->
+      <div class="unit-info-card__restrictions">
+        <div class="unit-info-card__restrictions-head">
+          <mat-icon>info</mat-icon>
+          <h4>樓層限制與可申請範圍</h4>
+        </div>
+        <ul class="unit-info-card__restrictions-list">
+          <li>
+            <mat-icon class="ok">check_circle</mat-icon>
+            您位於 12F，可申請所有格局類項目（G-01 ~ G-05）
+          </li>
+          <li>
+            <mat-icon class="ok">check_circle</mat-icon>
+            水電（E-01 ~ E-07）、弱電（W-01 ~ W-05）皆可申請
+          </li>
+          <li>
+            <mat-icon class="warn">warning_amber</mat-icon>
+            16F 以上才有 G-05 廚房隔間變更限制，您不受此限
+          </li>
+          <li>
+            <mat-icon class="warn">warning_amber</mat-icon>
+            衛浴超出水區範圍需另行評估（請使用 Layer 4 上傳施工圖）
+          </li>
+        </ul>
+      </div>
+    </div>
     <!-- 進度卡 -->
     <div class="card dashboard-progress">
       <div class="dashboard-progress__head">
@@ -16,26 +89,16 @@
         <span class="dashboard-progress__bar-fill" [style.width.%]="status.progressPercent"></span>
       </div>
       <p class="dashboard-progress__hint">距截止還有 {{ status.daysLeft }} 天，請儘早完成申請。</p>
-    </div>
 
-    <!-- 快速入口 -->
-    <div class="card dashboard-entries">
-      <span class="eyebrow">快速入口</span>
+
       <div class="dashboard-entries__grid">
-        <a
-          *ngFor="let entry of quickEntries"
-          [routerLink]="entry.route"
-          class="dashboard-entries__card"
-        >
+        <a *ngFor="let entry of quickEntries" [routerLink]="entry.route" class="dashboard-entries__card">
           <mat-icon class="dashboard-entries__icon">{{ entry.icon }}</mat-icon>
           <span class="dashboard-entries__label">{{ entry.label }}</span>
           <small class="dashboard-entries__sub">{{ entry.sub }}</small>
         </a>
       </div>
-    </div>
 
-    <!-- 即將到期 -->
-    <div class="card dashboard-alerts">
       <span class="eyebrow">即將到期</span>
       <ul class="dashboard-alerts__list">
         <li class="dashboard-alerts__row" *ngFor="let alert of alerts">
@@ -48,8 +111,9 @@
         </li>
       </ul>
     </div>
+    
 
-    <!-- 通知列表 -->
+    <!-- 通知列表
     <div class="card dashboard-notifications">
       <span class="eyebrow">最新通知</span>
       <ul class="dashboard-notifications__list">
@@ -65,5 +129,6 @@
         </li>
       </ul>
     </div>
+     -->
   </div>
 </section>

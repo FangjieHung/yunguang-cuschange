@@ -29,7 +29,7 @@ import {
   ImagePreviewDialogWidgetComponent,
   JsonViewDialogWidgetComponent,
 } from './widgets';
-import { PartnerLogosComponent } from './components/partner-logos/partner-logos.component';
+import { PanoramaComponent } from './components/panorama/panorama.component';
 
 const CUST_MODULES = [CoreSharedModule];
 const CUST_COMPONENTS = [
@@ -58,7 +58,7 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule, SwiperModule];
     ...CUST_COMPONENTS,
     ...CUST_CONTROLS,
     ...CUST_WIDGETS,
-    PartnerLogosComponent,
+    PanoramaComponent,
   ],
   imports: [
     CommonModule,
@@ -74,7 +74,7 @@ const THIRD_MODULES = [InfiniteScrollModule, NgxSpinnerModule, SwiperModule];
     ...CUST_CONTROLS,
     ...CUST_WIDGETS,
     ...THIRD_MODULES,
-    PartnerLogosComponent,
+    PanoramaComponent,
   ],
   providers: [],
 })

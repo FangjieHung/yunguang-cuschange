@@ -34,9 +34,12 @@
         "styles": [
           "./node_modules/ngx-spinner/animations/ball-grid-beat.css",
           "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-          "apps/web/src/styles.scss"
+          "apps/web/src/styles.scss",
+          "node_modules/pannellum/build/pannellum.css"
         ],
-        "scripts": [],
+        "scripts": [
+          "node_modules/pannellum/build/pannellum.js"
+        ],
         "allowedCommonJsDependencies": [
           "enum-values",
           "linqts",

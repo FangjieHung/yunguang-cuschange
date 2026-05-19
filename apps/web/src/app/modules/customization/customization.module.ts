@@ -25,7 +25,6 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 // Pages
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { MyUnitComponent } from './pages/my-unit/my-unit.component';
 import { WholeHouseComponent } from './pages/whole-house/whole-house.component';
 import { FormLayer1Component } from './pages/form-layer1/form-layer1.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
@@ -42,7 +41,6 @@ import { SubmitComponent } from './pages/submit/submit.component';
     EmptyStateComponent,
     WelcomeComponent,
     DashboardComponent,
-    MyUnitComponent,
     WholeHouseComponent,
     FormLayer1Component,
     MyListComponent,

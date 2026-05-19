@@ -1,0 +1,33 @@
+/* Todo Card */
+.todo-card {
+  padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.todo-date { font-size: 10px; color: var(--text-muted); margin-top: -4px; }
+.todo-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(103,205,201,.15);
+}
+.todo-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+.todo-info { flex: 1; }
+.todo-name  { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.todo-sub   { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+.todo-time  { font-size: 9px;  color: var(--text-muted); margin-top: 3px; }
+.todo-check {
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(103,205,201,.40);
+  display: flex; align-items: center; justify-content: center;
+}
+.todo-check.done {
+  background: var(--seafoam); border-color: var(--seafoam);
+  box-shadow: 0 2px 8px rgba(103,205,201,.35);
+}
+.todo-check.done svg { width: 10px; height: 10px; stroke: #fff; fill: none; }
+.todo-avatars { display: flex; margin-top: 5px; }
+.todo-av {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.8);
+  margin-left: -5px;
+}
+.todo-av:first-child { margin-left: 0; }

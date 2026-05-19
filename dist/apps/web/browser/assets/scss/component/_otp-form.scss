@@ -1,0 +1,148 @@
+/* OTP 登入卡片 */
+.otp-form-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px);
+}
+
+.otp-form {
+  width: 100%;
+  max-width: 480px;
+  padding: clamp(32px, 5vw, 48px);
+  background: var(--glass-card);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  &__head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+
+  &__lead {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__body { display: flex; flex-direction: column; gap: 20px; }
+
+  &__field { display: flex; flex-direction: column; gap: 6px; }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  &__input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, .65);
+    color: var(--text-primary);
+    font-size: 16px;
+    transition: border-color .15s, box-shadow .15s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--seafoam);
+      box-shadow: 0 0 0 3px rgba(103, 205, 201, .15);
+    }
+  }
+
+  &__error {
+    margin: 0;
+    color: #c62828;
+    font-size: 12px;
+  }
+
+  &__submit { width: 100%; margin-top: 4px; }
+
+  &__hint {
+    color: var(--text-muted);
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__verify-hint {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+
+  &__digits {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  &__digit {
+    width: 48px;
+    height: 56px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, .65);
+    transition: border-color .15s, box-shadow .15s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--seafoam);
+      box-shadow: 0 0 0 3px rgba(103, 205, 201, .15);
+    }
+  }
+
+  &__resend {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: var(--seafoam-dark);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+
+    &:disabled {
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+  }
+
+  &__back {
+    align-self: center;
+    margin-top: -4px;
+  }
+
+  &__foot {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 12px;
+
+    a { color: var(--seafoam-dark); text-decoration: underline; }
+  }
+}
+
+@media (max-width: 480px) {
+  .otp-form__digit { width: 42px; height: 52px; font-size: 22px; }
+}

@@ -1,0 +1,21 @@
+/* Activity Card */
+.activity-card {
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.card-title {
+  font-size: 13px; font-weight: 600; color: var(--text-primary);
+}
+.card-subtitle {
+  font-size: 10px; color: var(--text-muted); margin-top: 2px;
+}
+.card-icon-btn {
+  width: 26px; height: 26px;
+  border: none; background: transparent; cursor: pointer;
+  border-radius: 6px; color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-icon-btn svg { width: 14px; height: 14px; }

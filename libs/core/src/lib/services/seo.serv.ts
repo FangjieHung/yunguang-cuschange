@@ -40,7 +40,7 @@ export class SEOServ {
       { property: 'og:url', content: this.appEnv.siteServer },
       { property: 'og:image', content: `${this.appEnv.siteServer}/assets/image/og/tslmai.png` },
       { property: 'og:description', content: this.appEnv.siteName },
-      { name: 'keywords', content: '台灣人工智慧檢驗醫學學會,人工智慧,檢驗醫學' },
+      { name: 'keywords', content: '澐光客變系統,人工智慧,檢驗醫學' },
       { name: 'description', content: this.appEnv.siteName }
     ]);
   }

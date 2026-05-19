@@ -1,11 +1,9 @@
 <header class="buyer-topbar">
-  <a routerLink="/customization" class="buyer-topbar__logo">
-    <span class="buyer-topbar__logo-mark">澐</span>
-    <span class="buyer-topbar__logo-text">
-      <strong>{{ buyer.project }}</strong>
-      <small>{{ buyer.unit }} ｜ {{ buyer.ownerName }}</small>
-    </span>
-  </a>
+
+
+  <a routerLink="/customization" class="block">
+        <img src="assets/image/logo/logo.webp" alt="富華澐光" class="topbar-public__logo">
+      </a>
 
   <div class="buyer-topbar__center">
     <span class="chip buyer-topbar__status" [attr.data-status]="status.status">
@@ -29,9 +27,6 @@
       <mat-icon class="buyer-topbar__caret">arrow_drop_down</mat-icon>
 
       <div class="buyer-topbar__menu" *ngIf="userMenuOpen">
-        <a class="buyer-topbar__menu-item" href="javascript:void(0)">
-          <mat-icon>person</mat-icon>我的帳號
-        </a>
         <a class="buyer-topbar__menu-item" href="javascript:void(0)">
           <mat-icon>group</mat-icon>委託方管理
         </a>

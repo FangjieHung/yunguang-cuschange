@@ -1,0 +1,123 @@
+/* ============================================
+   虛擬樣品屋入口卡
+   ============================================ */
+
+.vr-entry {
+  position: relative;
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 56px);
+  background: linear-gradient(
+    135deg,
+    var(--pale-seafoam) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    var(--seafoam-mist) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__badge {
+    @extend .chip;
+    @extend .chip--solid;
+    align-self: flex-start;
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  &__lead {
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 520px;
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__feature {
+    position: relative;
+    padding-left: 22px;
+    font-size: 13px;
+    color: var(--text-primary);
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--seafoam-dark);
+      font-weight: 700;
+    }
+  }
+
+  &__cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  &__visual {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: var(--seafoam-dark);
+      opacity: 0.6;
+    }
+
+    &-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+  }
+}

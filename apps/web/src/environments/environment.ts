@@ -7,7 +7,7 @@ export const environment = {
   appPfm: 'WEB',
   storageTokenName: 'tslmaiWebDevToken',
   storageAuthUserName: 'tslmaiWebDevAuthUser',
-  siteName: '台灣人工智慧檢驗醫學學會',
+  siteName: '澐光客變系統',
   siteServer: 'http://localhost:4200',
   apiServer: 'http://localhost:5038/Portal',
   cdnServer: 'http://localhost:5038',

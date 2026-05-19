@@ -1,0 +1,80 @@
+/* ============================================
+   桌機側邊浮動錨點導覽
+   ============================================ */
+
+.anchor-nav {
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: var(--blur);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    box-shadow: var(--shadow-card);
+  }
+
+  &__item {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid var(--seafoam);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s, background-color 0.15s;
+
+    &:hover {
+      transform: scale(1.4);
+
+      .anchor-nav__tooltip {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &--active {
+      background: var(--seafoam);
+      box-shadow: 0 0 0 4px rgba(103, 205, 201, 0.2);
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translate(8px, -50%);
+    padding: 4px 10px;
+    background: var(--text-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s, transform 0.15s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 4px solid var(--text-primary);
+    }
+  }
+}

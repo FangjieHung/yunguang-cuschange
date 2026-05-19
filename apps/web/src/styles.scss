@@ -81,6 +81,7 @@
 
   html {
     @apply text-base text-pretty;
+    background-color: var(--color-background);
     margin: 0;
     font-family: "Noto Sans TC", "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -90,14 +91,11 @@
   body {
     font-family: "Noto Sans TC", "Inter", sans-serif;
     color: var(--text-primary);
-    /* multi-stop gradient matching the seafoam palette */
-    background:
-      radial-gradient(ellipse at 0% 0%, #b2ece8 0%, transparent 55%),
-      radial-gradient(ellipse at 100% 0%, #daf7f2 0%, transparent 50%),
-      radial-gradient(ellipse at 100% 100%, #d0f0e0 0%, transparent 55%),
-      radial-gradient(ellipse at 0% 100%, #e0ffff 0%, transparent 50%),
-      linear-gradient(135deg, #cdf5ef 0%, #e8fdf8 50%, #daf7f2 100%);
+    /* multi-stop gradient using tokens from `_mat-theme.scss` */
+    
+    background-image: url(assets/image/photo/water-glowing.png);
     background-attachment: fixed;
+    background-size: cover;
   }
 }
 

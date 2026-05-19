@@ -1,0 +1,6 @@
+/* Middle Row */
+.middle-row {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 16px;
+}
