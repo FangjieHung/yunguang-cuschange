@@ -1,0 +1,46 @@
+<section id="fees" class="section section--alt">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Price Reference</span>
+      <h2 class="section__title">常見費用表</h2>
+      <p class="section__lead">
+        各類客變項目的參考費用範圍。實際金額以後台審核結果為準，登入後系統會即時試算您的客變總價。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="price-table">
+        <table>
+          <thead>
+            <tr>
+              <th>代號</th>
+              <th>項目</th>
+              <th>單位</th>
+              <th>費用範圍</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let group of priceByCategory">
+              <tr class="price-table__category-header">
+                <td [attr.colspan]="4">{{ group.category }}</td>
+              </tr>
+              <tr *ngFor="let item of group.items">
+                <td data-label="代號">
+                  <span class="price-table__code">{{ item.code }}</span>
+                </td>
+                <td data-label="項目">
+                  {{ item.name }}
+                  <div class="price-table__note" *ngIf="item.note">{{ item.note }}</div>
+                </td>
+                <td data-label="單位">{{ item.unit }}</td>
+                <td data-label="費用">
+                  <span class="price-table__price">{{ item.priceRange }}</span>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

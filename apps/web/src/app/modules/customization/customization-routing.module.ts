@@ -9,12 +9,17 @@ import { FormLayer1Component } from './pages/form-layer1/form-layer1.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { DesignerPackComponent } from './pages/designer-pack/designer-pack.component';
 import { SubmitComponent } from './pages/submit/submit.component';
+import { CustomizationReferenceComponent } from '../../shared/pages/customization-reference/customization-reference.page';
 
 const routes: Routes = [
   // welcome 走 shell（但 shell 內部隱藏 nav）
   {
     path: 'welcome',
     component: WelcomeComponent,
+  },
+  {
+    path: 'reference',
+    component: CustomizationReferenceComponent,
   },
   {
     path: '',

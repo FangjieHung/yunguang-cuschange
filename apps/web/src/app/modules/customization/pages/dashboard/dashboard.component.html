@@ -41,6 +41,7 @@
             <info-tile label="已申請" [value]="'5 項'"></info-tile>
           </dl>
 
+          <!--
           <div class="unit-info-card__downloads">
             <button class="btn btn-outline" (click)="download('A1 平面圖.pdf')">
               <mat-icon>picture_as_pdf</mat-icon>下載格局圖 PDF
@@ -49,6 +50,7 @@
               <mat-icon>folder_zip</mat-icon>下載設計師圖面包
             </a>
           </div>
+          -->
         </aside>
       </div>
 
@@ -73,45 +75,48 @@
           </li>
           <li>
             <mat-icon class="warn">warning_amber</mat-icon>
-            衛浴超出水區範圍需另行評估（請使用 Layer 4 上傳施工圖）
+            衛浴超出水區範圍需另行評估（ phase2 上傳施工圖）
           </li>
         </ul>
       </div>
     </div>
     <!-- 進度卡 -->
-    <div class="card dashboard-progress">
-      <div class="dashboard-progress__head">
-        <span class="eyebrow">申請進度</span>
-        <span class="chip" [attr.data-status]="status.status">{{ status.statusLabel }}</span>
-      </div>
-      <div class="dashboard-progress__percent">{{ status.progressPercent }}%</div>
-      <div class="dashboard-progress__bar">
-        <span class="dashboard-progress__bar-fill" [style.width.%]="status.progressPercent"></span>
-      </div>
-      <p class="dashboard-progress__hint">距截止還有 {{ status.daysLeft }} 天，請儘早完成申請。</p>
+    <ul class="card">
+      <li class="dashboard-progress">
+        <div class="dashboard-progress__head">
+          <span class="eyebrow">申請進度</span>
+          <span class="chip" [attr.data-status]="status.status">{{ status.statusLabel }}</span>
+        </div>
+        <div class="dashboard-progress__percent">{{ status.progressPercent }}%</div>
+        <div class="dashboard-progress__bar">
+          <span class="dashboard-progress__bar-fill" [style.width.%]="status.progressPercent"></span>
+        </div>
+        <p class="dashboard-progress__hint">距截止還有 {{ status.daysLeft }} 天，請儘早完成申請。</p>
+      </li>
 
+      <li class="p-6">
+        <span class="eyebrow">即將到期</span>
+        <ul class="dashboard-alerts__list">
+          <li class="dashboard-alerts__row" *ngFor="let alert of alerts">
+            <mat-icon class="dashboard-alerts__icon">warning_amber</mat-icon>
+            <div class="dashboard-alerts__body">
+              <strong>{{ alert.category }}</strong>
+              <small>{{ alert.code }}</small>
+            </div>
+            <span class="chip">{{ alert.deadline }}</span>
+          </li>
+        </ul>
+      </li>
 
-      <div class="dashboard-entries__grid">
+      <li class="dashboard-entries__grid p-6">
         <a *ngFor="let entry of quickEntries" [routerLink]="entry.route" class="dashboard-entries__card">
           <mat-icon class="dashboard-entries__icon">{{ entry.icon }}</mat-icon>
           <span class="dashboard-entries__label">{{ entry.label }}</span>
           <small class="dashboard-entries__sub">{{ entry.sub }}</small>
         </a>
-      </div>
+      </li>
+    </ul>
 
-      <span class="eyebrow">即將到期</span>
-      <ul class="dashboard-alerts__list">
-        <li class="dashboard-alerts__row" *ngFor="let alert of alerts">
-          <mat-icon class="dashboard-alerts__icon">warning_amber</mat-icon>
-          <div class="dashboard-alerts__body">
-            <strong>{{ alert.category }}</strong>
-            <small>{{ alert.code }}</small>
-          </div>
-          <span class="chip">{{ alert.deadline }}</span>
-        </li>
-      </ul>
-    </div>
-    
 
     <!-- 通知列表
     <div class="card dashboard-notifications">

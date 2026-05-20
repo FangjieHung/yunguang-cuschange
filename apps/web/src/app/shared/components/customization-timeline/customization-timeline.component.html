@@ -1,0 +1,32 @@
+<section id="process" class="section section--alt">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Customization Flow</span>
+      <h2 class="section__title">客變流程</h2>
+      <p class="section__lead">
+        從簽約到交屋的完整時間軸，每個階段的關鍵動作與時程。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="process-timeline">
+        <div class="process-step" *ngFor="let step of processSteps">
+          <div class="process-step__node">{{ step.stepNumber }}</div>
+
+          <div class="process-step__content">
+            <span class="process-step__phase">Step {{ step.stepNumber }}</span>
+            <h3 class="process-step__label">{{ step.label }}</h3>
+
+            <span class="process-step__duration" *ngIf="step.durationHint">{{ step.durationHint }}</span>
+
+            <p class="process-step__description">{{ step.description }}</p>
+
+            <ul class="process-step__actions">
+              <li class="process-step__action" *ngFor="let action of step.buyerActions">{{ action }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

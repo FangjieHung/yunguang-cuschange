@@ -84,10 +84,10 @@
       <button
         type="button"
         class="btn btn-primary btn-lg otp-form__submit"
-        [disabled]="!otpComplete"
+        routerLink="/customization/welcome"
         (click)="submitOtp()"
       >
-        登入
+        登入 <!-- [disabled]="!otpComplete"-->
       </button>
 
       <button

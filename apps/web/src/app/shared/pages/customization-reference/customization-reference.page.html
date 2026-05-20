@@ -1,0 +1,23 @@
+<div class="customization-reference-page">
+  <aside class="customization-reference-page__sidenav">
+    <nav class="customization-reference-page__sidenav-nav">
+      <span class="customization-reference-page__sidenav-label">快速導航</span>
+      <a
+        *ngFor="let section of navSections"
+        (click)="navigateTo(section.id)"
+        [class.active]="activeSection() === section.id"
+        class="customization-reference-page__nav-link"
+      >
+        {{ section.label }}
+      </a>
+    </nav>
+  </aside>
+
+  <main class="customization-reference-page__content">
+    <app-customization-principles [principles]="principles()" />
+    <app-customization-timeline [processSteps]="processSteps()" />
+    <app-customization-faq [faqGroups]="faqGroups()" />
+    <app-customization-pricing [priceByCategory]="priceByCategory()" />
+    <app-customization-equipment [equipmentByCategory]="equipmentByCategory()" />
+  </main>
+</div>

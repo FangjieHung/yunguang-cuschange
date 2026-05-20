@@ -1,0 +1,28 @@
+<section id="faq" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">FAQ</span>
+      <h2 class="section__title">常見問題</h2>
+      <p class="section__lead">
+        針對客變流程、費用、時程、設計師委託等常見疑問的回答。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="faq">
+        <div class="faq__group" *ngFor="let group of faqGroups">
+          <h3 class="faq__group-title">{{ group.groupTitle }}</h3>
+
+          <mat-accordion multi>
+            <mat-expansion-panel class="faq__panel" *ngFor="let item of group.items">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{ item.q }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>{{ item.a }}</p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

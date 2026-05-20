@@ -1,0 +1,35 @@
+<section id="equipment" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Standard Equipment</span>
+      <h2 class="section__title">標準交屋設備</h2>
+      <p class="section__lead">
+        本建案標準交屋包含的主要建材與設備規格。如有升級需求，請於客變期間透過系統申請。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="equipment-table">
+        <div class="equipment-group" *ngFor="let group of equipmentByCategory">
+          <h3 class="equipment-group__title">{{ group.category }}</h3>
+
+          <div class="equipment-row" *ngFor="let item of group.items">
+            <div class="equipment-row__thumb">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </div>
+
+            <div class="equipment-row__info">
+              <h4 class="equipment-row__name">
+                {{ item.name }}
+                <span class="equipment-row__model" *ngIf="item.model">· {{ item.model }}</span>
+              </h4>
+              <p class="equipment-row__spec">{{ item.spec }}</p>
+            </div>
+
+            <span class="equipment-row__brand">{{ item.brand }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

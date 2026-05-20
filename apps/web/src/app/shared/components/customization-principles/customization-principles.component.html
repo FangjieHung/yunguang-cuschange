@@ -1,0 +1,31 @@
+<section id="principles" class="section">
+  <div class="section__inner">
+    <div class="section__head">
+      <span class="section__eyebrow">Customization Principles</span>
+      <h2 class="section__title">客變原則</h2>
+      <p class="section__lead">
+        各類別的變更範圍與限制總覽。實際可變項目依您的戶型樓層而定，登入後系統會自動篩選顯示。
+      </p>
+    </div>
+
+    <div class="section__body">
+      <div class="principles-grid">
+        <article class="principle-card" *ngFor="let p of principles">
+          <div class="principle-card__icon">
+            <mat-icon>{{ p.icon }}</mat-icon>
+          </div>
+          <h3 class="principle-card__title">{{ p.title }}</h3>
+          <p class="principle-card__scope">{{ p.scope }}</p>
+
+          <ul class="principle-card__rules">
+            <li class="principle-card__rule" *ngFor="let rule of p.rules">{{ rule }}</li>
+          </ul>
+
+          <div class="principle-card__examples">
+            <span class="chip chip--outline" *ngFor="let ex of p.examples">{{ ex }}</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
