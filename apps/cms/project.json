@@ -15,57 +15,22 @@
         "main": "apps/cms/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/cms/tsconfig.app.json",
-        "assets": [
-          "apps/cms/src/favicon.ico",
-          "apps/cms/src/assets",
-          {
-            "input": "./libs/core/src/assets",
-            "glob": "**/*",
-            "output": "assets/shared"
-          }
-        ],
-        "styles": [
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-          "./node_modules/ngx-spinner/animations/ball-spin-clockwise.css",
-          "apps/cms/src/styles.scss"
-        ],
-        "scripts": [],
-        "allowedCommonJsDependencies": [
-          "enum-values",
-          "linqts",
-          "quill",
-          "form-data"
-        ]
+        "assets": ["apps/cms/src/favicon.ico", "apps/cms/src/assets"],
+        "styles": ["apps/cms/src/styles.scss"],
+        "scripts": []
       },
       "configurations": {
-        "staging": {
-          "budgets": [],
-          "fileReplacements": [
-            {
-              "replace": "apps/cms/src/environments/environment.ts",
-              "with": "apps/cms/src/environments/environment.staging.ts"
-            }
-          ],
-          "outputHashing": "all"
-        },
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "3mb",
-              "maximumError": "5mb"
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "3kb",
-              "maximumError": "5kb"
-            }
-          ],
-          "fileReplacements": [
-            {
-              "replace": "apps/cms/src/environments/environment.ts",
-              "with": "apps/cms/src/environments/environment.prod.ts"
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
             }
           ],
           "outputHashing": "all"
@@ -86,9 +51,6 @@
       "configurations": {
         "production": {
           "browserTarget": "cms:build:production"
-        },
-        "staging": {
-          "browserTarget": "cms:build:staging"
         },
         "development": {
           "browserTarget": "cms:build:development"
