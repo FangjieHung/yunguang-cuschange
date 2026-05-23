@@ -1,0 +1,61 @@
+<section class="buyer-list-page">
+  <header class="page-header">
+    <div>
+      <h1 class="display-2">買家帳號管理</h1>
+      <p class="body-lg">管理所有買家和帳號</p>
+    </div>
+    <button class="btn btn-primary" (click)="onImportBuyers()">
+      <mat-icon>upload_file</mat-icon> 批次匯入
+    </button>
+  </header>
+
+  <div class="search-section">
+    <input
+      type="text"
+      placeholder="搜尋買家名稱、戶號或信箱..."
+      [formControl]="searchControl"
+      class="search-input"
+    />
+    <span class="search-hint">找到 {{ filteredBuyers.length }} 筆買家</span>
+  </div>
+
+  <div class="buyer-table">
+    <div class="table-header">
+      <span class="col col-unit">戶號</span>
+      <span class="col col-owner">買家名稱</span>
+      <span class="col col-layout">格局</span>
+      <span class="col col-size">坪數</span>
+      <span class="col col-actions">操作</span>
+    </div>
+
+    <div class="table-body" *ngIf="!isLoading">
+      <div
+        class="table-row"
+        *ngFor="let buyer of filteredBuyers"
+        (click)="onViewBuyer(buyer)"
+      >
+        <span class="col col-unit">{{ buyer.unitNo }}</span>
+        <span class="col col-owner">{{ buyer.ownerName }}</span>
+        <span class="col col-layout">{{ buyer.layout }}</span>
+        <span class="col col-size">{{ buyer.size }}坪</span>
+        <span class="col col-actions">
+          <button
+            class="btn btn-sm btn-outline"
+            (click)="onViewBuyer(buyer); $event.stopPropagation()"
+            mat-button
+          >
+            <mat-icon>person</mat-icon> 檢視
+          </button>
+        </span>
+      </div>
+
+      <div class="table-empty" *ngIf="filteredBuyers.length === 0">
+        <p>沒有符合條件的買家</p>
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</section>

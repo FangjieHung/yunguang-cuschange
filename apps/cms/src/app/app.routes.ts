@@ -15,6 +15,12 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'buyer-mgmt',
+    loadChildren: () =>
+      import('./modules/buyer-mgmt/buyer-mgmt.module').then((m) => m.BuyerMgmtModule),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

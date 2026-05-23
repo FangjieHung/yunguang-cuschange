@@ -1,0 +1,51 @@
+<section class="buyer-detail-page" *ngIf="!isLoading && buyer">
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()" mat-button>
+      <mat-icon>arrow_back</mat-icon> 返回
+    </button>
+    <h1 class="display-2">{{ buyer.ownerName }}</h1>
+  </header>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3>基本資訊</h3>
+      <dl class="detail-list">
+        <dt>戶號</dt>
+        <dd>{{ buyer.unitNo }}</dd>
+        <dt>買家名稱</dt>
+        <dd>{{ buyer.ownerName }}</dd>
+        <dt>身分證末4碼</dt>
+        <dd>{{ maskId(buyer.ownerIdLast4) }}</dd>
+        <dt>電話</dt>
+        <dd>{{ buyer.phone }}</dd>
+        <dt>信箱</dt>
+        <dd>{{ buyer.email || '-' }}</dd>
+      </dl>
+    </div>
+
+    <div class="detail-card">
+      <h3>戶型資訊</h3>
+      <dl class="detail-list">
+        <dt>格局</dt>
+        <dd>{{ buyer.layout }}</dd>
+        <dt>坪數</dt>
+        <dd>{{ buyer.size }}坪</dd>
+        <dt>樓層</dt>
+        <dd>{{ buyer.floor }}F</dd>
+        <dt>朝向</dt>
+        <dd>{{ buyer.facing }}</dd>
+      </dl>
+    </div>
+
+    <div class="detail-card full-width">
+      <h3>帳號管理</h3>
+      <button class="btn btn-outline" (click)="onResetPassword()" mat-button>
+        <mat-icon>vpn_key</mat-icon> 重設密碼
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="loading" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

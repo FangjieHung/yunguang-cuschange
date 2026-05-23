@@ -1,0 +1,59 @@
+<section class="batch-import-page">
+  <header class="page-header">
+    <h1 class="display-2">批次匯入買家</h1>
+    <p class="body-lg">上傳 CSV 檔案批次新增買家帳號</p>
+  </header>
+
+  <div class="import-card">
+    <div class="import-section">
+      <h3>選擇檔案</h3>
+      <div class="file-input-wrapper">
+        <input
+          type="file"
+          accept=".csv"
+          (change)="onFileSelected($event)"
+          class="file-input"
+          id="file-input"
+        />
+        <label for="file-input" class="file-label">
+          <mat-icon>cloud_upload</mat-icon>
+          <span>{{ selectedFile?.name || '選擇 CSV 檔案或拖放檔案' }}</span>
+        </label>
+      </div>
+
+      <p class="file-hint">
+        CSV 檔案應包含：戶號、買家名稱、身分證末4碼、電話、信箱、格局、坪數、樓層、朝向
+      </p>
+    </div>
+
+    <div class="import-section" *ngIf="selectedFile">
+      <h3>預覽</h3>
+      <p class="file-name">檔案：{{ selectedFile.name }}</p>
+      <p class="file-size">大小：{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
+    </div>
+
+    <div class="import-actions">
+      <button
+        class="btn btn-ghost"
+        (click)="onCancel()"
+        [disabled]="isUploading"
+        mat-button
+      >
+        取消
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="onUpload()"
+        [disabled]="!selectedFile || isUploading"
+        mat-button
+      >
+        {{ isUploading ? '上傳中...' : '確認匯入' }}
+      </button>
+    </div>
+
+    <div class="import-message" *ngIf="uploadMessage && uploadSuccess">
+      <mat-icon class="success">check_circle</mat-icon>
+      <p>{{ uploadMessage }}</p>
+    </div>
+  </div>
+</section>
