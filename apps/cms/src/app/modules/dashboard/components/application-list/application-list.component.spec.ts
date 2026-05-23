@@ -67,7 +67,7 @@ describe('ApplicationListComponent', () => {
   });
 
   it('should emit applicationSelect event on row click', () => {
-    spyOn(component.applicationSelect, 'emit');
+    jest.spyOn(component.applicationSelect, 'emit');
     component.onApplicationClick(mockApplications[0]);
     expect(component.applicationSelect.emit).toHaveBeenCalledWith(
       mockApplications[0]

@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard.component';
 import { KpiCardComponent } from './components/kpi-card/kpi-card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ApplicationListComponent } from './components/application-list/application-list.component';
 import { CmsStore } from '../../core/state';
 import { SharedModule } from '../../shared/shared.module';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
@@ -13,8 +15,8 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent, KpiCardComponent, ChartComponent],
-      imports: [SharedModule, BaseChartDirective],
+      declarations: [DashboardComponent, KpiCardComponent, ChartComponent, ApplicationListComponent],
+      imports: [SharedModule, BaseChartDirective, ReactiveFormsModule],
       providers: [CmsStore, provideCharts(withDefaultRegisterables())],
     }).compileComponents();
 
