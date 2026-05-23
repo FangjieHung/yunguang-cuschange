@@ -57,6 +57,33 @@
     <p class="body-md">{{ getProgressPercent() }}% 完成</p>
   </div>
 
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <h3 class="title-lg">數據分析</h3>
+
+    <div class="charts-grid">
+      <cms-chart
+        title="申請狀態分布"
+        type="doughnut"
+        [chartData]="statusChartData"
+      ></cms-chart>
+
+      <cms-chart
+        title="費用分析"
+        type="bar"
+        [chartData]="feeChartData"
+      ></cms-chart>
+    </div>
+
+    <div class="charts-full">
+      <cms-chart
+        title="申請趨勢"
+        type="line"
+        [chartData]="trendChartData"
+      ></cms-chart>
+    </div>
+  </div>
+
   <!-- Recent Applications List -->
   <div class="applications-section">
     <h3 class="title-lg">最近申請</h3>

@@ -245,3 +245,45 @@
     color: white;
   }
 }
+
+.charts-section {
+  margin-top: 40px;
+
+  h3 {
+    margin-bottom: 24px;
+  }
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.charts-full {
+  width: 100%;
+}
+
+.title-lg {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-on-surface, #333);
+  margin: 0;
+}
+
+.body-lg {
+  font-size: 16px;
+  color: var(--color-on-surface, #333);
+}
+
+.body-md {
+  font-size: 14px;
+  color: var(--color-on-surface, #333);
+}
+
+.display-2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-on-surface, #333);
+}
