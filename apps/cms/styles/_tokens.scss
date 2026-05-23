@@ -1,0 +1,45 @@
+// 色彩系統（繼承自 customization）
+$color-primary: #3b6cf2;
+$color-success: #4caf50;
+$color-warning: #fff4d6;
+$color-danger: #a52525;
+
+$color-surface: #ffffff;
+$color-surface-variant: #f4f6fa;
+$color-on-surface: #333333;
+
+// 狀態色
+$status-draft: #fff4d6;
+$status-review: #fff4d6;
+$status-approved: #d6f5e3;
+$status-rework: #ffe1e1;
+$status-confirmed: #d6f5e3;
+
+// 排版
+$font-size-display2: 32px;
+$font-size-headline-md: 28px;
+$font-size-title-lg: 22px;
+$font-size-body-lg: 16px;
+$font-size-body-md: 14px;
+$font-size-eyebrow: 12px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+// 間距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-xxl: 24px;
+
+// 邊框半徑
+$border-radius-sm: 6px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// 過渡
+$transition-standard: 200ms ease;
+$transition-fast: 150ms ease;
