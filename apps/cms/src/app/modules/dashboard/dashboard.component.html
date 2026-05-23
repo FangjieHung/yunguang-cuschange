@@ -1,0 +1,96 @@
+<section class="dashboard-page">
+  <header class="dashboard-page__header">
+    <h1 class="display-2">儀表板</h1>
+    <p class="body-lg">全棟戶況概覽與審核進度</p>
+  </header>
+
+  <!-- KPI Cards Row -->
+  <div class="dashboard-grid">
+    <!-- Submitted Applications Card -->
+    <div class="kpi-card">
+      <div class="kpi-card__label">已送出申請</div>
+      <div class="kpi-card__value">{{ dashboardStats().totalSubmitted }}</div>
+      <div class="kpi-card__icon submitted"></div>
+    </div>
+
+    <!-- Under Review Card -->
+    <div class="kpi-card kpi-card--warning">
+      <div class="kpi-card__label">審核中</div>
+      <div class="kpi-card__value">{{ dashboardStats().underReview }}</div>
+      <div class="kpi-card__icon reviewing"></div>
+    </div>
+
+    <!-- Approved Card -->
+    <div class="kpi-card kpi-card--success">
+      <div class="kpi-card__label">已批准</div>
+      <div class="kpi-card__value">{{ dashboardStats().approved }}</div>
+      <div class="kpi-card__icon approved"></div>
+    </div>
+
+    <!-- Needs Rework Card -->
+    <div class="kpi-card kpi-card--danger">
+      <div class="kpi-card__label">需返工</div>
+      <div class="kpi-card__value">{{ dashboardStats().needsRework }}</div>
+      <div class="kpi-card__icon rework"></div>
+    </div>
+
+    <!-- Needs Confirmation Card -->
+    <div class="kpi-card kpi-card--info">
+      <div class="kpi-card__label">待複確認</div>
+      <div class="kpi-card__value">{{ dashboardStats().needsConfirmation }}</div>
+      <div class="kpi-card__icon confirmation"></div>
+    </div>
+
+    <!-- Total Add-on Card -->
+    <div class="kpi-card">
+      <div class="kpi-card__label">加價合計</div>
+      <div class="kpi-card__value">+NT$ {{ dashboardStats().totalAddOn | number }}</div>
+      <div class="kpi-card__subtext">待複確認</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <h3 class="title-lg">審核進度</h3>
+    <div class="progress-bar">
+      <div class="progress-bar__fill" [style.width.%]="getProgressPercent()"></div>
+    </div>
+    <p class="body-md">{{ getProgressPercent() }}% 完成</p>
+  </div>
+
+  <!-- Recent Applications List -->
+  <div class="applications-section">
+    <h3 class="title-lg">最近申請</h3>
+    <div class="applications-table">
+      <div class="table-header">
+        <span class="table-col col-unit">戶號</span>
+        <span class="table-col col-status">狀態</span>
+        <span class="table-col col-submittedAt">送出日期</span>
+        <span class="table-col col-total">金額</span>
+        <span class="table-col col-actions">操作</span>
+      </div>
+      <div class="table-body">
+        <div
+          class="table-row"
+          *ngFor="let app of applications() | slice: 0:10"
+        >
+          <span class="table-col col-unit">{{ app.buyerId }}</span>
+          <span class="table-col col-status">
+            <span class="chip" [attr.data-status]="app.status">{{
+              app.status
+            }}</span>
+          </span>
+          <span class="table-col col-submittedAt">{{
+            app.submittedAt | date: 'short'
+          }}</span>
+          <span class="table-col col-total">
+            +NT$ {{ app.totalAddOn | number }}
+          </span>
+          <span class="table-col col-actions">
+            <button class="btn btn-sm btn-ghost">查看</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
