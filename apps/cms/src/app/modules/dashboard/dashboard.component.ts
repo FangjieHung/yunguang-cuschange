@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsStore } from '../../core/state';
-import { DashboardStats } from '../../core/models';
+import { Application, DashboardStats } from '../../core/models';
 import { computed } from '@angular/core';
 import { ChartData } from 'chart.js';
 import { ChartDataHelper } from './utils/chart-data.helper';
@@ -32,6 +32,11 @@ export class DashboardComponent implements OnInit {
     if (total === 0) return 0;
     const completed = stats.approved + stats.needsRework + stats.needsConfirmation;
     return Math.round((completed / total) * 100);
+  }
+
+  onApplicationSelect(app: Application) {
+    // Navigate to application detail or show detail in modal
+    console.log('Selected application:', app);
   }
 
   private updateCharts(): void {

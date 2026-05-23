@@ -87,36 +87,11 @@
   <!-- Recent Applications List -->
   <div class="applications-section">
     <h3 class="title-lg">最近申請</h3>
-    <div class="applications-table">
-      <div class="table-header">
-        <span class="table-col col-unit">戶號</span>
-        <span class="table-col col-status">狀態</span>
-        <span class="table-col col-submittedAt">送出日期</span>
-        <span class="table-col col-total">金額</span>
-        <span class="table-col col-actions">操作</span>
-      </div>
-      <div class="table-body">
-        <div
-          class="table-row"
-          *ngFor="let app of applications() | slice: 0:10"
-        >
-          <span class="table-col col-unit">{{ app.buyerId }}</span>
-          <span class="table-col col-status">
-            <span class="chip" [attr.data-status]="app.status">{{
-              app.status
-            }}</span>
-          </span>
-          <span class="table-col col-submittedAt">{{
-            app.submittedAt | date: 'short'
-          }}</span>
-          <span class="table-col col-total">
-            +NT$ {{ app.totalAddOn | number }}
-          </span>
-          <span class="table-col col-actions">
-            <button class="btn btn-sm btn-ghost">查看</button>
-          </span>
-        </div>
-      </div>
-    </div>
+    <cms-application-list
+      [applications]="applications()"
+      [pageSize]="10"
+      [enableFiltering]="true"
+      (applicationSelect)="onApplicationSelect($event)"
+    ></cms-application-list>
   </div>
 </section>

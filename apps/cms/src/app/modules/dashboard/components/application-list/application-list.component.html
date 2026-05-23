@@ -1,0 +1,82 @@
+<div class="application-list">
+  <!-- Filter Section -->
+  <div class="application-list__filters" *ngIf="enableFiltering">
+    <label class="filter-group">
+      <span class="filter-label">狀態篩選</span>
+      <select [formControl]="statusFilter" class="filter-select">
+        <option *ngFor="let option of statusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </label>
+    <span class="filter-count">
+      找到 {{ filteredApplications.length }} 筆申請
+    </span>
+  </div>
+
+  <!-- Applications Table -->
+  <div class="applications-table">
+    <div class="table-header">
+      <span class="table-col col-buyerId">買家/戶號</span>
+      <span class="table-col col-status">狀態</span>
+      <span class="table-col col-submittedAt">送出日期</span>
+      <span class="table-col col-fee">加價</span>
+      <span class="table-col col-refund">退費</span>
+      <span class="table-col col-actions">操作</span>
+    </div>
+
+    <div class="table-body">
+      <div
+        class="table-row"
+        *ngFor="let app of getPaginatedApplications()"
+        (click)="onApplicationClick(app)"
+        role="button"
+        tabindex="0"
+      >
+        <span class="table-col col-buyerId">{{ app.buyerId }}</span>
+        <span class="table-col col-status">
+          <span class="chip" [attr.data-status]="app.status">
+            {{ getStatusLabel(app.status) }}
+          </span>
+        </span>
+        <span class="table-col col-submittedAt">
+          {{ app.submittedAt | date: 'short' }}
+        </span>
+        <span class="table-col col-fee">
+          {{ app.totalAddOn > 0 ? ('+NT$ ' + (app.totalAddOn | number)) : '-' }}
+        </span>
+        <span class="table-col col-refund">
+          {{ app.totalRefund > 0 ? ('-NT$ ' + (app.totalRefund | number)) : '-' }}
+        </span>
+        <span class="table-col col-actions">
+          <button class="btn btn-sm btn-ghost">查看</button>
+        </span>
+      </div>
+
+      <div class="table-empty" *ngIf="filteredApplications.length === 0">
+        <p>沒有符合條件的申請</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="getTotalPages() > 1">
+    <button
+      class="btn btn-sm btn-ghost"
+      (click)="prevPage()"
+      [disabled]="currentPage === 1"
+    >
+      上一頁
+    </button>
+    <span class="pagination__info">
+      第 {{ currentPage }} / {{ getTotalPages() }} 頁
+    </span>
+    <button
+      class="btn btn-sm btn-ghost"
+      (click)="nextPage()"
+      [disabled]="currentPage === getTotalPages()"
+    >
+      下一頁
+    </button>
+  </div>
+</div>
