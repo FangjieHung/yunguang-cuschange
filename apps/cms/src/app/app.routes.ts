@@ -9,6 +9,12 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'project-mgmt',
+    loadChildren: () =>
+      import('./modules/project-mgmt/project-mgmt.module').then((m) => m.ProjectMgmtModule),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

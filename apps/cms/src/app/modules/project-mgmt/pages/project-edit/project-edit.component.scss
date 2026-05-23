@@ -1,0 +1,170 @@
+:host {
+  display: block;
+}
+
+.project-edit-page {
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: 32px;
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+}
+
+.project-form {
+  background: var(--color-surface, #ffffff);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+
+  &:last-of-type {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-on-surface, #333);
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+
+    .required {
+      color: #d32f2f;
+    }
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-surface-variant, #e0e0e0);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary, #3b6cf2);
+    box-shadow: 0 0 0 2px rgba(59, 108, 242, 0.1);
+  }
+
+  &:disabled {
+    background: var(--color-surface-variant, #f5f5f5);
+    cursor: not-allowed;
+  }
+}
+
+.form-error {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #d32f2f;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-surface-variant, #e0e0e0);
+}
+
+.btn {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+
+  &-primary {
+    background: var(--color-primary, #3b6cf2);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #2850c4;
+    }
+  }
+
+  &-ghost {
+    background: transparent;
+    border: 1px solid var(--color-surface-variant, #e0e0e0);
+    color: var(--color-on-surface, #333);
+
+    &:hover:not(:disabled) {
+      background: var(--color-surface-variant, #f5f5f5);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+  p {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-edit-page {
+    padding: 16px;
+
+    .page-header {
+      h1 {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .project-form {
+    padding: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

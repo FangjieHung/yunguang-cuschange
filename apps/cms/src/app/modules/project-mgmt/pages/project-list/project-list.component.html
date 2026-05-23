@@ -1,0 +1,52 @@
+<section class="project-list-page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="display-2">建案管理</h1>
+      <p class="body-lg">管理所有建案和項目配置</p>
+    </div>
+    <button class="btn btn-primary" (click)="onCreateProject()">
+      <mat-icon>add</mat-icon> 新增建案
+    </button>
+  </header>
+
+  <div class="project-grid" *ngIf="!isLoading && (projects() && projects().length > 0)">
+    <div
+      class="project-card"
+      *ngFor="let project of projects()"
+      (click)="onEditProject(project)"
+    >
+      <h3 class="project-card__name">{{ project.name }}</h3>
+      <p class="project-card__code">{{ project.code }}</p>
+      <div class="project-card__meta">
+        <span class="badge" [class.badge--active]="project.status === 'active'">
+          {{ project.status === 'active' ? '進行中' : '已結束' }}
+        </span>
+        <span class="meta-text">{{ project.totalUnits }} 戶</span>
+      </div>
+      <p class="project-card__dates">
+        {{ project.startDate | date: 'short' }} ~
+        {{ project.endDate | date: 'short' }}
+      </p>
+      <button
+        class="btn btn-sm btn-outline"
+        (click)="onEditProject(project); $event.stopPropagation()"
+      >
+        <mat-icon>edit</mat-icon> 編輯
+      </button>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && (!projects() || projects().length === 0)">
+    <mat-icon class="empty-icon">folder_open</mat-icon>
+    <h3>沒有建案</h3>
+    <p>開始建立新的建案以管理項目</p>
+    <button class="btn btn-primary" (click)="onCreateProject()">
+      <mat-icon>add</mat-icon> 新增建案
+    </button>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+    <p>正在載入建案...</p>
+  </div>
+</section>
