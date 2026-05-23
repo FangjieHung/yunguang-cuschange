@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  MOCK_BUYER,
-  MOCK_LIST,
-  sumFees,
-} from '../../customization.data';
+import { MOCK_BUYER, MOCK_STATUS } from '../../customization.data';
+import { CustomizationVersion, VersionService } from '../../services/version.service';
 
 @Component({
   selector: 'app-submit',
@@ -14,22 +11,29 @@ import {
 })
 export class SubmitComponent {
   buyer = MOCK_BUYER;
-  list = MOCK_LIST;
   agreed = false;
+  version: CustomizationVersion | null;
 
-  get summary() {
-    return sumFees(this.list);
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private versionService: VersionService
+  ) {
+    this.version = this.versionService.selectedVersion;
   }
 
-  constructor(private router: Router, private dialog: MatDialog) {}
+  get totalDelta(): number {
+    return this.version?.totalDelta || 0;
+  }
 
   back(): void {
     this.router.navigate(['/customization/my-list']);
   }
 
   submit(): void {
-    if (!this.agreed) return;
-    alert('您的申請已送出，將進入審核流程。\n(UI demo - 實際送出邏輯待 API 完成)');
+    if (!this.agreed || !this.version) return;
+    this.versionService.submitVersion(this.version.id, MOCK_STATUS.applyEndDate);
+    alert(`已送出方案：${this.version.name}\n(UI demo - 實際送出邏輯待 API 完成)`);
     this.router.navigate(['/customization']);
   }
 }

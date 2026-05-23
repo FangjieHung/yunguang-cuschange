@@ -1,46 +1,85 @@
 <section class="my-list-page">
   <header class="my-list-page__head">
-    <span class="eyebrow">我的清單</span>
-    <h1 class="display-2">已申請項目</h1>
-    <p class="body-lg">依工程類別自動彙整，共 {{ totalItems }} 項。</p>
+    <span class="eyebrow">比較清單</span>
+    <h1 class="display-2">已儲存方案</h1>
+    <p class="body-lg">
+      可儲存多達 {{ maxVersions }} 個方案進行比較。目前 {{ versions.length }} / {{ maxVersions }} 個。
+    </p>
   </header>
 
   <empty-state
-    *ngIf="totalItems === 0"
-    icon="inbox"
-    title="您還沒有任何客變項目"
-    message="從全室設定開始規劃，或進入空間 Room Navigator 標注位置。"
+    *ngIf="versions.length === 0"
+    icon="bookmarks"
+    title="尚無已儲存的方案"
+    message="到全室設定挑選建材，並點「加入比較清單」儲存方案。"
     ctaLabel="開始規劃"
     ctaRoute="/customization/whole-house"
   ></empty-state>
 
-  <ng-container *ngIf="totalItems > 0">
-    <div class="list-summary" *ngFor="let cat of list">
-      <h3 class="list-summary__category">
-        <mat-icon>label</mat-icon>{{ cat.category }}
-        <small>共 {{ cat.items.length }} 項</small>
-      </h3>
-      <div class="card list-summary__items">
-        <item-row
-          *ngFor="let item of cat.items"
-          [item]="item"
-          (edit)="editItem($event)"
-          (remove)="removeItem($event, cat)"
-        ></item-row>
-      </div>
-    </div>
-
-    <div class="my-list-page__footer">
-      <fee-summary [addOn]="summary.addOn" [refund]="summary.refund" class="card"></fee-summary>
-
-      <div class="my-list-page__cta card">
-        <button type="button" class="btn btn-outline" (click)="saveDraft()">
-          <mat-icon>save</mat-icon>儲存草稿
+  <div class="version-grid" *ngIf="versions.length > 0">
+    <article
+      *ngFor="let v of versions"
+      class="version-card card"
+      [class.version-card--selected]="selectedId === v.id"
+      [class.version-card--submitted]="isSubmitted(v)"
+    >
+      <header class="version-card__head">
+        <div>
+          <h3 class="version-card__title">
+            {{ v.name }}
+            <span
+              class="chip version-card__chip-submitted"
+              *ngIf="isSubmitted(v)"
+              [attr.data-status]="submission?.reviewStatus"
+            >
+              已送出審核 · {{ reviewStatusLabel() }}
+            </span>
+            <span class="chip" *ngIf="selectedId === v.id && !isSubmitted(v)">已選定</span>
+          </h3>
+          <small class="version-card__time">{{ formatTime(v.createdAt) }}</small>
+        </div>
+        <button
+          type="button"
+          class="version-card__remove"
+          [disabled]="!canRemove(v)"
+          [title]="canRemove(v) ? '刪除方案' : '審核中無法刪除'"
+          (click)="remove(v)"
+          aria-label="刪除方案"
+        >
+          <mat-icon>delete_outline</mat-icon>
         </button>
-        <button type="button" class="btn btn-primary btn-lg" (click)="goSubmit()">
-          前往送出確認 <mat-icon>arrow_forward</mat-icon>
-        </button>
-      </div>
-    </div>
-  </ng-container>
+      </header>
+
+      <ul class="version-card__entries">
+        <li *ngFor="let entry of v.entries" class="version-card__entry">
+          <img [src]="entry.optionImage" [alt]="entry.optionName" />
+          <div>
+            <small>{{ entry.categoryTitle }}</small>
+            <strong>{{ entry.optionName }}</strong>
+          </div>
+        </li>
+      </ul>
+
+      <footer class="version-card__footer">
+        <span class="version-card__delta">
+          加價：<strong>+NT$ {{ v.totalDelta | number }}</strong>
+        </span>
+        <div class="version-card__cta">
+          <button type="button" class="btn btn-ghost btn-sm" (click)="openPreview(v)">
+            <mat-icon>visibility</mat-icon> 開啟預覽
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="choose(v)">
+            <mat-icon>check_circle</mat-icon> 選擇此方案
+          </button>
+        </div>
+      </footer>
+    </article>
+  </div>
+
+  <div class="my-list-page__cta card" *ngIf="versions.length > 0">
+    <button type="button" class="btn btn-outline" (click)="goCreate()">
+      <mat-icon>add</mat-icon> 新增方案
+    </button>
+    <small *ngIf="versions.length >= maxVersions">已達上限，請先刪除舊版本。</small>
+  </div>
 </section>

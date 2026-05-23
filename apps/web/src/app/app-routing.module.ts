@@ -25,19 +25,12 @@ const routes: Routes = [
             path: '',
             loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
           },
-          {
-            path: 'about',
-            loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
-          },
+
           {
             path: 'auth',
             loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
           },
-          {
-            path: 'account',
-            canActivate: [AppAuthGuard],
-            loadChildren: () => import('./modules/account/account.module').then((m) => m.AccountModule),
-          },
+
           {
             path: 'news',
             loadChildren: () =>

@@ -1,0 +1,64 @@
+<section class="version-preview-page" *ngIf="version; else missing">
+  <a class="version-preview-page__back" (click)="back()">
+    <mat-icon>arrow_back</mat-icon> 返回比較清單
+  </a>
+
+  <header class="version-preview-page__head">
+    <span class="eyebrow">方案預覽</span>
+    <h1 class="display-2">{{ version.name }}</h1>
+    <p class="body-lg">
+      加價合計：<strong>+NT$ {{ version.totalDelta | number }}</strong>
+    </p>
+  </header>
+
+  <div class="version-preview-page__grid">
+    <article class="card version-preview-page__panorama">
+      <header class="version-preview-page__panorama-head">
+        <span class="eyebrow">360° 預覽</span>
+        <h2>建材視覺</h2>
+      </header>
+      <app-panorama></app-panorama>
+    </article>
+
+    <article class="card version-preview-page__entries">
+      <header>
+        <span class="eyebrow">本方案建材</span>
+        <h2>選擇明細</h2>
+      </header>
+      <ul class="version-entry-list">
+        <li class="version-entry" *ngFor="let entry of version.entries">
+          <div class="version-entry__thumb">
+            <img [src]="entry.optionImage" [alt]="entry.optionName" />
+          </div>
+          <div class="version-entry__meta">
+            <small>{{ entry.categoryTitle }}</small>
+            <strong>{{ entry.optionName }}</strong>
+            <span class="chip" *ngIf="entry.priceDelta > 0">+NT$ {{ entry.priceDelta | number }}</span>
+            <span class="chip" *ngIf="!entry.priceDelta">標配</span>
+          </div>
+        </li>
+      </ul>
+    </article>
+  </div>
+
+  <footer class="version-preview-page__actions card">
+    <button type="button" class="btn btn-ghost" (click)="back()">
+      <mat-icon>arrow_back</mat-icon> 返回清單
+    </button>
+    <button type="button" class="btn btn-primary btn-lg" (click)="choose()">
+      <mat-icon>check_circle</mat-icon> 選擇此方案
+    </button>
+  </footer>
+</section>
+
+<ng-template #missing>
+  <section class="version-preview-page">
+    <empty-state
+      icon="search_off"
+      title="找不到此方案"
+      message="該版本可能已被刪除，請回到比較清單。"
+      ctaLabel="回比較清單"
+      ctaRoute="/customization/my-list"
+    ></empty-state>
+  </section>
+</ng-template>

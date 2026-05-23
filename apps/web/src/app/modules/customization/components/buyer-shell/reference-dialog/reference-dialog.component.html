@@ -1,0 +1,139 @@
+<div class="reference-dialog">
+  <h2 class="reference-dialog__title">客變參考資訊</h2>
+
+  <!-- 客變原則 -->
+  <div class="reference-dialog__section">
+    <button
+      (click)="toggleSection('principles')"
+      [class.open]="isSectionExpanded('principles')"
+      class="reference-dialog__section-header"
+      type="button"
+    >
+      <span>客變原則</span>
+      <mat-icon>{{ isSectionExpanded('principles') ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div [class.open]="isSectionExpanded('principles')" class="reference-dialog__section-body">
+      <div class="reference-dialog__principles-grid">
+        <div *ngFor="let p of principles" class="reference-dialog__principle-card">
+          <h4>{{ p.title }}</h4>
+          <p>{{ p.scope }}</p>
+          <ul>
+            <li *ngFor="let rule of p.rules">{{ rule }}</li>
+          </ul>
+          <div class="reference-dialog__examples">
+            <span *ngFor="let ex of p.examples" class="chip">{{ ex }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 客變流程 -->
+  <div class="reference-dialog__section">
+    <button
+      (click)="toggleSection('process')"
+      [class.open]="isSectionExpanded('process')"
+      class="reference-dialog__section-header"
+      type="button"
+    >
+      <span>客變流程</span>
+      <mat-icon>{{ isSectionExpanded('process') ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div [class.open]="isSectionExpanded('process')" class="reference-dialog__section-body">
+      <div class="reference-dialog__process-timeline">
+        <div *ngFor="let step of processSteps" class="reference-dialog__process-step">
+          <div class="reference-dialog__process-node">{{ step.stepNumber }}</div>
+          <div class="reference-dialog__process-content">
+            <h5>{{ step.label }}</h5>
+            <span *ngIf="step.durationHint" class="reference-dialog__duration">
+              {{ step.durationHint }}
+            </span>
+            <p>{{ step.description }}</p>
+            <ul>
+              <li *ngFor="let action of step.buyerActions">{{ action }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常見問題 -->
+  <div class="reference-dialog__section">
+    <button
+      (click)="toggleSection('faq')"
+      [class.open]="isSectionExpanded('faq')"
+      class="reference-dialog__section-header"
+      type="button"
+    >
+      <span>常見問題</span>
+      <mat-icon>{{ isSectionExpanded('faq') ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div [class.open]="isSectionExpanded('faq')" class="reference-dialog__section-body">
+      <div class="reference-dialog__faq-list">
+        <div *ngFor="let group of faqGroups" class="reference-dialog__faq-group">
+          <h5>{{ group.groupTitle }}</h5>
+          <div *ngFor="let item of group.items" class="reference-dialog__faq-item">
+            <p class="reference-dialog__faq-q">Q: {{ item.q }}</p>
+            <p class="reference-dialog__faq-a">A: {{ item.a }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 費用表 -->
+  <div class="reference-dialog__section">
+    <button
+      (click)="toggleSection('fees')"
+      [class.open]="isSectionExpanded('fees')"
+      class="reference-dialog__section-header"
+      type="button"
+    >
+      <span>費用表</span>
+      <mat-icon>{{ isSectionExpanded('fees') ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div [class.open]="isSectionExpanded('fees')" class="reference-dialog__section-body">
+      <div class="reference-dialog__price-table">
+        <div *ngFor="let group of priceByCategory" class="reference-dialog__price-group">
+          <h5>{{ group.category }}</h5>
+          <table>
+            <tr *ngFor="let item of group.items">
+              <td class="reference-dialog__price-code">{{ item.code }}</td>
+              <td class="reference-dialog__price-name">
+                {{ item.name }}
+                <div *ngIf="item.note" class="reference-dialog__price-note">{{ item.note }}</div>
+              </td>
+              <td class="reference-dialog__price-range">{{ item.priceRange }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 設備表 -->
+  <div class="reference-dialog__section">
+    <button
+      (click)="toggleSection('equipment')"
+      [class.open]="isSectionExpanded('equipment')"
+      class="reference-dialog__section-header"
+      type="button"
+    >
+      <span>設備表</span>
+      <mat-icon>{{ isSectionExpanded('equipment') ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div [class.open]="isSectionExpanded('equipment')" class="reference-dialog__section-body">
+      <div class="reference-dialog__equipment-list">
+        <div *ngFor="let group of equipmentByCategory" class="reference-dialog__equipment-group">
+          <h5>{{ group.category }}</h5>
+          <div *ngFor="let item of group.items" class="reference-dialog__equipment-item">
+            <h6>{{ item.name }}</h6>
+            <p>{{ item.brand }} {{ item.model }}</p>
+            <p>{{ item.spec }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

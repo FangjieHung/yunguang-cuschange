@@ -1,1 +1,57 @@
-:host { display: block; min-height: 100vh; }
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.buyer-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &__body {
+    display: flex;
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    width: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 300ms ease;
+  }
+
+  &__sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 200ms ease;
+    color: var(--color-on-surface, #333);
+
+    &:hover {
+      background: var(--color-surface-variant, #f5f5f5);
+    }
+
+    &--active {
+      background: var(--color-primary-container, #e8f5e9);
+      color: var(--color-primary, #4caf50);
+    }
+  }
+
+  &__main {
+    flex: 1;
+    overflow: auto;
+  }
+}
+

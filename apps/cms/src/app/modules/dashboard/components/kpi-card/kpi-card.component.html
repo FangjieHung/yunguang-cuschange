@@ -1,0 +1,8 @@
+<div class="kpi-card" [class]="'kpi-card--' + variant">
+  <div class="kpi-card__label">{{ label }}</div>
+  <div class="kpi-card__value">{{ value }}</div>
+  <div class="kpi-card__icon">
+    <mat-icon>{{ icon }}</mat-icon>
+  </div>
+  <div class="kpi-card__subtext" *ngIf="subtext">{{ subtext }}</div>
+</div>

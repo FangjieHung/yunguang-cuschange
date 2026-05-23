@@ -18,32 +18,7 @@
   border-bottom: 1px solid var(--border);
 
   &__logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--text-primary);
-    text-decoration: none;
-    flex-shrink: 0;
-
-    &-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--seafoam), var(--seafoam-dark));
-      box-shadow: 0 2px 8px rgba(103, 205, 201, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    &-text {
-      letter-spacing: 0.02em;
-    }
+    @apply w-full h-[var(--topbar-h)] object-contain py-2;
   }
 
   &__nav {

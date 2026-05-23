@@ -15,6 +15,17 @@
       >
         <mat-icon>{{ item.icon }}</mat-icon>
       </a>
+
+      <!-- Reference Info Dialog -->
+      <button
+        (click)="openReferenceDialog()"
+        class="buyer-shell__sidebar-item"
+        matTooltip="客變參考資訊"
+        matTooltipPosition="right"
+        type="button"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
     </aside>
 
     <main class="buyer-shell__main">

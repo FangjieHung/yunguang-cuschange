@@ -12,6 +12,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { SharedModule } from '../../shared/shared.module';
 import { CustomizationRoutingModule } from './customization-routing.module';
 
 // Shell + shared components
@@ -26,8 +27,8 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WholeHouseComponent } from './pages/whole-house/whole-house.component';
-import { FormLayer1Component } from './pages/form-layer1/form-layer1.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
+import { VersionPreviewComponent } from './pages/version-preview/version-preview.component';
 import { DesignerPackComponent } from './pages/designer-pack/designer-pack.component';
 import { SubmitComponent } from './pages/submit/submit.component';
 
@@ -42,8 +43,8 @@ import { SubmitComponent } from './pages/submit/submit.component';
     WelcomeComponent,
     DashboardComponent,
     WholeHouseComponent,
-    FormLayer1Component,
     MyListComponent,
+    VersionPreviewComponent,
     DesignerPackComponent,
     SubmitComponent,
   ],
@@ -53,6 +54,7 @@ import { SubmitComponent } from './pages/submit/submit.component';
     ReactiveFormsModule,
     RouterModule,
     CustomizationRoutingModule,
+    SharedModule,
     MatIconModule,
     MatButtonModule,
     MatDialogModule,

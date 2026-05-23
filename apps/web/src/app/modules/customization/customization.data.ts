@@ -37,6 +37,22 @@ export interface WholeHouseItem {
   layer: 1 | 2 | 3 | 4;
 }
 
+export interface MaterialOption {
+  id: string;
+  name: string;
+  image: string;
+  isDefault?: boolean;
+  priceDelta?: number;
+}
+
+export interface MaterialCategory {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  options: MaterialOption[];
+}
+
 export interface FloorOption {
   id: string;
   name: string;
@@ -162,6 +178,94 @@ export const MOCK_WHOLE_HOUSE_ITEMS: WholeHouseItem[] = [
     title: '玄關門',
     description: '門片材質、顏色與五金',
     layer: 1,
+  },
+];
+
+// ========== Material categories (whole-house single-page form) ==========
+const MATERIAL_ASSET_BASE = 'assets/image/building-material-options';
+
+export const MOCK_MATERIAL_CATEGORIES: MaterialCategory[] = [
+  {
+    id: 'wood-floor',
+    title: '木地板顏色',
+    description: '全室木地板統一選色',
+    icon: 'view_in_ar',
+    options: [
+      {
+        id: 'wf-bea502',
+        name: 'BEA502 冰島橡木',
+        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA502-冰島橡木1(預設).jpg`,
+        isDefault: true,
+        priceDelta: 0,
+      },
+      {
+        id: 'wf-bea502-b',
+        name: 'BEA502 冰島橡木 II',
+        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA502-冰島橡木2(預設).jpg`,
+        isDefault: true,
+        priceDelta: 0,
+      },
+      {
+        id: 'wf-bea366',
+        name: 'BEA366 布拉格橡木',
+        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA366-布拉格橡木1.jpg`,
+        priceDelta: 12000,
+      },
+      {
+        id: 'wf-bea366-b',
+        name: 'BEA366 布拉格橡木 II',
+        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA366-布拉格橡木2.jpg`,
+        priceDelta: 12000,
+      },
+      {
+        id: 'wf-tile-617',
+        name: '客變磁磚 TES-617',
+        image: `${MATERIAL_ASSET_BASE}/木地板顏色/客變磁磚-TES-617.jpg`,
+        priceDelta: 18500,
+      },
+    ],
+  },
+  {
+    id: 'kitchen-cabinet',
+    title: '廚具櫃體',
+    description: '廚房櫃體飾面顏色',
+    icon: 'kitchen',
+    options: [
+      {
+        id: 'kc-d230',
+        name: 'D230 深海藍',
+        image: `${MATERIAL_ASSET_BASE}/廚具櫃體/D230-深海藍-預設.jpg`,
+        isDefault: true,
+        priceDelta: 0,
+      },
+      {
+        id: 'kc-d218',
+        name: 'D218 喀什米爾',
+        image: `${MATERIAL_ASSET_BASE}/廚具櫃體/D218-喀什米爾.jpg`,
+        priceDelta: 8500,
+      },
+    ],
+  },
+  {
+    id: 'system-cabinet',
+    title: '系統櫃體',
+    description: '全室系統櫃飾面顏色',
+    icon: 'door_sliding',
+    options: [
+      {
+        id: 'sc-l6012p',
+        name: '浪淘沙 牛津藍 (L6012P)',
+        image: `${MATERIAL_ASSET_BASE}/系統櫃體/浪淘沙-牛津藍(L6012P)(預設).jpg`,
+        isDefault: true,
+        priceDelta: 0,
+      },
+      {
+        id: 'sc-l0901p',
+        name: '浪淘沙 奶昔棕 (L0901P)',
+        image: `${MATERIAL_ASSET_BASE}/系統櫃體/浪淘沙-奶昔棕(L0901P).jpg`,
+        priceDelta: 6500,
+      },
+    ],
   },
 ];
 

@@ -12,7 +12,7 @@
           登入客變系統
           <mat-icon>arrow_forward</mat-icon>
         </a>
-        <a routerLink="/customization/reference" class="btn btn-outline btn-lg">
+        <a href="#principles" class="btn btn-outline btn-lg">
           了解客變原則
         </a>
       </div>
@@ -22,6 +22,15 @@
   </div>
 </section>
 
+<!-- ─── Customization Reference Components ─── -->
+<app-customization-principles [principles]="principles()" />
+<app-customization-timeline [processSteps]="processSteps()" />
+<app-customization-faq [faqGroups]="faqGroups()" />
+<app-customization-pricing [priceByCategory]="priceByCategory()" />
+<app-customization-equipment [equipmentByCategory]="equipmentByCategory()" />
+<section>
+  
+</section>
 <!-- ─── 虛擬樣品屋入口 ─── -->
 <section *ngIf="false" id="vr-tour" class="section">
   <div class="section__inner">

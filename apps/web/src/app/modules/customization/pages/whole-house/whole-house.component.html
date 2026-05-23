@@ -1,34 +1,88 @@
 <section class="whole-house-page">
   <header class="whole-house-page__head">
     <span class="eyebrow">客變設定 · 全室</span>
-    <h1 class="display-2">全室設定</h1>
-    <p class="body-lg">適用於跨越多個空間、不屬於單一房間的客變項目。請逐項選擇您的偏好。</p>
+    <h1 class="display-2">全室建材選擇</h1>
+    <p class="body-lg">於同一頁面完成全室建材選色，完成後可進入 360° 預覽結果。</p>
   </header>
 
-  <div class="whole-house-grid">
-    <button
-      *ngFor="let item of items"
-      type="button"
-      class="whole-house-card card"
-      (click)="open(item.id)"
-    >
-      <span class="whole-house-card__icon">
-        <mat-icon>{{ item.icon }}</mat-icon>
+  <article
+    *ngFor="let cat of categories"
+    class="wh-category card"
+  >
+    <header class="wh-category__head">
+      <span class="wh-category__icon">
+        <mat-icon>{{ cat.icon }}</mat-icon>
       </span>
-      <span class="whole-house-card__layer chip">Layer {{ item.layer }}</span>
-      <h3 class="whole-house-card__title">{{ item.title }}</h3>
-      <p class="whole-house-card__desc">{{ item.description }}</p>
-      <span class="whole-house-card__cta">
-        進入設定 <mat-icon>arrow_forward</mat-icon>
+      <div>
+        <h2 class="wh-category__title">{{ cat.title }}</h2>
+        <p class="wh-category__desc">{{ cat.description }}</p>
+      </div>
+      <span class="wh-category__selected chip" *ngIf="selectedOption(cat) as opt">
+        已選：{{ opt.name }}
       </span>
-    </button>
-  </div>
+    </header>
 
-  <div class="whole-house-page__hint card">
-    <mat-icon>tips_and_updates</mat-icon>
-    <div>
-      <strong>提醒</strong>
-      <p>單一空間（書房、主臥...）的個別設定，請至 Room Navigator 進入對應空間操作。</p>
+    <div class="wh-option-grid">
+      <button
+        *ngFor="let opt of cat.options"
+        type="button"
+        class="wh-option"
+        [class.wh-option--selected]="isSelected(cat.id, opt.id)"
+        (click)="select(cat.id, opt.id)"
+      >
+        <div class="wh-option__thumb">
+          <img [src]="opt.image" [alt]="opt.name" loading="lazy" />
+          <mat-icon class="wh-option__check" *ngIf="isSelected(cat.id, opt.id)">
+            check_circle
+          </mat-icon>
+        </div>
+        <div class="wh-option__meta">
+          <span class="wh-option__name">{{ opt.name }}</span>
+          <span class="wh-option__price">
+            <ng-container *ngIf="opt.isDefault || !opt.priceDelta">標配</ng-container>
+            <ng-container *ngIf="!opt.isDefault && opt.priceDelta">
+              +NT$ {{ opt.priceDelta | number }}
+            </ng-container>
+          </span>
+        </div>
+      </button>
     </div>
-  </div>
+  </article>
+
+  <footer class="whole-house-page__actions card">
+    <div class="whole-house-page__summary">
+      <span>加價合計</span>
+      <strong>+NT$ {{ totalDelta | number }}</strong>
+      <small class="whole-house-page__counter">
+        已儲存版本：{{ versions.length }} / {{ maxVersions }}
+      </small>
+    </div>
+    <div class="whole-house-page__cta">
+      <button type="button" class="btn btn-ghost" (click)="showPreview()">
+        <mat-icon>visibility</mat-icon> 預覽結果
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="isFull"
+        [matTooltip]="isFull ? '已達 ' + maxVersions + ' 個版本上限' : ''"
+        (click)="saveVersion()"
+      >
+        <mat-icon>bookmark_add</mat-icon> 加入比較清單
+      </button>
+    </div>
+  </footer>
+
+  <section *ngIf="previewVisible" class="whole-house-preview card">
+    <header class="whole-house-preview__head">
+      <div>
+        <span class="eyebrow">360° 預覽</span>
+        <h2 class="whole-house-preview__title">建材視覺預覽</h2>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" (click)="hidePreview()">
+        <mat-icon>close</mat-icon> 關閉預覽
+      </button>
+    </header>
+    <app-panorama></app-panorama>
+  </section>
 </section>

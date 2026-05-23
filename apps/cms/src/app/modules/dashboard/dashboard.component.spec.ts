@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
+import { KpiCardComponent } from './components/kpi-card/kpi-card.component';
 import { CmsStore } from '../../core/state';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -10,7 +11,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
+      declarations: [DashboardComponent, KpiCardComponent],
       imports: [SharedModule],
       providers: [CmsStore],
     }).compileComponents();

@@ -1,44 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MOCK_LIST, sumFees, ListItem, ListCategory } from '../../customization.data';
+import { Subscription } from 'rxjs';
+import {
+  CustomizationVersion,
+  MAX_VERSIONS,
+  SubmissionState,
+  VersionService,
+} from '../../services/version.service';
 
 @Component({
   selector: 'app-my-list',
   templateUrl: './my-list.component.html',
   styleUrls: ['./my-list.component.scss'],
 })
-export class MyListComponent {
-  list: ListCategory[] = JSON.parse(JSON.stringify(MOCK_LIST));
+export class MyListComponent implements OnDestroy {
+  versions: CustomizationVersion[] = [];
+  selectedId: string | null = null;
+  submission: SubmissionState | null = null;
+  readonly maxVersions = MAX_VERSIONS;
+  private sub = new Subscription();
 
-  get summary() {
-    return sumFees(this.list);
+  constructor(
+    private router: Router,
+    private snack: MatSnackBar,
+    private versionService: VersionService
+  ) {
+    this.sub.add(this.versionService.versions$.subscribe((v) => (this.versions = v)));
+    this.sub.add(this.versionService.selectedId$.subscribe((id) => (this.selectedId = id)));
+    this.sub.add(this.versionService.submission$.subscribe((s) => (this.submission = s)));
   }
 
-  get totalItems(): number {
-    return this.list.reduce((sum, cat) => sum + cat.items.length, 0);
+  isSubmitted(v: CustomizationVersion): boolean {
+    return !!this.submission && this.submission.versionId === v.id;
   }
 
-  constructor(private router: Router, private snack: MatSnackBar) {}
-
-  editItem(item: ListItem): void {
-    console.log('[UI-only] edit', item);
-    this.snack.open(`(UI demo) 編輯 ${item.code}`, '關閉', { duration: 2000 });
-  }
-
-  removeItem(item: ListItem, cat: ListCategory): void {
-    cat.items = cat.items.filter((i) => i.code !== item.code);
-    if (cat.items.length === 0) {
-      this.list = this.list.filter((c) => c.category !== cat.category);
+  reviewStatusLabel(): string {
+    if (!this.submission) return '';
+    switch (this.submission.reviewStatus) {
+      case 'review': return '審核中';
+      case 'approved': return '已核准';
+      case 'rework': return '需修正';
     }
-    this.snack.open(`已刪除 ${item.code}`, '復原', { duration: 3000 });
   }
 
-  saveDraft(): void {
-    this.snack.open('草稿已儲存', '關閉', { duration: 2500 });
+  canRemove(v: CustomizationVersion): boolean {
+    // 送出中且還在 review 的版本不能刪
+    if (!this.submission) return true;
+    if (this.submission.versionId !== v.id) return true;
+    return this.submission.reviewStatus !== 'review';
   }
 
-  goSubmit(): void {
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  openPreview(v: CustomizationVersion): void {
+    this.router.navigate(['/customization/version', v.id]);
+  }
+
+  choose(v: CustomizationVersion): void {
+    this.versionService.setSelected(v.id);
     this.router.navigate(['/customization/submit']);
+  }
+
+  remove(v: CustomizationVersion): void {
+    this.versionService.remove(v.id);
+    this.snack.open(`已刪除 ${v.name}`, '關閉', { duration: 2500 });
+  }
+
+  goCreate(): void {
+    this.router.navigate(['/customization/whole-house']);
+  }
+
+  formatTime(ts: number): string {
+    const d = new Date(ts);
+    const pad = (n: number) => `${n}`.padStart(2, '0');
+    return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 }

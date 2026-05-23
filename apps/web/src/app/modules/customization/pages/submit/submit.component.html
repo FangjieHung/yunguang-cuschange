@@ -5,37 +5,48 @@
     <p class="body-lg">請最後確認您的客變申請內容。送出後將進入審核流程。</p>
   </header>
 
-  <div class="submit-confirm card">
+  <empty-state
+    *ngIf="!version"
+    icon="error_outline"
+    title="尚未選定方案"
+    message="請至比較清單選擇要送出的方案。"
+    ctaLabel="前往比較清單"
+    ctaRoute="/customization/my-list"
+  ></empty-state>
+
+  <div class="submit-confirm card" *ngIf="version">
     <div class="submit-confirm__meta">
       <info-tile label="戶號" [value]="buyer.unit"></info-tile>
       <info-tile label="所有權人" [value]="buyer.ownerName"></info-tile>
-      <info-tile label="申請版本" value="v1（草稿）"></info-tile>
+      <info-tile label="申請方案" [value]="version.name"></info-tile>
     </div>
 
-    <div class="submit-confirm__section" *ngFor="let cat of list">
-      <h3 class="submit-confirm__category">{{ cat.category }}</h3>
-      <ul class="submit-confirm__items">
-        <li class="submit-confirm__item" *ngFor="let item of cat.items">
-          <mat-icon class="submit-confirm__check">check_circle</mat-icon>
-          <span class="chip">{{ item.code }}</span>
-          <span class="submit-confirm__name">{{ item.name }}</span>
-          <span class="submit-confirm__location">{{ item.location }}</span>
-          <span class="submit-confirm__fee"
-            [class.submit-confirm__fee--add]="item.fee > 0"
-            [class.submit-confirm__fee--refund]="item.fee < 0">
-            <ng-container *ngIf="item.fee > 0">+NT$ {{ item.fee | number }}</ng-container>
-            <ng-container *ngIf="item.fee < 0">-NT$ {{ -item.fee | number }}</ng-container>
-            <ng-container *ngIf="item.fee === 0">標配</ng-container>
+    <section class="submit-confirm__section">
+      <h3 class="submit-confirm__category">建材選擇</h3>
+      <ul class="submit-materials">
+        <li class="submit-materials__item" *ngFor="let entry of version.entries">
+          <div class="submit-materials__thumb">
+            <img [src]="entry.optionImage" [alt]="entry.optionName" />
+          </div>
+          <div class="submit-materials__meta">
+            <small>{{ entry.categoryTitle }}</small>
+            <strong>{{ entry.optionName }}</strong>
+          </div>
+          <span class="submit-materials__fee"
+            [class.submit-materials__fee--add]="entry.priceDelta > 0">
+            <ng-container *ngIf="entry.priceDelta > 0">
+              +NT$ {{ entry.priceDelta | number }}
+            </ng-container>
+            <ng-container *ngIf="!entry.priceDelta">標配</ng-container>
           </span>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <fee-summary
-      [addOn]="summary.addOn"
-      [refund]="summary.refund"
-      class="submit-confirm__summary"
-    ></fee-summary>
+    <div class="submit-confirm__total card">
+      <span>加價合計</span>
+      <strong>+NT$ {{ totalDelta | number }}</strong>
+    </div>
 
     <div class="submit-confirm__agreement">
       <mat-checkbox [(ngModel)]="agreed" color="primary">

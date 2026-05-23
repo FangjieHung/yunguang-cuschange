@@ -6,47 +6,46 @@
 
   <!-- KPI Cards Row -->
   <div class="dashboard-grid">
-    <!-- Submitted Applications Card -->
-    <div class="kpi-card">
-      <div class="kpi-card__label">已送出申請</div>
-      <div class="kpi-card__value">{{ dashboardStats().totalSubmitted }}</div>
-      <div class="kpi-card__icon submitted"></div>
-    </div>
+    <cms-kpi-card
+      label="已送出申請"
+      [value]="dashboardStats().totalSubmitted"
+      icon="description"
+    ></cms-kpi-card>
 
-    <!-- Under Review Card -->
-    <div class="kpi-card kpi-card--warning">
-      <div class="kpi-card__label">審核中</div>
-      <div class="kpi-card__value">{{ dashboardStats().underReview }}</div>
-      <div class="kpi-card__icon reviewing"></div>
-    </div>
+    <cms-kpi-card
+      label="審核中"
+      [value]="dashboardStats().underReview"
+      icon="schedule"
+      variant="warning"
+    ></cms-kpi-card>
 
-    <!-- Approved Card -->
-    <div class="kpi-card kpi-card--success">
-      <div class="kpi-card__label">已批准</div>
-      <div class="kpi-card__value">{{ dashboardStats().approved }}</div>
-      <div class="kpi-card__icon approved"></div>
-    </div>
+    <cms-kpi-card
+      label="已批准"
+      [value]="dashboardStats().approved"
+      icon="check_circle"
+      variant="success"
+    ></cms-kpi-card>
 
-    <!-- Needs Rework Card -->
-    <div class="kpi-card kpi-card--danger">
-      <div class="kpi-card__label">需返工</div>
-      <div class="kpi-card__value">{{ dashboardStats().needsRework }}</div>
-      <div class="kpi-card__icon rework"></div>
-    </div>
+    <cms-kpi-card
+      label="需返工"
+      [value]="dashboardStats().needsRework"
+      icon="error"
+      variant="danger"
+    ></cms-kpi-card>
 
-    <!-- Needs Confirmation Card -->
-    <div class="kpi-card kpi-card--info">
-      <div class="kpi-card__label">待複確認</div>
-      <div class="kpi-card__value">{{ dashboardStats().needsConfirmation }}</div>
-      <div class="kpi-card__icon confirmation"></div>
-    </div>
+    <cms-kpi-card
+      label="待複確認"
+      [value]="dashboardStats().needsConfirmation"
+      icon="pending_actions"
+      variant="info"
+    ></cms-kpi-card>
 
-    <!-- Total Add-on Card -->
-    <div class="kpi-card">
-      <div class="kpi-card__label">加價合計</div>
-      <div class="kpi-card__value">+NT$ {{ dashboardStats().totalAddOn | number }}</div>
-      <div class="kpi-card__subtext">待複確認</div>
-    </div>
+    <cms-kpi-card
+      label="加價合計"
+      [value]="'+NT$ ' + (dashboardStats().totalAddOn | number)"
+      icon="trending_up"
+      subtext="待複確認"
+    ></cms-kpi-card>
   </div>
 
   <!-- Progress Bar -->

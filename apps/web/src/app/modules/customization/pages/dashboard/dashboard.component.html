@@ -5,6 +5,60 @@
       歡迎回到 {{ buyer.project }} 客變系統。<br />申請開放至 {{ status.applyEndDate }}。</p>
   </header>
 
+  <!-- 已送出方案 -->
+  <section class="card submitted-card" *ngIf="submission && submittedVersion">
+    <header class="submitted-card__head">
+      <div>
+        <span class="eyebrow">已送出申請</span>
+        <h2 class="submitted-card__title">
+          {{ submittedVersion.name }}
+          <span class="chip" [attr.data-status]="submission.reviewStatus">
+            {{ reviewStatusLabel() }}
+          </span>
+        </h2>
+        <small class="submitted-card__time">
+          送出時間：{{ formatDateTime(submission.submittedAt) }}　/　申請截止：{{ submission.applyDeadline }}
+        </small>
+      </div>
+      <div class="submitted-card__delta">
+        <small>加價合計</small>
+        <strong>+NT$ {{ submittedVersion.totalDelta | number }}</strong>
+      </div>
+    </header>
+
+    <ul class="submitted-card__entries">
+      <li class="submitted-card__entry" *ngFor="let entry of submittedVersion.entries">
+        <img [src]="entry.optionImage" [alt]="entry.optionName" />
+        <div>
+          <small>{{ entry.categoryTitle }}</small>
+          <strong>{{ entry.optionName }}</strong>
+        </div>
+      </li>
+    </ul>
+
+    <footer class="submitted-card__footer" *ngIf="editable">
+      <small class="submitted-card__hint">
+        <mat-icon>info</mat-icon>
+        審核尚未開始且未到期，您仍可修改方案。
+      </small>
+      <div class="submitted-card__actions">
+        <button type="button" class="btn btn-ghost btn-sm" (click)="goPickFromSaved()">
+          <mat-icon>list_alt</mat-icon> 從已儲存方案選擇
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="goCreateNew()">
+          <mat-icon>add</mat-icon> 新增方案
+        </button>
+      </div>
+    </footer>
+
+    <footer class="submitted-card__footer" *ngIf="!editable">
+      <small class="submitted-card__hint submitted-card__hint--lock">
+        <mat-icon>lock</mat-icon>
+        已進入審核或已過申請截止，目前無法修改。
+      </small>
+    </footer>
+  </section>
+
   <div class="dashboard-grid">
 
     <!-- 我的戶型 -->

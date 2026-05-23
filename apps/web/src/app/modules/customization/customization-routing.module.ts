@@ -5,10 +5,10 @@ import { BuyerShellComponent } from './components/buyer-shell/buyer-shell.compon
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { WholeHouseComponent } from './pages/whole-house/whole-house.component';
-import { FormLayer1Component } from './pages/form-layer1/form-layer1.component';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { DesignerPackComponent } from './pages/designer-pack/designer-pack.component';
 import { SubmitComponent } from './pages/submit/submit.component';
+import { VersionPreviewComponent } from './pages/version-preview/version-preview.component';
 import { CustomizationReferenceComponent } from '../../shared/pages/customization-reference/customization-reference.page';
 
 const routes: Routes = [
@@ -27,8 +27,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, pathMatch: 'full' },
       { path: 'whole-house', component: WholeHouseComponent },
-      { path: 'form/layer-1/:itemId', component: FormLayer1Component },
       { path: 'my-list', component: MyListComponent },
+      { path: 'version/:id', component: VersionPreviewComponent },
       { path: 'designer-pack', component: DesignerPackComponent },
       { path: 'submit', component: SubmitComponent },
     ],

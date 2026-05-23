@@ -1,9 +1,9 @@
 /* Buyer Topbar */
 .buyer-topbar {
+  @apply flex justify-between;
   position: sticky;
   top: 0;
   z-index: 30;
-  display: flex;
   align-items: center;
   gap: 16px;
   height: var(--topbar-h);
@@ -13,42 +13,8 @@
   -webkit-backdrop-filter: var(--blur);
   border-bottom: 1px solid var(--border);
 
-  &__logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text-primary);
-  }
-
-  &__logo-mark {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--seafoam), var(--seafoam-dark));
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 16px;
-    box-shadow: 0 2px 8px rgba(103, 205, 201, .35);
-  }
-
-  &__logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-
-    strong { font-size: 14px; font-weight: 700; }
-    small { font-size: 11px; color: var(--text-muted); }
-  }
-
   &__center {
-    display: flex;
-    gap: 8px;
-    margin-left: 12px;
-    flex: 1;
+    @apply flex items-center justify-center gap-2 mx-3 flex-1;
   }
 
   &__status {
