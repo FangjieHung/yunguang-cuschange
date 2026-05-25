@@ -1,4 +1,152 @@
 <div class="notification-history-container">
-  <h2>通知歷史</h2>
-  <p>通知歷史功能即將推出</p>
+  <mat-card class="history-card">
+    <mat-card-header>
+      <mat-card-title>通知紀錄</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <form [formGroup]="filterForm" class="filter-form">
+          <!-- Date Range -->
+          <div class="filter-group">
+            <mat-form-field appearance="outline">
+              <mat-label>開始日期</mat-label>
+              <input matInput [matDatepicker]="pickerFrom" formControlName="dateFrom" />
+              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFrom></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="filter-group">
+            <mat-form-field appearance="outline">
+              <mat-label>結束日期</mat-label>
+              <input matInput [matDatepicker]="pickerTo" formControlName="dateTo" />
+              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+              <mat-datepicker #pickerTo></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Status Filter -->
+          <div class="filter-group">
+            <mat-form-field appearance="outline">
+              <mat-label>狀態</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="">全部</mat-option>
+                <mat-option value="sent">已送出</mat-option>
+                <mat-option value="pending">待送出</mat-option>
+                <mat-option value="failed">送出失敗</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Sender Filter -->
+          <div class="filter-group">
+            <mat-form-field appearance="outline">
+              <mat-label>寄件者</mat-label>
+              <input matInput formControlName="sender" placeholder="搜尋寄件者" />
+            </mat-form-field>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="filter-actions">
+            <button mat-raised-button color="primary" (click)="applyFilters()">
+              套用篩選
+            </button>
+            <button mat-stroked-button (click)="clearFilters()">清除篩選</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading()" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>載入中...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="error() && !loading()" class="error-container">
+        <p class="error-message">{{ error() }}</p>
+        <button mat-raised-button color="primary" (click)="loadNotifications()">
+          重試
+        </button>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!loading() && !error() && notifications().length === 0" class="empty-state">
+        <p>沒有通知記錄</p>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!loading() && !error() && notifications().length > 0" class="table-wrapper">
+        <table class="notifications-table">
+          <thead>
+            <tr>
+              <th (click)="onSort('sender')" class="sortable">
+                寄件者
+                <span class="sort-indicator" *ngIf="sortBy() === 'sender'">
+                  {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="onSort('title')" class="sortable">
+                標題
+                <span class="sort-indicator" *ngIf="sortBy() === 'title'">
+                  {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th>收件人範圍</th>
+              <th>收件人數量</th>
+              <th (click)="onSort('sentAt')" class="sortable">
+                送出時間
+                <span class="sort-indicator" *ngIf="sortBy() === 'sentAt'">
+                  {{ sortDirection() === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th>狀態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let notification of notifications()" (click)="onRowClick(notification)" class="table-row">
+              <td class="sender-cell">
+                {{ notification.sender?.name || '未知' }}
+              </td>
+              <td class="title-cell">
+                {{ notification.title }}
+              </td>
+              <td>
+                {{ getScopeName(notification.recipientScope) }}
+              </td>
+              <td>
+                {{ notification.recipientCount || 0 }}
+              </td>
+              <td>
+                {{ notification.sentAt ? (notification.sentAt | date: 'yyyy-MM-dd HH:mm') : '-' }}
+              </td>
+              <td>
+                <span class="status-badge" [class]="'status-' + notification.status">
+                  {{ getStatusLabel(notification.status) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div *ngIf="!loading() && !error() && notifications().length > 0" class="pagination-container">
+        <div class="pagination-info">
+          第 {{ currentPage() }} / {{ totalPages() }} 頁 (共 {{ totalNotifications() }} 條記錄)
+        </div>
+        <div class="pagination-controls">
+          <button mat-icon-button [disabled]="!canGoPrevious" (click)="goPrevious()">
+            <span>上一頁</span>
+          </button>
+          <span class="page-info">{{ currentPage() }} / {{ totalPages() }}</span>
+          <button mat-icon-button [disabled]="!canGoNext" (click)="goNext()">
+            <span>下一頁</span>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

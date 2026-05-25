@@ -74,8 +74,11 @@ export interface Notification {
   title: string;
   content: string;
   channel: 'line' | 'email' | 'in-app';
-  status: 'draft' | 'scheduled' | 'sent';
+  status: 'draft' | 'scheduled' | 'sent' | 'pending' | 'failed';
   sentAt?: string;
+  sender?: User;
+  recipientScope?: 'global' | 'specific-units' | 'specific-buyers';
+  recipientCount?: number;
 }
 
 // 儀表板統計

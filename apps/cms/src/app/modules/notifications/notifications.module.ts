@@ -10,6 +10,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { SendNotificationComponent } from './pages/send-notification/send-notification.component';
 import { NotificationHistoryComponent } from './pages/notification-history/notification-history.component';
@@ -29,6 +34,11 @@ import { NotificationHistoryComponent } from './pages/notification-history/notif
     MatNativeDateModule,
     MatCardModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
     NotificationsRoutingModule,
   ],
   exports: [SendNotificationComponent, NotificationHistoryComponent],

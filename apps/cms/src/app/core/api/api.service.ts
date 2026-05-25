@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Project, Buyer, Application } from '../models';
+import { Project, Buyer, Application, Notification } from '../models';
 import { MockApiService } from './mock-api.service';
 
 @Injectable({
@@ -114,5 +114,38 @@ export class ApiService {
       `${environment.apiUrl}/notifications/send`,
       payload
     );
+  }
+
+  getNotifications(
+    filters?: any,
+    sort?: any,
+    page?: number
+  ): Observable<{ data: Notification[]; total: number }> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getNotifications(filters, sort, page);
+    }
+    let queryParams = '';
+    if (filters || sort || page) {
+      const params = new URLSearchParams();
+      if (filters) {
+        Object.keys(filters).forEach((key) => {
+          if (filters[key] !== null && filters[key] !== undefined) {
+            params.append(key, filters[key]);
+          }
+        });
+      }
+      if (sort) {
+        params.append('sortBy', sort.sortBy || 'sentAt');
+        params.append('sortDirection', sort.sortDirection || 'desc');
+      }
+      if (page) {
+        params.append('page', page.toString());
+      }
+      queryParams = params.toString();
+    }
+    const url = queryParams
+      ? `${environment.apiUrl}/notifications?${queryParams}`
+      : `${environment.apiUrl}/notifications`;
+    return this.httpClient.get<{ data: Notification[]; total: number }>(url);
   }
 }
