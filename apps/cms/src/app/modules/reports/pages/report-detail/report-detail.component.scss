@@ -1,0 +1,254 @@
+.report-detail-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .loading-container,
+  .not-found-container,
+  .error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    flex-direction: column;
+
+    p {
+      margin-top: 16px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  .error-card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .content {
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .spacer {
+        flex: 1;
+      }
+    }
+
+    .detail-card,
+    .data-card {
+      margin-bottom: 24px;
+
+      .card-header {
+        padding-bottom: 0;
+        margin-bottom: 16px;
+      }
+    }
+
+    .metadata-section {
+      .metadata-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+        margin-bottom: 32px;
+
+        .metadata-item {
+          label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.54);
+            margin-bottom: 8px;
+            font-weight: 500;
+          }
+
+          span {
+            display: block;
+            font-size: 16px;
+          }
+
+          .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+
+            &.status-completed {
+              background-color: rgba(76, 175, 80, 0.12);
+              color: rgb(76, 175, 80);
+            }
+
+            &.status-processing {
+              background-color: rgba(255, 193, 7, 0.12);
+              color: rgb(255, 193, 7);
+            }
+
+            &.status-failed {
+              background-color: rgba(244, 67, 54, 0.12);
+              color: rgb(244, 67, 54);
+            }
+          }
+        }
+      }
+
+      .section {
+        margin-bottom: 32px;
+
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+
+          .info-item {
+            label {
+              display: block;
+              font-size: 12px;
+              text-transform: uppercase;
+              color: rgba(0, 0, 0, 0.54);
+              margin-bottom: 4px;
+              font-weight: 500;
+            }
+
+            span {
+              display: block;
+              font-size: 14px;
+            }
+          }
+        }
+
+        &.download-section {
+          .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            button {
+              min-width: 120px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              mat-icon {
+                margin-right: 4px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+
+      .table-wrapper {
+        min-width: 400px;
+      }
+
+      .data-table {
+        width: 100%;
+
+        th {
+          font-weight: 500;
+          background-color: rgba(0, 0, 0, 0.04);
+          text-align: left;
+        }
+
+        td {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+          padding: 16px 8px;
+        }
+
+        .status-badge {
+          display: inline-block;
+          padding: 4px 8px;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: 500;
+
+          &.status-completed {
+            background-color: rgba(76, 175, 80, 0.12);
+            color: rgb(76, 175, 80);
+          }
+
+          &.status-processing {
+            background-color: rgba(255, 193, 7, 0.12);
+            color: rgb(255, 193, 7);
+          }
+
+          &.status-failed {
+            background-color: rgba(244, 67, 54, 0.12);
+            color: rgb(244, 67, 54);
+          }
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      justify-content: flex-start;
+
+      button {
+        min-width: 120px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .report-detail-container {
+    padding: 16px;
+
+    .content {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        h1 {
+          font-size: 20px;
+        }
+
+        .spacer {
+          width: 100%;
+        }
+      }
+
+      .metadata-section {
+        .metadata-grid {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .section {
+          .info-grid {
+            grid-template-columns: 1fr;
+          }
+
+          &.download-section {
+            .button-group {
+              flex-direction: column;
+              gap: 8px;
+
+              button {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

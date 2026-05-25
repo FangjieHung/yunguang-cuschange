@@ -18,9 +18,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { SendNotificationComponent } from './pages/send-notification/send-notification.component';
 import { NotificationHistoryComponent } from './pages/notification-history/notification-history.component';
+import { NotificationDetailComponent } from './pages/notification-detail/notification-detail.component';
 
 @NgModule({
-  declarations: [SendNotificationComponent, NotificationHistoryComponent],
+  declarations: [SendNotificationComponent, NotificationHistoryComponent, NotificationDetailComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -41,6 +42,6 @@ import { NotificationHistoryComponent } from './pages/notification-history/notif
     MatIconModule,
     NotificationsRoutingModule,
   ],
-  exports: [SendNotificationComponent, NotificationHistoryComponent],
+  exports: [SendNotificationComponent, NotificationHistoryComponent, NotificationDetailComponent],
 })
 export class NotificationsModule {}

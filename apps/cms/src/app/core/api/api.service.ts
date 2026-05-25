@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Project, Buyer, Application, Notification, ReportData, Report } from '../models';
 import { MockApiService } from './mock-api.service';
@@ -149,6 +149,30 @@ export class ApiService {
     return this.httpClient.get<{ data: Notification[]; total: number }>(url);
   }
 
+  getNotificationById(id: string): Observable<Notification | undefined> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getNotificationById?.(id) || of(undefined);
+    }
+    return this.httpClient.get<Notification>(`${environment.apiUrl}/notifications/${id}`);
+  }
+
+  getNotificationRecipients(id: string): Observable<any[]> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getNotificationRecipients?.(id) || of([]);
+    }
+    return this.httpClient.get<any[]>(`${environment.apiUrl}/notifications/${id}/recipients`);
+  }
+
+  resendNotification(id: string): Observable<{ success: boolean; message: string }> {
+    if (this.useMockApi()) {
+      return this.mockApiService.resendNotification?.(id) || of({ success: true, message: 'Resent' });
+    }
+    return this.httpClient.post<{ success: boolean; message: string }>(
+      `${environment.apiUrl}/notifications/${id}/resend`,
+      {}
+    );
+  }
+
   generateReport(payload: any): Observable<ReportData> {
     if (this.useMockApi()) {
       return this.mockApiService.generateReport(payload);
@@ -207,5 +231,12 @@ export class ApiService {
       return this.mockApiService.deleteReport(reportId);
     }
     return this.httpClient.delete<void>(`${environment.apiUrl}/reports/${reportId}`);
+  }
+
+  getReportById(id: string): Observable<Report | undefined> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getReportById?.(id) || of(undefined);
+    }
+    return this.httpClient.get<Report>(`${environment.apiUrl}/reports/${id}`);
   }
 }

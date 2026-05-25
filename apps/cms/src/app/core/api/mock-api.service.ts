@@ -358,4 +358,48 @@ export class MockApiService {
     }
     return of(void 0).pipe(delay(300));
   }
+
+  getNotificationById(id: string): Observable<Notification | undefined> {
+    const notification = this.notifications.find((n) => n.id === id);
+    return of(notification ? { ...notification } : undefined).pipe(delay(300));
+  }
+
+  getNotificationRecipients(id: string): Observable<any[]> {
+    const notification = this.notifications.find((n) => n.id === id);
+    if (!notification) {
+      return of([]).pipe(delay(300));
+    }
+
+    // Generate mock recipients based on notification recipient count
+    const recipients = [];
+    const statuses: Array<'delivered' | 'pending' | 'failed'> = ['delivered', 'pending', 'failed'];
+
+    for (let i = 0; i < (notification.recipientCount || 5); i++) {
+      recipients.push({
+        id: `buyer-${i + 1}`,
+        name: `Buyer ${i + 1}`,
+        email: `buyer${i + 1}@example.com`,
+        status: statuses[i % statuses.length],
+      });
+    }
+
+    return of(recipients).pipe(delay(300));
+  }
+
+  resendNotification(id: string): Observable<{ success: boolean; message: string }> {
+    const notification = this.notifications.find((n) => n.id === id);
+    if (!notification) {
+      return of({ success: false, message: 'Notification not found' }).pipe(delay(300));
+    }
+
+    // Update the notification status to pending (it was being resent)
+    notification.status = 'pending';
+
+    return of({ success: true, message: 'Notification resent successfully' }).pipe(delay(500));
+  }
+
+  getReportById(id: string): Observable<Report | undefined> {
+    const report = this.reports.find((r) => r.id === id);
+    return of(report ? { ...report } : undefined).pipe(delay(300));
+  }
 }

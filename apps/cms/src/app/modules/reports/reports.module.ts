@@ -16,12 +16,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportBuilderComponent } from './pages/report-builder/report-builder.component';
 import { ReportListComponent } from './pages/report-list/report-list.component';
+import { ReportDetailComponent } from './pages/report-detail/report-detail.component';
 
 @NgModule({
-  declarations: [ReportBuilderComponent, ReportListComponent],
+  declarations: [ReportBuilderComponent, ReportListComponent, ReportDetailComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -40,8 +42,9 @@ import { ReportListComponent } from './pages/report-list/report-list.component';
     MatIconModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSnackBarModule,
     ReportsRoutingModule,
   ],
-  exports: [ReportBuilderComponent, ReportListComponent],
+  exports: [ReportBuilderComponent, ReportListComponent, ReportDetailComponent],
 })
 export class ReportsModule {}

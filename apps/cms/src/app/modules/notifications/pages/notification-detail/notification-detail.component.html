@@ -1,0 +1,191 @@
+<div class="notification-detail-container">
+  <!-- Loading State -->
+  <div *ngIf="loading()" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading notification details...</p>
+  </div>
+
+  <!-- Not Found State -->
+  <div *ngIf="notFound() && !loading()" class="not-found-container">
+    <mat-card class="error-card">
+      <mat-card-header>
+        <mat-card-title>Notification Not Found</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>The notification you're looking for does not exist or has been deleted.</p>
+        <button mat-raised-button color="primary" (click)="onBack()">Back to History</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error() && !loading() && !notFound()" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-header>
+        <mat-card-title>Error</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ error() }}</p>
+        <button mat-raised-button color="primary" (click)="onBack()">Back to History</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="notification() && !loading() && !notFound() && !error()" class="content">
+    <!-- Header with Back Button -->
+    <div class="header">
+      <button mat-icon-button (click)="onBack()" data-testid="back-button" title="Back to history">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Notification Details</h1>
+      <div class="spacer"></div>
+      <button
+        *ngIf="canResend()"
+        mat-raised-button
+        color="accent"
+        (click)="onResend()"
+        [disabled]="resending()"
+        title="Resend this notification"
+      >
+        <mat-icon *ngIf="!resending()">mail_outline</mat-icon>
+        <mat-spinner *ngIf="resending()" diameter="20"></mat-spinner>
+        {{ resending() ? 'Resending...' : 'Resend' }}
+      </button>
+    </div>
+
+    <!-- Main Content Card -->
+    <mat-card class="detail-card">
+      <!-- Notification Header -->
+      <mat-card-header class="card-header">
+        <mat-card-title>{{ notification()?.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Notification #{{ notification()?.id }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Notification Metadata -->
+      <mat-card-content class="metadata-section">
+        <div class="metadata-grid">
+          <div class="metadata-item">
+            <label>Status</label>
+            <span class="badge" [ngClass]="'status-' + notification()?.status">
+              {{ getNotificationStatusLabel(notification()?.status) }}
+            </span>
+          </div>
+          <div class="metadata-item">
+            <label>Type</label>
+            <span>{{ notification()?.type }}</span>
+          </div>
+          <div class="metadata-item">
+            <label>Channel</label>
+            <span>{{ notification()?.channel }}</span>
+          </div>
+          <div class="metadata-item">
+            <label>Recipient Scope</label>
+            <span>{{ getScopeName(notification()?.recipientScope) }}</span>
+          </div>
+        </div>
+
+        <!-- Sender Info -->
+        <div class="section">
+          <h3>Sent By</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Name:</label>
+              <span>{{ notification()?.sender?.name || 'Unknown' }}</span>
+            </div>
+            <div class="info-item">
+              <label>Email:</label>
+              <span>{{ notification()?.sender?.email || 'N/A' }}</span>
+            </div>
+            <div class="info-item">
+              <label>Sent At:</label>
+              <span>{{ notification()?.sentAt ? (notification()!.sentAt | date: 'medium') : 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="section">
+          <h3>Content</h3>
+          <div class="content-box">
+            {{ notification()?.content }}
+          </div>
+        </div>
+
+        <!-- Delivery Statistics -->
+        <div class="section">
+          <h3>Delivery Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">Total Recipients</span>
+              <span class="stat-value">{{ getDeliveryStats().total }}</span>
+            </div>
+            <div class="stat-item delivered">
+              <span class="stat-label">Delivered</span>
+              <span class="stat-value">{{ getDeliveryStats().delivered }}</span>
+            </div>
+            <div class="stat-item pending">
+              <span class="stat-label">Pending</span>
+              <span class="stat-value">{{ getDeliveryStats().pending }}</span>
+            </div>
+            <div class="stat-item failed">
+              <span class="stat-label">Failed</span>
+              <span class="stat-value">{{ getDeliveryStats().failed }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Recipients Table -->
+    <mat-card class="recipients-card">
+      <mat-card-header class="card-header">
+        <mat-card-title>Recipients ({{ recipients().length }})</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="table-container">
+        <table mat-table [dataSource]="recipients()" class="recipients-table">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Delivery Status</th>
+            <td mat-cell *matCellDef="let element" data-testid="recipient-status">
+              <span class="status-badge" [ngClass]="'status-' + element.status">
+                {{ getStatusLabel(element.status) }}
+              </span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- Empty State -->
+        <div *ngIf="recipients().length === 0" class="empty-state">
+          <p>No recipients found for this notification.</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button mat-stroked-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to History
+      </button>
+    </div>
+  </div>
+</div>
