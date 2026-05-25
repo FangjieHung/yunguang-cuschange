@@ -1,0 +1,55 @@
+<section class="application-list-page">
+  <header class="page-header">
+    <h1 class="display-2">申請審核</h1>
+    <p class="body-lg">管理和審核所有客變申請</p>
+  </header>
+
+  <div class="filters">
+    <select [formControl]="statusFilter" class="filter-select">
+      <option *ngFor="let opt of statusOptions" [value]="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
+    <span class="result-count">找到 {{ filteredApplications.length }} 筆申請</span>
+  </div>
+
+  <div class="applications-table">
+    <div class="table-header">
+      <span class="col col-unit">買家</span>
+      <span class="col col-status">狀態</span>
+      <span class="col col-items">申請項目數</span>
+      <span class="col col-fee">費用</span>
+      <span class="col col-submitted">送出日期</span>
+      <span class="col col-actions">操作</span>
+    </div>
+
+    <div class="table-body">
+      <div
+        class="table-row"
+        *ngFor="let app of filteredApplications"
+        (click)="onViewApplication(app)"
+      >
+        <span class="col col-unit">{{ app.buyerId }}</span>
+        <span class="col col-status">
+          <span class="chip" [attr.data-status]="app.status">
+            {{ getStatusLabel(app.status) }}
+          </span>
+        </span>
+        <span class="col col-items">{{ app.items.length }} 項</span>
+        <span class="col col-fee">+NT$ {{ app.totalAddOn | number }}</span>
+        <span class="col col-submitted">{{
+          app.submittedAt | date: 'short'
+        }}</span>
+        <span class="col col-actions">
+          <button class="btn btn-sm" (click)="onViewApplication(app); $event.stopPropagation()">
+            審核
+          </button>
+        </span>
+      </div>
+
+      <div class="table-empty" *ngIf="filteredApplications.length === 0">
+        <p>沒有符合條件的申請</p>
+      </div>
+    </div>
+  </div>
+</section>

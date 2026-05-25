@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="review-form">
+  <div class="form-group">
+    <label for="decision">審核決定</label>
+    <div class="radio-group">
+      <label class="radio-option">
+        <input type="radio" value="approved" formControlName="decision" />
+        <span>核准</span>
+      </label>
+      <label class="radio-option">
+        <input type="radio" value="rework" formControlName="decision" />
+        <span>要求返工</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">審核意見</label>
+    <textarea
+      formControlName="comment"
+      placeholder="請輸入審核意見..."
+      rows="6"
+      class="form-control"
+    ></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid || isSubmitting"
+    >
+      {{ isSubmitting ? '提交中...' : '提交審核' }}
+    </button>
+  </div>
+</form>

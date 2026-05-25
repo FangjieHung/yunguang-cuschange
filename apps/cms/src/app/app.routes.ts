@@ -21,6 +21,14 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'application-review',
+    loadChildren: () =>
+      import('./modules/application-review/application-review.module').then(
+        (m) => m.ApplicationReviewModule
+      ),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

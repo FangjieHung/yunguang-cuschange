@@ -1,0 +1,71 @@
+<section class="application-detail-page" *ngIf="!isLoading && application">
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> 返回
+    </button>
+    <h1 class="display-2">申請 #{{ application.id }}</h1>
+  </header>
+
+  <div class="detail-grid">
+    <div class="detail-card">
+      <h3>申請基本資訊</h3>
+      <dl class="detail-list">
+        <dt>買家 ID</dt>
+        <dd>{{ application.buyerId }}</dd>
+        <dt>申請版本</dt>
+        <dd>{{ application.version }}</dd>
+        <dt>狀態</dt>
+        <dd>
+          <span class="chip" [attr.data-status]="application.status">
+            {{ application.status }}
+          </span>
+        </dd>
+        <dt>送出日期</dt>
+        <dd>{{ application.submittedAt | date: 'short' }}</dd>
+      </dl>
+    </div>
+
+    <div class="detail-card">
+      <h3>費用資訊</h3>
+      <dl class="detail-list">
+        <dt>加價合計</dt>
+        <dd>+NT$ {{ application.totalAddOn | number }}</dd>
+        <dt>退費合計</dt>
+        <dd>-NT$ {{ application.totalRefund | number }}</dd>
+        <dt>申請項目數</dt>
+        <dd>{{ application.items.length }}</dd>
+      </dl>
+    </div>
+
+    <div class="detail-card full-width">
+      <h3>申請項目清單</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>代碼</th>
+            <th>項目名稱</th>
+            <th>類別</th>
+            <th>費用</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of application.items">
+            <td>{{ item.code }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.fee > 0 ? '+' : '' }}NT$ {{ item.fee | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="detail-card full-width" *ngIf="application.status === 'submitted'">
+      <h3>審核表單</h3>
+      <cms-review-form (submit)="onReviewSubmit($event)"></cms-review-form>
+    </div>
+  </div>
+</section>
+
+<div class="loading" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
