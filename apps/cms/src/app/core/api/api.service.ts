@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Project, Buyer, Application, Notification, ReportData, Report, SearchResult } from '../models';
+import { Project, Buyer, Application, Notification, ReportData, Report, SearchResult, Reminder, DashboardStatsWithTrend } from '../models';
 import { MockApiService } from './mock-api.service';
 
 @Injectable({
@@ -247,5 +247,34 @@ export class ApiService {
     return this.httpClient.get<SearchResult[]>(
       `${environment.apiUrl}/search?q=${encodeURIComponent(query)}&type=${searchType}`
     );
+  }
+
+  getTodayReminders(): Observable<Reminder[]> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getTodayReminders?.() || of([]);
+    }
+    return this.httpClient.get<Reminder[]>(`${environment.apiUrl}/reminders/today`);
+  }
+
+  getDashboardStats(): Observable<DashboardStatsWithTrend> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getDashboardStats?.() || of({
+        totalSubmitted: 0,
+        underReview: 0,
+        approved: 0,
+        needsRework: 0,
+        needsConfirmation: 0,
+        totalAddOn: 0,
+        totalRefund: 0,
+      });
+    }
+    return this.httpClient.get<DashboardStatsWithTrend>(`${environment.apiUrl}/dashboard/stats`);
+  }
+
+  markReminderAsDone(reminderId: string): Observable<{ success: boolean }> {
+    if (this.useMockApi()) {
+      return this.mockApiService.markReminderAsDone?.(reminderId) || of({ success: true });
+    }
+    return this.httpClient.post<{ success: boolean }>(`${environment.apiUrl}/reminders/${reminderId}/done`, {});
   }
 }

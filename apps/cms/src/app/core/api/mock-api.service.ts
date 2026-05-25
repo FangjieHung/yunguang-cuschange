@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { Project, Buyer, Application, Notification, User, ReportData, Report, SearchResult } from '../models';
+import { Project, Buyer, Application, Notification, User, ReportData, Report, SearchResult, Reminder, DashboardStatsWithTrend } from '../models';
 import { MOCK_PROJECTS, MOCK_BUYERS, MOCK_APPLICATIONS } from './mock-data';
 
 @Injectable({
@@ -478,5 +478,68 @@ export class MockApiService {
     }
 
     return of(results).pipe(delay(300));
+  }
+
+  getTodayReminders(): Observable<Reminder[]> {
+    const reminders: Reminder[] = [
+      {
+        id: 'rem1',
+        type: 'application_review',
+        title: '申請案待審核',
+        description: '有 2 件申請案待審核',
+        deadline: new Date(new Date().setHours(17, 0, 0)).toISOString(),
+        priority: 'high',
+        actionUrl: '/business-operator/application/app1',
+        done: false,
+      },
+      {
+        id: 'rem2',
+        type: 'deadline_alert',
+        title: '申請案即將過期',
+        description: '有 1 件申請案距離截止日期 3 天',
+        deadline: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+        priority: 'medium',
+        actionUrl: '/business-operator/application/app2',
+        done: false,
+      },
+      {
+        id: 'rem3',
+        type: 'notification',
+        title: '待發送的通知',
+        description: '有 5 則通知等待發送',
+        priority: 'low',
+        actionUrl: '/notifications',
+        done: false,
+      },
+    ];
+    return of(reminders).pipe(delay(300));
+  }
+
+  getDashboardStats(): Observable<DashboardStatsWithTrend> {
+    const stats: DashboardStatsWithTrend = {
+      totalSubmitted: 12,
+      underReview: 6,
+      approved: 4,
+      needsRework: 2,
+      needsConfirmation: 4,
+      totalAddOn: 125000,
+      totalRefund: 15000,
+      yesterdayApproved: 3,
+      trendData: [
+        { date: '2024-05-19', submitted: 5, underReview: 2, approved: 1, needsConfirmation: 0 },
+        { date: '2024-05-20', submitted: 6, underReview: 3, approved: 1, needsConfirmation: 1 },
+        { date: '2024-05-21', submitted: 7, underReview: 2, approved: 2, needsConfirmation: 1 },
+        { date: '2024-05-22', submitted: 8, underReview: 4, approved: 2, needsConfirmation: 2 },
+        { date: '2024-05-23', submitted: 9, underReview: 3, approved: 3, needsConfirmation: 2 },
+        { date: '2024-05-24', submitted: 10, underReview: 5, approved: 3, needsConfirmation: 3 },
+        { date: '2024-05-25', submitted: 12, underReview: 6, approved: 4, needsConfirmation: 4 },
+      ],
+    };
+    return of(stats).pipe(delay(500));
+  }
+
+  markReminderAsDone(reminderId: string): Observable<{ success: boolean }> {
+    // In a real implementation, this would persist to the backend
+    return of({ success: true }).pipe(delay(200));
   }
 }

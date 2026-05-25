@@ -127,3 +127,32 @@ export interface SearchResult {
   icon?: string;
   data?: any;
 }
+
+// 提醒項目
+export interface Reminder {
+  id: string;
+  type: 'application_review' | 'deadline_alert' | 'notification';
+  title: string;
+  description?: string;
+  deadline?: string; // ISO 8601 date string
+  priority: 'high' | 'medium' | 'low';
+  actionUrl?: string;
+  done?: boolean;
+  createdAt?: string;
+  relatedId?: string; // buyer ID, application ID, or notification ID
+}
+
+// 儀表板的7日趨勢資料
+export interface TrendData {
+  date: string; // YYYY-MM-DD
+  submitted: number;
+  underReview: number;
+  approved: number;
+  needsConfirmation: number;
+}
+
+// 擴展儀表板統計，包含趨勢資料
+export interface DashboardStatsWithTrend extends DashboardStats {
+  trendData?: TrendData[];
+  yesterdayApproved?: number; // 用於計算昨日的核准數以比較百分比變化
+}

@@ -1,4 +1,95 @@
 <div class="buyer-quick-detail-container">
-  <h1>買家詳情</h1>
-  <p>待實作</p>
+  <!-- Header -->
+  <div class="detail-header">
+    <button mat-icon-button (click)="goBack()" aria-label="返回">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="detail-title">買家詳情</h1>
+    <div class="header-placeholder"></div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="loading-container">
+    <p>載入買家資訊中...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!isLoading() && buyer() as buyer" class="detail-content">
+    <!-- Basic Information Card -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>基本資訊</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">名稱</span>
+            <span class="info-value">{{ buyer.ownerName }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">身份證末四碼</span>
+            <span class="info-value">****{{ buyer.ownerIdLast4 }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">聯絡電話</span>
+            <a [href]="'tel:' + buyer.phone" class="info-value">{{ buyer.phone }}</a>
+          </div>
+          <div class="info-item" *ngIf="buyer.email">
+            <span class="info-label">電郵</span>
+            <a [href]="'mailto:' + buyer.email" class="info-value">{{ buyer.email }}</a>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Unit Information Card -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>物業資訊</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">戶號</span>
+            <span class="info-value">{{ buyer.unitNo }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">樓層</span>
+            <span class="info-value">{{ buyer.floor }} 樓</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">朝向</span>
+            <span class="info-value">{{ buyer.facing }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">佈局</span>
+            <span class="info-value">{{ buyer.layout }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">面積</span>
+            <span class="info-value">{{ buyer.size }} m²</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button mat-raised-button color="accent" (click)="navigateToFullProfile()" class="action-btn">
+        <mat-icon>person</mat-icon>
+        查看完整檔案
+      </button>
+      <button mat-raised-button color="primary" (click)="navigateToNewApplication()" class="action-btn">
+        <mat-icon>add</mat-icon>
+        建立新申請
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading() && !buyer()" class="empty-state">
+    <mat-icon class="empty-icon">person_off</mat-icon>
+    <h2>找不到買家</h2>
+    <p>無法載入所要求的買家資訊</p>
+  </div>
 </div>

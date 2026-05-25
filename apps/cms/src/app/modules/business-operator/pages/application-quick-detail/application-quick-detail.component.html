@@ -1,4 +1,127 @@
 <div class="application-quick-detail-container">
-  <h1>申請案詳情</h1>
-  <p>待實作</p>
+  <!-- Header -->
+  <div class="detail-header">
+    <button mat-icon-button (click)="goBack()" aria-label="返回">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="detail-title">申請案詳情</h1>
+    <div class="header-placeholder"></div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="loading-container">
+    <p>載入申請案資訊中...</p>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!isLoading() && application() as app" class="detail-content">
+    <!-- Status Card -->
+    <mat-card class="status-card">
+      <mat-card-content>
+        <div class="status-header">
+          <div class="status-info">
+            <h3>申請案 ID</h3>
+            <p class="app-id">{{ app.id }}</p>
+          </div>
+          <mat-chip-set aria-label="申請案狀態">
+            <mat-chip [color]="getStatusColor(app.status)" selected>
+              {{ getStatusText(app.status) }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Fee Summary Card -->
+    <mat-card class="fee-card">
+      <mat-card-header>
+        <mat-card-title>費用摘要</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="fee-summary">
+          <div class="fee-item">
+            <span class="fee-label">總加購費</span>
+            <span class="fee-value">{{ formatCurrency(app.totalAddOn) }}</span>
+          </div>
+          <div class="fee-item" *ngIf="app.totalRefund > 0">
+            <span class="fee-label">總退款</span>
+            <span class="fee-value refund">-{{ formatCurrency(app.totalRefund) }}</span>
+          </div>
+          <div class="fee-divider"></div>
+          <div class="fee-item total">
+            <span class="fee-label">淨額</span>
+            <span class="fee-value">{{ formatCurrency(app.totalAddOn - app.totalRefund) }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Items Card -->
+    <mat-card class="items-card" *ngIf="app.items && app.items.length > 0">
+      <mat-card-header>
+        <mat-card-title>選定項目 ({{ app.items.length }})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let item of app.items; trackBy: trackByItemId">
+            <div class="item-content">
+              <div class="item-info">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-code">{{ item.code }}</p>
+              </div>
+              <span class="item-fee">{{ formatCurrency(item.fee) }}</span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Timeline Card -->
+    <mat-card class="timeline-card">
+      <mat-card-header>
+        <mat-card-title>時間線</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="timeline-items">
+          <div class="timeline-item submitted" *ngIf="app.submittedAt">
+            <mat-icon>check_circle</mat-icon>
+            <div class="timeline-text">
+              <p class="timeline-label">已提交</p>
+              <p class="timeline-date">{{ formatDate(app.submittedAt) }}</p>
+            </div>
+          </div>
+          <div class="timeline-item reviewed" *ngIf="app.reviewedAt">
+            <mat-icon>done_all</mat-icon>
+            <div class="timeline-text">
+              <p class="timeline-label">已審核</p>
+              <p class="timeline-date">{{ formatDate(app.reviewedAt) }}</p>
+              <p class="timeline-reviewer" *ngIf="app.reviewedBy">審核者: {{ app.reviewedBy }}</p>
+            </div>
+          </div>
+          <div class="timeline-item confirmation" *ngIf="app.preConfirmDeadline && app.preConfirmStatus === 'pending'">
+            <mat-icon>schedule</mat-icon>
+            <div class="timeline-text">
+              <p class="timeline-label">待確認</p>
+              <p class="timeline-date">截止: {{ formatDate(app.preConfirmDeadline) }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Button -->
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="navigateToFullDetail()" class="action-btn">
+        <mat-icon>visibility</mat-icon>
+        查看完整詳情
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading() && !application()" class="empty-state">
+    <mat-icon class="empty-icon">description_off</mat-icon>
+    <h2>找不到申請案</h2>
+    <p>無法載入所要求的申請案資訊</p>
+  </div>
 </div>

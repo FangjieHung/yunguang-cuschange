@@ -1,4 +1,178 @@
 <div class="status-overview-container">
-  <h1>狀態概覽</h1>
-  <p>待實作</p>
+  <!-- Header -->
+  <div class="overview-header">
+    <button mat-icon-button (click)="goBack()" aria-label="返回">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="overview-title">狀態概覽</h1>
+    <button mat-icon-button (click)="refreshStats()" aria-label="刷新">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="loading-container">
+    <p>載入統計資料中...</p>
+  </div>
+
+  <!-- Overview Content -->
+  <div *ngIf="!isLoading()" class="overview-content">
+    <!-- KPI Cards -->
+    <div class="kpi-cards-grid">
+      <!-- Pending Applications Card -->
+      <mat-card class="kpi-card pending">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3 class="kpi-title">待提交申請</h3>
+            <mat-icon class="kpi-icon">schedule</mat-icon>
+          </div>
+          <div class="kpi-value">{{ stats().totalSubmitted }}</div>
+          <div class="kpi-stat">{{ getPendingPercentage() }}% of total</div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Under Review Card -->
+      <mat-card class="kpi-card reviewing">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3 class="kpi-title">審核中</h3>
+            <mat-icon class="kpi-icon">assignment</mat-icon>
+          </div>
+          <div class="kpi-value">{{ stats().underReview }}</div>
+          <mat-progress-bar mode="determinate" [value]="getReviewProgress()"></mat-progress-bar>
+          <div class="kpi-stat">{{ getReviewProgress() }}% 進度</div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Approved Card -->
+      <mat-card class="kpi-card approved">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3 class="kpi-title">已核准</h3>
+            <mat-icon class="kpi-icon">check_circle</mat-icon>
+          </div>
+          <div class="kpi-value">{{ stats().approved }}</div>
+          <div class="kpi-stat" [ngClass]="{ positive: getApprovedPercentageChange() > 0 }">
+            <span *ngIf="getApprovedPercentageChange() >= 0">+</span>{{ getApprovedPercentageChange() }}% vs yesterday
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Awaiting Confirmation Card -->
+      <mat-card class="kpi-card confirmation">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3 class="kpi-title">待確認</h3>
+            <mat-icon class="kpi-icon">pending_actions</mat-icon>
+          </div>
+          <div class="kpi-value">{{ stats().needsConfirmation }}</div>
+          <button
+            mat-button
+            color="accent"
+            (click)="navigateToConfirmation()"
+            class="kpi-action"
+            aria-label="查看待確認項目"
+          >
+            查看詳情
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- 7-Day Trend Chart -->
+    <mat-card class="trend-card" *ngIf="stats().trendData && stats().trendData!.length > 0">
+      <mat-card-header>
+        <mat-card-title>7日趨勢</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="trend-container">
+          <div class="trend-chart">
+            <div class="trend-items">
+              <div *ngFor="let trend of (stats().trendData || [])" class="trend-item">
+                <div class="trend-date">{{ trend.date | slice: 5 }}</div>
+                <div class="trend-bars">
+                  <div class="bar submitted" [style.height.%]="(trend.submitted / getMaxTrendValue()) * 100"
+                       [matTooltip]="'提交: ' + trend.submitted"></div>
+                  <div class="bar reviewing" [style.height.%]="(trend.underReview / getMaxTrendValue()) * 100"
+                       [matTooltip]="'審核中: ' + trend.underReview"></div>
+                  <div class="bar approved" [style.height.%]="(trend.approved / getMaxTrendValue()) * 100"
+                       [matTooltip]="'已核准: ' + trend.approved"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trend-legend">
+            <div class="legend-item">
+              <span class="legend-color submitted"></span>
+              <span>提交</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color reviewing"></span>
+              <span>審核中</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color approved"></span>
+              <span>已核准</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Alerts Section -->
+    <mat-card class="alerts-card" *ngIf="hasAlerts()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>warning</mat-icon>
+          狀態提醒
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="alert-items">
+          <div *ngIf="(stats().needsRework ?? 0) > 0" class="alert-item rework">
+            <mat-icon>error_outline</mat-icon>
+            <div class="alert-text">
+              <p class="alert-title">{{ stats().needsRework }} 件申請需要修正</p>
+              <p class="alert-description">請檢查審核意見並進行修正</p>
+            </div>
+          </div>
+          <div *ngIf="(stats().needsConfirmation ?? 0) > 0" class="alert-item confirmation">
+            <mat-icon>info</mat-icon>
+            <div class="alert-text">
+              <p class="alert-title">{{ stats().needsConfirmation }} 件申請等待買家確認</p>
+              <p class="alert-description">
+                <button mat-button color="accent" (click)="navigateToConfirmation()" class="alert-action">
+                  查看詳情
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Financial Summary -->
+    <mat-card class="financial-card">
+      <mat-card-header>
+        <mat-card-title>財務摘要</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="financial-items">
+          <div class="financial-item">
+            <span class="financial-label">總加購費用</span>
+            <span class="financial-value addon">{{ formatCurrency(stats().totalAddOn) }}</span>
+          </div>
+          <div class="financial-item">
+            <span class="financial-label">總退款金額</span>
+            <span class="financial-value refund">{{ formatCurrency(stats().totalRefund) }}</span>
+          </div>
+          <div class="financial-divider"></div>
+          <div class="financial-item">
+            <span class="financial-label">淨額</span>
+            <span class="financial-value net">{{ formatCurrency(stats().totalAddOn - stats().totalRefund) }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

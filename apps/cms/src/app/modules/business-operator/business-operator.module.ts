@@ -10,6 +10,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { BusinessOperatorRoutingModule } from './business-operator-routing.module';
 import { QuickSearchComponent } from './pages/quick-search/quick-search.component';
@@ -39,6 +44,11 @@ import { ApplicationQuickDetailComponent } from './pages/application-quick-detai
     MatChipsModule,
     MatProgressBarModule,
     MatBadgeModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatSnackBarModule,
     BusinessOperatorRoutingModule,
   ],
   exports: [

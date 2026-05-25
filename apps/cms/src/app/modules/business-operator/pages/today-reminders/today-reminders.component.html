@@ -1,4 +1,176 @@
 <div class="today-reminders-container">
-  <h1>今日提醒</h1>
-  <p>待實作</p>
+  <!-- Header -->
+  <div class="reminders-header">
+    <button mat-icon-button (click)="goBack()" aria-label="返回">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="reminders-title">今日提醒</h1>
+    <button mat-icon-button (click)="refreshReminders()" aria-label="刷新">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="loading-container">
+    <p>載入提醒中...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading() && reminders().length === 0" class="empty-state">
+    <mat-icon class="empty-icon">check_circle</mat-icon>
+    <h2>沒有提醒</h2>
+    <p>您已完成今日所有任務</p>
+  </div>
+
+  <!-- Reminders Content -->
+  <div *ngIf="!isLoading() && reminders().length > 0" class="reminders-content">
+    <!-- Pending Count Badge -->
+    <div class="pending-badge" *ngIf="pendingRemindersCount() > 0">
+      <span>待處理: {{ pendingRemindersCount() }} 項</span>
+    </div>
+
+    <!-- High Priority Reminders -->
+    <div *ngIf="highPriorityReminders().length > 0" class="reminder-section">
+      <h2 class="section-title high-priority">
+        <mat-icon>priority_high</mat-icon>
+        高優先級 ({{ highPriorityReminders().length }})
+      </h2>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let reminder of highPriorityReminders(); trackBy: trackByReminderId"
+          class="reminder-item high"
+        >
+          <div class="reminder-content">
+            <div class="reminder-main">
+              <mat-icon class="reminder-icon" matListItemIcon>{{ getIconForReminder(reminder.type) }}</mat-icon>
+              <div class="reminder-text">
+                <h3 class="reminder-title">{{ reminder.title }}</h3>
+                <p *ngIf="reminder.description" class="reminder-description">{{ reminder.description }}</p>
+                <p *ngIf="reminder.deadline" class="reminder-deadline">
+                  <mat-icon class="deadline-icon">schedule</mat-icon>
+                  截止: {{ formatDeadline(reminder.deadline) }}
+                </p>
+              </div>
+            </div>
+            <div class="reminder-actions">
+              <button
+                mat-icon-button
+                (click)="navigateToAction(reminder)"
+                *ngIf="reminder.actionUrl"
+                matTooltip="查看詳情"
+                aria-label="查看詳情"
+              >
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="markReminderAsDone(reminder.id)"
+                matTooltip="標記為完成"
+                aria-label="標記為完成"
+              >
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <!-- Medium Priority Reminders -->
+    <div *ngIf="mediumPriorityReminders().length > 0" class="reminder-section">
+      <h2 class="section-title medium-priority">
+        <mat-icon>info</mat-icon>
+        中優先級 ({{ mediumPriorityReminders().length }})
+      </h2>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let reminder of mediumPriorityReminders(); trackBy: trackByReminderId"
+          class="reminder-item medium"
+        >
+          <div class="reminder-content">
+            <div class="reminder-main">
+              <mat-icon class="reminder-icon" matListItemIcon>{{ getIconForReminder(reminder.type) }}</mat-icon>
+              <div class="reminder-text">
+                <h3 class="reminder-title">{{ reminder.title }}</h3>
+                <p *ngIf="reminder.description" class="reminder-description">{{ reminder.description }}</p>
+                <p *ngIf="reminder.deadline" class="reminder-deadline">
+                  <mat-icon class="deadline-icon">schedule</mat-icon>
+                  截止: {{ formatDeadline(reminder.deadline) }}
+                </p>
+              </div>
+            </div>
+            <div class="reminder-actions">
+              <button
+                mat-icon-button
+                (click)="navigateToAction(reminder)"
+                *ngIf="reminder.actionUrl"
+                matTooltip="查看詳情"
+                aria-label="查看詳情"
+              >
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="markReminderAsDone(reminder.id)"
+                matTooltip="標記為完成"
+                aria-label="標記為完成"
+              >
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <!-- Low Priority Reminders -->
+    <div *ngIf="lowPriorityReminders().length > 0" class="reminder-section">
+      <h2 class="section-title low-priority">
+        <mat-icon>check_circle_outline</mat-icon>
+        低優先級 ({{ lowPriorityReminders().length }})
+      </h2>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let reminder of lowPriorityReminders(); trackBy: trackByReminderId"
+          class="reminder-item low"
+        >
+          <div class="reminder-content">
+            <div class="reminder-main">
+              <mat-icon class="reminder-icon" matListItemIcon>{{ getIconForReminder(reminder.type) }}</mat-icon>
+              <div class="reminder-text">
+                <h3 class="reminder-title">{{ reminder.title }}</h3>
+                <p *ngIf="reminder.description" class="reminder-description">{{ reminder.description }}</p>
+                <p *ngIf="reminder.deadline" class="reminder-deadline">
+                  <mat-icon class="deadline-icon">schedule</mat-icon>
+                  截止: {{ formatDeadline(reminder.deadline) }}
+                </p>
+              </div>
+            </div>
+            <div class="reminder-actions">
+              <button
+                mat-icon-button
+                (click)="navigateToAction(reminder)"
+                *ngIf="reminder.actionUrl"
+                matTooltip="查看詳情"
+                aria-label="查看詳情"
+              >
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="markReminderAsDone(reminder.id)"
+                matTooltip="標記為完成"
+                aria-label="標記為完成"
+              >
+                <mat-icon>check</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
 </div>
