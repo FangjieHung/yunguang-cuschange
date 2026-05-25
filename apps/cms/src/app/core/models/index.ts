@@ -104,3 +104,16 @@ export interface ReportData {
   chartData?: any;
   summary?: { [key: string]: any };
 }
+
+// 報表記錄
+export interface Report {
+  id: string;
+  title: string;
+  reportType: 'applications' | 'buyers' | 'financials' | 'timeline';
+  generatedAt: Date;
+  dateRange: { from: Date; to: Date };
+  generatedBy?: User;
+  status: 'completed' | 'processing' | 'failed';
+  fileSize?: number;
+  downloadUrl?: string;
+}

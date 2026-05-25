@@ -11,6 +11,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportBuilderComponent } from './pages/report-builder/report-builder.component';
 import { ReportListComponent } from './pages/report-list/report-list.component';
@@ -30,6 +35,11 @@ import { ReportListComponent } from './pages/report-list/report-list.component';
     MatNativeDateModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+    MatDialogModule,
+    MatTooltipModule,
     ReportsRoutingModule,
   ],
   exports: [ReportBuilderComponent, ReportListComponent],

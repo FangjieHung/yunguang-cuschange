@@ -13,8 +13,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
+  declarations: [ConfirmDialogComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -30,6 +33,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -46,6 +50,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    ConfirmDialogComponent,
   ],
 })
 export class SharedModule {}

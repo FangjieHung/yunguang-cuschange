@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { Project, Buyer, Application, Notification, User, ReportData } from '../models';
+import { Project, Buyer, Application, Notification, User, ReportData, Report } from '../models';
 import { MOCK_PROJECTS, MOCK_BUYERS, MOCK_APPLICATIONS } from './mock-data';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class MockApiService {
   private buyers: Buyer[] = [...MOCK_BUYERS];
   private applications: Application[] = JSON.parse(JSON.stringify(MOCK_APPLICATIONS));
   private notifications: Notification[] = this.generateMockNotifications();
+  private reports: Report[] = this.generateMockReports();
 
   getProjects(): Observable<Project[]> {
     return of([...this.projects]).pipe(delay(500));
@@ -244,5 +245,117 @@ export class MockApiService {
     };
 
     return of(report).pipe(delay(1000));
+  }
+
+  private generateMockReports(): Report[] {
+    const mockUsers: User[] = [
+      { id: 'user-001', name: 'John Doe', email: 'john@example.com', role: 'ROLE-01' },
+      { id: 'user-002', name: 'Jane Smith', email: 'jane@example.com', role: 'ROLE-02' },
+      { id: 'user-003', name: 'Bob Johnson', email: 'bob@example.com', role: 'ROLE-03' },
+    ];
+
+    const reportTypes: Array<'applications' | 'buyers' | 'financials' | 'timeline'> = [
+      'applications',
+      'buyers',
+      'financials',
+      'timeline',
+    ];
+    const statuses: Array<'completed' | 'processing' | 'failed'> = ['completed', 'processing', 'failed'];
+
+    const reports: Report[] = [];
+
+    for (let i = 0; i < 25; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dateFrom = new Date(date);
+      dateFrom.setMonth(dateFrom.getMonth() - 1);
+
+      reports.push({
+        id: `report-${String(i + 1).padStart(3, '0')}`,
+        title: `${reportTypes[i % reportTypes.length]} Report ${i + 1}`,
+        reportType: reportTypes[i % reportTypes.length],
+        generatedAt: date,
+        dateRange: { from: dateFrom, to: date },
+        generatedBy: mockUsers[i % mockUsers.length],
+        status: statuses[i % statuses.length],
+        fileSize: Math.floor(Math.random() * 5000000) + 500000,
+        downloadUrl: `/downloads/report-${i + 1}.pdf`,
+      });
+    }
+
+    return reports;
+  }
+
+  getReports(
+    filters?: any,
+    sort?: any,
+    page: number = 0
+  ): Observable<{ data: Report[]; total: number }> {
+    let filtered = [...this.reports];
+
+    if (filters) {
+      if (filters.reportType && filters.reportType.length > 0) {
+        filtered = filtered.filter((r) => filters.reportType.includes(r.reportType));
+      }
+      if (filters.dateFrom) {
+        const dateFrom = new Date(filters.dateFrom);
+        filtered = filtered.filter((r) => new Date(r.generatedAt) >= dateFrom);
+      }
+      if (filters.dateTo) {
+        const dateTo = new Date(filters.dateTo);
+        dateTo.setHours(23, 59, 59, 999);
+        filtered = filtered.filter((r) => new Date(r.generatedAt) <= dateTo);
+      }
+      if (filters.status) {
+        filtered = filtered.filter((r) => r.status === filters.status);
+      }
+      if (filters.generatedBy) {
+        filtered = filtered.filter((r) =>
+          r.generatedBy?.name.toLowerCase().includes(filters.generatedBy.toLowerCase())
+        );
+      }
+    }
+
+    if (sort) {
+      filtered.sort((a, b) => {
+        const sortKey = (sort.sortBy || 'generatedAt') as keyof Report;
+        let aVal: any = a[sortKey];
+        let bVal: any = b[sortKey];
+
+        if (sort.sortBy === 'generatedBy') {
+          aVal = a.generatedBy?.name || '';
+          bVal = b.generatedBy?.name || '';
+        }
+
+        if (aVal < bVal) return sort.sortDirection === 'asc' ? -1 : 1;
+        if (aVal > bVal) return sort.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    const pageSize = 15;
+    const start = page * pageSize;
+    const data = filtered.slice(start, start + pageSize);
+
+    return of({ data, total: filtered.length }).pipe(delay(500));
+  }
+
+  downloadReport(reportId: string, format: string = 'pdf'): Observable<Blob> {
+    const report = this.reports.find((r) => r.id === reportId);
+    if (!report) {
+      return of(new Blob(['Report not found'], { type: 'text/plain' })).pipe(delay(300));
+    }
+
+    const content = `Report: ${report.title}\nGenerated at: ${report.generatedAt.toISOString()}\nType: ${report.reportType}`;
+    const blob = new Blob([content], { type: 'application/pdf' });
+    return of(blob).pipe(delay(500));
+  }
+
+  deleteReport(reportId: string): Observable<void> {
+    const index = this.reports.findIndex((r) => r.id === reportId);
+    if (index > -1) {
+      this.reports.splice(index, 1);
+    }
+    return of(void 0).pipe(delay(300));
   }
 }

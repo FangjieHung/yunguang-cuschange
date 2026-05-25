@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Project, Buyer, Application, Notification, ReportData } from '../models';
+import { Project, Buyer, Application, Notification, ReportData, Report } from '../models';
 import { MockApiService } from './mock-api.service';
 
 @Injectable({
@@ -154,5 +154,58 @@ export class ApiService {
       return this.mockApiService.generateReport(payload);
     }
     return this.httpClient.post<ReportData>(`${environment.apiUrl}/reports/generate`, payload);
+  }
+
+  getReports(
+    filters?: any,
+    sort?: any,
+    page?: number
+  ): Observable<{ data: Report[]; total: number }> {
+    if (this.useMockApi()) {
+      return this.mockApiService.getReports(filters, sort, page);
+    }
+    let queryParams = '';
+    if (filters || sort || page) {
+      const params = new URLSearchParams();
+      if (filters) {
+        Object.keys(filters).forEach((key) => {
+          if (filters[key] !== null && filters[key] !== undefined) {
+            if (Array.isArray(filters[key])) {
+              filters[key].forEach((val: any) => params.append(key, val));
+            } else {
+              params.append(key, filters[key]);
+            }
+          }
+        });
+      }
+      if (sort) {
+        params.append('sortBy', sort.sortBy || 'generatedAt');
+        params.append('sortDirection', sort.sortDirection || 'desc');
+      }
+      if (page !== undefined) {
+        params.append('page', page.toString());
+      }
+      queryParams = params.toString();
+    }
+    const url = queryParams
+      ? `${environment.apiUrl}/reports?${queryParams}`
+      : `${environment.apiUrl}/reports`;
+    return this.httpClient.get<{ data: Report[]; total: number }>(url);
+  }
+
+  downloadReport(reportId: string, format: string = 'pdf'): Observable<Blob> {
+    if (this.useMockApi()) {
+      return this.mockApiService.downloadReport(reportId, format);
+    }
+    return this.httpClient.get(`${environment.apiUrl}/reports/${reportId}/download?format=${format}`, {
+      responseType: 'blob',
+    });
+  }
+
+  deleteReport(reportId: string): Observable<void> {
+    if (this.useMockApi()) {
+      return this.mockApiService.deleteReport(reportId);
+    }
+    return this.httpClient.delete<void>(`${environment.apiUrl}/reports/${reportId}`);
   }
 }
