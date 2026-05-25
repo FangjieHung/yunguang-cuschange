@@ -45,6 +45,14 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'business-operator',
+    loadChildren: () =>
+      import('./modules/business-operator/business-operator.module').then(
+        (m) => m.BusinessOperatorModule
+      ),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

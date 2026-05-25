@@ -117,3 +117,13 @@ export interface Report {
   fileSize?: number;
   downloadUrl?: string;
 }
+
+// 快速搜尋結果
+export interface SearchResult {
+  type: 'buyer' | 'application' | 'unit';
+  id: string;
+  title: string;
+  subtitle?: string;
+  icon?: string;
+  data?: any;
+}

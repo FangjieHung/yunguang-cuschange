@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { Project, Buyer, Application, Notification, User, ReportData, Report } from '../models';
+import { Project, Buyer, Application, Notification, User, ReportData, Report, SearchResult } from '../models';
 import { MOCK_PROJECTS, MOCK_BUYERS, MOCK_APPLICATIONS } from './mock-data';
 
 @Injectable({
@@ -401,5 +401,82 @@ export class MockApiService {
   getReportById(id: string): Observable<Report | undefined> {
     const report = this.reports.find((r) => r.id === id);
     return of(report ? { ...report } : undefined).pipe(delay(300));
+  }
+
+  quickSearch(query: string, searchType: 'buyer' | 'application' | 'unit' = 'buyer'): Observable<SearchResult[]> {
+    const lowerQuery = query.toLowerCase().trim();
+    if (!lowerQuery) {
+      return of([]).pipe(delay(300));
+    }
+
+    const results: SearchResult[] = [];
+
+    // Search buyers
+    if (searchType === 'buyer') {
+      const matchedBuyers = this.buyers.filter(
+        (b) =>
+          b.ownerName.toLowerCase().includes(lowerQuery) ||
+          b.unitNo.toLowerCase().includes(lowerQuery) ||
+          (b.email && b.email.toLowerCase().includes(lowerQuery))
+      );
+
+      results.push(
+        ...matchedBuyers.map((b) => ({
+          type: 'buyer' as const,
+          id: b.id,
+          title: b.ownerName,
+          subtitle: `戶號: ${b.unitNo}, 聯絡: ${b.phone}`,
+          icon: 'person',
+          data: { unitNo: b.unitNo, phone: b.phone, email: b.email },
+        }))
+      );
+    }
+
+    // Search applications
+    if (searchType === 'application') {
+      const matchedApps = this.applications.filter(
+        (a) =>
+          a.id.toLowerCase().includes(lowerQuery) ||
+          this.buyers.some(
+            (b) =>
+              b.id === a.buyerId &&
+              b.ownerName.toLowerCase().includes(lowerQuery)
+          )
+      );
+
+      results.push(
+        ...matchedApps.map((a) => {
+          const buyer = this.buyers.find((b) => b.id === a.buyerId);
+          return {
+            type: 'application' as const,
+            id: a.id,
+            title: a.id,
+            subtitle: `買家: ${buyer?.ownerName || 'N/A'}, 狀態: ${a.status}`,
+            icon: 'description',
+            data: { status: a.status, date: a.submittedAt },
+          };
+        })
+      );
+    }
+
+    // Search units
+    if (searchType === 'unit') {
+      const matchedUnits = this.buyers.filter((b) =>
+        b.unitNo.toLowerCase().includes(lowerQuery)
+      );
+
+      results.push(
+        ...matchedUnits.map((b) => ({
+          type: 'unit' as const,
+          id: b.id,
+          title: b.unitNo,
+          subtitle: `${b.floor}樓, ${b.layout}`,
+          icon: 'apartment',
+          data: { floor: b.floor, layout: b.layout, size: b.size },
+        }))
+      );
+    }
+
+    return of(results).pipe(delay(300));
   }
 }

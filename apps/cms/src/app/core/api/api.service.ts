@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Project, Buyer, Application, Notification, ReportData, Report } from '../models';
+import { Project, Buyer, Application, Notification, ReportData, Report, SearchResult } from '../models';
 import { MockApiService } from './mock-api.service';
 
 @Injectable({
@@ -238,5 +238,14 @@ export class ApiService {
       return this.mockApiService.getReportById?.(id) || of(undefined);
     }
     return this.httpClient.get<Report>(`${environment.apiUrl}/reports/${id}`);
+  }
+
+  quickSearch(query: string, searchType: 'buyer' | 'application' | 'unit' = 'buyer'): Observable<SearchResult[]> {
+    if (this.useMockApi()) {
+      return this.mockApiService.quickSearch?.(query, searchType) || of([]);
+    }
+    return this.httpClient.get<SearchResult[]>(
+      `${environment.apiUrl}/search?q=${encodeURIComponent(query)}&type=${searchType}`
+    );
   }
 }

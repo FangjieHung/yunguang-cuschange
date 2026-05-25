@@ -1,0 +1,171 @@
+<div class="quick-search-container">
+  <!-- Header -->
+  <header class="quick-search-header">
+    <div class="header-content">
+      <h1 class="header-title">快速搜尋</h1>
+    </div>
+  </header>
+
+  <!-- Search Form Section -->
+  <section class="search-section">
+    <!-- Main Search Input -->
+    <div class="search-input-wrapper">
+      <mat-form-field class="search-field" appearance="outline">
+        <mat-label>搜尋買家、戶號、申請案...</mat-label>
+        <input
+          matInput
+          [formControl]="searchControl"
+          type="text"
+          autocomplete="off"
+          class="search-input"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="searchControl.value"
+          (click)="clearSearch()"
+          aria-label="清除搜尋"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Search Type Selector -->
+    <div class="search-type-selector">
+      <button
+        mat-stroked-button
+        [class.active]="searchType() === 'buyer'"
+        (click)="onSearchTypeChange('buyer')"
+        class="type-button"
+      >
+        <mat-icon>person</mat-icon>
+        買家
+      </button>
+      <button
+        mat-stroked-button
+        [class.active]="searchType() === 'application'"
+        (click)="onSearchTypeChange('application')"
+        class="type-button"
+      >
+        <mat-icon>description</mat-icon>
+        申請案
+      </button>
+      <button
+        mat-stroked-button
+        [class.active]="searchType() === 'unit'"
+        (click)="onSearchTypeChange('unit')"
+        class="type-button"
+      >
+        <mat-icon>apartment</mat-icon>
+        戶號
+      </button>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results-section" *ngIf="searchControl.value">
+    <!-- Loading Indicator -->
+    <mat-progress-bar
+      *ngIf="isLoading()"
+      mode="indeterminate"
+      class="loading-bar"
+    ></mat-progress-bar>
+
+    <!-- Results List -->
+    <div class="results-list" *ngIf="!isLoading() && results().length > 0">
+      <button
+        mat-list-item
+        *ngFor="let result of results()"
+        (click)="onSelectResult(result)"
+        class="result-item"
+      >
+        <mat-icon matListItemIcon *ngIf="result.icon">
+          {{ result.icon }}
+        </mat-icon>
+        <div matListItemTitle class="result-title">
+          {{ result.title }}
+        </div>
+        <div matListItemLine class="result-subtitle" *ngIf="result.subtitle">
+          {{ result.subtitle }}
+        </div>
+        <mat-icon matListItemMeta class="result-chevron">
+          chevron_right
+        </mat-icon>
+      </button>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="no-results" *ngIf="!isLoading() && results().length === 0">
+      <mat-icon class="no-results-icon">search_off</mat-icon>
+      <p class="no-results-text">找不到相關結果</p>
+      <p class="no-results-hint">請嘗試不同的搜尋條件</p>
+    </div>
+  </section>
+
+  <!-- Recent Searches Section -->
+  <section class="recent-section" *ngIf="!searchControl.value && recentSearches().length > 0">
+    <div class="recent-header">
+      <h2 class="recent-title">最近搜尋</h2>
+      <button
+        mat-icon-button
+        (click)="clearRecentSearches()"
+        aria-label="清除最近搜尋"
+        class="clear-recent-btn"
+      >
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </div>
+    <div class="recent-chips">
+      <mat-chip-set aria-label="最近搜尋">
+        <button
+          mat-chip
+          *ngFor="let search of recentSearches()"
+          (click)="onRecentSearchClick(search)"
+          class="recent-chip"
+        >
+          {{ search }}
+        </button>
+      </mat-chip-set>
+    </div>
+  </section>
+
+  <!-- Quick Actions Section -->
+  <section class="quick-actions-section" *ngIf="!searchControl.value">
+    <h2 class="actions-title">快速操作</h2>
+    <div class="actions-grid">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="navigateToNewApplication()"
+        class="action-button"
+      >
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>新增申請</span>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="navigateToTodayReminders()"
+        class="action-button"
+      >
+        <mat-icon>notifications</mat-icon>
+        <span>今日提醒</span>
+      </button>
+      <button
+        mat-raised-button
+        (click)="navigateToStatusOverview()"
+        class="action-button status-button"
+      >
+        <mat-icon>dashboard</mat-icon>
+        <span>狀態概覽</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Empty State -->
+  <section class="empty-state" *ngIf="!searchControl.value && recentSearches().length === 0">
+    <mat-icon class="empty-icon">search</mat-icon>
+    <p class="empty-text">開始搜尋或使用快速操作</p>
+  </section>
+</div>
