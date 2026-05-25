@@ -29,6 +29,14 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'notifications',
+    loadChildren: () =>
+      import('./modules/notifications/notifications.module').then(
+        (m) => m.NotificationsModule
+      ),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

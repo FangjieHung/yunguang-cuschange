@@ -1,0 +1,114 @@
+<div class="send-notification-container">
+  <mat-card class="notification-card">
+    <mat-card-header>
+      <mat-card-title>發送通知</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Title Field -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>通知標題</mat-label>
+          <input matInput formControlName="title" placeholder="輸入通知標題" />
+          <mat-error *ngIf="form.get('title')?.hasError('required')">
+            標題為必填項
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Content Field -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>通知內容</mat-label>
+          <textarea
+            matInput
+            formControlName="content"
+            rows="5"
+            placeholder="輸入通知內容"
+          ></textarea>
+          <mat-error *ngIf="form.get('content')?.hasError('required')">
+            內容為必填項
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Recipient Scope Field -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>接收者範圍</mat-label>
+          <mat-select formControlName="recipientScope">
+            <mat-option value="global">全體用戶</mat-option>
+            <mat-option value="specific-units">特定單位</mat-option>
+            <mat-option value="specific-buyers">特定購買者</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('recipientScope')?.hasError('required')">
+            接收者範圍為必選項
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Conditional: Selected Units -->
+        <mat-form-field
+          *ngIf="isSpecificUnitsScope"
+          class="form-field"
+          appearance="outline"
+        >
+          <mat-label>選擇單位</mat-label>
+          <mat-select formControlName="selectedUnits" multiple>
+            <mat-option value="unit-001">A棟</mat-option>
+            <mat-option value="unit-002">B棟</mat-option>
+            <mat-option value="unit-003">C棟</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('selectedUnits')?.hasError('required')">
+            請選擇至少一個單位
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Conditional: Selected Buyers -->
+        <mat-form-field
+          *ngIf="isSpecificBuyersScope"
+          class="form-field"
+          appearance="outline"
+        >
+          <mat-label>選擇購買者</mat-label>
+          <mat-select formControlName="selectedBuyers" multiple>
+            <mat-option value="buyer-001">購買者 001</mat-option>
+            <mat-option value="buyer-002">購買者 002</mat-option>
+            <mat-option value="buyer-003">購買者 003</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('selectedBuyers')?.hasError('required')">
+            請選擇至少一個購買者
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Send Date Field -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>排程發送日期（可選）</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="sendDate"
+            placeholder="選擇發送日期"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid || isSubmitting"
+          >
+            {{ isSubmitting ? '發送中...' : '發送通知' }}
+          </button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="onReset()"
+            [disabled]="isSubmitting"
+          >
+            重置
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

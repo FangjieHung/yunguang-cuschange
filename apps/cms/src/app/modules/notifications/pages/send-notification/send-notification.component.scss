@@ -1,0 +1,93 @@
+@import '../../../../../styles/tokens';
+
+.send-notification-container {
+  padding: $spacing-lg;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.notification-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius-lg;
+
+  mat-card-header {
+    margin-bottom: $spacing-xl;
+
+    mat-card-title {
+      font-size: $font-size-headline-md;
+      font-weight: $font-weight-bold;
+      color: $color-on-surface;
+      margin: 0;
+    }
+  }
+
+  mat-card-content {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+}
+
+.form-field {
+  width: 100%;
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: $spacing-lg;
+  justify-content: flex-start;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $color-surface-variant;
+
+  button {
+    min-width: 120px;
+    height: 40px;
+    font-size: $font-size-body-md;
+    font-weight: $font-weight-medium;
+    text-transform: none;
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .send-notification-container {
+    padding: $spacing-md;
+  }
+
+  .notification-card {
+    mat-card-header {
+      margin-bottom: $spacing-lg;
+
+      mat-card-title {
+        font-size: $font-size-title-lg;
+      }
+    }
+
+    mat-card-content {
+      form {
+        gap: $spacing-md;
+      }
+    }
+  }
+
+  .button-group {
+    flex-direction: column;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-md;
+
+    button {
+      width: 100%;
+    }
+  }
+}

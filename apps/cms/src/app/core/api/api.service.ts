@@ -105,4 +105,14 @@ export class ApiService {
       preConfirmStatus,
     });
   }
+
+  sendNotification(payload: any): Observable<{ success: boolean; message: string }> {
+    if (this.useMockApi()) {
+      return this.mockApiService.sendNotification(payload);
+    }
+    return this.httpClient.post<{ success: boolean; message: string }>(
+      `${environment.apiUrl}/notifications/send`,
+      payload
+    );
+  }
 }

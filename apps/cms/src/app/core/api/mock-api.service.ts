@@ -82,4 +82,11 @@ export class MockApiService {
     }
     return of(app ? JSON.parse(JSON.stringify(app)) : undefined).pipe(delay(500));
   }
+
+  sendNotification(payload: any): Observable<{ success: boolean; message: string }> {
+    return of({
+      success: true,
+      message: 'Notification sent successfully',
+    }).pipe(delay(500));
+  }
 }
