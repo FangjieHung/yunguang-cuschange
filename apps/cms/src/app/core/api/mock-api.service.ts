@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { Project, Buyer, Application, Notification, User } from '../models';
+import { Project, Buyer, Application, Notification, User, ReportData } from '../models';
 import { MOCK_PROJECTS, MOCK_BUYERS, MOCK_APPLICATIONS } from './mock-data';
 
 @Injectable({
@@ -178,5 +178,71 @@ export class MockApiService {
     const data = filtered.slice(start, start + pageSize);
 
     return of({ data, total: filtered.length }).pipe(delay(500));
+  }
+
+  generateReport(payload: any): Observable<ReportData> {
+    const dateFrom = new Date(payload.dateFrom);
+    const dateTo = new Date(payload.dateTo);
+    const reportType = payload.reportType;
+
+    // Generate mock report data based on report type
+    let data: any[] = [];
+    let summary: any = {};
+
+    if (reportType === 'applications') {
+      data = [
+        { date: '2024-01-01', status: 'submitted', count: 5 },
+        { date: '2024-01-02', status: 'approved', count: 3 },
+        { date: '2024-01-03', status: 'under-review', count: 2 },
+      ];
+      summary = { totalApplications: 10, averageDaily: 3.33, approvalRate: 30 };
+    } else if (reportType === 'buyers') {
+      data = [
+        { unitNo: 'A01', ownerName: 'John Doe', status: 'active' },
+        { unitNo: 'A02', ownerName: 'Jane Smith', status: 'active' },
+        { unitNo: 'A03', ownerName: 'Bob Johnson', status: 'pending' },
+      ];
+      summary = { totalBuyers: 3, activeCount: 2 };
+    } else if (reportType === 'financials') {
+      data = [
+        { category: 'Interior', totalFees: 50000, count: 10 },
+        { category: 'Exterior', totalFees: 30000, count: 5 },
+        { category: 'Utilities', totalFees: 20000, count: 3 },
+      ];
+      summary = { totalFees: 100000, averageFeePerApplication: 5000 };
+    } else if (reportType === 'timeline') {
+      data = [
+        { milestone: 'Submitted', date: '2024-01-01', count: 15 },
+        { milestone: 'Under Review', date: '2024-01-05', count: 12 },
+        { milestone: 'Approved', date: '2024-01-10', count: 8 },
+      ];
+      summary = { averageProcessingDays: 9, completionRate: 53 };
+    }
+
+    const chartData = {
+      labels: data.map((d) => d.date || d.category || d.unitNo || d.milestone),
+      datasets: [
+        {
+          label: 'Count',
+          data: data.map((d) => d.count || d.totalFees),
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+        },
+      ],
+    };
+
+    const report: ReportData = {
+      id: `report-${Date.now()}`,
+      title: `${reportType} Report`,
+      generatedAt: new Date(),
+      reportType,
+      dateRange: { from: dateFrom, to: dateTo },
+      groupBy: payload.groupBy,
+      data,
+      chartData: payload.includeCharts ? chartData : undefined,
+      summary,
+    };
+
+    return of(report).pipe(delay(1000));
   }
 }

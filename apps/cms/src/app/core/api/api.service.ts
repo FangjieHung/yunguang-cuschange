@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Project, Buyer, Application, Notification } from '../models';
+import { Project, Buyer, Application, Notification, ReportData } from '../models';
 import { MockApiService } from './mock-api.service';
 
 @Injectable({
@@ -147,5 +147,12 @@ export class ApiService {
       ? `${environment.apiUrl}/notifications?${queryParams}`
       : `${environment.apiUrl}/notifications`;
     return this.httpClient.get<{ data: Notification[]; total: number }>(url);
+  }
+
+  generateReport(payload: any): Observable<ReportData> {
+    if (this.useMockApi()) {
+      return this.mockApiService.generateReport(payload);
+    }
+    return this.httpClient.post<ReportData>(`${environment.apiUrl}/reports/generate`, payload);
   }
 }

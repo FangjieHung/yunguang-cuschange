@@ -37,6 +37,14 @@ export const appRoutes: Route[] = [
     canActivate: [authGuard()],
   },
   {
+    path: 'reports',
+    loadChildren: () =>
+      import('./modules/reports/reports.module').then(
+        (m) => m.ReportsModule
+      ),
+    canActivate: [authGuard()],
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

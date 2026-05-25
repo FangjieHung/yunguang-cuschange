@@ -1,0 +1,15 @@
+.report-list-container {
+  padding: 24px;
+
+  mat-card {
+    mat-card-header {
+      margin-bottom: 16px;
+
+      mat-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  }
+}

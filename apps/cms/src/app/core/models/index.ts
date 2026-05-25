@@ -91,3 +91,16 @@ export interface DashboardStats {
   totalAddOn: number;
   totalRefund: number;
 }
+
+// 報表資料
+export interface ReportData {
+  id: string;
+  title: string;
+  generatedAt: Date;
+  reportType: 'applications' | 'buyers' | 'financials' | 'timeline';
+  dateRange: { from: Date; to: Date };
+  groupBy?: 'daily' | 'weekly' | 'monthly' | 'status' | 'category';
+  data: any[];
+  chartData?: any;
+  summary?: { [key: string]: any };
+}
