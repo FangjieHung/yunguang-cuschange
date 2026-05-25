@@ -17,7 +17,11 @@
         "tsConfig": "apps/cms/tsconfig.app.json",
         "assets": ["apps/cms/src/favicon.ico", "apps/cms/src/assets"],
         "styles": ["apps/cms/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "optimization": true,
+        "sourceMap": false,
+        "namedChunks": false,
+        "aot": true
       },
       "configurations": {
         "production": {
@@ -33,7 +37,19 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "buildOptimizer": true,
+          "optimization": true,
+          "vendorChunk": false,
+          "extractLicenses": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/cms/src/environments/environment.ts",
+              "with": "apps/cms/src/environments/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -41,7 +57,13 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/cms/src/environments/environment.prod.ts",
+              "with": "apps/cms/src/environments/environment.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
