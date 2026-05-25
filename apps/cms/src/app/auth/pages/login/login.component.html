@@ -1,0 +1,117 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Logo Section -->
+    <div class="login-logo">
+      <div class="logo-icon">YG</div>
+      <h1 class="logo-text">雲光建案管理系統</h1>
+      <p class="logo-subtitle">CMS 後台管理系統</p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="login-form-wrapper">
+      <h2>登入</h2>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage()" class="error-message">
+        <span class="material-icons">error</span>
+        {{ errorMessage() }}
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="form-label">信箱</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="請輸入您的信箱"
+            [class.form-control--error]="
+              loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+            "
+            (blur)="loginForm.get('email')?.markAsTouched()"
+          />
+          <span
+            *ngIf="
+              loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+            "
+            class="form-error"
+          >
+            {{ getEmailError() }}
+          </span>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">密碼</label>
+          <div class="password-input-wrapper">
+            <input
+              id="password"
+              [type]="hidePassword() ? 'password' : 'text'"
+              formControlName="password"
+              class="form-control"
+              placeholder="請輸入您的密碼"
+              [class.form-control--error]="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+              (blur)="loginForm.get('password')?.markAsTouched()"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()"
+              [title]="hidePassword() ? '顯示密碼' : '隱藏密碼'"
+            >
+              <span class="material-icons">
+                {{ hidePassword() ? 'visibility_off' : 'visibility' }}
+              </span>
+            </button>
+          </div>
+          <span
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+            class="form-error"
+          >
+            {{ getPasswordError() }}
+          </span>
+        </div>
+
+        <!-- Remember Me Checkbox -->
+        <div class="form-group checkbox-group">
+          <input
+            id="rememberMe"
+            type="checkbox"
+            formControlName="rememberMe"
+            class="checkbox-input"
+          />
+          <label for="rememberMe" class="checkbox-label">記住我的信箱</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="!loginForm.valid || isLoading()"
+        >
+          <span *ngIf="isLoading()" class="spinner"></span>
+          <span>{{ isLoading() ? '登入中...' : '登入' }}</span>
+        </button>
+      </form>
+
+      <!-- Forgot Password Link -->
+      <div class="forgot-password">
+        <a href="#">忘記密碼？</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>© 2024 雲光建案管理系統。保留所有權利。</p>
+    </div>
+  </div>
+</div>

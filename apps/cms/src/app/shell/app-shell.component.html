@@ -1,0 +1,23 @@
+<div class="app-shell">
+  <!-- Top Bar -->
+  <tslmai-angular16-apps-topbar
+    [currentUser]="currentUser()"
+    (toggleSidebar)="toggleSidebar()"
+    (logout)="logout()"
+  ></tslmai-angular16-apps-topbar>
+
+  <!-- Main Layout -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <tslmai-angular16-apps-sidebar
+      [isOpen]="sidebarOpen()"
+      [isMobile]="isMobile()"
+      (navigationClick)="closeSidebar()"
+    ></tslmai-angular16-apps-sidebar>
+
+    <!-- Content Area -->
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

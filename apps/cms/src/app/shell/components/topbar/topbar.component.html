@@ -1,0 +1,64 @@
+<header class="topbar">
+  <!-- Left: Hamburger Menu -->
+  <div class="topbar__left">
+    <button
+      class="topbar__menu-btn material-icons"
+      (click)="onToggleSidebar()"
+      title="Toggle Menu"
+      aria-label="Toggle Menu"
+    >
+      menu
+    </button>
+  </div>
+
+  <!-- Center: App Title -->
+  <div class="topbar__center">
+    <h1 class="topbar__title">雲光建案管理系統</h1>
+  </div>
+
+  <!-- Right: Notifications and User Menu -->
+  <div class="topbar__right">
+    <!-- Notifications -->
+    <button class="topbar__icon-btn notifications-btn" title="Notifications" aria-label="Notifications">
+      <span class="material-icons">notifications</span>
+      <span *ngIf="notificationCount() > 0" class="badge">{{ notificationCount() }}</span>
+    </button>
+
+    <!-- User Menu -->
+    <div class="user-menu">
+      <button
+        class="topbar__user-btn"
+        (click)="onToggleUserMenu()"
+        title="User Menu"
+        aria-label="User Menu"
+      >
+        <span class="user-avatar">{{ currentUser?.name?.charAt(0) || 'U' }}</span>
+        <span class="user-name">{{ currentUser?.name || 'User' }}</span>
+        <span class="material-icons dropdown-icon">expand_more</span>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div *ngIf="userMenuOpen()" class="user-dropdown">
+        <div class="user-dropdown__header">
+          <span>{{ currentUser?.email }}</span>
+        </div>
+        <a href="#" class="user-dropdown__item">
+          <span class="material-icons">account_circle</span>
+          <span>個人資料</span>
+        </a>
+        <a href="#" class="user-dropdown__item">
+          <span class="material-icons">settings</span>
+          <span>設定</span>
+        </a>
+        <div class="user-dropdown__divider"></div>
+        <button
+          class="user-dropdown__item user-dropdown__logout"
+          (click)="onLogout()"
+        >
+          <span class="material-icons">logout</span>
+          <span>登出</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

@@ -98,6 +98,7 @@ export class PanoramaComponent implements AfterViewInit, OnDestroy {
       autoLoad: true,
       showFullscreenCtrl: true,
       showZoomCtrl: true,
+      autoRotate: -2
     });
   }
 

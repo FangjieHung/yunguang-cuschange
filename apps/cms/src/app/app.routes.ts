@@ -1,7 +1,17 @@
 import { Route } from '@angular/router';
 import { authGuard } from './core/auth';
 
-export const appRoutes: Route[] = [
+// Auth routes (no layout wrapper)
+const authRoutes: Route[] = [
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+];
+
+// Protected routes with AppShell layout
+const protectedRoutes: Route[] = [
   {
     path: 'dashboard',
     loadChildren: () =>
@@ -52,11 +62,26 @@ export const appRoutes: Route[] = [
       ),
     canActivate: [authGuard()],
   },
+];
+
+export const appRoutes: Route[] = [
+  // Auth routes (no layout wrapper)
+  ...authRoutes,
+  // App shell with protected routes
+  {
+    path: '',
+    loadChildren: () =>
+      import('./shell/shell.module').then((m) => m.ShellModule),
+    children: protectedRoutes,
+    canActivate: [authGuard()],
+  },
+  // Default redirect
   {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',
   },
+  // Wildcard route - redirect to dashboard or login
   {
     path: '**',
     redirectTo: '/dashboard',
