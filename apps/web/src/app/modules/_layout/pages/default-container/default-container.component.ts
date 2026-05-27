@@ -5,9 +5,7 @@ import {
   inject,
   ViewChild,
   OnInit,
-  OnDestroy,
   HostListener,
-  AfterViewInit,
   signal,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -26,20 +24,17 @@ import { NAV_SECTIONS, NavSection } from '../../../home/pages/default/default.da
 })
 export class DefaultContainerComponent
   extends BBDBaseComponent
-  implements OnInit, AfterViewInit, OnDestroy
+  implements OnInit
 {
   @ViewChild('drawer') drawer!: MatSidenav;
 
   navSections: NavSection[] = NAV_SECTIONS;
-  currentSection = '';
   isDrawerOpen = false;
   showNav = signal(false);
 
   private _route = inject(ActivatedRoute);
   private _router = inject(Router);
   private _seoServ = inject(SEOServ);
-
-  private _observer?: IntersectionObserver;
 
   constructor(protected override injector: Injector) {
     super(injector);
@@ -71,41 +66,6 @@ export class DefaultContainerComponent
       });
   }
 
-  ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
-    this._initSectionObserver();
-  }
-
-  ngOnDestroy(): void {
-    this._observer?.disconnect();
-  }
-
-  private _initSectionObserver(): void {
-    const sectionIds = this.navSections.map((s) => s.id);
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => !!el);
-
-    if (elements.length === 0) return;
-
-    this._observer = new IntersectionObserver(
-      (entries) => {
-        // 找到目前可見比例最高的 section
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) {
-          this.currentSection = visible[0].target.id;
-        }
-      },
-      {
-        rootMargin: '-30% 0px -50% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
-    );
-
-    elements.forEach((el) => this._observer!.observe(el));
-  }
 
   private getDeepestChildRoute(route: ActivatedRoute): ActivatedRoute {
     let r = route;
@@ -113,16 +73,6 @@ export class DefaultContainerComponent
       r = r.firstChild;
     }
     return r;
-  }
-
-  scrollToSection(id: string, event?: Event): void {
-    event?.preventDefault();
-    if (!this.isBrowser) return;
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      this.closeDrawer();
-    }
   }
 
   openDrawer(): void {

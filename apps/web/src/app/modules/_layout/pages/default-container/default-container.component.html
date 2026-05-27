@@ -13,10 +13,9 @@
     <nav class="topbar-drawer__nav">
       <a
         *ngFor="let section of navSections"
-        href="#{{ section.id }}"
+        [routerLink]="section.route"
+        target="_blank"
         class="topbar-drawer__nav-link"
-        [attr.data-active]="currentSection === section.id"
-        (click)="scrollToSection(section.id, $event)"
       >
         {{ section.label }}
       </a>
@@ -37,10 +36,9 @@
       <nav class="topbar-public__nav">
         <a
           *ngFor="let section of navSections"
-          href="#{{ section.id }}"
+          [routerLink]="section.route"
+          target="_blank"
           class="topbar-public__nav-link"
-          [attr.data-active]="currentSection === section.id"
-          (click)="scrollToSection(section.id, $event)"
         >
           {{ section.label }}
         </a>
@@ -67,16 +65,15 @@
 
     <!-- 浮動錨點導覽（桌機） -->
     <nav class="anchor-nav" *ngIf="showNav()" aria-label="區塊快速導覽">
-      <button
+      <a
         *ngFor="let section of navSections"
-        type="button"
+        [routerLink]="section.route"
+        target="_blank"
         class="anchor-nav__item"
-        [class.anchor-nav__item--active]="currentSection === section.id"
-        (click)="scrollToSection(section.id)"
         [attr.aria-label]="'跳至 ' + section.label"
       >
         <span class="anchor-nav__label">{{ section.label }}</span>
-      </button>
+      </a>
     </nav>
 
     <!-- 主內容（router 投放） -->
