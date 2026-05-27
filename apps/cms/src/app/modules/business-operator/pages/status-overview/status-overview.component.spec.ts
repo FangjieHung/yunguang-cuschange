@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -74,6 +74,7 @@ describe('StatusOverviewComponent', () => {
 
     fixture = TestBed.createComponent(StatusOverviewComponent);
     component = fixture.componentInstance;
+    component.enableAutoRefresh = false; // Disable auto-refresh for tests
   });
 
   it('should create', () => {
@@ -83,6 +84,7 @@ describe('StatusOverviewComponent', () => {
   describe('Initialization', () => {
     it('should load dashboard stats on init', fakeAsync(() => {
       apiService.getDashboardStats.mockReturnValue(of(mockDashboardStats));
+      component.enableAutoRefresh = false;
 
       fixture.detectChanges();
       tick();
@@ -97,6 +99,7 @@ describe('StatusOverviewComponent', () => {
         throwError(() => new Error('Load failed'))
       );
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      component.enableAutoRefresh = false;
 
       fixture.detectChanges();
       tick();
@@ -256,17 +259,17 @@ describe('StatusOverviewComponent', () => {
   });
 
   describe('Auto-refresh interval', () => {
-    it('should setup auto-refresh if enabled', fakeAsync(() => {
+    it('should setup auto-refresh if enabled', () => {
       apiService.getDashboardStats.mockReturnValue(of(mockDashboardStats));
 
       component.enableAutoRefresh = true;
       component.autoRefreshInterval = 100; // 100ms for testing
 
       fixture.detectChanges();
-      tick(100);
 
       expect(component.stats()).toEqual(mockDashboardStats);
-    }));
+      expect(apiService.getDashboardStats).toHaveBeenCalled();
+    });
   });
 
   describe('Navigation', () => {

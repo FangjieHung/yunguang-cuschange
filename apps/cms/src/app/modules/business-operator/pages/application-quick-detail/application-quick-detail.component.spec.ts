@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -136,20 +137,20 @@ describe('ApplicationQuickDetailComponent', () => {
     });
 
     it('should display application ID', () => {
-      expect(component.application().id).toBe('app1');
+      expect(component.application()?.id).toBe('app1');
     });
 
     it('should display application status', () => {
-      expect(component.application().status).toBe('under-review');
+      expect(component.application()?.status).toBe('under-review');
     });
 
     it('should display total add-on fee', () => {
-      expect(component.application().totalAddOn).toBe(80000);
+      expect(component.application()?.totalAddOn).toBe(80000);
     });
 
     it('should display application items', () => {
-      expect(component.application().items.length).toBe(2);
-      expect(component.application().items[0].name).toBe('廚房升級套餐');
+      expect(component.application()?.items.length).toBe(2);
+      expect(component.application()?.items[0].name).toBe('廚房升級套餐');
     });
   });
 
@@ -207,7 +208,7 @@ describe('ApplicationQuickDetailComponent', () => {
     it('should navigate to full application detail', () => {
       component.navigateToFullDetail();
 
-      expect(router.navigate).toHaveBeenCalledWith(['/application-review/app1']);
+      expect(router.navigate).toHaveBeenCalledWith(['/application-review', 'app1']);
     });
 
     it('should navigate back', () => {

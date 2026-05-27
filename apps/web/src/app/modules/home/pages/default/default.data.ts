@@ -17,7 +17,6 @@ export const NAV_SECTIONS: NavSection[] = [
   { id: 'faq', label: '常見問題' },
   { id: 'fees', label: '費用表' },
   { id: 'equipment', label: '設備表' },
-  { id: 'vr-tour', label: '虛擬樣品屋' },
 ];
 
 // ─── 客變原則 ───────────────────────────────────────────

@@ -103,7 +103,7 @@ describe('LoginComponent', () => {
   });
 
   it('should call authService.login with correct credentials', fakeAsync(() => {
-    spyOn(authService, 'login').and.returnValue(of(mockUser));
+    jest.spyOn(authService, 'login').mockReturnValue(of(mockUser));
 
     component.loginForm.patchValue({
       email: 'test@example.com',
@@ -118,7 +118,7 @@ describe('LoginComponent', () => {
   }));
 
   it('should navigate to dashboard on successful login', fakeAsync(() => {
-    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
+    jest.spyOn(router, 'navigate').mockReturnValue(Promise.resolve(true));
 
     component.loginForm.patchValue({
       email: 'test@example.com',
@@ -188,7 +188,7 @@ describe('LoginComponent', () => {
   }));
 
   it('should handle login error', fakeAsync(() => {
-    spyOn(authService, 'login').and.returnValue(
+    jest.spyOn(authService, 'login').mockReturnValue(
       throwError(() => new Error('Login failed'))
     );
 
@@ -274,7 +274,7 @@ describe('LoginComponent', () => {
   });
 
   it('should display error message when login fails', fakeAsync(() => {
-    spyOn(authService, 'login').and.returnValue(
+    jest.spyOn(authService, 'login').mockReturnValue(
       throwError(() => new Error('Login failed'))
     );
 
@@ -292,7 +292,7 @@ describe('LoginComponent', () => {
   }));
 
   it('should not submit form if form is invalid', () => {
-    spyOn(authService, 'login').and.returnValue(of(mockUser));
+    jest.spyOn(authService, 'login').mockReturnValue(of(mockUser));
 
     component.loginForm.patchValue({
       email: '',

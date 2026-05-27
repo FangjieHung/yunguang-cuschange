@@ -118,27 +118,27 @@ describe('BuyerQuickDetailComponent', () => {
     });
 
     it('should display buyer name', () => {
-      expect(component.buyer().ownerName).toBe('張三');
+      expect(component.buyer()?.ownerName).toBe('張三');
     });
 
     it('should display buyer unit number', () => {
-      expect(component.buyer().unitNo).toBe('A01');
+      expect(component.buyer()?.unitNo).toBe('A01');
     });
 
     it('should display buyer contact phone', () => {
-      expect(component.buyer().phone).toBe('0912345678');
+      expect(component.buyer()?.phone).toBe('0912345678');
     });
 
     it('should display buyer email', () => {
-      expect(component.buyer().email).toBe('buyer1@example.com');
+      expect(component.buyer()?.email).toBe('buyer1@example.com');
     });
 
     it('should display unit details (layout, size, floor)', () => {
       const buyer = component.buyer();
-      expect(buyer.layout).toBe('3房2廳');
-      expect(buyer.size).toBe(85.5);
-      expect(buyer.floor).toBe(5);
-      expect(buyer.facing).toBe('南');
+      expect(buyer?.layout).toBe('3房2廳');
+      expect(buyer?.size).toBe(85.5);
+      expect(buyer?.floor).toBe(5);
+      expect(buyer?.facing).toBe('南');
     });
   });
 
