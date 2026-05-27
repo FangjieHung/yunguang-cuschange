@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { ExplanationRoutingModule } from './explanation-routing.module';
 
 // Custom packages
@@ -13,9 +12,6 @@ import {
   EquipmentPageComponent
 } from './pages';
 
-// Config settings
-const CUSTOM_MODULES = [SharedModule];
-
 @NgModule({
   declarations: [
     PrinciplesPageComponent,
@@ -26,9 +22,8 @@ const CUSTOM_MODULES = [SharedModule];
   ],
   imports: [
     CommonModule,
-    MatIconModule,
     ExplanationRoutingModule,
-    ...CUSTOM_MODULES
+    SharedModule
   ]
 })
 export class ExplanationModule { }

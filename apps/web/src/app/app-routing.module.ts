@@ -49,6 +49,11 @@ const routes: Routes = [
             loadChildren: () => import('./modules/result/result.module').then(m => m.ResultModule)
           },
           {
+            path: 'explanation',
+            loadChildren: () =>
+              import('./modules/explanation/explanation.module').then((m) => m.ExplanationModule),
+          },
+          {
             path: '**',
             component: ResultErrorComponent,
           },
