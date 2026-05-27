@@ -19,4 +19,15 @@ export class DefaultComponent extends BBDBaseComponent {
   constructor(protected override injector: Injector) {
     super(injector);
   }
+
+  getEquipmentIcon(category: string): string {
+    const iconMap: Record<string, string> = {
+      '廚具': 'kitchen',
+      '衛浴': 'shower',
+      '門窗': 'door_front',
+      '電器': 'ac_unit',
+      '五金': 'lock',
+    };
+    return iconMap[category] || 'build';
+  }
 }
