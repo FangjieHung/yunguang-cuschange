@@ -9,14 +9,15 @@
 export interface NavSection {
   id: string;
   label: string;
+  route: string;
 }
 
 export const NAV_SECTIONS: NavSection[] = [
-  { id: 'principles', label: '客變原則' },
-  { id: 'process', label: '客變流程' },
-  { id: 'faq', label: '常見問題' },
-  { id: 'fees', label: '費用表' },
-  { id: 'equipment', label: '設備表' },
+  { id: 'principles', label: '客變原則', route: '/explanation/principles' },
+  { id: 'process', label: '客變流程', route: '/explanation/timeline' },
+  { id: 'faq', label: '常見問題', route: '/explanation/faq' },
+  { id: 'fees', label: '費用表', route: '/explanation/pricing' },
+  { id: 'equipment', label: '設備表', route: '/explanation/equipment' },
 ];
 
 // ─── 客變原則 ───────────────────────────────────────────
