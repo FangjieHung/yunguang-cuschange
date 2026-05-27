@@ -12,8 +12,8 @@
   }
 }
 
-// Preview Sections 樣式
-.preview-section {
+// Customization Bento Grid
+.customization-bento {
   &__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -23,236 +23,146 @@
       padding: 0 32px;
     }
   }
+}
 
-  &__title {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-    line-height: 1.2;
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 
-    @media (min-width: 768px) {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-  }
-
-  &__description {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-    margin: 0 0 24px 0;
-    line-height: 1.5;
-
-    @media (min-width: 768px) {
-      font-size: 16px;
-      margin-bottom: 32px;
-    }
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
   }
 }
 
-// Principles Preview
-.principles-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+.bento-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 200px;
+  text-align: center;
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    border-color: #1976d2;
   }
 
   &__icon {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
     color: #1976d2;
+    transition: transform 0.3s;
 
     @media (min-width: 768px) {
       font-size: 48px;
       width: 48px;
       height: 48px;
     }
+
+    .bento-card:hover & {
+      transform: scale(1.15);
+    }
   }
 
-  &__name {
-    font-size: 12px;
-    font-weight: 500;
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
     margin: 0;
     line-height: 1.3;
-
-    @media (min-width: 768px) {
-      font-size: 14px;
-    }
-  }
-}
-
-// Timeline Preview
-.timeline-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  &__step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  &__circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #e3f2fd;
-    color: #1976d2;
-    font-weight: 600;
-    font-size: 14px;
-
-    @media (min-width: 768px) {
-      width: 48px;
-      height: 48px;
-      font-size: 16px;
-    }
-  }
-
-  &__label {
-    font-size: 11px;
-    text-align: center;
-    margin: 0;
-    line-height: 1.2;
-    color: rgba(0, 0, 0, 0.7);
-
-    @media (min-width: 768px) {
-      font-size: 12px;
-    }
-  }
-}
-
-// FAQ Preview
-.faq-preview {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-
-  @media (min-width: 768px) {
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  &__item {
-    padding: 12px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    border-left: 4px solid #1976d2;
-  }
-
-  &__question {
-    font-size: 13px;
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.4;
     color: rgba(0, 0, 0, 0.87);
 
     @media (min-width: 768px) {
-      font-size: 14px;
+      font-size: 18px;
     }
   }
-}
 
-// Pricing Preview
-.pricing-preview {
-  margin-bottom: 24px;
-
-  @media (min-width: 768px) {
-    margin-bottom: 32px;
-  }
-
-  &__note {
-    font-size: 14px;
+  &__description {
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
     margin: 0;
-    line-height: 1.5;
-    text-align: center;
-    padding: 24px 16px;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-
-    @media (min-width: 768px) {
-      font-size: 16px;
-      padding: 32px;
-    }
-  }
-}
-
-// Equipment Preview
-.equipment-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-
-  &__category {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    padding: 12px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #f5f5f5;
-    }
-  }
-
-  mat-icon {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
-    color: #1976d2;
-
-    @media (min-width: 768px) {
-      font-size: 40px;
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  &__label {
-    font-size: 12px;
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.3;
+    line-height: 1.4;
 
     @media (min-width: 768px) {
       font-size: 13px;
+    }
+  }
+
+  // Variant colors for different cards
+  &--principles {
+    border-color: #e3f2fd;
+
+    .bento-card__icon {
+      color: #1976d2;
+    }
+
+    &:hover {
+      border-color: #1976d2;
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    }
+  }
+
+  &--timeline {
+    border-color: #f3e5f5;
+
+    .bento-card__icon {
+      color: #7b1fa2;
+    }
+
+    &:hover {
+      border-color: #7b1fa2;
+      background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+    }
+  }
+
+  &--faq {
+    border-color: #fff3e0;
+
+    .bento-card__icon {
+      color: #f57c00;
+    }
+
+    &:hover {
+      border-color: #f57c00;
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    }
+  }
+
+  &--pricing {
+    border-color: #e8f5e9;
+
+    .bento-card__icon {
+      color: #388e3c;
+    }
+
+    &:hover {
+      border-color: #388e3c;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+  }
+
+  &--equipment {
+    border-color: #e0f2f1;
+
+    .bento-card__icon {
+      color: #00796b;
+    }
+
+    &:hover {
+      border-color: #00796b;
+      background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
     }
   }
 }

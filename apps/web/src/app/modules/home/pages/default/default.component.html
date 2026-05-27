@@ -17,132 +17,73 @@
         </a>
       </div>
     </div>
-
-    <!--
-    <app-panorama></app-panorama>
-    -->
   </div>
 </section>
 
-<!-- ─── Customization Preview Sections ─── -->
-<!-- 客變原則 預覽 -->
-<section id="principles" class="preview-section">
-  <div class="preview-section__container">
-    <h2 class="preview-section__title">客變原則</h2>
-    <p class="preview-section__description">瞭解客變的規則、限制與施工範圍</p>
+<!-- ─── Customization Bento Grid ─── -->
+<section class="customization-bento section">
+  <div class="customization-bento__container">
+    <div class="bento-grid">
+      <!-- 客變原則 -->
+      <a
+        id="principles"
+        [routerLink]="'/explanation/principles'"
+        target="_blank"
+        class="bento-card bento-card--principles"
+      >
+        <mat-icon class="bento-card__icon">rule</mat-icon>
+        <h3 class="bento-card__title">客變原則</h3>
+        <p class="bento-card__description">瞭解規則與限制</p>
+      </a>
 
-    <!-- 簡化版：顯示 category icons grid -->
-    <div class="principles-preview">
-      <div *ngFor="let principle of principles()" class="principles-preview__item">
-        <mat-icon class="principles-preview__icon">{{ principle.icon }}</mat-icon>
-        <h3 class="principles-preview__name">{{ principle.title }}</h3>
-      </div>
+      <!-- 客變流程 -->
+      <a
+        id="process"
+        [routerLink]="'/explanation/timeline'"
+        target="_blank"
+        class="bento-card bento-card--timeline"
+      >
+        <mat-icon class="bento-card__icon">timeline</mat-icon>
+        <h3 class="bento-card__title">客變流程</h3>
+        <p class="bento-card__description">完整流程步驟</p>
+      </a>
+
+      <!-- 常見問題 -->
+      <a
+        id="faq"
+        [routerLink]="'/explanation/faq'"
+        target="_blank"
+        class="bento-card bento-card--faq"
+      >
+        <mat-icon class="bento-card__icon">help</mat-icon>
+        <h3 class="bento-card__title">常見問題</h3>
+        <p class="bento-card__description">快速找到答案</p>
+      </a>
+
+      <!-- 費用表 -->
+      <a
+        id="fees"
+        [routerLink]="'/explanation/pricing'"
+        target="_blank"
+        class="bento-card bento-card--pricing"
+      >
+        <mat-icon class="bento-card__icon">price_check</mat-icon>
+        <h3 class="bento-card__title">費用表</h3>
+        <p class="bento-card__description">費用概況</p>
+      </a>
+
+      <!-- 設備表 -->
+      <a
+        id="equipment"
+        [routerLink]="'/explanation/equipment'"
+        target="_blank"
+        class="bento-card bento-card--equipment"
+      >
+        <mat-icon class="bento-card__icon">build</mat-icon>
+        <h3 class="bento-card__title">設備表</h3>
+        <p class="bento-card__description">設備與選配</p>
+      </a>
     </div>
-
-    <a
-      [routerLink]="'/explanation/principles'"
-      target="_blank"
-      class="btn btn-primary"
-    >
-      查看詳情
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
-  </div>
-</section>
-
-<!-- 客變流程 預覽 -->
-<section id="process" class="preview-section">
-  <div class="preview-section__container">
-    <h2 class="preview-section__title">客變流程</h2>
-    <p class="preview-section__description">了解從簽約到施工的完整流程</p>
-
-    <!-- 簡化版：顯示步驟 circles 簡圖 -->
-    <div class="timeline-preview">
-      <div *ngFor="let step of processSteps()" class="timeline-preview__step">
-        <div class="timeline-preview__circle">{{ step.stepNumber }}</div>
-        <p class="timeline-preview__label">{{ step.label }}</p>
-      </div>
-    </div>
-
-    <a
-      [routerLink]="'/explanation/timeline'"
-      target="_blank"
-      class="btn btn-primary"
-    >
-      查看詳情
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
-  </div>
-</section>
-
-<!-- 常見問題 預覽 -->
-<section id="faq" class="preview-section">
-  <div class="preview-section__container">
-    <h2 class="preview-section__title">常見問題</h2>
-    <p class="preview-section__description">快速找到您想知道的答案</p>
-
-    <!-- 簡化版：顯示前 3 個常見問題 -->
-    <div class="faq-preview">
-      <div *ngFor="let item of (faqGroups()[0]?.items ?? []).slice(0, 3)" class="faq-preview__item">
-        <p class="faq-preview__question">{{ item.q }}</p>
-      </div>
-    </div>
-
-    <a
-      [routerLink]="'/explanation/faq'"
-      target="_blank"
-      class="btn btn-primary"
-    >
-      查看詳情
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
-  </div>
-</section>
-
-<!-- 費用表 預覽 -->
-<section id="fees" class="preview-section">
-  <div class="preview-section__container">
-    <h2 class="preview-section__title">費用表</h2>
-    <p class="preview-section__description">瞭解各項客變的費用概況</p>
-
-    <!-- 簡化版：顯示費用類別總覽 -->
-    <div class="pricing-preview">
-      <p class="pricing-preview__note">點擊「查看詳情」查看完整費用表</p>
-    </div>
-
-    <a
-      [routerLink]="'/explanation/pricing'"
-      target="_blank"
-      class="btn btn-primary"
-    >
-      查看詳情
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
-  </div>
-</section>
-
-<!-- 設備表 預覽 -->
-<section id="equipment" class="preview-section">
-  <div class="preview-section__container">
-    <h2 class="preview-section__title">設備表</h2>
-    <p class="preview-section__description">標準設備與升級選項一覽</p>
-
-    <!-- 簡化版：顯示設備類別 -->
-    <div class="equipment-preview">
-      <div *ngFor="let category of equipmentByCategory() | keyvalue" class="equipment-preview__category">
-        <mat-icon>{{ getEquipmentIcon(category.key) }}</mat-icon>
-        <p class="equipment-preview__label">{{ category.key }}</p>
-      </div>
-    </div>
-
-    <a
-      [routerLink]="'/explanation/equipment'"
-      target="_blank"
-      class="btn btn-primary"
-    >
-      查看詳情
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
   </div>
 </section>
 <!-- ─── 虛擬樣品屋入口 ─── -->
