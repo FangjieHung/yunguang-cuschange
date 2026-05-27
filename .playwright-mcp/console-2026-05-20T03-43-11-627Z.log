@@ -1,4 +1,0 @@
-[     183ms] [INFO] [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled. @ http://localhost:4200/polyfills.js:990
-[     310ms] [LOG] Angular is running in development mode. @ http://localhost:4200/vendor.js:91081
-[     317ms] [LOG] BBDNotify:2026-05-20T03:43:11.943Z - 執行失敗  @ http://localhost:4200/main.js:12342
-[     320ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5038/Portal/AppStore/GetAppObjectStoreValueByCode/ORG_CONTACT_SETTING:0
