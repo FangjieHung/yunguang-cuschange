@@ -79,7 +79,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
         this.doFormPatchValue();
       },
       error: (err) => {
-        this.bbdNotifyServ.error('執行失敗', err);
+        // this.bbdNotifyServ.error('執行失敗', err);
       },
     });
   }
@@ -162,7 +162,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
           this.bbdNotifyServ.success(`修改會員資料成功。`);
         },
         error: (err) => {
-          this.bbdNotifyServ.error('執行失敗', err);
+          // this.bbdNotifyServ.error('執行失敗', err);
         },
       }).add(() => this.spinnerServ.hide());
     } else {
@@ -183,7 +183,7 @@ export class CustEditWidgetComponent extends BBDBaseComponent implements OnInit 
           }
         },
         error: (err) => {
-          this.bbdNotifyServ.error('執行失敗', err);
+          // this.bbdNotifyServ.error('執行失敗', err);
         },
       }).add(() => this.spinnerServ.hide());
     }

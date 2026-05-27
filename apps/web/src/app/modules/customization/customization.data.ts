@@ -199,22 +199,9 @@ export const MOCK_MATERIAL_CATEGORIES: MaterialCategory[] = [
         priceDelta: 0,
       },
       {
-        id: 'wf-bea502-b',
-        name: 'BEA502 冰島橡木 II',
-        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA502-冰島橡木2(預設).jpg`,
-        isDefault: true,
-        priceDelta: 0,
-      },
-      {
         id: 'wf-bea366',
         name: 'BEA366 布拉格橡木',
         image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA366-布拉格橡木1.jpg`,
-        priceDelta: 12000,
-      },
-      {
-        id: 'wf-bea366-b',
-        name: 'BEA366 布拉格橡木 II',
-        image: `${MATERIAL_ASSET_BASE}/木地板顏色/BEA366-布拉格橡木2.jpg`,
         priceDelta: 12000,
       },
       {

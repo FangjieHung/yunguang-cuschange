@@ -95,7 +95,7 @@ export class NewsListComponent extends BBDBaseComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.bbdNotifyServ.error('執行失敗', err);
+        // this.bbdNotifyServ.error('執行失敗', err);
         this.isLoading = false;
       }
     });

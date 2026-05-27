@@ -86,7 +86,7 @@ export class ForgetResetPasswordComponent extends BBDBaseComponent implements On
           this.isCompleted = true;
         },
         error: (err) => {
-          this.bbdNotifyServ.error('執行失敗', err);
+          // this.bbdNotifyServ.error('執行失敗', err);
         },
       }).add(() => this.spinnerServ.hide());
   }

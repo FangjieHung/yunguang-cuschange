@@ -9,7 +9,7 @@
   gap: 8px;
   height: 44px;
   padding: 0 24px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;
@@ -37,6 +37,7 @@
     box-shadow: 0 2px 8px rgba(103, 205, 201, 0.3);
 
     &:hover {
+      color: #fff;
       background: var(--seafoam-dark);
       box-shadow: var(--shadow-elevated);
     }

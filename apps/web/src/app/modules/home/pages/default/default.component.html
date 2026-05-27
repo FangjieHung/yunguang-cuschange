@@ -2,38 +2,34 @@
 <section id="hero" class="hero section">
   <div class="hero__inner">
     <div class="hero__content">
-      <span class="hero__eyebrow">富華澐光 · 客變線上服務</span>
-      <h1 class="hero__title">歡迎回來！<br />這是專屬於您的空間私訂系統。</h1>
+      <span class="hero__eyebrow">富華澐光 · 線上客變服務</span>
+      <h1 class="hero__title">歡迎回來！<br />這是專屬您的空間私訂系統</h1>
       <p class="hero__subtitle">
-        線上瀏覽客變原則、規劃需求、追蹤進度。從格局、水電到建材選配，一站式完成。
+        與您一同實現對家的想像，讓未來的每一天，都生活在光與澐之中。
       </p>
       <div class="hero__cta-row">
         <a routerLink="/auth/login" class="btn btn-primary btn-lg">
           登入客變系統
-          <mat-icon>arrow_forward</mat-icon>
+          <span class="material-symbols-rounded">arrow_forward</span>
         </a>
-        <a href="#principles" class="btn btn-outline btn-lg">
-          了解客變原則
+        <a routerLink="/customization" class="btn btn-outline btn-lg">
+          測試流程：跳過登入
+          <span class="material-symbols-rounded">arrow_forward</span>
         </a>
       </div>
     </div>
-  </div>
-</section>
+    <!-- ─── Customization Bento Grid ─── -->
 
-<!-- ─── Customization Bento Grid ─── -->
-<section class="customization-bento section">
-  <div class="customization-bento__container">
     <div class="bento-grid">
       <!-- 客變原則 -->
       <a
         id="principles"
         [routerLink]="'/explanation/principles'"
         target="_blank"
-        class="bento-card bento-card--principles"
+        class="bento-card bento-card--equipment col-span-3"
       >
-        <mat-icon class="bento-card__icon">rule</mat-icon>
+        <span class="material-symbols-rounded">rule</span>
         <h3 class="bento-card__title">客變原則</h3>
-        <p class="bento-card__description">瞭解規則與限制</p>
       </a>
 
       <!-- 客變流程 -->
@@ -41,11 +37,10 @@
         id="process"
         [routerLink]="'/explanation/timeline'"
         target="_blank"
-        class="bento-card bento-card--timeline"
+        class="bento-card bento-card--equipment col-span-3"
       >
-        <mat-icon class="bento-card__icon">timeline</mat-icon>
+        <span class="material-symbols-rounded">timeline</span>
         <h3 class="bento-card__title">客變流程</h3>
-        <p class="bento-card__description">完整流程步驟</p>
       </a>
 
       <!-- 常見問題 -->
@@ -53,11 +48,10 @@
         id="faq"
         [routerLink]="'/explanation/faq'"
         target="_blank"
-        class="bento-card bento-card--faq"
+        class="bento-card bento-card--equipment col-span-2"
       >
-        <mat-icon class="bento-card__icon">help</mat-icon>
+        <span class="material-symbols-rounded">help</span>
         <h3 class="bento-card__title">常見問題</h3>
-        <p class="bento-card__description">快速找到答案</p>
       </a>
 
       <!-- 費用表 -->
@@ -65,11 +59,10 @@
         id="fees"
         [routerLink]="'/explanation/pricing'"
         target="_blank"
-        class="bento-card bento-card--pricing"
+        class="bento-card bento-card--equipment col-span-2"
       >
-        <mat-icon class="bento-card__icon">price_check</mat-icon>
+        <span class="material-symbols-rounded">price_check</span>
         <h3 class="bento-card__title">費用表</h3>
-        <p class="bento-card__description">費用概況</p>
       </a>
 
       <!-- 設備表 -->
@@ -77,15 +70,15 @@
         id="equipment"
         [routerLink]="'/explanation/equipment'"
         target="_blank"
-        class="bento-card bento-card--equipment"
+        class="bento-card bento-card--equipment col-span-2"
       >
-        <mat-icon class="bento-card__icon">build</mat-icon>
+        <span class="material-symbols-rounded">build</span>
         <h3 class="bento-card__title">設備表</h3>
-        <p class="bento-card__description">設備與選配</p>
       </a>
     </div>
   </div>
 </section>
+
 <!-- ─── 虛擬樣品屋入口 ─── -->
 <section *ngIf="false" id="vr-tour" class="section">
   <div class="section__inner">
@@ -94,7 +87,8 @@
         <span class="vr-entry__badge">Phase 2 即將提供</span>
         <h2 class="vr-entry__title">走進您的未來家</h2>
         <p class="vr-entry__lead">
-          虛擬樣品屋讓您在簽約後、開工前就能 360° 預覽不同戶型與選配組合，幫助您構思客變需求。
+          虛擬樣品屋讓您在簽約後、開工前就能 360°
+          預覽不同戶型與選配組合，幫助您構思客變需求。
         </p>
 
         <ul class="vr-entry__features">
@@ -106,13 +100,13 @@
         <div class="vr-entry__cta-row">
           <a href="/#vr-coming-soon" class="btn btn-primary btn-lg">
             進入虛擬樣品屋
-            <mat-icon>360</mat-icon>
+            <span class="material-symbols-rounded">360</span>
           </a>
         </div>
       </div>
 
       <div class="vr-entry__visual">
-        <mat-icon>view_in_ar</mat-icon>
+        <span class="material-symbols-rounded">view_in_ar</span>
         <span class="vr-entry__visual-label">360° 預覽 · 即將提供</span>
       </div>
     </div>

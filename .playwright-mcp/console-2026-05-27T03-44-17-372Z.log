@@ -1,2 +1,0 @@
-[ 1067657ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
-[ 1067657ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998

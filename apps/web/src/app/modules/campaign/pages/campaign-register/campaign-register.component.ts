@@ -144,7 +144,7 @@ export class CampaignRegisterComponent extends BBDBaseComponent implements OnIni
 
       },
       error: (err) => {
-        this.bbdNotifyServ.error('執行失敗', err);
+        // this.bbdNotifyServ.error('執行失敗', err);
       },
     }).add(() => this.spinnerServ.hide());
   }

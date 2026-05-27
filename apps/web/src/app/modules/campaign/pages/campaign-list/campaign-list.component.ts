@@ -65,7 +65,7 @@ export class CampaignListComponent extends BBDBaseComponent implements OnInit {
         this.doScrollToTop();
       },
       error: (err) => {
-        this.bbdNotifyServ.error('執行失敗', err);
+        // this.bbdNotifyServ.error('執行失敗', err);
       }
     }).add(() => this.spinnerServ.hide());
   }

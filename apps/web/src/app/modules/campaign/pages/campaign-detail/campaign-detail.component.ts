@@ -159,7 +159,7 @@ export class CampaignDetailComponent extends BBDBaseComponent implements OnInit 
         this.doDataInit();
       },
       error: (err) => {
-        this.bbdNotifyServ.error('執行失敗', err);
+        // this.bbdNotifyServ.error('執行失敗', err);
       },
     }).add(() => this.spinnerServ.hide());
   }
