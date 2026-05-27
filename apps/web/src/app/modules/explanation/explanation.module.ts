@@ -11,19 +11,37 @@ import {
   PricingPageComponent,
   EquipmentPageComponent
 } from './pages';
+import {
+  CustomizationPrinciplesComponent,
+  CustomizationTimelineComponent,
+  CustomizationFaqComponent,
+  CustomizationPricingComponent,
+  CustomizationEquipmentComponent,
+} from '../../shared/components';
+
+const CUSTOM_MODULES = [SharedModule];
+const CUSTOM_COMPONENTS = [
+  PrinciplesPageComponent,
+  TimelinePageComponent,
+  FaqPageComponent,
+  PricingPageComponent,
+  EquipmentPageComponent
+];
+const STANDALONE_COMPONENTS = [
+  CustomizationPrinciplesComponent,
+  CustomizationTimelineComponent,
+  CustomizationFaqComponent,
+  CustomizationPricingComponent,
+  CustomizationEquipmentComponent,
+];
 
 @NgModule({
-  declarations: [
-    PrinciplesPageComponent,
-    TimelinePageComponent,
-    FaqPageComponent,
-    PricingPageComponent,
-    EquipmentPageComponent
-  ],
+  declarations: [...CUSTOM_COMPONENTS],
   imports: [
     CommonModule,
     ExplanationRoutingModule,
-    SharedModule
+    ...CUSTOM_MODULES,
+    ...STANDALONE_COMPONENTS,
   ]
 })
 export class ExplanationModule { }
