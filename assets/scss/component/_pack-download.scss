@@ -1,0 +1,82 @@
+/* 設計師圖面包下載 */
+.designer-pack-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__head { text-align: left; }
+
+  &__upload-back {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(218, 247, 242, .35);
+
+    mat-icon { font-size: 28px; width: 28px; height: 28px; color: var(--seafoam-dark); flex-shrink: 0; }
+    strong { font-size: 14px; }
+    p { margin: 4px 0 0; color: var(--text-secondary); font-size: 13px; }
+  }
+}
+
+.pack-download {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    transition: background .15s;
+
+    &:hover { background: rgba(218, 247, 242, .35); }
+  }
+
+  &__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(244, 67, 54, .15);
+    color: #c62828;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    mat-icon { font-size: 24px; width: 24px; height: 24px; }
+
+    &--zip {
+      background: linear-gradient(135deg, var(--seafoam), var(--seafoam-dark));
+      color: #fff;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+
+    h4 { margin: 0; font-size: 15px; font-weight: 700; color: var(--text-primary); }
+    p { margin: 2px 0; font-size: 12px; color: var(--text-secondary); }
+    small { font-size: 11px; color: var(--text-muted); }
+  }
+
+  &--zip {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(218, 247, 242, .8), rgba(208, 240, 224, .6));
+    border: 1px solid rgba(103, 205, 201, .3);
+  }
+}
+
+@media (max-width: 600px) {
+  .pack-download__row, .pack-download--zip { flex-direction: column; align-items: flex-start; }
+  .pack-download__row .btn, .pack-download--zip .btn { align-self: stretch; justify-content: center; }
+}

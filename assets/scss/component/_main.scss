@@ -1,0 +1,9 @@
+/* Main */
+.main {
+  padding: 24px 28px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  overflow: auto;
+  align-content: start;
+}

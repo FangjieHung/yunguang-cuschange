@@ -1,0 +1,92 @@
+/* 全室設定 */
+.whole-house-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__head { text-align: left; }
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: rgba(218, 247, 242, .5);
+
+    mat-icon { font-size: 28px; width: 28px; height: 28px; color: var(--seafoam-dark); flex-shrink: 0; }
+    strong { font-size: 14px; color: var(--text-primary); }
+    p { margin: 4px 0 0; color: var(--text-secondary); font-size: 13px; }
+  }
+}
+
+.whole-house-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.whole-house-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  text-align: left;
+  background: var(--glass-card);
+  border: 1px solid rgba(255, 255, 255, .7);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--seafoam), var(--seafoam-dark));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(103, 205, 201, .35);
+
+    mat-icon { font-size: 24px; width: 24px; height: 24px; }
+  }
+
+  &__layer {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+  }
+
+  &__title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--seafoam-dark);
+    font-size: 13px;
+    font-weight: 600;
+
+    mat-icon { font-size: 16px; width: 16px; height: 16px; }
+  }
+}

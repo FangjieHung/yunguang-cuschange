@@ -1,0 +1,225 @@
+// ============================================================
+//  _theme.scss — Intellecta Dashboard · Teal M3 Theme
+//  產出來源：重新調整
+//
+//  Primary   #38acb5 → Custom Teal
+//  Accent    #158ea3 → Custom Blue-Teal
+//  Font      Inter（Google Fonts）
+//  Density   0（預設）
+// ============================================================
+
+@use "@angular/material" as mat;
+
+// ── Base ──
+@include mat.core();
+
+// ── Primary Palette：Custom Teal #38acb5 ──
+$primary-palette: mat.define-palette(
+  mat.$cyan-palette,
+  500  /* default */,
+  100  /* lighter */,
+  800  /* darker  */
+);
+
+// ── Accent Palette：Custom Blue-Teal #158ea3 ──
+$accent-palette: mat.define-palette(
+  mat.$blue-palette,
+  700  /* default */,
+  300  /* lighter */,
+  900  /* darker  */
+);
+
+// ── Theme Definition ──
+$project-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent:  $accent-palette,
+    ),
+    typography: mat.define-typography-config(
+      $font-family: "'Inter', sans-serif"
+    ),
+    density: 0
+  )
+);
+
+// ── Apply ──
+@include mat.all-component-themes($project-light-theme);
+
+/* ============================================================
+   _tokens.css — Intellecta Dashboard · Seafoam M3 Token
+   產出來源：dev/visual-reverse-engineer/index.html
+   架構：Layer 1 原始值 → Layer 2 元件別名 → Layer 3 MD3 語意色彩
+   ============================================================ */
+
+/* ── Layer 1：原始 Token（直接持有數值）── */
+:root {
+  /* Primary — Custom Teal */
+  --token-primary:                   #38acb5;
+  --token-on-primary:                #ffffff;
+  --token-primary-container:         #c1f0f7;
+  --token-on-primary-container:      #001f23;
+
+  /* Secondary — Custom Blue-Teal */
+  --token-secondary:                 #158ea3;
+  --token-on-secondary:              #ffffff;
+  --token-secondary-container:       #b3dce8;
+  --token-on-secondary-container:    #001426;
+
+  /* Tertiary — Complementary Mint */
+  --token-tertiary:                  #4db8b4;
+  --token-on-tertiary:               #ffffff;
+  --token-tertiary-container:        #d0f0e0;
+  --token-on-tertiary-container:     #1a3533;
+
+  /* Error — MD3 標準 */
+  --token-error:                     #ba1a1a;
+  --token-on-error:                  #ffffff;
+  --token-error-container:           #ffdad6;
+  --token-on-error-container:        #410002;
+
+  /* Surface & Background */
+  --token-background:                #f7f9fb;
+  --token-on-background:             #001426;
+  --token-surface:                   rgba(255, 255, 255, .95);
+  --token-on-surface:                #001f23;
+  --token-surface-variant:           rgba(56, 172, 181, .08);
+  --token-on-surface-variant:        #3a7a83;
+
+  /* Outline */
+  --token-outline:                   #6ba3ac;
+  --token-outline-variant:           rgba(56, 172, 181, .20);
+
+  /* Shadow & Scrim */
+  --token-shadow:                    rgba(56, 172, 181, .12);
+  --token-scrim:                     rgba(0,  20,  38,  .40);
+
+  /* Inverse */
+  --token-inverse-surface:           #001f23;
+  --token-inverse-on-surface:        #c1f0f7;
+  --token-inverse-primary:           #5dd5e2;
+
+  /* Surface Containers（由淺至深） */
+  --token-surface-dim:               #dfe8eb;
+  --token-surface-bright:            #f7f9fb;
+  --token-surface-container-lowest:  rgba(255, 255, 255, .30);
+  --token-surface-container-low:     rgba(193, 240, 247, .40);
+  --token-surface-container:         rgba(193, 240, 247, .55);
+  --token-surface-container-high:    rgba(193, 240, 247, .65);
+  --token-surface-container-highest: rgba(193, 240, 247, .75);
+
+  /* Overlay & Divider */
+  --token-primary-overlay:           rgba(56, 172, 181, .10);
+  --token-primary-divider:           rgba(56, 172, 181, .20);
+
+  /* Shape */
+  --token-radius-pill:               9999px;
+
+  /* Typography */
+  --token-font-size-md:              12px;
+
+  /* Layout */
+  --token-footer-height-desktop:     52px;
+
+  /* Utility */
+  --token-transparent:               transparent;
+}
+
+/* ── Layer 2：元件 Token（語意別名，引用 Layer 1）── */
+:root {
+  /* ===== Button Toggle ===== */
+  --button-toggle-bg:                var(--token-transparent);
+  --button-toggle-selected-bg:       var(--token-primary-overlay);
+  --button-toggle-divider:           var(--token-primary-divider);
+
+  /* ===== Shape ===== */
+  --shape-pill:                      var(--token-radius-pill);
+
+  /* ===== Typography ===== */
+  --font-size-button:                var(--token-font-size-md);
+
+  /* ===== Layout ===== */
+  --footer-height-desktop:           var(--token-footer-height-desktop);
+}
+
+/* ── Layer 3：MD3 語意色彩系統（引用 Layer 1）── */
+:root {
+  /* ===== Core Brand Colors ===== */
+  --color-primary:                   var(--token-primary);
+  --color-on-primary:                var(--token-on-primary);
+  --color-primary-container:         var(--token-primary-container);
+  --color-on-primary-container:      var(--token-on-primary-container);
+  --color-secondary:                 var(--token-secondary);
+  --color-on-secondary:              var(--token-on-secondary);
+  --color-secondary-container:       var(--token-secondary-container);
+  --color-on-secondary-container:    var(--token-on-secondary-container);
+  --color-tertiary:                  var(--token-tertiary);
+  --color-on-tertiary:               var(--token-on-tertiary);
+  --color-tertiary-container:        var(--token-tertiary-container);
+  --color-on-tertiary-container:     var(--token-on-tertiary-container);
+
+  /* ===== Semantic States ===== */
+  --color-error:                     var(--token-error);
+  --color-on-error:                  var(--token-on-error);
+  --color-error-container:           var(--token-error-container);
+  --color-on-error-container:        var(--token-on-error-container);
+
+  /* ===== Surface System ===== */
+  --color-background:                var(--token-background);
+  --color-on-background:             var(--token-on-background);
+  --color-surface:                   var(--token-surface);
+  --color-on-surface:                var(--token-on-surface);
+  --color-surface-variant:           var(--token-surface-variant);
+  --color-on-surface-variant:        var(--token-on-surface-variant);
+  --color-outline:                   var(--token-outline);
+  --color-outline-variant:           var(--token-outline-variant);
+  --color-shadow:                    var(--token-shadow);
+  --color-scrim:                     var(--token-scrim);
+
+  /* ===== Inverse ===== */
+  --color-inverse-surface:           var(--token-inverse-surface);
+  --color-inverse-on-surface:        var(--token-inverse-on-surface);
+  --color-inverse-primary:           var(--token-inverse-primary);
+
+  /* ===== Surface Containers ===== */
+  --surface-dim:                     var(--token-surface-dim);
+  --surface-bright:                  var(--token-surface-bright);
+  --surface-container-lowest:        var(--token-surface-container-lowest);
+  --surface-container-low:           var(--token-surface-container-low);
+  --surface-container:               var(--token-surface-container);
+  --surface-container-high:          var(--token-surface-container-high);
+  --surface-container-highest:       var(--token-surface-container-highest);
+}
+
+  /* ── Design Tokens ── */
+  :root {
+    --seafoam:       #38acb5;
+    --seafoam-dark:  #158ea3;
+    --pale-seafoam:  #DAF7F2;
+    --mint-ice:      #E6FFE6;
+    --seafoam-mist:  #D0F0E0;
+    --aqua-haze:     #E0FFFF;
+
+    --text-primary:  #1a3533;
+    --text-secondary:#5a8480;
+    --text-muted:    #9bbfbb;
+    --border:        rgba(103,205,201,.20);
+
+    /* glass surfaces */
+    --glass-nav:     rgba(255,255,255,.45);
+    --glass-card:    rgba(255,255,255,.55);
+    --glass-card-dim:rgba(240,253,252,.50);
+    --blur:          blur(16px);
+
+    --radius-sm:     10px;
+    --radius-md:     16px;
+    --radius-lg:     20px;
+    --shadow-card:   0 4px 24px rgba(103,205,201,.10);
+
+    /* ── S1+S2 公開區補充 token ── */
+    --shadow-elevated: 0 10px 36px rgba(103,205,201,.18);
+    --shadow-soft:     0 2px 12px rgba(103,205,201,.06);
+    --max-content:     1200px;
+    --topbar-h:        64px;
+    --section-gap:     clamp(48px, 6vw, 80px);
+  }

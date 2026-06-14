@@ -1,0 +1,85 @@
+/* ============================================
+   按鈕系統 .btn
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.05s ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--seafoam);
+    outline-offset: 2px;
+  }
+
+  /* Variants */
+  &-primary {
+    background: var(--seafoam);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(103, 205, 201, 0.3);
+
+    &:hover {
+      color: #fff;
+      background: var(--seafoam-dark);
+      box-shadow: var(--shadow-elevated);
+    }
+  }
+
+  &-outline {
+    background: transparent;
+    border: 1.5px solid var(--seafoam);
+    color: var(--seafoam-dark);
+
+    &:hover {
+      background: rgba(103, 205, 201, 0.1);
+    }
+  }
+
+  &-ghost {
+    background: transparent;
+    color: var(--text-primary);
+
+    &:hover {
+      background: rgba(103, 205, 201, 0.1);
+    }
+  }
+
+  /* Sizes */
+  &-sm {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+
+  &-lg {
+    height: 52px;
+    padding: 0 32px;
+    font-size: 16px;
+  }
+
+  /* Disabled */
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
