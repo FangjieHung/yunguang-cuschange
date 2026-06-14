@@ -80,6 +80,28 @@
           ],
           "outputHashing": "all"
         },
+        "gh-pages": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "10mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "5kb",
+              "maximumError": "7kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/web/src/environments/environment.ts",
+              "with": "apps/web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "baseHref": "/yunguang-cuschange/"
+        },
         "development": {
           "buildOptimizer": false,
           "optimization": false,
